@@ -48,7 +48,7 @@
 	<!-- Main navbar -->
 	<div class="navbar navbar-inverse">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="index.html">
+			<a class="navbar-brand" href="<%= url_for("/") %>">
               <strong>MarketOnline.vn</strong>
             </a>
 
@@ -69,7 +69,7 @@
 				<li class="dropdown dropdown-user">
 					<a class="dropdown-toggle" data-toggle="dropdown">
 						<img src="assets/images/placeholder.jpg" alt="">
-						<span>Thịnh Nguyễn</span>
+						<span><%= PbMember.find(PbSession.get_current_auth_cookie(cookies)[0]).username %></span>
 						<i class="caret"></i>
 					</a>
 
@@ -104,7 +104,7 @@
 							<div class="media">
 								<a href="#" class="media-left"><img src="assets/images/placeholder.jpg" class="img-circle img-sm" alt=""></a>
 								<div class="media-body">
-									<span class="media-heading text-semibold">Thịnh Nguyễn</span>
+									<span class="media-heading text-semibold"><%= PbMember.find(PbSession.get_current_auth_cookie(cookies)[0]).username %></span>
 									<div class="text-size-mini text-muted">
 										<i class="icon-pin text-size-small"></i> &nbsp;HCM City, Viet Nam
 									</div>
@@ -130,7 +130,14 @@
 
 								<!-- Main -->
 								<li class="navigation-header"><span>Danh mục</span> <i class="icon-menu" title="Main pages"></i></li>
-								<li class="active"><a href="index.html"><i class="icon-home4"></i> <span>Trang Chính</span></a></li>
+								<li class="active"><a href="<%= url_for("/") %>"><i class="icon-home4"></i> <span>Trang chính</span></a></li>
+                                <li>
+									<a href="#"><i class="icon-stack2"></i> <span>Chia sẻ</span></a>
+									<ul>
+										<li><a href="#">Facebook</a></li>
+										<li><a href="#">Google</a></li>
+									</ul>
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -156,7 +163,7 @@
 
 					<div class="breadcrumb-line">
 						<ul class="breadcrumb">
-							<li><a href="index.html"><i class="icon-home2 position-left"></i> Trang chính</a></li>
+							<li><a href="#"><i class="icon-home2 position-left"></i> Trang chính</a></li>
 							<li class="active">Thông tin hoạt động</li>
 						</ul>
 
@@ -169,7 +176,7 @@
 				<!-- Content area -->
 				<div class="content">
 
-					
+					<%= PbSession.get_current_auth_cookie(cookies) %>
 
 				</div>
 				<!-- /content area -->
