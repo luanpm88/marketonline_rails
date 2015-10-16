@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title><%= @page_title %> - Marketonline</title>
+	<title>Marketonline.vn</title>
     
     <!-- Global stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
@@ -142,7 +142,7 @@
                                 <li <%= 'class=active' if ["ad_types","ads"].include?(params[:controller]) %>>
 									<a href="#"><i class="icon-stack2"></i> <span>Quảng cáo</span></a>
 									<ul>
-										<li <%= 'class=active' if ["ads"].include?(params[:controller]) %>><a href="<%= ads_path %>">Danh sách quảng cáo</a></li>
+										<li <%= 'class=active' if ["ads"].include?(params[:controller]) %>><a href="<%= ads_path %>">Quản lý quảng cáo</a></li>
 										<li><a href="#">Thống kê</a></li>
 									</ul>
 								</li>
@@ -163,7 +163,7 @@
 				<div class="page-header">
 					<div class="page-header-content">
 						<div class="page-title">
-							<h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold"><%= @page_title %></span></h4>
+							<h4><span class="text-semibold"><%= @page_title %></span></h4>
 						</div>
 
 						
