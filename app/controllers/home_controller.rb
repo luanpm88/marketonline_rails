@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    #code
+    @page_title = "Thông tin hoạt động"
   end
 end

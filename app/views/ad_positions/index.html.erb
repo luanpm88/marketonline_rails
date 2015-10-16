@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Ad Positions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ad_positions.each do |ad_position| %>
+      <tr>
+        <td><%= ad_position.name %></td>
+        <td><%= ad_position.description %></td>
+        <td><%= link_to 'Show', ad_position %></td>
+        <td><%= link_to 'Edit', edit_ad_position_path(ad_position) %></td>
+        <td><%= link_to 'Destroy', ad_position, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ad position', new_ad_position_path %>

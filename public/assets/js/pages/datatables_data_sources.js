@@ -9,8 +9,8 @@
 *
 * ---------------------------------------------------------------------------- */
 
-$(function() {
-
+$(function() {    
+    
 
     // Table setup
     // ------------------------------
@@ -43,10 +43,44 @@ $(function() {
 
 
     // AJAX sourced data
-    $('.datatable-ajax').dataTable({
-        ajax: 'assets/demo_data/tables/datatable_ajax.json'
-    });
-
+    $('.datatable-ajax').each (function() {
+        var item = $(this)
+        var orders = []
+        var num = 0
+        $('.datatable-ajax').find("th").each(function() {
+          if(!$(this).hasClass("sortable")) {
+            orders.push(num)
+          }
+          num++
+        })
+        item.dataTable({
+            "order": [],
+            "columnDefs": [ { "targets": orders, "orderable": false } ],
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "url": item.attr("url"),
+                "data": function ( d ) {                    
+                }
+            },
+            "language": {
+                "url": "/assets/js/datatable_vietnamese.json"
+            },
+            "initComplete": function(settings, json) {
+                // External table additions
+                // ------------------------------
+            
+                // Add placeholder to the datatable filter option
+                $('.dataTables_filter input[type=search]').attr('placeholder','Type to filter...');
+            
+            
+                // Enable Select2 select for the length option
+                $('.dataTables_length select').select2({
+                    minimumResultsForSearch: "-1"
+                });
+            }            
+        });
+    })
 
     // Javascript sourced data
     var dataSet = [
@@ -110,18 +144,6 @@ $(function() {
         alert(data[0] +"'s location is: "+ data[ 2 ]);
     });
 
-
-
-    // External table additions
-    // ------------------------------
-
-    // Add placeholder to the datatable filter option
-    $('.dataTables_filter input[type=search]').attr('placeholder','Type to filter...');
-
-
-    // Enable Select2 select for the length option
-    $('.dataTables_length select').select2({
-        minimumResultsForSearch: "-1"
-    });
+    
     
 });

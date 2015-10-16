@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+AdPosition.create(name: "home_top_banner_1", title: "Trang chính - Vị trí 1", with: 685, height: 380)
+AdPosition.create(name: "home_top_banner_2", title: "Trang chính - Vị trí 2", with: 293, height: 380)
+AdPosition.create(name: "home_top_banner_3", title: "Trang chính - Vị trí 3", with: 186, height: 180)

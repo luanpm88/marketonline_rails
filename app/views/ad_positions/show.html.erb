@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @ad_position.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @ad_position.description %>
+</p>
+
+<%= link_to 'Edit', edit_ad_position_path(@ad_position) %> |
+<%= link_to 'Back', ad_positions_path %>

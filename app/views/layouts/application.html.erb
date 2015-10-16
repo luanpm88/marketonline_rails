@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Marketonline</title>
+	<title><%= @page_title %> - Marketonline</title>
     
     <!-- Global stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
@@ -29,18 +29,24 @@
 	<!-- /core JS files -->
 
 	<!-- Theme JS files -->
-    <%= javascript_include_tag '/assets/js/plugins/visualization/d3/d3.min.js' %>
+	<%= javascript_include_tag '/assets/js/plugins/visualization/d3/d3.min.js' %>
     <%= javascript_include_tag '/assets/js/plugins/visualization/d3/d3_tooltip.js' %>
-    <%= javascript_include_tag '/assets/js/plugins/forms/styling/switchery.min.js' %>
-    <%= javascript_include_tag '/assets/js/plugins/forms/styling/uniform.min.js' %>
+	<%= javascript_include_tag '/assets/js/plugins/forms/validation/validate.min.js' %>
+	<%= javascript_include_tag '/assets/js/plugins/forms/validation/localization/messages_vi.min.js' %>
     <%= javascript_include_tag '/assets/js/plugins/forms/selects/bootstrap_multiselect.js' %>
     <%= javascript_include_tag '/assets/js/plugins/ui/moment/moment.min.js' %>
     <%= javascript_include_tag '/assets/js/plugins/pickers/daterangepicker.js' %>
-    
-    <%= javascript_include_tag '/assets/js/core/app.js' %>
-    <%= javascript_include_tag '/assets/js/pages/dashboard.js' %>
+	<%= javascript_include_tag '/assets/js/plugins/tables/datatables/datatables.min.js' %>	
+	<%= javascript_include_tag '/assets/js/plugins/forms/styling/switch.min.js' %>
+	<%= javascript_include_tag '/assets/js/plugins/forms/styling/switchery.min.js' %>
+    <%= javascript_include_tag '/assets/js/plugins/forms/inputs/touchspin.min.js' %>
+	<%= javascript_include_tag '/assets/js/plugins/forms/styling/uniform.min.js' %>
+	<%= javascript_include_tag '/assets/js/plugins/forms/selects/select2.min.js' %>
+	<%= javascript_include_tag '/assets/js/plugins/media/fancybox.min.js' %>
 	<!-- /theme JS files -->
-
+	
+	<%= javascript_include_tag '/assets/js/core/app.js' %>
+	<%= javascript_include_tag '/assets/js/custom.js' %>	
 </head>
 
 <body>
@@ -68,7 +74,7 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown dropdown-user">
 					<a class="dropdown-toggle" data-toggle="dropdown">
-						<img src="assets/images/placeholder.jpg" alt="">
+						<img src="/assets/images/placeholder.jpg" alt="">
 						<span><%= @current_user.display_name %></span>
 						<i class="caret"></i>
 					</a>
@@ -102,7 +108,7 @@
 					<div class="sidebar-user">
 						<div class="category-content">
 							<div class="media">
-								<a href="#" class="media-left"><img src="assets/images/placeholder.jpg" class="img-circle img-sm" alt=""></a>
+								<a href="#" class="media-left"><img src="/assets/images/placeholder.jpg" class="img-circle img-sm" alt=""></a>
 								<div class="media-body">
 									<span class="media-heading text-semibold"><%= @current_user.display_name %></span>
 									<div class="text-size-mini text-muted">
@@ -130,12 +136,14 @@
 
 								<!-- Main -->
 								<li class="navigation-header"><span>Danh mục</span> <i class="icon-menu" title="Main pages"></i></li>
-								<li class="active"><a href="<%= url_for("/") %>"><i class="icon-home4"></i> <span>Trang chính</span></a></li>
-                                <li>
-									<a href="#"><i class="icon-stack2"></i> <span>Chia sẻ</span></a>
+								<li <%= 'class=active' if ["home"].include?(params[:controller]) %>>
+									<a href="<%= url_for("/") %>"><i class="icon-home4"></i> <span>Trang chính</span></a>
+								</li>
+                                <li <%= 'class=active' if ["ad_types","ads"].include?(params[:controller]) %>>
+									<a href="#"><i class="icon-stack2"></i> <span>Quảng cáo</span></a>
 									<ul>
-										<li><a href="#">Facebook</a></li>
-										<li><a href="#">Google</a></li>
+										<li <%= 'class=active' if ["ads"].include?(params[:controller]) %>><a href="<%= ads_path %>">Danh sách quảng cáo</a></li>
+										<li><a href="#">Thống kê</a></li>
 									</ul>
 								</li>
 							</ul>
@@ -155,7 +163,7 @@
 				<div class="page-header">
 					<div class="page-header-content">
 						<div class="page-title">
-							<h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Trang chính</span> - Thông tin hoạt động</h4>
+							<h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold"><%= @page_title %></span></h4>
 						</div>
 
 						
@@ -164,7 +172,7 @@
 					<div class="breadcrumb-line">
 						<ul class="breadcrumb">
 							<li><a href="#"><i class="icon-home2 position-left"></i> Trang chính</a></li>
-							<li class="active">Thông tin hoạt động</li>
+							<li class="active"><%= @page_title %></li>
 						</ul>
 
 						
@@ -176,7 +184,9 @@
 				<!-- Content area -->
 				<div class="content">
 
-					<%= PbSession.get_current_auth_cookie(cookies) %>
+					<% if notice %><p class="alert alert-success"><%= notice %></p><% end %>
+					<% if alert %><p class="alert"><%= alert %></p><% end %>
+					<%= yield %>
 
 				</div>
 				<!-- /content area -->

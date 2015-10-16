@@ -65,6 +65,7 @@ $(function() {
 
     // Initialize
     var validator = $(".form-validate-jquery").validate({
+        lang: 'vi',
         ignore: 'input[type=hidden], .select2-input', // ignore hidden fields
         errorClass: 'validation-error-label',
         successClass: 'validation-valid-label',
@@ -108,7 +109,7 @@ $(function() {
         },
         validClass: "validation-valid-label",
         success: function(label) {
-            label.addClass("validation-valid-label").text("Success.")
+            label.addClass("validation-valid-label").text("Hoàn tất.")
         },
         rules: {
             vali: "required",
@@ -174,7 +175,9 @@ $(function() {
             custom: {
                 required: "This is a custom error message",
             },
-            agree: "Please accept our policy"
+            agree: "Please accept our policy",
+            "ad[ad_position_id]": "Hãy chọn vị trí.",
+            "ad[image]": "Hãy chọn ảnh.",
         }
     });
 
