@@ -5,11 +5,12 @@ class Ad < ActiveRecord::Base
   validates :ad_position_id, presence: true
   
   belongs_to :ad_position
+  belongs_to :pb_member
   
   def self.datatable(params)    
     @records = self.joins(:ad_position).all
     
-    order = "ads.created_at"
+    order = "ads.created_at DESC"
     if !params["order"].nil?
       case params["order"]["0"]["column"]
       when "1"
@@ -35,10 +36,19 @@ class Ad < ActiveRecord::Base
       row = [
               item.image_link,
               item.name,
-              "<div class=\"text-center\">#{item.ad_position.display_name}</div>",           
-              "<div class=\"text-center\"></div>",
+              "<div class=\"text-center\">#{item.ad_position.display_name}</div>",                     
               "<div class=\"text-center\">#{item.created_at.strftime("%d-%m-%Y")}</div>",
-              "<div class=\"text-right\"></div>"
+              "<div class=\"text-center\">#{(item.pb_member.display_name if !item.pb_member.nil?)}</div>",
+              "<div class=\"text-center\"></div>",
+              "<div class=\"text-right\"><ul class=\"icons-list\">"+
+                  "<li class=\"dropup\">"+
+                      "<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\"><i class=\"icon-menu7\"></i></a>"+
+                      "<ul class=\"dropdown-menu dropdown-menu-right\">"+
+                          "<li>#{item.edit_link}</li>"+
+                          "<li>#{item.destroy_link}</li>"+
+                      "</ul>"+
+                  "</li>"+
+              "</ul></div>"
             ]
       data << row      
     end
@@ -79,6 +89,20 @@ class Ad < ActiveRecord::Base
     link_helper = ActionController::Base.helpers
     
     link_helper.link_to(display_image(:square), image_src(:banner), class: "fancybox.image fancybox", title: name)
+  end
+  
+  def destroy_link
+    ActionView::Base.send(:include, Rails.application.routes.url_helpers)
+    link_helper = ActionController::Base.helpers
+    
+    link_helper.link_to("<i class=\"icon-cross\"></i> Xóa".html_safe, {controller: "ads", action: "delete", id: self.id}, method: :delete, data: { confirm: 'Are you sure?' })
+  end
+  
+  def edit_link
+    ActionView::Base.send(:include, Rails.application.routes.url_helpers)
+    link_helper = ActionController::Base.helpers
+    
+    link_helper.link_to("<i class=\"icon-pencil\"></i> Sửa".html_safe, {controller: "ads", action: "edit", id: self.id})
   end
 
 end

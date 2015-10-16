@@ -24,18 +24,36 @@
 															<label>Vị trí đặt <span class="text-danger">*</span></label>
                                                             <%= f.select("ad_position_id", AdPosition.all.collect {|p| [ p.display_name, p.id ] }, { include_blank: "- Chọn vị trí -"} , {class: "select", required: "required" }) %>
 														</div>
-														<div class="form-group">
-															<label>Hình ảnh <span class="text-danger">*</span></label>
-															<input type="file" name="ad[image]" class="form-control file-styled" required="required">
-															<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
-														</div>
+														<% if @ad.image.present? %>
+															<div class="form-group">
+																<label>Thay hình ảnh</label>
+																<div class="row">
+																	<div class="col-md-2">
+																		<%= @ad.image_link %><br />
+																	</div>
+																	<div class="col-md-10">																		
+																		<input type="file" name="ad[image]" class="form-control file-styled">
+																		<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
+																	</div>
+																</div>
+															</div>
+														<% else %>
+															<div class="form-group">
+																<label>Hình ảnh <span class="text-danger">*</span></label>
+																<input type="file" name="ad[image]" class="form-control file-styled" required="required">
+																<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
+															</div>
+														<% end %>
+														
 													</fieldset>
 												</div>
 												
 											</div>
 	
 											<div class="text-right">
-												<button id="reset" class="btn btn-default" type="reset">Nhập lại <i class="icon-reload-alt position-right"></i></button>
+												<% if !@ad.id.present? %>
+													<button id="reset" class="btn btn-default" type="reset">Nhập lại <i class="icon-reload-alt position-right"></i></button>
+												<% end %>
 												<button type="submit" class="btn btn-primary">Lưu <i class="icon-arrow-right14 position-right"></i></button>
 											</div>
 										

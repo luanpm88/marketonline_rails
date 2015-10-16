@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     collection do
       get 'datatable'
       get 'image'
+      get 'delete'
     end
   end
   resources :ad_positions
