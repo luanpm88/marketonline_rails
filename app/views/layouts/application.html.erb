@@ -69,7 +69,7 @@
 				<li class="dropdown dropdown-user">
 					<a class="dropdown-toggle" data-toggle="dropdown">
 						<img src="assets/images/placeholder.jpg" alt="">
-						<span><%= PbMember.find(PbSession.get_current_auth_cookie(cookies)[0]).username %></span>
+						<span><%= @current_user.display_name %></span>
 						<i class="caret"></i>
 					</a>
 
@@ -104,7 +104,7 @@
 							<div class="media">
 								<a href="#" class="media-left"><img src="assets/images/placeholder.jpg" class="img-circle img-sm" alt=""></a>
 								<div class="media-body">
-									<span class="media-heading text-semibold"><%= PbMember.find(PbSession.get_current_auth_cookie(cookies)[0]).username %></span>
+									<span class="media-heading text-semibold"><%= @current_user.display_name %></span>
 									<div class="text-size-mini text-muted">
 										<i class="icon-pin text-size-small"></i> &nbsp;HCM City, Viet Nam
 									</div>
