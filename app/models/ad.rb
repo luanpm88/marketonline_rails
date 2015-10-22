@@ -1,4 +1,6 @@
 class Ad < ActiveRecord::Base
+  attr_accessor :product_name
+  
   mount_uploader :image, AdUploader
   
   validates :name, presence: true
@@ -6,6 +8,24 @@ class Ad < ActiveRecord::Base
   
   belongs_to :ad_position
   belongs_to :pb_member
+  belongs_to :pb_product
+  
+  has_many :ad_clicks
+  
+  before_validation :update_ad_name
+  after_save :update_product_name
+  
+  def update_ad_name
+    if product_name.present? and type_name == 'product'
+      self.name = product_name
+    end
+  end
+  
+  def update_product_name
+    if type_name == 'product' and pb_product.present?
+      pb_product.update_attribute(:name, name)
+    end
+  end
   
   def self.datatable(params)    
     @records = self.joins(:ad_position).all
@@ -81,21 +101,21 @@ class Ad < ActiveRecord::Base
   end
   
   def display_image(version = nil)
-    self.image_url.nil? ? "<i class=\"icon-picture icon-nopic-60\"></i>".html_safe : "<img width='60' src='#{image_src(version)}' />".html_safe
+    "<img src='#{image_src(version)}' />".html_safe
   end
   
   def image_link
     ActionView::Base.send(:include, Rails.application.routes.url_helpers)
     link_helper = ActionController::Base.helpers
     
-    link_helper.link_to(display_image(:square), image_src(:banner), class: "fancybox.image fancybox", title: name)
+    link_helper.link_to(display_image(:square), image_src(:banner), class: "fancybox.image fancybox ad_link", title: name)
   end
   
   def destroy_link
     ActionView::Base.send(:include, Rails.application.routes.url_helpers)
     link_helper = ActionController::Base.helpers
     
-    link_helper.link_to("<i class=\"icon-bin\"></i> Xóa".html_safe, {controller: "ads", action: "delete", id: self.id}, method: :delete, data: { confirm: 'Are you sure?' })
+    link_helper.link_to("<i class=\"icon-bin\"></i> Xóa".html_safe, {controller: "ads", action: "delete", id: self.id}, method: :delete, data: { confirm: 'Bạn có chắc muốn xóa quảng cáo này?' }, class: "ajax_link")
   end
   
   def edit_link
@@ -104,5 +124,40 @@ class Ad < ActiveRecord::Base
     
     link_helper.link_to("<i class=\"icon-pencil\"></i> Sửa".html_safe, {controller: "ads", action: "edit", id: self.id})
   end
-
+  
+  def add_status(status_name)
+    statuses = statuses << status_name if !statuses.include?(status_name)
+    update_statuses(statuses)
+  end
+  
+  def statuses
+    return [] if status.nil?
+    status.to_s.split("][").map {|s| s.gsub("[","").gsub("]","")}
+  end
+  
+  def update_statuses(arr)
+    self.update_attribute(:status, "["+arr.join("][")+"]")
+  end
+  
+  def self.get_by_ad_position(pos)
+    pos = self.includes(:ad_position).where(ad_positions: {name: pos})
+  end
+  
+  def self.type_name_options
+    [
+      ["Hình ảnh & Liên kết","image"],
+      ["Sản phẩm/Dịch vụ","product"],
+      ["Thương mại","trade"],
+      ["Thương hiệu","company"],
+      ["Tuyển dụng","employer"],
+      ["Ứng viên","employee"],
+      ["Trường học","school"],
+      ["Lớp học","class"]
+    ]
+  end
+  
+  def clicks
+    ad_clicks
+  end
+  
 end

@@ -1,5 +1,5 @@
 class AdsController < ApplicationController
-  before_action :set_ad, only: [:delete, :image, :show, :edit, :update, :destroy]
+  before_action :set_ad, only: [:click, :delete, :show, :edit, :update, :destroy]
 
   # GET /ads
   # GET /ads.json
@@ -65,7 +65,7 @@ class AdsController < ApplicationController
   def destroy
     @ad.destroy
     respond_to do |format|
-      format.html { redirect_to ads_path, notice: 'Ad was successfully destroyed.' }
+      format.html { redirect_to ads_path, notice: 'Quảng cáo đã được xóa.' }
       format.json { head :no_content }
     end
   end
@@ -77,17 +77,31 @@ class AdsController < ApplicationController
   end
   
   def image
-    send_file @ad.image_path(params[:type]), :disposition => 'inline'
+    if params[:id].present?
+      @ad = Ad.find(params[:id])
+      if @ad.image.nil?
+        send_file "public/img/no_img.jpg", :disposition => 'inline'
+      else
+        send_file @ad.image_path(params[:type]), :disposition => 'inline'
+      end
+    else
+      send_file "public/img/no_img.jpg", :disposition => 'inline'
+    end
   end
   
   # DELETE /ads/1
   # DELETE /ads/1.json
   def delete
-    @ad.destroy
-    respond_to do |format|
-      format.html { redirect_to ads_path, notice: 'Ad was successfully destroyed.' }
+    @message = "Quảng cáo <strong>#{@ad.name}</strong> đã được xóa."
+    # @ad.destroy
+    respond_to do |format|      
+      format.html { render "/home/ajax_success", layout: nil }
       format.json { head :no_content }
     end
+  end
+  
+  def click
+    redirect_to @ad.url
   end
 
   private
@@ -98,6 +112,6 @@ class AdsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ad_params
-      params.require(:ad).permit(:name, :description, :ad_position_id, :url, :image, :user_id, :status)
+      params.require(:ad).permit(:product_name, :pb_product_id, :name, :description, :ad_position_id, :url, :image, :user_id, :status)
     end
 end

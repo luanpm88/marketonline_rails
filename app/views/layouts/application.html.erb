@@ -43,10 +43,16 @@
 	<%= javascript_include_tag '/assets/js/plugins/forms/styling/uniform.min.js' %>
 	<%= javascript_include_tag '/assets/js/plugins/forms/selects/select2.min.js' %>
 	<%= javascript_include_tag '/assets/js/plugins/media/fancybox.min.js' %>
+	<%= javascript_include_tag "/assets/js/jquery.number.min.js" %>
 	<!-- /theme JS files -->
 	
 	<%= javascript_include_tag '/assets/js/core/app.js' %>
-	<%= javascript_include_tag '/assets/js/custom.js' %>	
+	
+	<%= javascript_include_tag '/assets/js/pages/datatables_data_sources.js' %>
+	<%= javascript_include_tag '/assets/js/pages/form_validation.js' %>
+	
+	<%= javascript_include_tag '/assets/js/custom.js' %>
+	<%= stylesheet_link_tag '/assets/css/custom.css' %>
 </head>
 
 <body>
@@ -143,7 +149,10 @@
 									<a href="#"><i class="icon-stack2"></i> <span>Quảng cáo</span></a>
 									<ul>
 										<li <%= 'class=active' if ["ads"].include?(params[:controller]) %>><a href="<%= ads_path %>">Quản lý quảng cáo</a></li>
-										<li><a href="#">Thống kê</a></li>
+										<% if ["admin"].include? @current_user.role %>
+											<li <%= 'class=active' if ["ad_positions"].include?(params[:controller]) %>><a href="<%= ad_positions_path %>">Vị trí đặt quảng cáo</a></li>
+										<% end %>
+										<!--<li><a href="#">Thống kê</a></li>-->
 									</ul>
 								</li>
 							</ul>
@@ -179,11 +188,11 @@
 					</div>
 				</div>
 				<!-- /page header -->
-
+				
 
 				<!-- Content area -->
 				<div class="content">
-
+				
 					<% if notice %><p class="alert alert-success"><%= notice %></p><% end %>
 					<% if alert %><p class="alert"><%= alert %></p><% end %>
 					<%= yield %>
@@ -199,6 +208,46 @@
 
 	</div>
 	<!-- /page container -->
+
+
+
+
+	<!-- Modal HTML -->
+	<!-- Button HTML (to Trigger Modal) -->
+    <a id="mainModalButton" href="#mainModal" role="button" class="btn btn-large btn-primary hidden" data-toggle="modal">Launch Demo Modal</a>
+	
+    <div id="mainModal" class="modal fade">
+
+        <div class="modal-dialog modal-lg">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                    <h4 class="modal-title">Thông báo</h4>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <p class="modal-message paid"></p>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
 
 </body>
 </html>

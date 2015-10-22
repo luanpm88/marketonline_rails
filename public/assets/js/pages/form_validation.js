@@ -66,7 +66,7 @@ $(function() {
     // Initialize
     var validator = $(".form-validate-jquery").validate({
         lang: 'vi',
-        ignore: 'input[type=hidden], .select2-input', // ignore hidden fields
+        ignore: ':hidden', // ignore hidden fields
         errorClass: 'validation-error-label',
         successClass: 'validation-valid-label',
         highlight: function(element, errorClass) {
@@ -169,6 +169,9 @@ $(function() {
             },
             switch_group: {
                 minlength: 2
+            },
+            "ad[url]": {
+                url: true
             }
         },
         messages: {

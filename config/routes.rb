@@ -4,9 +4,22 @@ Rails.application.routes.draw do
       get 'datatable'
       get 'image'
       get 'delete'
+      get 'click'
     end
   end
-  resources :ad_positions
+  resources :ad_positions do
+    collection do
+      get 'datatable'
+      get 'delete'
+      get 'home_top_banner_frame'
+      get 'preview_box'
+    end
+  end
+  resources :pb_products do
+    collection do
+      
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

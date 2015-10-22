@@ -1,25 +1,48 @@
-<%= form_for(@ad_position) do |f| %>
-  <% if @ad_position.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@ad_position.errors.count, "error") %> prohibited this ad_position from being saved:</h2>
-
-      <ul>
-      <% @ad_position.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+                                          
+                                          <%= form_for(@ad_position, html: {class: "form-validate-jquery"}) do |f| %>
+											<div class="row">
+												<div class="col-md-6">
+													<fieldset class="text-semibold">
+														<legend><i class="icon-file-text position-left"></i> Thông tin cơ bản</legend>
+														
+														<div class="form-group">
+															<label>Mã <span class="text-danger">*</span></label>
+															<%= f.text_field :name, required: "required", class: "form-control" %>
+														</div>
+				
+														<div class="form-group">
+															<label>Tiêu đề <span class="text-danger">*</span></label>
+															<%= f.text_field :title, required: "required", class: "form-control" %>
+														</div>
+													</fieldset>
+												</div>
+		
+												<div class="col-md-6">
+													<fieldset class="text-semibold">
+														<legend><i class="icon-file-text position-left"></i> Cài đặt quảng cáo</legend>
+																											
+														<div class="form-group">
+															<label>Kích thước (Rộng x Dài) <span class="text-danger">*</span></label>
+                                                            <div class="row">
+                                                              <div class="col-md-6">
+                                                                <%= f.text_field :width, required: "required", class: "form-control text-right number_input" %>
+                                                              </div>
+                                                              <div class="col-md-6">
+                                                                <%= f.text_field :height, required: "required", class: "form-control text-right number_input" %>
+                                                              </div>
+                                                            </div>
+														</div>
+                                                        
+													</fieldset>
+												</div>
+												
+											</div>
+	
+											<div class="text-right">
+												<% if !@ad_position.id.present? %>
+													<button id="reset" class="btn btn-default" type="reset">Nhập lại <i class="icon-reload-alt position-right"></i></button>
+												<% end %>
+												<button type="submit" class="btn btn-primary">Lưu <i class="icon-arrow-right14 position-right"></i></button>
+											</div>
+										
+                                      <% end %>

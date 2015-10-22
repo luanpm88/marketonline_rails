@@ -1,0 +1,17 @@
+
+
+<div class="form-group">
+    <label>Xem trước quảng cáo</span></label>
+    <div class="text-center">
+      <div class="preview_box_image" style="width: 100%; max-width: <%= @ad_position.width %>px">
+    
+      </div>
+    </div>
+</div>
+
+<script>
+  var box_width = $(".preview_box_image").width()
+  var box_height = box_width/<%= @ad_position.width.to_f/@ad_position.height.to_f %>
+  $(".preview_box_image").height(box_height)
+  $(".preview_box_image").width(box_width)
+</script>

@@ -1,9 +1,11 @@
 class AdPositionsController < ApplicationController
-  before_action :set_ad_position, only: [:show, :edit, :update, :destroy]
+  before_action :set_ad_position, only: [:preview_box, :show, :edit, :update, :destroy]
 
   # GET /ad_positions
   # GET /ad_positions.json
   def index
+    @page_title = "<i class=\"icon-stack2 position-left\"></i> Vị trí đặt quảng cáo".html_safe
+
     @ad_positions = AdPosition.all
   end
 
@@ -28,7 +30,7 @@ class AdPositionsController < ApplicationController
 
     respond_to do |format|
       if @ad_position.save
-        format.html { redirect_to @ad_position, notice: 'Ad position was successfully created.' }
+        format.html { redirect_to ad_positions_path, notice: 'Ad position was successfully created.' }
         format.json { render :show, status: :created, location: @ad_position }
       else
         format.html { render :new }
@@ -42,7 +44,7 @@ class AdPositionsController < ApplicationController
   def update
     respond_to do |format|
       if @ad_position.update(ad_position_params)
-        format.html { redirect_to @ad_position, notice: 'Ad position was successfully updated.' }
+        format.html { redirect_to ad_positions_path, notice: 'Ad position was successfully updated.' }
         format.json { render :show, status: :ok, location: @ad_position }
       else
         format.html { render :edit }
@@ -59,6 +61,24 @@ class AdPositionsController < ApplicationController
       format.html { redirect_to ad_positions_url, notice: 'Ad position was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def datatable
+    result = AdPosition.datatable(params)
+    
+    render json: result[:result]
+  end
+
+  def home_top_banner_frame
+    @pos_1 = AdPosition.get("home_top_banner_1")
+    @pos_2 = AdPosition.get("home_top_banner_2")
+    @pos_3 = AdPosition.get("home_top_banner_3")
+
+    render layout: "ad_frame"
+  end
+  
+  def preview_box
+    render layout: nil
   end
 
   private

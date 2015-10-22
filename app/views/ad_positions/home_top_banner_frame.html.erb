@@ -1,0 +1,47 @@
+<div class="home_top_banner_frame">
+  <div class="home_top_banner_1_2">
+    <div class="home_top_banner_1">      
+        <div class="banner_item" style="width:<%= @pos_1.width %>px;height:<%= @pos_1.height %>px;">
+          <ul class="home_top_banner_1_slide">
+            <% @pos_1.active_ads.each do |ad| %>
+              <li>
+                <a href="<%= click_ads_path(id: ad) %>" target="_blank">
+                  <img title="<%= ad.name %>" src="<%= ad.image_src(:banner) %>" />
+                </a>
+              </li>
+            <% end %>
+          </ul>
+        </div>      
+    </div>
+    <div class="home_top_banner_2">
+      <div class="banner_item" style="width:<%= @pos_2.width %>px;height:<%= @pos_2.height %>px;">
+          <ul class="home_top_banner_2_slide">
+            <% @pos_2.active_ads.each do |ad| %>
+              <li>
+                <a>
+                  <img title="<%= ad.name %>" src="<%= ad.image_src(:banner) %>" />
+                </a>
+              </li>
+            <% end %>
+          </ul>
+        </div>      
+    </div>
+  </div>
+  <div class="home_top_banner_3">
+    <div class="banner_item" style="width:<%= (@pos_1.width+@pos_2.width) %>px;height:<%= @pos_3.height %>px;">
+      <ul class="home_top_banner_3_slide">
+        <% @pos_3.active_ads.each do |ad| %>
+          <li>
+            <a href="<%= click_ads_path(id: ad) %>" target="_blank">
+              <img title="<%= ad.name %>" src="<%= ad.image_src(:banner) %>" />
+            </a>
+            <br />
+            <a class="home_top_banner_3_title" href="">
+              <%= ad.name %>
+            </a>
+          </li>
+        <% end %>
+      </ul>
+    </div>    
+  </div>
+</div>

@@ -1,0 +1,43 @@
+.product_name_input {
+    position: absolute;
+    top: 26px;
+    width: 458px;
+    z-index: 1;
+}
+.product_images {
+    
+}
+.product_images ul {
+    margin: 0;
+    padding: 0;
+}
+.product_images ul li {
+    float: left;
+    list-style: outside none none;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+.product_images ul li img {
+    max-height: 100px;
+}
+.preview_box_image {
+    display: inline-block;
+    width: 100%;
+    border: dashed 2px #eee;
+    background: #f9f9f9;
+    overflow: hidden;
+}
+.image-checkbutton {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #333;
+    height: 22px;
+    margin-left: -23px;
+    margin-top: 1px;
+    padding: 0 2px;
+    position: absolute;
+    width: 22px;
+    cursor: pointer;
+}
+.ad_link img {
+    max-width: 100px;
+}
