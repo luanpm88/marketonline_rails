@@ -35,6 +35,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'thin'
+gem "sixarm_ruby_unaccent", ">= 1.1.1", "< 2"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

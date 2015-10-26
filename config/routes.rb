@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :ad_clicks
   resources :ads do
     collection do
       get 'datatable'

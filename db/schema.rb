@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151020043159) do
+ActiveRecord::Schema.define(version: 20151026061857) do
+
+  create_table "ad_clicks", force: :cascade do |t|
+    t.integer  "ad_id",         limit: 4
+    t.text     "customer_code", limit: 65535
+    t.string   "ip",            limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
 
   create_table "ad_positions", force: :cascade do |t|
     t.string   "name",        limit: 255

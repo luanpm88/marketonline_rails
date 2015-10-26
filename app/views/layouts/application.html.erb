@@ -143,7 +143,7 @@
 								<!-- Main -->
 								<li class="navigation-header"><span>Danh mục</span> <i class="icon-menu" title="Main pages"></i></li>
 								<li <%= 'class=active' if ["home"].include?(params[:controller]) %>>
-									<a href="<%= url_for("/") %>"><i class="icon-home4"></i> <span>Trang chính</span></a>
+									<a href="<%= root_path %>"><i class="icon-home4"></i> <span>Trang chính</span></a>
 								</li>
                                 <li <%= 'class=active' if ["ad_types","ads"].include?(params[:controller]) %>>
 									<a href="#"><i class="icon-stack2"></i> <span>Quảng cáo</span></a>
@@ -173,9 +173,7 @@
 					<div class="page-header-content">
 						<div class="page-title">
 							<h4><span class="text-semibold"><%= @page_title %></span></h4>
-						</div>
-
-						
+						</div>						
 					</div>
 
 					<div class="breadcrumb-line">

@@ -17,6 +17,10 @@ class Ad < ActiveRecord::Base
   before_validation :update_ad_image
   after_save :update_product_name
   
+  def click(request, session)
+    ad_clicks.create(customer_code: session[:session_id], ip: request.remote_ip)
+  end
+  
   def update_ad_name
     if product_name.present? and type_name == 'product'
       self.name = product_name
@@ -166,6 +170,16 @@ class Ad < ActiveRecord::Base
   
   def clicks
     ad_clicks
+  end
+  
+  def redirect_url
+    if type_name == 'product'
+      # http://test.marketonline.vn/san-pham/19550/ten-san-pham-chi-tiet-mau-can-co-cac-hang-muc-sau
+      "/san-pham/#{self.pb_product_id.to_s}/"+pb_product.name.unaccent.downcase.gsub(/\s+/,"xaaaaax").gsub!(/\W/,'').gsub("xaaaaax","-").gsub(/\-+/,"-")
+    else
+      url
+    end
+    
   end
   
 end
