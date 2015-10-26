@@ -1,0 +1,29 @@
+<%= form_for(@ad_click) do |f| %>
+  <% if @ad_click.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ad_click.errors.count, "error") %> prohibited this ad_click from being saved:</h2>
+
+      <ul>
+      <% @ad_click.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :ad_id %><br>
+    <%= f.number_field :ad_id %>
+  </div>
+  <div class="field">
+    <%= f.label :customer_code %><br>
+    <%= f.text_area :customer_code %>
+  </div>
+  <div class="field">
+    <%= f.label :ip %><br>
+    <%= f.text_field :ip %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

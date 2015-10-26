@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ad:</strong>
+  <%= @ad_click.ad_id %>
+</p>
+
+<p>
+  <strong>Customer code:</strong>
+  <%= @ad_click.customer_code %>
+</p>
+
+<p>
+  <strong>Ip:</strong>
+  <%= @ad_click.ip %>
+</p>
+
+<%= link_to 'Edit', edit_ad_click_path(@ad_click) %> |
+<%= link_to 'Back', ad_clicks_path %>
