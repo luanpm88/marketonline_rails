@@ -93,7 +93,7 @@ class AdsController < ApplicationController
   # DELETE /ads/1.json
   def delete
     @message = "Quảng cáo <strong>#{@ad.name}</strong> đã được xóa."
-    # @ad.destroy
+    @ad.destroy
     respond_to do |format|      
       format.html { render "/home/ajax_success", layout: nil }
       format.json { head :no_content }
