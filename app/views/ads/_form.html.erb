@@ -26,7 +26,7 @@
 														
 														<div class="form-group type_group product_type_group">
 															<label>Sản Phẩm <span class="text-danger">*</span></label>
-															<%= f.text_field :pb_product, required: "required", class: "select2-ajax", data_link: pb_products_path(format: "json"), placeholder: "Tìm sản phẩm..." %>
+															<%= f.text_field :pb_product_id, required: "required", class: "select2-ajax", data_link: pb_products_path(format: "json"), placeholder: "Tìm sản phẩm..." %>
 															<%= f.text_field :product_name, { class: "form-control product_name_input" } %>
 														</div>
 														
@@ -60,7 +60,7 @@
 															
 														</div>														
 														
-														<%= hidden_field_tag "banner" %>
+														<%= f.hidden_field "banner" %>
 															
 														<div class="product_images">
 														</div>																								
@@ -71,7 +71,7 @@
 															<div class="row">
 																<div class="col-md-3">
 																	<%= @ad.image_link %>
-																	<label class="image-checkbutton"><i image="<%= @ad.image_src(:banner) %>" class="<%= "icon-checkmark" if @ad.image.present? %>"></i></label>
+																	<label class="image-checkbutton"><i image="<%= @ad.image_src(:banner) %>" class="<%= "icon-checkmark" if @ad.image.present? %> <%= "noimage" if !@ad.image.present? %>"></i></label>
 																</div>
 																<div class="col-md-7">																		
 																	<input type="file" name="ad[image]" class="form-control file-styled">
@@ -105,6 +105,7 @@
 				img.attr('src', e.target.result);
 				box.find("a").attr('href', e.target.result);
 				box.find("i").attr('image', e.target.result);
+				box.find("i").removeClass("noimage");
 				if(box.find("i").hasClass("icon-checkmark") || $("icon-checkmark").length == 0) {
 					insertImageToPreviewBox(e.target.result)
 					if($("icon-checkmark").length == 0) {
@@ -120,6 +121,7 @@
 	function insertImageToPreviewBox(src) {
 		if (src=="") {
 			$(".preview_box_image").html("")
+			$("input[name='ad[banner]']").val(src)
 			return
 		}
 		var img = new Image();
@@ -148,6 +150,13 @@
 			$(".preview_box_image").html('<img class="preview_box_img" src="'+src+'" style="margin-top: -10px; width:'+new_w+'px; height:'+new_h+'px;margin-left:'+ma_left+'px;;margin-top:'+ma_top+'px;" />')			
 		}
 		img.src = src;
+		
+		// update input
+		if (src.indexOf("data") == 0) {
+			$("input[name='ad[banner]']").val("upload")
+		} else {
+			$("input[name='ad[banner]']").val(src)
+		}
 	}
 	
 	function updatePeviewBox() {
@@ -193,12 +202,12 @@
 	}
 	
 	function updateProductSelectLayout() {
-		if ($("input[name='ad[pb_product]']").length) {
-			var val = $("input[name='ad[pb_product]']").select2("val")			
+		if ($("input[name='ad[pb_product_id]']").length) {
+			var val = $("input[name='ad[pb_product_id]']").select2("val")			
 			if (val == "") {
 				$(".product_name_input").hide()
 			} else {
-				var text = $("input[name='ad[pb_product]']").select2("data").text
+				var text = $("input[name='ad[pb_product_id]']").select2("data").text
 				$(".product_name_input").show()
 				$(".product_name_input").val(text)
 			}
@@ -218,7 +227,7 @@
 		})		
 		// update input product layout
 		updateProductSelectLayout()
-		$("input[name='ad[pb_product]']").change(function() {
+		$("input[name='ad[pb_product_id]']").change(function() {
 			updateProductSelectLayout()
 		})
 		
@@ -228,8 +237,12 @@
 		})
 		
 		$(document).on("click", ".image-checkbutton", function() {
+			if($(this).find("i").hasClass("noimage")) {
+				return
+			}
 			var checked = $(this).find("i").hasClass("icon-checkmark")
 			$(".image-checkbutton i").removeClass("icon-checkmark")
+			
 			if (checked) {
 				$(this).find("i").removeClass("icon-checkmark")
 				insertImageToPreviewBox("")
@@ -243,5 +256,21 @@
 		$(".image_upload_input input[type=file]").change(function() {
 			readURL(this)
 		})
+		
+		// custome validate
+		jQuery.validator.addMethod("select_image", function(value, element) {
+			var ok = false
+			var image = $("input[name='ad[banner]']").val()
+			if (image != "" && image != "upload") {
+				ok = true
+			}
+			if (image == "upload" && $(".image_upload_input input[type=file]").val() != "") {
+				ok = true
+			}
+			return ok
+		}, 'Chọn hình cho quảng cáo');
+		$(".image_upload_input input[type=file]").rules( "add", {
+			select_image: true
+		});
 	})
 </script>

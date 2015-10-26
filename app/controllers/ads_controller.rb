@@ -112,6 +112,6 @@ class AdsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ad_params
-      params.require(:ad).permit(:product_name, :pb_product_id, :name, :description, :ad_position_id, :url, :image, :user_id, :status)
+      params.require(:ad).permit(:banner, :type_name, :product_name, :pb_product_id, :name, :description, :ad_position_id, :url, :image, :user_id, :status)
     end
 end

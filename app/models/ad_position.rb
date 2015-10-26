@@ -77,7 +77,7 @@ class AdPosition < ActiveRecord::Base
   end
   
   def display_name
-    "#{title} (#{display_size})"
+    "<span class=\"text-nowrap\">#{title}</span><br />#{display_size}".html_safe
   end
   
   def destroy_link

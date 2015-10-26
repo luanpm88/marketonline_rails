@@ -1,9 +1,10 @@
 class Ad < ActiveRecord::Base
   attr_accessor :product_name
+  attr_accessor :banner
   
   mount_uploader :image, AdUploader
   
-  validates :name, presence: true
+  # validates :name, presence: true
   validates :ad_position_id, presence: true
   
   belongs_to :ad_position
@@ -13,12 +14,19 @@ class Ad < ActiveRecord::Base
   has_many :ad_clicks
   
   before_validation :update_ad_name
+  before_validation :update_ad_image
   after_save :update_product_name
   
   def update_ad_name
     if product_name.present? and type_name == 'product'
       self.name = product_name
     end
+  end
+  
+  def update_ad_image
+    if banner != "" and banner != "upload"
+      self.remote_image_url = banner
+    end    
   end
   
   def update_product_name
