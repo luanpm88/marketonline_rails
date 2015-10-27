@@ -22,8 +22,9 @@ class AdClick < ActiveRecord::Base
     
     @records.each do |item|
       location = Geokit::Geocoders::IpGeocoder.geocode(item.ip).all.first
+      city = location.present? ? location.city.to_s+", "+location.country.to_s : ""
       row = [
-              location.city.to_s+", "+location.county.to_s,
+              city,
               "<div class=\"text-center\">"+item.ip+"</div>",
               "<span class=\"text-muted\">#{item.created_at.strftime("%d/%m/%Y")}, #{item.created_at.strftime("%H:%m %P")}</span>"
             ]
