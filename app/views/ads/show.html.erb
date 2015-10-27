@@ -1,39 +1,58 @@
-<p id="notice"><%= notice %></p>
+                    <style>
+						.datatable-header {
+							display: none;
+						}
+						.datatable-footer {
+							padding-left: 10px;
+							padding-right: 10px;
+						}
+					</style>
+                    
+                    <!-- Ad Statistic Content -->
+					<div class="row">
+						<div class="col-lg-8">
+							<!-- Marketing campaigns -->
+							<div class="panel panel-flat">								
+									<div class="table-responsive">
+										
+										<table class="table text-nowrap datatable-ajax" url="<%= datatable_ad_clicks_path(format: "json") %>">
+											<thead>
+												<tr class="active border-double">
+													<th>Nguồn truy cập</th>
+													<th class="text-center">Địa chỉ IP</th>
+													<th class="col-md-2 text-center">Thời gian</th>												
+												</tr>
+											</thead>
+											<tbody>
+												<% @ad.main_ad_clicks.each do |ac| %>
+													<tr>
+														<td>
+															<div class="media-left media-middle">
+																<a href="#"><img src="assets/images/placeholder.jpg" class="img-circle img-xs" alt=""></a>
+															</div>
+														</td>	
+														<td class="text-center">
+															<%= ac.ip %>xx
+														</td>
+														<td class="text-center">
+															<span class="text-muted"><%= ac.created_at.strftime("%d/%m/%Y") %>, <%= ac.created_at.strftime("%H:%m %P") %></span>
+														</td>													
+													</tr>
+												<% end %>
+											</tbody>
+										</table>
+									</div>
+							</div>
+							<!-- /marketing campaigns -->
+                            
+                        </div>
+                        
+                        <div class="col-lg-4">
 
-<p>
-  <strong>Name:</strong>
-  <%= @ad.name %>
-</p>
+							
 
-<p>
-  <strong>Description:</strong>
-  <%= @ad.description %>
-</p>
-
-<p>
-  <strong>Ad type:</strong>
-  <%= @ad.ad_type_id %>
-</p>
-
-<p>
-  <strong>Url:</strong>
-  <%= @ad.url %>
-</p>
-
-<p>
-  <strong>Image:</strong>
-  <%= @ad.image %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @ad.user_id %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @ad.status %>
-</p>
-
-<%= link_to 'Edit', edit_ad_path(@ad) %> |
-<%= link_to 'Back', ads_path %>
+						</div>
+                        
+                    </div>
+                    
+                    

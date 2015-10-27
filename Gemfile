@@ -36,6 +36,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'thin'
 gem "sixarm_ruby_unaccent", ">= 1.1.1", "< 2"
+gem 'geokit-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

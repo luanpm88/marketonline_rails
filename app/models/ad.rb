@@ -10,12 +10,17 @@ class Ad < ActiveRecord::Base
   belongs_to :ad_position
   belongs_to :pb_member
   belongs_to :pb_product
+  belongs_to :ad
   
   has_many :ad_clicks
   
   before_validation :update_ad_name
   before_validation :update_ad_image
   after_save :update_product_name
+  
+  def main_ad_clicks
+    ad_clicks.order("created_at DESC")
+  end
   
   def click(request, session)
     ad_clicks.create(customer_code: session[:session_id], ip: request.remote_ip)
@@ -71,11 +76,12 @@ class Ad < ActiveRecord::Base
               "<div class=\"text-center\">#{item.ad_position.display_name}</div>",                     
               "<div class=\"text-center\">#{item.created_at.strftime("%d-%m-%Y")}</div>",
               "<div class=\"text-center\">#{(item.pb_member.display_name if !item.pb_member.nil?)}</div>",
-              "<div class=\"text-center\"></div>",
+              "<div class=\"text-center\">#{item.click_count.to_s}</div>",
               "<div class=\"text-right\"><ul class=\"icons-list\">"+
                   "<li class=\"dropup\">"+
                       "<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\"><i class=\"icon-menu7\"></i></a>"+
                       "<ul class=\"dropdown-menu dropdown-menu-right\">"+
+                          "<li>#{item.statistic_link}</li>"+
                           "<li>#{item.edit_link}</li>"+
                           "<li>#{item.destroy_link}</li>"+
                       "</ul>"+
@@ -93,6 +99,10 @@ class Ad < ActiveRecord::Base
     result["data"] = data
     
     return {result: result}
+  end
+  
+  def click_count
+    ad_clicks.count
   end
   
   def image_path(version = nil)
@@ -135,6 +145,13 @@ class Ad < ActiveRecord::Base
     link_helper = ActionController::Base.helpers
     
     link_helper.link_to("<i class=\"icon-pencil\"></i> Sửa".html_safe, {controller: "ads", action: "edit", id: self.id})
+  end
+  
+  def statistic_link
+    ActionView::Base.send(:include, Rails.application.routes.url_helpers)
+    link_helper = ActionController::Base.helpers
+    
+    link_helper.link_to("<i class=\"icon-statistics\"></i> Xem thống kê".html_safe, {controller: "ads", action: "show", id: self.id})
   end
   
   def add_status(status_name)

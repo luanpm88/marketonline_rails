@@ -64,7 +64,7 @@ $(function() {
                 }
             },
             "language": {
-                "url": "assets/js/datatable_vietnamese.json"
+                "url": URL+"assets/js/datatable_vietnamese.json"
             },
             "initComplete": function(settings, json) {
                 // External table additions

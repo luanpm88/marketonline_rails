@@ -60,6 +60,12 @@ class AdClicksController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def datatable
+    result = AdClick.datatable(params)
+    
+    render json: result[:result]
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

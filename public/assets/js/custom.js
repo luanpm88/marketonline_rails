@@ -29,7 +29,7 @@ function ajaxLink(item) {
     }
 }
 
-$(document).ready(function() {
+$(document).ready(function() {   
     $(document).on("mouseover", ".fancybox", function(e) {                
         $(this).fancybox();
         e.preventDefault();

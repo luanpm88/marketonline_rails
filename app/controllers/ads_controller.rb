@@ -4,8 +4,6 @@ class AdsController < ApplicationController
   # GET /ads
   # GET /ads.json
   def index
-    @page_title = "<i class=\"icon-stack2 position-left\"></i> Quản lý quảng cáo".html_safe
-    
     @ads = Ad.all
   end
 
@@ -16,15 +14,11 @@ class AdsController < ApplicationController
 
   # GET /ads/new
   def new
-    @page_title = "<i class=\"icon-stack2 position-left\"></i> Thêm quảng cáo".html_safe
-    
     @ad = Ad.new
   end
 
   # GET /ads/1/edit
   def edit
-    @page_title = "<i class=\"icon-stack2 position-left\"></i> Sửa quảng cáo".html_safe
-    
   end
 
   # POST /ads
