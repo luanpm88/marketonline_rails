@@ -36,7 +36,7 @@ class AdClick < ActiveRecord::Base
       # location = GeoIp.geolocation("118.69.191.130")
       # city = location.present? ? location[:city]+", "+location[:country_name] : ""
       row = [
-              item.city+", "+item.country,
+              item.city.to_s+", "+item.country.to_s,
               "<div class=\"text-center\">"+item.ip+"</div>",
               "<span class=\"text-muted\">#{item.created_at.strftime("%d/%m/%Y")}, #{item.created_at.strftime("%H:%m %P")}</span>"
             ]
