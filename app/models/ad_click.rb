@@ -1,4 +1,15 @@
 class AdClick < ActiveRecord::Base
+  geocoded_by :ip
+  reverse_geocoded_by :latitude, :longitude do |obj,results|
+    if geo = results.first
+      obj.city    = geo.city
+      obj.zipcode = geo.postal_code
+      obj.country = geo.country_code
+    end
+  end
+  after_validation :geocode
+  after_validation :reverse_geocode
+  
   def self.datatable(params)    
     @records = self.all
     
@@ -21,8 +32,9 @@ class AdClick < ActiveRecord::Base
     data = []
     
     @records.each do |item|
-      location = Geokit::Geocoders::IpGeocoder.geocode(item.ip).all.first
-      city = location.present? ? location.city.to_s+", "+location.country.to_s : ""
+      # location = Geokit::Geocoders::IpGeocoder.geocode(item.ip).all.first
+      location = GeoIp.geolocation("118.69.191.130")
+      city = location.present? ? location[:city]+", "+location[:country_name] : ""
       row = [
               city,
               "<div class=\"text-center\">"+item.ip+"</div>",
