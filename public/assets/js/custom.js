@@ -210,6 +210,15 @@ $(document).ready(function() {
     $('.daterange-basic').daterangepicker({
         applyClass: 'bg-slate-600',
         cancelClass: 'btn-default',
+        opens: 'left',
+        ranges: {
+                'Hôm nay': [moment(), moment()],
+                'Hôm qua': [moment().subtract('days', 1), moment().subtract('days', 1)],
+                '7 ngày trước': [moment().subtract('days', 6), moment()],
+                '30 ngày trước': [moment().subtract('days', 29), moment()],
+                'Tháng này': [moment().startOf('month'), moment().endOf('month')],
+                'Tháng trước': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
+        },
         locale: {
             format: 'DD-MM-YYYY',
             closeText: "Đóng",
@@ -220,7 +229,7 @@ $(document).ready(function() {
             monthNamesShort: ["Một", "Hai", "Ba", "Bốn", "Năm", "Sáu", "Bảy", "Tám", "Chín", "Mười", "Mười một", "Mười hai"],
             dayNames: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"],
             dayNamesShort: ["CN", "Hai", "Ba", "Tư", "Năm", "Sáu", "Bảy"],
-            dayNamesMin: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
+            daysOfWeek: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
             weekHeader: "Tuần",
             dateFormat: "dd/mm/yy",
             firstDay: 1,
@@ -229,7 +238,8 @@ $(document).ready(function() {
             cancelLabel: "Đóng",
             applyLabel: "Lưu",
             startLabel: "Bắt đầu",
-            endLabel: "Kết thúc"
+            endLabel: "Kết thúc",
+            customRangeLabel: "Tùy chọn"
         }
     });
 });
