@@ -19,6 +19,34 @@ module ApplicationHelper
         title = 'Sửa quảng cáo: '+ad.name
         
       end
+      if ["show"].include?(params[:action])
+        ad = Ad.find(params[:id])
+        breadcrumb += '<li><a href="#">'+ad.name+'</a></li>'
+        title = 'Thống kê quảng cáo: '+ad.name
+        
+      end
+    elsif ["ad_positions"].include?(params[:controller])
+      breadcrumb += '<li><a href="'+ad_positions_path+'"><i class="icon-stack2 position-left"></i> Vị trí đặt quảng cáo</a></li>'
+      title = "Vị trí đặt quảng cáo"
+      
+      if ["new"].include?(params[:action])
+        breadcrumb += '<li><a href="#">Thêm vị trí</a></li>'
+        title = 'Thêm vị trí'
+        
+      end
+      if ["edit"].include?(params[:action])
+        ad = AdPosition.find(params[:id])
+        breadcrumb += '<li><a href="#">'+ad.title+'</a></li>'
+        title = 'Sửa vị trí: '+ad.title
+        
+      end
+      
+    elsif ["home"].include?(params[:controller])
+      if ["index"].include?(params[:action])
+        #breadcrumb += '<li><a href="#">Thêm quảng cáo</a></li>'
+        title = 'Tranh chính'
+        
+      end
     end
     
     breadcrumb += '</ul>'
