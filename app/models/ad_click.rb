@@ -39,8 +39,8 @@ class AdClick < ActiveRecord::Base
       # city = location.present? ? location[:city]+", "+location[:country_name] : ""
       row = [
               "<div class=\"text-default text-semibold\">#{item.customer}</div>",
-              "<div class=\"text-default text-center\">#{item.ip}</div><div class=\"text-muted text-size-small text-center\"><span class=\"status-mark border-blue position-left\"></span>#{item.city.to_s}, #{item.country.to_s}</div>",
-              "<span class=\"text-muted text-center\">#{item.created_at.strftime("%d/%m/%Y")}<br />#{item.created_at.strftime("%H:%m %P")}</span>"
+              "<div class=\"text-default\">#{item.ip}</div><div class=\"text-muted text-size-small text-center\"><span class=\"status-mark border-blue position-left\"></span>#{item.city.to_s}, #{item.country.to_s}</div>",
+              "<div class=\"text-muted text-center\">#{item.created_at.strftime("%d/%m/%Y")}<br />#{item.created_at.strftime("%H:%m %P")}</div>"
             ]
       data << row      
     end
