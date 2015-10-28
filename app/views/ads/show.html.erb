@@ -1,9 +1,3 @@
-                    <script>
-						var CHART_DAYS = JSON.parse('<%= Ad.display_chart_days.to_json.html_safe %>')
-						var CHART_VALUES = JSON.parse('<%= @ad.chart_values("guest").to_json.html_safe %>')
-						var CHART_VALUES_2 = JSON.parse('<%= @ad.chart_values("user").to_json.html_safe %>')
-					</script>
-					
 					<style>
 						.datatable-header {
 							display: none;
@@ -15,8 +9,17 @@
 					</style>
                     
                     <!-- Ad Statistic Content -->
-					<div class="row">
+					<div class="row datatable_box">
 						<div class="col-lg-6">
+							<form class="datatable_filter">
+								<%= hidden_field_tag "ad_id", @ad.id %>
+								<div class="form-group">								
+									<div class="input-group">
+										<span class="input-group-addon"><i class="icon-calendar22"></i></span>
+										<input type="text" name="daterange" class="form-control daterange-basic ad_chart_daterange" value="<%= @begin_date.strftime("%d-%m-%Y") %> - <%= @end_date.strftime("%d-%m-%Y") %>"> 
+									</div>
+								</div>
+							</form>
 							<!-- Marketing campaigns -->
 							<div class="panel panel-flat">								
 									<div class="table-responsive">
@@ -53,8 +56,7 @@
                             
                         </div>
                         
-                        <div class="col-lg-6">
-
+                        <div class="col-lg-6">							
 							<!-- Basic area chart -->
 							<div class="panel panel-flat">
 								<div class="panel-heading">
@@ -70,7 +72,7 @@
 		
 								<div class="panel-body">
 									<div class="chart-container">
-										<div class="chart has-fixed-height" id="basic_area"></div>
+										<div data-url="<%= chart_ads_path(id: @ad.id) %>" class="chart has-fixed-height" id="basic_area"></div>
 									</div>
 								</div>
 							</div>
@@ -80,4 +82,9 @@
                         
                     </div>
                     
-                    
+<script>
+	loadAdDetailChart($("#basic_area"), $(".ad_chart_daterange").val())
+	$(".ad_chart_daterange").change(function() {
+		loadAdDetailChart($("#basic_area"), $(this).val())
+	})
+</script>                    

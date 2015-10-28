@@ -199,20 +199,14 @@ class Ad < ActiveRecord::Base
     
   end
   
-  def self.chart_days
-    from_date = Date.today - 5.days
-    to_date = Date.today + 5.days
-    return (from_date..to_date)
-  end
-  
-  def self.display_chart_days
-    result = self.chart_days.map { |d| d.strftime("%d/%m") }
+  def self.display_chart_days(from,to)
+    result = (from..to).map { |d| d.strftime("%d/%m") }
     return result
   end
   
-  def chart_values(type=nil)
+  def chart_values(type=nil,from,to)
     arr = []
-    Ad.chart_days.each do |d|
+    (from..to).each do |d|
       records = ad_clicks.where("created_at >= ? AND created_at <= ?", d.beginning_of_day, d.end_of_day)
       records = records.where(pb_member_id: nil) if type == "guest"
       records = records.where.not(pb_member_id: nil) if type == "user"

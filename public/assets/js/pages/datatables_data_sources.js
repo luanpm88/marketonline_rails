@@ -45,6 +45,8 @@ $(function() {
     // AJAX sourced data
     $('.datatable-ajax').each (function() {
         var item = $(this)
+        var box = $(this).parents(".datatable_box")
+        var filters = box.find(".datatable_filter")
         var orders = []
         var num = 0
         var item_id = ""
@@ -65,7 +67,7 @@ $(function() {
             "ajax": {
                 "url": item.attr("url"),
                 "data": function ( d ) {
-                    d.item_id = item_id
+                    d.filters = filters.serialize()
                 }
             },
             "language": {

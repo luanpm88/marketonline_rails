@@ -29,6 +29,142 @@ function ajaxLink(item) {
     }
 }
 
+function loadAdDetailChart(box, daterange) {
+    var chart_id = box.attr("id")
+    var url = box.attr("data-url")
+    var datatable = box.parents(".datatable_box").find("table")
+    $.ajax({
+        url : url,
+        data: "daterange="+daterange,
+        type: "GET",
+        success:function(data, textStatus, jqXHR)
+        {
+            renderBasicAreaChart(chart_id, data.days, JSON.parse(data.value_1), JSON.parse(data.value_2))
+            datatable.dataTable().fnFilter();
+        }
+    })
+}
+
+function renderBasicAreaChart(chart_id, days, values_1, values_2) {
+    $(function() {
+
+        // Set paths
+        // ------------------------------
+    
+        require.config({
+            paths: {
+                echarts: URL+'assets/js/plugins/visualization/echarts'
+            }
+        });
+    
+    
+        // Configuration
+        // ------------------------------
+    
+        require(
+            [
+                'echarts',
+                'echarts/theme/limitless',
+                'echarts/chart/bar',
+                'echarts/chart/line'
+            ],
+    
+    
+            // Charts setup
+            function (ec, limitless) {
+    
+    
+                // Initialize charts
+                // ------------------------------
+    
+                var basic_area = ec.init(document.getElementById(chart_id), limitless);
+                
+    
+                // Charts setup
+                // ------------------------------
+    
+                
+                //
+                // Basic area options
+                //
+    
+                basic_area_options = {
+    
+                    // Setup grid
+                    grid: {
+                        x: 40,
+                        x2: 20,
+                        y: 35,
+                        y2: 25
+                    },
+    
+                    // Add tooltip
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+    
+                    // Add legend
+                    legend: {
+                        data: ['Khách viếng thăm', 'Thành viên']
+                    },
+    
+    
+                    // Enable drag recalculate
+                    calculable: true,
+    
+                    // Horizontal axis
+                    xAxis: [{
+                        type: 'category',
+                        boundaryGap: false,
+                        data: days
+                    }],
+    
+                    // Vertical axis
+                    yAxis: [{
+                        type: 'value'
+                    }],
+    
+                    // Add series
+                    series: [
+                        {
+                            name: 'Khách viếng thăm',
+                            type: 'line',
+                            smooth: true,
+                            itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                            data: values_1
+                        },
+                        {
+                            name: 'Thành viên',
+                            type: 'line',
+                            smooth: true,
+                            itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                            data: values_2
+                        }
+                    ]
+                };
+    
+    
+                
+                // Apply options
+                // ------------------------------
+                    
+                basic_area.setOption(basic_area_options);
+    
+                // Resize charts
+                // ------------------------------
+    
+                window.onresize = function () {
+                    setTimeout(function () {
+                        basic_area.resize();
+                    }, 200);
+                }
+            }
+        );
+    });
+}
+
+
+
 $(document).ready(function() {   
     $(document).on("mouseover", ".fancybox", function(e) {                
         $(this).fancybox();
@@ -69,4 +205,31 @@ $(document).ready(function() {
             }
         });
     })
+    
+    // Basic initialization
+    $('.daterange-basic').daterangepicker({
+        applyClass: 'bg-slate-600',
+        cancelClass: 'btn-default',
+        locale: {
+            format: 'DD-MM-YYYY',
+            closeText: "Đóng",
+            prevText: "Trước",
+            nextText: "Sau",
+            currentText: "Hôm nay",
+            monthNames: ["Tháng một", "Tháng hai", "Tháng ba", "Tháng tư", "Tháng năm", "Tháng sáu", "Tháng bảy", "Tháng tám", "Tháng chín", "Tháng mười", "Tháng mười một", "Tháng mười hai"],
+            monthNamesShort: ["Một", "Hai", "Ba", "Bốn", "Năm", "Sáu", "Bảy", "Tám", "Chín", "Mười", "Mười một", "Mười hai"],
+            dayNames: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"],
+            dayNamesShort: ["CN", "Hai", "Ba", "Tư", "Năm", "Sáu", "Bảy"],
+            dayNamesMin: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
+            weekHeader: "Tuần",
+            dateFormat: "dd/mm/yy",
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            cancelLabel: "Đóng",
+            applyLabel: "Lưu",
+            startLabel: "Bắt đầu",
+            endLabel: "Kết thúc"
+        }
+    });
 });

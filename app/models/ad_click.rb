@@ -12,8 +12,9 @@ class AdClick < ActiveRecord::Base
   after_validation :geocode
   after_validation :reverse_geocode
   
-  def self.datatable(params)    
-    @records = self.where(ad_id: params[:item_id])
+  def self.datatable(params)
+    filters = CGI::parse(params[:filters])
+    @records = self.where(ad_id: filters["ad_id"][0])
     
     order = "ad_clicks.created_at DESC"
     if !params["order"].nil?
@@ -25,9 +26,12 @@ class AdClick < ActiveRecord::Base
     end
     @records = @records.order(order) if !order.nil?
     
-    ## Keyword search
-    #q = params["search"]["value"].strip.downcase
-    #@records = @records.where("LOWER(ads.name) LIKE ?", "%#{q}%") if !q.empty?
+    if !filters["daterange"].empty?
+      from = filters["daterange"][0].split(" - ")[0].to_date
+      to = filters["daterange"][0].split(" - ")[1].to_date
+      @records = @records.where("created_at >= ? AND created_at <= ?", from.beginning_of_day, to.end_of_day)
+    end
+    
     
     total = @records.count
     @records = @records.limit(params[:length]).offset(params["start"])

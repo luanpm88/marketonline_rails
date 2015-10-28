@@ -1,5 +1,5 @@
 class AdsController < ApplicationController
-  before_action :set_ad, only: [:click, :delete, :show, :edit, :update, :destroy]
+  before_action :set_ad, only: [:chart, :click, :delete, :show, :edit, :update, :destroy]
 
   # GET /ads
   # GET /ads.json
@@ -10,6 +10,8 @@ class AdsController < ApplicationController
   # GET /ads/1
   # GET /ads/1.json
   def show
+    @begin_date = Date.today - 5
+    @end_date = Date.today + 5
   end
 
   # GET /ads/new
@@ -97,6 +99,12 @@ class AdsController < ApplicationController
   def click
     @ad.click(request, session, @current_user)
     redirect_to @ad.redirect_url
+  end
+  
+  def chart
+    from = params[:daterange].split(" - ")[0].to_date
+    to = params[:daterange].split(" - ")[1].to_date
+    render json: {days: Ad.display_chart_days(from,to), value_1: @ad.chart_values("guest",from,to).to_json, value_2: @ad.chart_values("user",from,to).to_json}
   end
 
   private

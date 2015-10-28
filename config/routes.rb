@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get 'image'
       get 'delete'
       get 'click'
+      get 'chart'
     end
   end
   resources :ad_positions do
