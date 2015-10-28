@@ -95,7 +95,7 @@ class AdsController < ApplicationController
   end
   
   def click
-    @ad.click(request, session)
+    @ad.click(request, session, user)
     redirect_to @ad.redirect_url
   end
 

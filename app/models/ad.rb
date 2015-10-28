@@ -22,8 +22,8 @@ class Ad < ActiveRecord::Base
     ad_clicks.order("created_at DESC")
   end
   
-  def click(request, session)
-    ad_clicks.create(customer_code: session[:session_id], ip: request.remote_ip)
+  def click(request, session, user)
+    ad_clicks.create(customer_code: session[:session_id], ip: request.remote_ip, pb_member_id: user.id)
   end
   
   def update_ad_name
