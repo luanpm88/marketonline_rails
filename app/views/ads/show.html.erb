@@ -1,6 +1,7 @@
                     <script>
 						var CHART_DAYS = JSON.parse('<%= Ad.display_chart_days.to_json.html_safe %>')
-						var CHART_VALUES = JSON.parse('<%= @ad.chart_values.to_json.html_safe %>')
+						var CHART_VALUES = JSON.parse('<%= @ad.chart_values("guest").to_json.html_safe %>')
+						var CHART_VALUES_2 = JSON.parse('<%= @ad.chart_values("user").to_json.html_safe %>')
 					</script>
 					
 					<style>

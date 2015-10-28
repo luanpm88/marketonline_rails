@@ -447,7 +447,7 @@ $(function() {
 
                 // Add legend
                 legend: {
-                    data: ['Lượt truy cập']
+                    data: ['Khách viếng thăm', 'Thành viên']
                 },
 
 
@@ -469,20 +469,19 @@ $(function() {
                 // Add series
                 series: [
                     {
-                        name: 'Lượt truy cập',
+                        name: 'Khách viếng thăm',
                         type: 'line',
                         smooth: true,
                         itemStyle: {normal: {areaStyle: {type: 'default'}}},
                         data: CHART_VALUES
+                    },
+                    {
+                        name: 'Thành viên',
+                        type: 'line',
+                        smooth: true,
+                        itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                        data: CHART_VALUES_2
                     }
-                    //,
-                    //{
-                    //    name: 'Lượt truy cập',
-                    //    type: 'line',
-                    //    smooth: true,
-                    //    itemStyle: {normal: {areaStyle: {type: 'default'}}},
-                    //    data: [30, 182, 434, 791, 390, 30, 10]
-                    //}
                     //,
                     //{
                     //    name: 'New orders',

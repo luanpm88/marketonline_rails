@@ -210,10 +210,14 @@ class Ad < ActiveRecord::Base
     return result
   end
   
-  def chart_values
+  def chart_values(type=nil)
     arr = []
     Ad.chart_days.each do |d|
-      arr << ad_clicks.where("created_at >= ? AND created_at <= ?", d.beginning_of_day, d.end_of_day).count
+      records = ad_clicks.where("created_at >= ? AND created_at <= ?", d.beginning_of_day, d.end_of_day)
+      records = records.where(pb_member_id: nil) if type == "guest"
+      records = records.where.not(pb_member_id: nil) if type == "user"
+      
+      arr << records.count
     end
     
     return arr
