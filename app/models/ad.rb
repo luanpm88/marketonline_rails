@@ -199,4 +199,24 @@ class Ad < ActiveRecord::Base
     
   end
   
+  def self.chart_days
+    from_date = Date.today - 5.days
+    to_date = Date.today + 5.days
+    return (from_date..to_date)
+  end
+  
+  def self.display_chart_days
+    result = self.chart_days.map { |d| d.strftime("%d/%m") }
+    return result
+  end
+  
+  def chart_values
+    arr = []
+    Ad.chart_days.each do |d|
+      arr << ad_clicks.where("created_at >= ? AND created_at <= ?", d.beginning_of_day, d.end_of_day).count
+    end
+    
+    return arr
+  end
+  
 end

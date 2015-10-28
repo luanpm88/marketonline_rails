@@ -1,4 +1,6 @@
 class AdClick < ActiveRecord::Base
+  belongs_to :pb_member
+  
   geocoded_by :ip
   reverse_geocoded_by :latitude, :longitude do |obj,results|
     if geo = results.first
@@ -11,7 +13,7 @@ class AdClick < ActiveRecord::Base
   after_validation :reverse_geocode
   
   def self.datatable(params)    
-    @records = self.all
+    @records = self.where(ad_id: params[:item_id])
     
     order = "ad_clicks.created_at DESC"
     if !params["order"].nil?
@@ -36,9 +38,9 @@ class AdClick < ActiveRecord::Base
       # location = GeoIp.geolocation("118.69.191.130")
       # city = location.present? ? location[:city]+", "+location[:country_name] : ""
       row = [
-              item.city.to_s+", "+item.country.to_s,
-              "<div class=\"text-center\">"+item.ip+"</div>",
-              "<span class=\"text-muted\">#{item.created_at.strftime("%d/%m/%Y")}, #{item.created_at.strftime("%H:%m %P")}</span>"
+              "<div class=\"text-default text-semibold\">#{item.customer}</div>",
+              "<div class=\"text-default text-center\">#{item.ip}</div><div class=\"text-muted text-size-small text-center\"><span class=\"status-mark border-blue position-left\"></span>#{item.city.to_s}, #{item.country.to_s}</div>",
+              "<span class=\"text-muted text-center\">#{item.created_at.strftime("%d/%m/%Y")}<br />#{item.created_at.strftime("%H:%m %P")}</span>"
             ]
       data << row      
     end
@@ -51,5 +53,9 @@ class AdClick < ActiveRecord::Base
     result["data"] = data
     
     return {result: result}
+  end
+  
+  def customer
+    pb_member.nil? ? "Khách viếng thăm" : pb_member.display_name
   end
 end

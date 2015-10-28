@@ -47,12 +47,16 @@ $(function() {
         var item = $(this)
         var orders = []
         var num = 0
+        var item_id = ""
         $('.datatable-ajax').find("th").each(function() {
           if(!$(this).hasClass("sortable")) {
             orders.push(num)
           }
           num++
         })
+        if (typeof(item.attr("item-id")) != "undefined") {
+            item_id = item.attr("item-id")
+        }
         item.dataTable({
             "order": [],
             "columnDefs": [ { "targets": orders, "orderable": false } ],
@@ -60,7 +64,8 @@ $(function() {
             "serverSide": true,
             "ajax": {
                 "url": item.attr("url"),
-                "data": function ( d ) {                    
+                "data": function ( d ) {
+                    d.item_id = item_id
                 }
             },
             "language": {

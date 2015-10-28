@@ -17,7 +17,7 @@ $(function() {
 
     require.config({
         paths: {
-            echarts: 'assets/js/plugins/visualization/echarts'
+            echarts: URL+'assets/js/plugins/visualization/echarts'
         }
     });
 
@@ -41,13 +41,13 @@ $(function() {
             // Initialize charts
             // ------------------------------
 
-            var basic_lines = ec.init(document.getElementById('basic_lines'), limitless);
-            var stacked_lines = ec.init(document.getElementById('stacked_lines'), limitless);
-            var inverted_axes = ec.init(document.getElementById('inverted_axes'), limitless);
-            var line_point = ec.init(document.getElementById('line_point'), limitless);
+            //var basic_lines = ec.init(document.getElementById('basic_lines'), limitless);
+            //var stacked_lines = ec.init(document.getElementById('stacked_lines'), limitless);
+            //var inverted_axes = ec.init(document.getElementById('inverted_axes'), limitless);
+            //var line_point = ec.init(document.getElementById('line_point'), limitless);
             var basic_area = ec.init(document.getElementById('basic_area'), limitless);
-            var stacked_area = ec.init(document.getElementById('stacked_area'), limitless);
-            var reversed_value = ec.init(document.getElementById('reversed_value'), limitless);
+            //var stacked_area = ec.init(document.getElementById('stacked_area'), limitless);
+            //var reversed_value = ec.init(document.getElementById('reversed_value'), limitless);
 
 
 
@@ -447,7 +447,7 @@ $(function() {
 
                 // Add legend
                 legend: {
-                    data: ['New orders', 'In progress', 'Closed deals']
+                    data: ['Lượt truy cập']
                 },
 
 
@@ -458,9 +458,7 @@ $(function() {
                 xAxis: [{
                     type: 'category',
                     boundaryGap: false,
-                    data: [
-                        'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'
-                    ]
+                    data: CHART_DAYS
                 }],
 
                 // Vertical axis
@@ -471,26 +469,28 @@ $(function() {
                 // Add series
                 series: [
                     {
-                        name: 'Closed deals',
+                        name: 'Lượt truy cập',
                         type: 'line',
                         smooth: true,
                         itemStyle: {normal: {areaStyle: {type: 'default'}}},
-                        data: [10, 12, 21, 54, 260, 830, 710]
-                    },
-                    {
-                        name: 'In progress',
-                        type: 'line',
-                        smooth: true,
-                        itemStyle: {normal: {areaStyle: {type: 'default'}}},
-                        data: [30, 182, 434, 791, 390, 30, 10]
-                    },
-                    {
-                        name: 'New orders',
-                        type: 'line',
-                        smooth: true,
-                        itemStyle: {normal: {areaStyle: {type: 'default'}}},
-                        data: [1320, 1132, 601, 234, 120, 90, 20]
+                        data: CHART_VALUES
                     }
+                    //,
+                    //{
+                    //    name: 'Lượt truy cập',
+                    //    type: 'line',
+                    //    smooth: true,
+                    //    itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                    //    data: [30, 182, 434, 791, 390, 30, 10]
+                    //}
+                    //,
+                    //{
+                    //    name: 'New orders',
+                    //    type: 'line',
+                    //    smooth: true,
+                    //    itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                    //    data: [1320, 1132, 601, 234, 120, 90, 20]
+                    //}
                 ]
             };
 
@@ -657,13 +657,13 @@ $(function() {
             // Apply options
             // ------------------------------
 
-            basic_lines.setOption(basic_lines_options);
-            stacked_lines.setOption(stacked_lines_options);
-            inverted_axes.setOption(inverted_axes_options);
-            line_point.setOption(line_point_options);
+            //basic_lines.setOption(basic_lines_options);
+            //stacked_lines.setOption(stacked_lines_options);
+            //inverted_axes.setOption(inverted_axes_options);
+            //line_point.setOption(line_point_options);
             basic_area.setOption(basic_area_options);
-            stacked_area.setOption(stacked_area_options);
-            reversed_value.setOption(reversed_value_options);
+            //stacked_area.setOption(stacked_area_options);
+            //reversed_value.setOption(reversed_value_options);
 
 
 
@@ -672,13 +672,13 @@ $(function() {
 
             window.onresize = function () {
                 setTimeout(function () {
-                    basic_lines.resize();
-                    stacked_lines.resize();
-                    inverted_axes.resize();
-                    line_point.resize();
+                    //basic_lines.resize();
+                    //stacked_lines.resize();
+                    //inverted_axes.resize();
+                    //line_point.resize();
                     basic_area.resize();
-                    stacked_area.resize();
-                    reversed_value.resize();
+                    //stacked_area.resize();
+                    //reversed_value.resize();
                 }, 200);
             }
         }

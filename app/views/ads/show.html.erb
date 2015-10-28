@@ -1,4 +1,9 @@
-                    <style>
+                    <script>
+						var CHART_DAYS = JSON.parse('<%= Ad.display_chart_days.to_json.html_safe %>')
+						var CHART_VALUES = JSON.parse('<%= @ad.chart_values.to_json.html_safe %>')
+					</script>
+					
+					<style>
 						.datatable-header {
 							display: none;
 						}
@@ -10,12 +15,12 @@
                     
                     <!-- Ad Statistic Content -->
 					<div class="row">
-						<div class="col-lg-8">
+						<div class="col-lg-6">
 							<!-- Marketing campaigns -->
 							<div class="panel panel-flat">								
 									<div class="table-responsive">
 										
-										<table class="table text-nowrap datatable-ajax" url="<%= datatable_ad_clicks_path(format: "json") %>">
+										<table item-id="<%= @ad.id %>" class="table text-nowrap datatable-ajax" url="<%= datatable_ad_clicks_path(format: "json") %>">
 											<thead>
 												<tr class="active border-double">
 													<th>Nguồn truy cập</th>
@@ -47,9 +52,28 @@
                             
                         </div>
                         
-                        <div class="col-lg-4">
+                        <div class="col-lg-6">
 
-							
+							<!-- Basic area chart -->
+							<div class="panel panel-flat">
+								<div class="panel-heading">
+									<h5 class="panel-title">Thống kê truy cập</h5>
+									<div class="heading-elements">
+										<ul class="icons-list">
+											<li><a data-action="collapse"></a></li>
+											<li><a data-action="reload"></a></li>
+											<li><a data-action="close"></a></li>
+										</ul>
+									</div>
+								</div>
+		
+								<div class="panel-body">
+									<div class="chart-container">
+										<div class="chart has-fixed-height" id="basic_area"></div>
+									</div>
+								</div>
+							</div>
+							<!-- /basic area chart -->
 
 						</div>
                         
