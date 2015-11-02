@@ -14,13 +14,7 @@
 															<label>Tiêu đề <span class="text-danger">*</span></label>
 															<%= f.text_field :title, required: "required", class: "form-control" %>
 														</div>
-													</fieldset>
-												</div>
-		
-												<div class="col-md-6">
-													<fieldset class="text-semibold">
-														<legend><i class="icon-file-text position-left"></i> Cài đặt quảng cáo</legend>
-																											
+														
 														<div class="form-group">
 															<label>Kích thước (Rộng x Dài) <span class="text-danger">*</span></label>
                                                             <div class="row">
@@ -30,6 +24,33 @@
                                                               <div class="col-md-6">
                                                                 <%= f.text_field :height, required: "required", class: "form-control text-right number_input" %>
                                                               </div>
+                                                            </div>
+														</div>
+														
+													</fieldset>
+												</div>
+		
+												<div class="col-md-6">
+													<fieldset class="text-semibold">
+														<legend><i class="icon-file-text position-left"></i> Cài đặt quảng cáo</legend>
+																											
+														
+															  
+														<div class="form-group">
+															<label>Phí trên lượng nhấn (VNĐ/Lượt nhấn) <span class="text-danger">*</span></label>
+                                                            <div class="row">
+                                                              <div class="col-md-12">
+                                                                <%= f.text_field :click_price, required: "required", class: "form-control text-right number_input" %>
+                                                              </div>                                                              
+                                                            </div>
+														</div>
+															  
+														<div class="form-group">
+															<label>Phí theo thời gian (VNĐ/ngày) <span class="text-danger">*</span></label>
+                                                            <div class="row">
+                                                              <div class="col-md-12">
+                                                                <%= f.text_field :day_price, required: "required", class: "form-control text-right number_input" %>
+                                                              </div>                                                              
                                                             </div>
 														</div>
                                                         

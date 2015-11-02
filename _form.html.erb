@@ -1,0 +1,276 @@
+                                          		  
+										  <%= form_for(@ad, html: {class: "form-validate-jquery", multipart: true}) do |f| %>
+										  
+											<% if @ad.errors.any? %>
+												<div id="error_explanation">
+												  <h2><%= pluralize(@ad.errors.count, "error") %> prohibited this ad from being saved:</h2>
+											
+												  <ul>
+												  <% @ad.errors.full_messages.each do |message| %>
+													<li><%= message %></li>
+												  <% end %>
+												  </ul>
+												</div>
+											<% end %>
+										  
+										  
+											<div class="row">
+												<div class="col-md-6">
+													<fieldset class="text-semibold">
+														<legend><i class="icon-file-text position-left"></i> Thông tin cơ bản</legend>
+														
+														<div class="form-group">
+															<label>Loại quảng cáo <span class="text-danger">*</span></label>
+															<%= select_tag "ad[type_name]", options_for_select(Ad.type_name_options, @ad.type_name), class: "modern_select required" %>
+														</div>
+														
+														<div class="form-group type_group product_type_group">
+															<label>Sản Phẩm <span class="text-danger">*</span></label>
+															<%= f.text_field :pb_product_id, required: "required", class: "select2-ajax", data_link: pb_products_path(format: "json"), placeholder: "Tìm sản phẩm..." %>
+															<%= f.text_field :product_name, { class: "form-control product_name_input" } %>
+														</div>
+														
+														<div class="form-group type_group image_type_group">
+															<label>Tiêu đề quảng cáo <span class="text-danger">*</span></label>
+															<%= f.text_field :name, required: "required", class: "form-control" %>
+														</div>
+														
+														<div class="form-group type_group image_type_group">
+															<label>Đường dẫn <span class="text-danger">*</span></label>
+															<%= f.text_field :url, required: "required", class: "form-control" %>
+														</div>
+														
+														<div class="form-group">
+															<label>Mô tả</label>
+															<%= f.text_area :description, class: "form-control" %>
+														</div>
+													</fieldset>
+												</div>
+		
+												<div class="col-md-6">
+													<fieldset class="text-semibold">
+														<legend><i class="icon-file-text position-left"></i> Cài đặt quảng cáo</legend>
+																											
+														<div class="form-group">
+															<label>Vị trí đặt <span class="text-danger">*</span></label>
+                                                            <%= f.select("ad_position_id", AdPosition.all.collect {|p| [ p.display_name, p.id ] }, { include_blank: "- Chọn vị trí -"} , {class: "select", required: "required" }) %>
+														</div>
+														
+														<div class="ad_preview_box">
+															
+														</div>														
+														
+														<%= f.hidden_field "banner" %>
+															
+														<div class="product_images">
+														</div>																								
+														
+														
+														<div class="form-group image_upload_input">
+															<label>Thay hình ảnh</label>
+															<div class="row">
+																<div class="col-md-3">
+																	<%= @ad.image_link %>
+																	<label class="image-checkbutton"><i image="<%= @ad.image_src(:banner) %>" class="<%= "icon-checkmark" if @ad.image.present? %> <%= "noimage" if !@ad.image.present? %>"></i></label>
+																</div>
+																<div class="col-md-7">																		
+																	<input type="file" name="ad[image]" class="form-control file-styled">
+																	<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
+																</div>
+															</div>
+														</div>
+																								
+														
+													</fieldset>
+												</div>
+												
+											</div>
+												
+											<div class="text-right">
+												<% if !@ad.id.present? %>
+													<button id="reset" class="btn btn-default" type="reset">Nhập lại <i class="icon-reload-alt position-right"></i></button>
+												<% end %>
+												<button type="submit" class="btn btn-primary">Lưu <i class="icon-arrow-right14 position-right"></i></button>
+											</div>
+										
+                                      <% end %>
+<script>
+	
+	function readURL(input) {
+		var box = $(input).parents(".image_upload_input")
+		var img = box.find("img")		
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();	
+			reader.onload = function (e) {
+				img.attr('src', e.target.result);
+				box.find("a").attr('href', e.target.result);
+				box.find("i").attr('image', e.target.result);
+				box.find("i").removeClass("noimage");
+				if(box.find("i").hasClass("icon-checkmark") || $("icon-checkmark").length == 0) {
+					insertImageToPreviewBox(e.target.result)
+					if($("icon-checkmark").length == 0) {
+						box.find("i").addClass("icon-checkmark")
+					}
+				}
+			}	
+			reader.readAsDataURL(input.files[0]);
+			
+		}
+	}
+	
+	function insertImageToPreviewBox(src) {
+		if (src=="") {
+			$(".preview_box_image").html("")
+			$("input[name='ad[banner]']").val(src)
+			return
+		}
+		var img = new Image();
+		img.onload = function() {
+			var w = this.width
+			var h = this.height
+			
+			var box_w = $(".preview_box_image").width()
+			var box_h = $(".preview_box_image").height()
+			
+			var new_h = 0
+			var new_w = 0
+			var ma_top = 0
+			var ma_left = 0
+			
+			if (w/h > box_w/box_h) {
+				new_h = box_h
+				new_w = box_h*(w/h)
+				ma_left = (box_w-new_w)/2
+			} else {
+				new_w = box_w
+				new_h = box_w*(h/w)
+				ma_top = (box_h-new_h)/2
+			}
+			
+			$(".preview_box_image").html('<img class="preview_box_img" src="'+src+'" style="margin-top: -10px; width:'+new_w+'px; height:'+new_h+'px;margin-left:'+ma_left+'px;;margin-top:'+ma_top+'px;" />')			
+		}
+		img.src = src;
+		
+		// update input
+		if (src.indexOf("data") == 0) {
+			$("input[name='ad[banner]']").val("upload")
+		} else {
+			$("input[name='ad[banner]']").val(src)
+		}
+	}
+	
+	function updatePeviewBox() {
+		if ($("select[name='ad[ad_position_id]']").length) {
+			var id = $("select[name='ad[ad_position_id]']").select2("val")
+			if (id == "") {
+				$(".ad_preview_box").html("")
+				return
+			}
+			$.ajax({
+				url : '<%= preview_box_ad_positions_path %>?id='+id,
+				success:function(data, textStatus, jqXHR)
+				{
+					$(".ad_preview_box").html(data)
+					if($("i.icon-checkmark").length) {
+						insertImageToPreviewBox($("i.icon-checkmark").attr("image"))
+					}	
+				}
+			})
+		}
+			
+	}
+	
+	function renderProductDetail(id) {
+		if (id == "") {
+			$(".product_images").html("")
+			return
+		}
+		$.ajax({
+            url : '<%= pb_products_path %>/'+id+'.json',
+            success:function(data, textStatus, jqXHR)
+            {
+                // product_images
+				var images_html = '<div class="form-group type_group product_type_group"><label>Hình ảnh từ gian hàng <span class="text-danger">*</span></label><ul class="">'
+				data.pictures.forEach(function(entry) {
+					images_html += '<li><a href="'+entry+'" class="fancybox.image fancybox"><img src="'+entry+'" /></a><label class="image-checkbutton"><i image="'+entry+'" class=""></i></label></li>'
+				});
+				images_html += '</ul></div><br style="clear: both" /><br />'
+				
+				$(".product_images").html(images_html)
+            }
+        })
+	}
+	
+	function updateProductSelectLayout() {
+		if ($("input[name='ad[pb_product_id]']").length) {
+			var val = $("input[name='ad[pb_product_id]']").select2("val")			
+			if (val == "") {
+				$(".product_name_input").hide()
+			} else {
+				var text = $("input[name='ad[pb_product_id]']").select2("data").text
+				$(".product_name_input").show()
+				$(".product_name_input").val(text)
+			}
+			renderProductDetail(val)
+		}			
+	}
+	
+	function changeAdTypeName(val) {		
+		$(".type_group").hide()
+		$("."+val+"_type_group").show()
+	}
+	$(document).ready(function() {
+		changeAdTypeName($("select[name='ad[type_name]']").select2("val"))
+		$("select[name='ad[type_name]']").change(function() {
+			changeAdTypeName($(this).select2("val"))
+			updatePeviewBox()
+		})		
+		// update input product layout
+		updateProductSelectLayout()
+		$("input[name='ad[pb_product_id]']").change(function() {
+			updateProductSelectLayout()
+		})
+		
+		updatePeviewBox()
+		$("select[name='ad[ad_position_id]']").change(function() {
+			updatePeviewBox()
+		})
+		
+		$(document).on("click", ".image-checkbutton", function() {
+			if($(this).find("i").hasClass("noimage")) {
+				return
+			}
+			var checked = $(this).find("i").hasClass("icon-checkmark")
+			$(".image-checkbutton i").removeClass("icon-checkmark")
+			
+			if (checked) {
+				$(this).find("i").removeClass("icon-checkmark")
+				insertImageToPreviewBox("")
+			} else {
+				$(this).find("i").addClass("icon-checkmark")
+				insertImageToPreviewBox($(this).find("i").attr("image"))
+			}
+		})
+		
+		// image_upload_input
+		$(".image_upload_input input[type=file]").change(function() {
+			readURL(this)
+		})
+		
+		// custome validate
+		jQuery.validator.addMethod("select_image", function(value, element) {
+			var ok = false
+			var image = $("input[name='ad[banner]']").val()
+			if (image != "" && image != "upload") {
+				ok = true
+			}
+			if (image == "upload" && $(".image_upload_input input[type=file]").val() != "") {
+				ok = true
+			}
+			return ok
+		}, 'Chọn hình cho quảng cáo');
+		$(".image_upload_input input[type=file]").rules( "add", {
+			select_image: true
+		});
+	})
+</script>

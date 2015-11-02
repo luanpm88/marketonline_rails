@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151028035934) do
+ActiveRecord::Schema.define(version: 20151102012441) do
 
   create_table "ad_clicks", force: :cascade do |t|
     t.integer  "ad_id",         limit: 4
@@ -32,10 +32,12 @@ ActiveRecord::Schema.define(version: 20151028035934) do
     t.string   "name",        limit: 255
     t.string   "title",       limit: 255
     t.text     "description", limit: 65535
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.integer  "width",       limit: 4
     t.integer  "height",      limit: 4
+    t.decimal  "click_price",               precision: 10
+    t.decimal  "day_price",                 precision: 10
   end
 
   create_table "ads", force: :cascade do |t|
@@ -46,11 +48,12 @@ ActiveRecord::Schema.define(version: 20151028035934) do
     t.string   "image",          limit: 255
     t.integer  "user_id",        limit: 4
     t.string   "status",         limit: 255
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.integer  "pb_member_id",   limit: 4
     t.string   "type_name",      limit: 255
     t.integer  "pb_product_id",  limit: 4
+    t.decimal  "max_budget",                   precision: 10
   end
 
   create_table "email", force: :cascade do |t|

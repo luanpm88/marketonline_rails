@@ -77,6 +77,7 @@ class Ad < ActiveRecord::Base
               "<div class=\"text-center\">#{item.created_at.strftime("%d-%m-%Y")}</div>",
               "<div class=\"text-center\">#{(item.pb_member.display_name if !item.pb_member.nil?)}</div>",
               "<div class=\"text-center\">#{item.click_count.to_s}</div>",
+              "<div class=\"text-center\"><span class=\"label bg-grey-400\">Đang soạn</span></div>",
               "<div class=\"text-right\"><ul class=\"icons-list\">"+
                   "<li class=\"dropup\">"+
                       "<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\"><i class=\"icon-menu7\"></i></a>"+

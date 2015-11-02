@@ -11,17 +11,52 @@
                     <!-- Ad Statistic Content -->
 					<div class="row datatable_box">
 						<div class="col-lg-6">
-							<form class="datatable_filter">
-								<%= hidden_field_tag "ad_id", @ad.id %>
-								<div class="form-group">								
-									<div class="input-group">
-										<span class="input-group-addon"><i class="icon-calendar22"></i></span>
-										<input type="text" name="daterange" class="form-control daterange-basic ad_chart_daterange" value="<%= @begin_date.strftime("%d-%m-%Y") %> - <%= @end_date.strftime("%d-%m-%Y") %>"> 
+							<div class="panel panel-flat">
+								<form class="datatable_filter">
+									<%= hidden_field_tag "ad_id", @ad.id %>
+									<div class="form-group">								
+										<div class="input-group">
+											<span class="input-group-addon"><i class="icon-calendar22"></i></span>
+											<input type="text" name="daterange" class="form-control daterange-basic ad_chart_daterange" value="<%= @begin_date.strftime("%d-%m-%Y") %> - <%= @end_date.strftime("%d-%m-%Y") %>"> 
+										</div>
+									</div>
+								</form>
+								
+								<div class="container-fluid">
+									<div class="row text-center">
+										<div class="col-md-4">
+											<div class="content-group">
+												<h5 class="text-semibold no-margin"><i class="icon-calendar5 position-left text-slate"></i> <span class="total-click-count"></span></h5>
+												<span class="text-muted text-size-small">Tổng lượt truy cập</span>
+											</div>
+										</div>
+
+										<div class="col-md-4">
+											<div class="content-group">
+												<h5 class="text-semibold no-margin"><i class="icon-users position-left text-slate"></i> <span class="guest-click-count"></span></h5>
+												<span class="text-muted text-size-small">Khách viếng thăm</span>
+											</div>
+										</div>
+
+										<div class="col-md-4">
+											<div class="content-group">
+												<h5 class="text-semibold no-margin"><i class="icon-users position-left text-slate"></i> <span class="user-click-count"></span></h5>
+												<span class="text-muted text-size-small">Thành viên</span>
+											</div>
+										</div>
 									</div>
 								</div>
-							</form>
+							
+							</div>
+								
+							
+							
+								
+							
+							
 							<!-- Marketing campaigns -->
-							<div class="panel panel-flat">								
+							<div class="panel panel-flat">							
+								
 									<div class="table-responsive">
 										
 										<table item-id="<%= @ad.id %>" class="table text-nowrap datatable-ajax" url="<%= datatable_ad_clicks_path(format: "json") %>">

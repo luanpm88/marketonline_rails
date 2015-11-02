@@ -16,6 +16,12 @@ class AdPosition < ActiveRecord::Base
   def height=(new)
     self[:height] = new.to_s.gsub(/\,/, '')
   end
+  def click_price=(new)
+    self[:click_price] = new.to_s.gsub(/\,/, '')
+  end
+  def day_price=(new)
+    self[:day_price] = new.to_s.gsub(/\,/, '')
+  end
   
   def self.datatable(params)    
     @records = self.all
@@ -48,7 +54,7 @@ class AdPosition < ActiveRecord::Base
               item.title,
               "<div class=\"text-center\">#{item.display_size}</div>",              
               "<div class=\"text-center\">#{item.created_at.strftime("%d-%m-%Y")}</div>",              
-              "<div class=\"text-center\"></div>",
+              "<div class=\"text-right\">#{item.display_prices}</div>",
               "<div class=\"text-right\"><ul class=\"icons-list\">"+
                   "<li class=\"dropup\">"+
                       "<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\"><i class=\"icon-menu7\"></i></a>"+
@@ -72,12 +78,24 @@ class AdPosition < ActiveRecord::Base
     return {result: result}
   end
   
+  def display_prices
+    str = []
+    str << "<div class=\"text-nowrap\">Lượt nhấn: <strong>#{ApplicationController.helpers.format_price(click_price)} VNĐ</strong></div>"
+    str << "<div class=\"text-nowrap\">Ngày: <strong>#{ApplicationController.helpers.format_price(day_price)} VNĐ</strong></div>"
+    
+    return str.join("")
+  end
+  
   def display_size
     "#{width.to_s} x #{height.to_s}"
   end
   
   def display_name
     "<span class=\"text-nowrap\">#{title}</span><br />#{display_size}".html_safe
+  end
+  
+  def display_name_option
+    "#{title} (#{display_size})"
   end
   
   def destroy_link
