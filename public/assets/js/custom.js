@@ -1,3 +1,16 @@
+function parseDate(str) {
+    var mdy = str.split('-')
+    return new Date(mdy[2], mdy[1]-1, mdy[0]);
+}
+
+function daydiff(first, second) {
+    return Math.round((second-first)/(1000*60*60*24));
+}
+
+//alert(daydiff(parseDate($('#first').val()), parseDate($('#second').val())));
+
+
+
 function format_number(string) {
     return (string+"").replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
 }
@@ -188,6 +201,7 @@ $(document).ready(function() {
         transitionEffect: "fade",
         titleTemplate: '<span class="number">#index#</span> #title#',
         autoFocus: true,
+        enableCancelButton: true,
         onStepChanging: function (event, currentIndex, newIndex) {
 
             // Allways allow previous action even if the current form is not valid!
@@ -207,11 +221,23 @@ $(document).ready(function() {
                 form.find(".body:eq(" + newIndex + ") label.error").remove();
                 form.find(".body:eq(" + newIndex + ") .error").removeClass("error");
             }
+            
+            if (newIndex > 0) {
+                $("a[href='#cancel']").parent().show()
+            } else {
+                $("a[href='#cancel']").parent().hide()
+            }
 
             form.validate().settings.ignore = ":disabled,:hidden";
             return form.valid();
         },
-
+        onInit: function (event, currentIndex) {
+            if (currentIndex > 0) {
+                $("a[href='#cancel']").parent().show()
+            } else {
+                $("a[href='#cancel']").parent().hide()
+            }
+        },
         onStepChanged: function (event, currentIndex, priorIndex) {
 
             // Used to skip the "Warning" step if the user is old enough.
@@ -224,14 +250,27 @@ $(document).ready(function() {
                 form.steps("previous");
             }
         },
-
         onFinishing: function (event, currentIndex) {
-            form.validate().settings.ignore = ":disabled";
+            form.validate().settings.ignore = ":disabled,:hidden";
             return form.valid();
         },
-
+        onCanceled: function (event) {
+            form.validate().settings.ignore = ":disabled,:hidden";
+            if (form.valid()) {
+                $(".steps-validation").submit();
+            }
+        },
         onFinished: function (event, currentIndex) {
             alert("Submitted!");
+        },
+        labels: {
+            cancel: "Lưu tạm",
+            current: "Bước hiện tại:",
+            pagination: "Phân trang",
+            finish: "Hoàn tất",
+            next: "Tiếp theo",
+            previous: "Trở lại",
+            loading: "Đang tải ..."
         }
     });
 
@@ -273,6 +312,10 @@ $(document).ready(function() {
             email: {
                 email: true
             }
+        },
+        messages: {
+            "ad[ad_position_id]": "Hãy chọn vị trí.",
+            "ad[image]": "Hãy chọn ảnh.",
         }
     });
     
@@ -422,6 +465,34 @@ $(document).ready(function() {
                 'Tháng này': [moment().startOf('month'), moment().endOf('month')],
                 'Tháng trước': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
         },
+        locale: {
+            format: 'DD-MM-YYYY',
+            closeText: "Đóng",
+            prevText: "Trước",
+            nextText: "Sau",
+            currentText: "Hôm nay",
+            monthNames: ["Tháng một", "Tháng hai", "Tháng ba", "Tháng tư", "Tháng năm", "Tháng sáu", "Tháng bảy", "Tháng tám", "Tháng chín", "Tháng mười", "Tháng mười một", "Tháng mười hai"],
+            monthNamesShort: ["Một", "Hai", "Ba", "Bốn", "Năm", "Sáu", "Bảy", "Tám", "Chín", "Mười", "Mười một", "Mười hai"],
+            dayNames: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"],
+            dayNamesShort: ["CN", "Hai", "Ba", "Tư", "Năm", "Sáu", "Bảy"],
+            daysOfWeek: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
+            weekHeader: "Tuần",
+            dateFormat: "dd/mm/yy",
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            cancelLabel: "Đóng",
+            applyLabel: "Lưu",
+            startLabel: "Bắt đầu",
+            endLabel: "Kết thúc",
+            customRangeLabel: "Tùy chọn"
+        }
+    });
+    
+    // Basic initialization
+    $('.new_ad_daterange').daterangepicker({
+        applyClass: 'bg-slate-600',
+        cancelClass: 'btn-default',        
         locale: {
             format: 'DD-MM-YYYY',
             closeText: "Đóng",

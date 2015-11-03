@@ -20,10 +20,25 @@
 										<div class="form-group">
 											<label>Vị trí đặt <span class="text-danger">*</span></label>
 											<%= f.select("ad_position_id", AdPosition.all.collect {|p| [ p.display_name_option, p.id ] }, { include_blank: "- Chọn vị trí -"} , {class: "select", required: "required" }) %>
-										</div>										
+										</div>
+										<div class="ad_preview_box ad_preview_box_0">
+												
+										</div>
 									</div>
-
-									<div class="col-md-6">
+									<div class="col-md-6 payment_detail_box">
+										
+										<div class="row">
+											<div class="col-md-12">
+												<div class="form-group">
+													<label>Thời gian đặt quảng cáo: <span class="text-danger">*</span></label>
+													<div class="input-group">
+														<span class="input-group-addon"><i class="icon-calendar22"></i></span>
+														<input type="text" name="ad[daterange]" class="form-control new_ad_daterange" value="<%= @ad.start_at.strftime("%d-%m-%Y") %> - <%= @ad.end_at.strftime("%d-%m-%Y") %>"> 
+													</div>
+												</div>
+											</div>											
+										</div>
+										
 										<div class="row">
 											<div class="col-md-6">
 												<div class="form-group">
@@ -31,49 +46,67 @@
 													<select name="ad[payment_type]" data-placeholder="- Chọn hình thức -" class="select required">
 														<option></option>
 														<optgroup label="Tất cả hình thức">
-															<option value="1">Trả theo lượt nhấn</option>
-															<option value="2">Trả theo ngày</option>
+															<option value="per_click">Trả theo lượt nhấn</option>
+															<option value="per_day">Trả theo ngày</option>
 														</optgroup>
 													</select>
 												</div>
 											</div>
 											<div class="col-md-6">
-												<div class="form-group">
-													<label>Số tiền tối đa: <span class="text-danger">*</span></label>
+												<div class="form-group payment_type_group per_click_group">
+													<label>Số tiền tối đa (VNĐ): <span class="text-danger">*</span></label>
 													<%= f.text_field :max_budget, required: "required", class: "form-control text-right number_input" %>
 												</div>
+
+												<div class="form-group payment_type_group per_day_group">
+													<label>Số ngày quảng cáo: <span class="text-danger">*</span></label>
+													<%= f.text_field :days, required: "required", class: "form-control text-right number_input" %>
+												</div>
 											</div>
+										</div>
+										
+										<div class="row payment_type_group per_click_group">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>Đơn giá (VNĐ/lượt nhấn): <span class="text-danger">*</span></label>
+													<div class="text-right">
+														<strong class="per_click_price"></strong>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>Tổng cộng (lượt nhấn): <span class="text-danger">*</span></label>
+													<div class="text-right">
+														<strong class="click_total_price"></strong>
+													</div>
+												</div>
+											</div>
+										</div>
+										
+										<div class="row payment_type_group per_day_group">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>Đơn giá (VNĐ/ngày): <span class="text-danger">*</span></label>
+													<div class="text-right">
+														<strong class="per_day_price"></strong>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>Thành tiền (VNĐ): <span class="text-danger">*</span></label>
+													<div class="text-right">
+														<strong class="day_total_price"></strong>
+													</div>
+												</div>
+											</div>
+											
 										</div>
 									</div>
 								</div>
 									
-								<div class="row">
-									<div class="col-md-6">
-													
-									</div>
-
-									<div class="col-md-6">
-										<div class="row">
-											<div class="col-md-6">
-												<div class="form-group">
-													<label>Số tiền/Lượt nhấn: <span class="text-danger">*</span></label>
-													<div class="text-right">
-														<strong>10.000 (VNĐ/lượt nhấn)</strong>
-													</div>
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<label>Số lượt nhấn: <span class="text-danger">*</span></label>
-													<div class="text-right">
-														<strong>1000 lượt nhấn</strong>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
+								
 								
 							</fieldset>
 
@@ -116,12 +149,7 @@
 										<fieldset class="text-semibold">
 											<legend><i class="icon-file-text position-left"></i> Cài đặt quảng cáo</legend>
 																								
-											<!--<div class="form-group">
-												<label>Vị trí đặt <span class="text-danger">*</span></label>
-												<%= f.select("ad_position_id", AdPosition.all.collect {|p| [ p.display_name, p.id ] }, { include_blank: "- Chọn vị trí -"} , {class: "select", required: "required" }) %>
-											</div>-->
-											
-											<div class="ad_preview_box">
+											<div class="ad_preview_box ad_preview_box_1">
 												
 											</div>														
 											
@@ -154,163 +182,85 @@
 
 							<h6>Thanh Toán</h6>
 							<fieldset>
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>Company: <span class="text-danger">*</span></label>
-			                                <input type="text" name="experience-company" placeholder="Company name" class="form-control required">
-		                                </div>
-
-										<div class="form-group">
-											<label>Position: <span class="text-danger">*</span></label>
-			                                <input type="text" name="experience-position" placeholder="Company name" class="form-control required">
-		                                </div>
-
-										<div class="row">
-											<div class="col-md-6">
-												<label>From:</label>
-												<div class="row">
-													<div class="col-md-6">
-														<div class="form-group">
-						                                    <select name="education-from-month" data-placeholder="Month" class="select">
-						                                    	<option></option>
-						                                        <option value="January">January</option> 
-						                                        <option value="...">...</option> 
-						                                        <option value="December">December</option> 
-						                                    </select>
-					                                    </div>
-													</div>
-
-													<div class="col-md-6">
-														<div class="form-group">
-						                                    <select name="education-from-year" data-placeholder="Year" class="select">
-						                                        <option></option> 
-						                                        <option value="1995">1995</option> 
-						                                        <option value="...">...</option> 
-						                                        <option value="1980">1980</option> 
-						                                    </select>
-					                                    </div>
-													</div>
-												</div>
-											</div>
-
-											<div class="col-md-6">
-												<label>To:</label>
-												<div class="row">
-													<div class="col-md-6">
-														<div class="form-group">
-						                                    <select name="education-to-month" data-placeholder="Month" class="select">
-						                                    	<option></option>
-						                                        <option value="January">January</option> 
-						                                        <option value="...">...</option> 
-						                                        <option value="December">December</option> 
-						                                    </select>
-					                                    </div>
-													</div>
-
-													<div class="col-md-6">
-														<div class="form-group">
-						                                    <select name="education-to-year" data-placeholder="Year" class="select">
-						                                        <option></option> 
-						                                        <option value="1995">1995</option> 
-						                                        <option value="...">...</option> 
-						                                        <option value="1980">1980</option> 
-						                                    </select>
-					                                    </div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="col-md-6">
-		                                <div class="form-group">
-											<label>Brief description:</label>
-		                                    <textarea name="experience-description" rows="4" cols="4" placeholder="Tasks and responsibilities" class="form-control"></textarea>
-		                                </div>
-
-										<div class="form-group">
-											<label>Recommendations:</label>
-		                                    <input name="recommendations" type="file" class="file-styled">
-		                                    <span class="help-block">Accepted formats: pdf, doc. Max file size 2Mb</span>
-		                                </div>
-									</div>
-								</div>
+								
 							</fieldset>
 
 							<h6>Hoàn Thành</h6>
 							<fieldset>
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>Applicant resume:</label>
-		                                    <input type="file" name="resume" class="file-styled">
-		                                    <span class="help-block">Accepted formats: pdf, doc. Max file size 2Mb</span>
-	                                    </div>
-									</div>
-
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>Where did you find us? <span class="text-danger">*</span></label>
-		                                    <select name="source" data-placeholder="Choose an option..." class="select-simple required">
-		                                        <option></option> 
-		                                        <option value="monster">Monster.com</option> 
-		                                        <option value="linkedin">LinkedIn</option> 
-		                                        <option value="google">Google</option> 
-		                                        <option value="adwords">Google AdWords</option> 
-		                                        <option value="other">Other source</option>
-		                                    </select>
-	                                    </div>
-									</div>
-								</div>
-
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>Availability: <span class="text-danger">*</span></label>
-											<div class="radio">
-												<label>
-													<input type="radio" name="availability" class="styled required">
-													Immediately
-												</label>
-											</div>
-
-											<div class="radio">
-												<label>
-													<input type="radio" name="availability" class="styled">
-													1 - 2 weeks
-												</label>
-											</div>
-
-											<div class="radio">
-												<label>
-													<input type="radio" name="availability" class="styled">
-													3 - 4 weeks
-												</label>
-											</div>
-
-											<div class="radio">
-												<label>
-													<input type="radio" name="availability" class="styled">
-													More than 1 month
-												</label>
-											</div>
-										</div>
-									</div>
-
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>Additional information:</label>
-		                                    <textarea name="additional-info" rows="5" cols="5" placeholder="If you want to add any info, do it here." class="form-control"></textarea>
-	                                    </div>
-									</div>
-								</div>
+								
 							</fieldset>
 						<% end %>
 		            </div>
 		            <!-- /wizard with validation -->		  
 								  
 <script>
+	
+	function calculateAdPrices() {
+		var per_click = parseFloat($(".per_click_price").html().replace(/,/g,""))
+		var per_day = parseFloat($(".per_day_price").html().replace(/,/g,""))
+		
+		// count days between dates
+		var input_days_count = 0
+		if ($("input[name='ad[daterange]']").length && $("input[name='ad[daterange]']").val() != "") {
+			var daterange = $("input[name='ad[daterange]']").val()
+			b_date = daterange.split(' - ')[0]
+			e_date = daterange.split(' - ')[1]
+			input_days_count = daydiff(parseDate(b_date), parseDate(e_date))
+			
+			$("input[name='ad[days]']").val(input_days_count)
+		}
+		
+		var input_click_budget = 0
+		var input_day_number = 0
+		
+		if ($("input[name='ad[max_budget]']").length && $("input[name='ad[max_budget]']").val() != "") {
+			input_click_budget = parseFloat($("input[name='ad[max_budget]']").val().replace(/,/g,""))
+		}
+		
+		if ($("input[name='ad[days]']").length && $("input[name='ad[days]']").val() != "") {
+			input_day_number = parseFloat($("input[name='ad[days]']").val().replace(/,/g,""))
+		}
+		
+		var total_click = input_click_budget/per_click
+		var total_day_price = per_day*input_day_number
+		
+		$(".click_total_price").html(format_number(total_click))
+		$(".day_total_price").html(format_number(total_day_price))
+	}
+	
+	function getAdPositionValues() {
+		var pos_id = $("select[name='ad[ad_position_id]']").val()
+		var pd_box = $(".payment_detail_box")
+
+		// show/hide payment detail box
+		if(pos_id == "") {
+			pd_box.hide()
+			return
+		}
+		
+		// get values
+		$.ajax({
+			url : '<%= get_values_ad_positions_path %>?id='+pos_id,
+			success:function(data, textStatus, jqXHR)
+			{
+				$(".per_click_price").html(format_number(data.click_price))
+				$(".per_day_price").html(format_number(data.day_price))
+				pd_box.show()
+				
+				calculateAdPrices()
+			}
+		})
+	}
+	
+	function updatePaymentTypeSelect() {
+		var type = $("select[name='ad[payment_type]']").val()		
+		$(".payment_type_group").hide()
+		if (type == "per_click") {
+			$(".per_click_group").show()
+		} else if (type == "per_day") {
+			$(".per_day_group").show()
+		}
+	}
 	
 	function readURL(input) {
 		var box = $(input).parents(".image_upload_input")
@@ -329,8 +279,7 @@
 					}
 				}
 			}	
-			reader.readAsDataURL(input.files[0]);
-			
+			reader.readAsDataURL(input.files[0]);			
 		}
 	}
 	
@@ -494,5 +443,21 @@
 			fileButtonHtml: '<i class="icon-googleplus5"></i>',
 			wrapperClass: 'bg-warning'
 		});
+		
+		// payment type check
+		updatePaymentTypeSelect()
+		$("select[name='ad[payment_type]']").change(function() {
+			updatePaymentTypeSelect()
+		})
+		
+		// get ad position values
+		getAdPositionValues()
+		$("select[name='ad[ad_position_id]']").change(function() {
+			getAdPositionValues()
+		})
+		
+		$(document).on("keyup change", "input[name='ad[max_budget]'], input[name='ad[days]'], input[name='ad[daterange]']", function() {
+			calculateAdPrices()
+		})
 	})
 </script>

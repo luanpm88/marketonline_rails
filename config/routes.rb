@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       get 'delete'
       get 'home_top_banner_frame'
       get 'preview_box'
+      get 'get_values'
     end
   end
   resources :pb_products do

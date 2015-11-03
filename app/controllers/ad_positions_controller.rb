@@ -1,5 +1,5 @@
 class AdPositionsController < ApplicationController
-  before_action :set_ad_position, only: [:preview_box, :show, :edit, :update, :destroy]
+  before_action :set_ad_position, only: [:get_values, :preview_box, :show, :edit, :update, :destroy]
 
   # GET /ad_positions
   # GET /ad_positions.json
@@ -79,6 +79,11 @@ class AdPositionsController < ApplicationController
   
   def preview_box
     render layout: nil
+  end
+  
+  def get_values
+    
+    render json: @ad_position
   end
 
   private

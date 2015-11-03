@@ -1,6 +1,7 @@
 class Ad < ActiveRecord::Base
   attr_accessor :product_name
   attr_accessor :banner
+  attr_accessor :daterange
   
   mount_uploader :image, AdUploader
   
@@ -16,7 +17,19 @@ class Ad < ActiveRecord::Base
   
   before_validation :update_ad_name
   before_validation :update_ad_image
+  before_validation :update_ad_daterange
+  before_validation :update_ad_price
   after_save :update_product_name
+  
+  def max_budget=(new)
+    self[:max_budget] = new.to_s.gsub(/\,/, '')
+  end
+  def days=(new)
+    self[:days] = new.to_s.gsub(/\,/, '')
+  end
+  def price=(new)
+    self[:price] = new.to_s.gsub(/\,/, '')
+  end
   
   def main_ad_clicks
     ad_clicks.order("created_at DESC")
@@ -24,6 +37,13 @@ class Ad < ActiveRecord::Base
   
   def click(request, session, user)
     ad_clicks.create(customer_code: session[:session_id], ip: request.remote_ip, pb_member_id: user.id)
+  end
+  
+  def update_ad_daterange
+    if daterange.present?
+      self.start_at = daterange.split(" - ")[0].to_datetime.beginning_of_day
+      self.end_at = daterange.split(" - ")[1].to_datetime.end_of_day
+    end
   end
   
   def update_ad_name
@@ -35,6 +55,14 @@ class Ad < ActiveRecord::Base
   def update_ad_image
     if banner != "" and banner != "upload"
       self.remote_image_url = banner
+    end    
+  end
+  
+  def update_ad_price
+    if payment_type == "per_day"
+      self.price = ad_position.day_price
+    elsif payment_type == "per_click"
+      self.price = ad_position.click_price
     end    
   end
   

@@ -17,6 +17,8 @@ class AdsController < ApplicationController
   # GET /ads/new
   def new
     @ad = Ad.new
+    @ad.start_at = Time.now + 3.days
+    @ad.end_at = @ad.start_at + 1.month
   end
 
   # GET /ads/1/edit
@@ -115,6 +117,6 @@ class AdsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ad_params
-      params.require(:ad).permit(:banner, :type_name, :product_name, :pb_product_id, :name, :description, :ad_position_id, :url, :image, :user_id, :status)
+      params.require(:ad).permit(:days, :payment_type, :max_budget, :daterange, :banner, :type_name, :product_name, :pb_product_id, :name, :description, :ad_position_id, :url, :image, :user_id, :status)
     end
 end
