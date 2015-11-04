@@ -93,7 +93,7 @@ class AdPosition < ActiveRecord::Base
   def display_name
     "<span class=\"text-nowrap\">#{title}</span><br />#{display_size}".html_safe
   end
-  
+
   def display_name_option
     "#{title} (#{display_size})"
   end

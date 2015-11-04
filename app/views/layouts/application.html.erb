@@ -69,6 +69,10 @@
 	<%= javascript_include_tag '/assets/js/custom.js' %>
 	<%= stylesheet_link_tag '/assets/css/custom.css' %>	
 	
+	<script>
+		var START_STEP = <%= @ad.present? ? @ad.current_step : 0 %>
+	</script>
+	
 </head>
 
 <body>

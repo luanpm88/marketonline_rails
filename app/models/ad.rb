@@ -246,4 +246,8 @@ class Ad < ActiveRecord::Base
     return arr
   end
   
+  def current_step
+    id.nil? ? 0 : 1
+  end
+  
 end

@@ -46,8 +46,8 @@
 													<select name="ad[payment_type]" data-placeholder="- Chọn hình thức -" class="select required">
 														<option></option>
 														<optgroup label="Tất cả hình thức">
-															<option value="per_click">Trả theo lượt nhấn</option>
-															<option value="per_day">Trả theo ngày</option>
+															<option <%= 'selected=selected' if @ad.payment_type == "per_click" %> value="per_click">Trả theo lượt nhấn</option>
+															<option <%= 'selected=selected' if @ad.payment_type == "per_day" %> value="per_day">Trả theo ngày</option>
 														</optgroup>
 													</select>
 												</div>
@@ -124,8 +124,8 @@
 											
 											<div class="form-group type_group product_type_group">
 												<label>Sản Phẩm <span class="text-danger">*</span></label>
-												<%= f.text_field :pb_product_id, required: "required", class: "select2-ajax", data_link: pb_products_path(format: "json"), placeholder: "Tìm sản phẩm..." %>
-												<%= f.text_field :product_name, { class: "form-control product_name_input" } %>
+												<%= f.text_field :pb_product_id, required: "required", class: "select2-ajax", data_link: pb_products_path(format: "json"), placeholder: "Tìm sản phẩm...", text: (!@ad.pb_product.nil? ? @ad.pb_product.name : ""), value: 	@ad.pb_product_id %>
+												<%= f.text_field :product_name, { class: "form-control product_name_input", value: @ad.name } %>
 											</div>
 											
 											<div class="form-group type_group image_type_group">
@@ -384,6 +384,7 @@
 		$(".type_group").hide()
 		$("."+val+"_type_group").show()
 	}
+	
 	$(document).ready(function() {
 		changeAdTypeName($("select[name='ad[type_name]']").select2("val"))
 		$("select[name='ad[type_name]']").change(function() {

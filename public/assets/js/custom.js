@@ -199,6 +199,7 @@ $(document).ready(function() {
         headerTag: "h6",
         bodyTag: "fieldset",
         transitionEffect: "fade",
+        startIndex: START_STEP,
         titleTemplate: '<span class="number">#index#</span> #title#',
         autoFocus: true,
         enableCancelButton: true,
@@ -221,12 +222,6 @@ $(document).ready(function() {
                 form.find(".body:eq(" + newIndex + ") label.error").remove();
                 form.find(".body:eq(" + newIndex + ") .error").removeClass("error");
             }
-            
-            if (newIndex > 0) {
-                $("a[href='#cancel']").parent().show()
-            } else {
-                $("a[href='#cancel']").parent().hide()
-            }
 
             form.validate().settings.ignore = ":disabled,:hidden";
             return form.valid();
@@ -243,6 +238,12 @@ $(document).ready(function() {
             // Used to skip the "Warning" step if the user is old enough.
             if (currentIndex === 2 && Number($("#age-2").val()) >= 18) {
                 form.steps("next");
+            }
+            
+            if (currentIndex > 0) {
+                $("a[href='#cancel']").parent().show()
+            } else {
+                $("a[href='#cancel']").parent().hide()
             }
 
             // Used to skip the "Warning" step if the user is old enough and wants to the previous step.

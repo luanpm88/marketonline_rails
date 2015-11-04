@@ -1,7 +1,7 @@
 .product_name_input {
     position: absolute;
     top: 26px;
-    width: 458px;
+    width: 90%;
     z-index: 1;
 }
 .product_images {
