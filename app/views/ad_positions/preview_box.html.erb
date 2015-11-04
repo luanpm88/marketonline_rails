@@ -1,5 +1,5 @@
 <div class="form-group">
-    <label>Xem trước quảng cáo</span></label>
+    <label>Hình ảnh quảng cáo</span></label>
     <div class="text-center">
       <div class="preview_box_image" style="width: 80%; max-width: <%= @ad_position.width %>px">
     
@@ -11,6 +11,9 @@
     var box_width = $(".ad_preview_box_1 .preview_box_image").width()
     if ($(".steps ul li").eq(0).hasClass("current")) {
         box_width = $(".ad_preview_box_0 .preview_box_image").width()
+    }
+    if ($(".steps ul li").eq(2).hasClass("current")) {
+        box_width = $(".ad_preview_box_2 .preview_box_image").width()
     }
     var box_height = box_width/<%= @ad_position.width.to_f/@ad_position.height.to_f %>
     $(".preview_box_image").height(box_height)

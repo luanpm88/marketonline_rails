@@ -182,7 +182,79 @@
 
 							<h6>Thanh Toán</h6>
 							<fieldset>
+								<legend><i class="icon-file-text position-left"></i> Nội dung quảng cáo</legend>
 								
+								<div class="row ad_summary_detail">
+									<div class="col-md-6 ad_summary_col">
+										<div class="form-group">
+											<div class="text-left">
+												<div class="ad_preview_box ad_preview_box_2">
+												
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group ad_summary_col">
+											<label>Tiêu đề</label>
+											<div class="text-left">
+												<strong></strong>
+											</div>
+										</div>
+										<div class="form-group ad_summary_col">
+											<label>Đường dẫn</label>
+											<div class="text-left">
+												<strong class="display_ad_link"></strong>
+											</div>
+										</div>
+										<div class="form-group ad_summary_col">
+											<label>Mô tả</label>
+											<div class="text-left">
+												<strong></strong>
+											</div>
+										</div>
+									</div>
+									
+								</div>
+								
+								
+								<legend><i class="icon-file-text position-left"></i> Nội dung thanh toán</legend>
+								
+								<div class="row ad_summary">
+									<div class="col-md-3 ad_summary_col">
+										<div class="form-group">
+											<label>Loại quảng cáo</label>
+											<div class="text-right">
+												<strong></strong>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-2 ad_summary_col">
+										<div class="form-group">
+											<label>Hình thức trả phí</label>
+											<div class="text-right">
+												<strong class="payment_type"></strong>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4 ad_summary_col">
+										<div class="form-group">
+											<label>Nội dung thanh tóan</label>
+											<div class="text-right">
+												<strong></strong>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-3 ad_summary_col">
+										<div class="form-group">
+											<label>Tổng cộng</label>
+											<div class="text-right">
+												<strong class="big-info"></strong>
+											</div>
+										</div>
+									</div>
+								</div>
+								<hr>
 							</fieldset>
 
 							<h6>Hoàn Thành</h6>
@@ -190,10 +262,48 @@
 								
 							</fieldset>
 						<% end %>
+
 		            </div>
 		            <!-- /wizard with validation -->		  
 								  
 <script>
+	
+	function adSummary() {
+		var s1 = $(".ad_summary .ad_summary_col").eq(0).find("strong")
+		var s2 = $(".ad_summary .ad_summary_col").eq(1).find("strong")
+		var s3 = $(".ad_summary .ad_summary_col").eq(2).find("strong")
+		var s4 = $(".ad_summary .ad_summary_col").eq(3).find("strong")
+		
+		s1.html($("select[name='ad[ad_position_id]'] option:selected").text())
+		s2.html($("select[name='ad[payment_type]'] option:selected").text())
+		
+		var payment_detail = ""
+		if ($("select[name='ad[payment_type]']").val() == "per_day") {
+			payment_detail += '<div>Thời gian: '+$("input[name='ad[daterange]']").val()+'</div>'
+			payment_detail += '<div>Đơn giá: '+$(".per_day_price").html()+' VNĐ/ngày</div>'
+		} else {
+			payment_detail += '<div>Thời gian: '+$("input[name='ad[daterange]']").val()+'</div>'
+			payment_detail += '<div>Đơn giá: '+$(".per_click_price").html()+' VNĐ/lượt nhấn</div>'
+			payment_detail += '<div>Số lượt nhấn: '+$(".click_total_price").html()+' lượt nhấn</div>'
+		}
+		s3.html(payment_detail)
+		
+		s4.html($(".day_total_price").html()+" VNĐ")
+		
+		var d1 = $(".ad_summary_detail .ad_summary_col").eq(0).find("strong")
+		var d2 = $(".ad_summary_detail .ad_summary_col").eq(1).find("strong")
+		var d3 = $(".ad_summary_detail .ad_summary_col").eq(2).find("strong")
+		var d4 = $(".ad_summary_detail .ad_summary_col").eq(3).find("strong")
+		
+		if ($("select[name='ad[type_name]']").val() == "product") {
+			d2.html($("input[name='ad[product_name]']").val())
+		} else {
+			d2.html($("input[name='ad[name]']").val())
+		}
+		
+		d4.html($("textarea[name='ad[description]']").val())
+		
+	}
 	
 	function calculateAdPrices() {
 		var per_click = parseFloat($(".per_click_price").html().replace(/,/g,""))
@@ -362,6 +472,7 @@
 				images_html += '</ul></div><br style="clear: both" /><br />'
 				
 				$(".product_images").html(images_html)
+				$(".display_ad_link").html('<a target="_blank" href="'+data.url+'">'+data.url+'</a>')
             }
         })
 	}
@@ -460,5 +571,7 @@
 		$(document).on("keyup change", "input[name='ad[max_budget]'], input[name='ad[days]'], input[name='ad[daterange]']", function() {
 			calculateAdPrices()
 		})
+		
+		setInterval("adSummary()", 500)
 	})
 </script>

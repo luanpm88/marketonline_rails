@@ -41,3 +41,12 @@
 .ad_link img {
     max-width: 100px;
 }
+.big-info {
+    font-size: 18px;
+}
+.ad_summary .ad_summary_col {
+    border-right: solid 1px #ddd;
+}
+.ad_summary .ad_summary_col:last-child {
+    border-right: none;
+}

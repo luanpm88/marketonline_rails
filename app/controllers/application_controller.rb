@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   before_filter :app_variable
 
   def app_variable
-    @current_user = PbSession.get_current_user(cookies)
+    @current_user = PbMember.first # PbSession.get_current_user(cookies)
     if !["home_top_banner_frame","click","image"].include?(params[:action])
       redirect_to "http://test.marketonline.vn/logging.php?return_page=#{Rack::Utils.escape(root_path(:only_path => false))}" if @current_user.nil?
     end

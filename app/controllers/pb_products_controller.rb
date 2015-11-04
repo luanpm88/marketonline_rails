@@ -14,7 +14,7 @@ class PbProductsController < ApplicationController
     respond_to do |format|
       format.html
       format.json {
-        render json: {product: @pb_product, pictures: @pb_product.pictures}
+        render json: {product: @pb_product, pictures: @pb_product.pictures, url: @pb_product.url}
       }
     end
   end

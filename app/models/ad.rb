@@ -221,7 +221,7 @@ class Ad < ActiveRecord::Base
   def redirect_url
     if type_name == 'product'
       # http://test.marketonline.vn/san-pham/19550/ten-san-pham-chi-tiet-mau-can-co-cac-hang-muc-sau
-      "/san-pham/#{self.pb_product_id.to_s}/"+pb_product.name.unaccent.downcase.gsub(/\s+/,"xaaaaax").gsub!(/\W/,'').gsub("xaaaaax","-").gsub(/\-+/,"-")
+      pb_product.url
     else
       url
     end
@@ -247,7 +247,8 @@ class Ad < ActiveRecord::Base
   end
   
   def current_step
-    id.nil? ? 0 : 1
+    return 0 if id.nil?
+    return 2
   end
   
 end

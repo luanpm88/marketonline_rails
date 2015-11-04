@@ -234,11 +234,6 @@ $(document).ready(function() {
             }
         },
         onStepChanged: function (event, currentIndex, priorIndex) {
-
-            // Used to skip the "Warning" step if the user is old enough.
-            if (currentIndex === 2 && Number($("#age-2").val()) >= 18) {
-                form.steps("next");
-            }
             
             if (currentIndex > 0) {
                 $("a[href='#cancel']").parent().show()
@@ -246,10 +241,6 @@ $(document).ready(function() {
                 $("a[href='#cancel']").parent().hide()
             }
 
-            // Used to skip the "Warning" step if the user is old enough and wants to the previous step.
-            if (currentIndex === 2 && priorIndex === 3) {
-                form.steps("previous");
-            }
         },
         onFinishing: function (event, currentIndex) {
             form.validate().settings.ignore = ":disabled,:hidden";

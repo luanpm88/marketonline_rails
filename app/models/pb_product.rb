@@ -33,4 +33,8 @@ class PbProduct < ActiveRecord::Base
     end
     return arr
   end
+  
+  def url
+    "http://marketonline.vn/san-pham/#{id.to_s}/"+name.unaccent.downcase.gsub(/\s+/,"xaaaaax").gsub!(/\W/,'').gsub("xaaaaax","-").gsub(/\-+/,"-")
+  end
 end
