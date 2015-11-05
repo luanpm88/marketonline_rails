@@ -202,17 +202,11 @@ $(document).ready(function() {
         startIndex: START_STEP,
         titleTemplate: '<span class="number">#index#</span> #title#',
         autoFocus: true,
-        enableCancelButton: true,
         onStepChanging: function (event, currentIndex, newIndex) {
 
             // Allways allow previous action even if the current form is not valid!
             if (currentIndex > newIndex) {
                 return true;
-            }
-
-            // Forbid next action on "Warning" step if the user is to young
-            if (newIndex === 3 && Number($("#age-2").val()) < 18) {
-                return false;
             }
 
             // Needed in some cases if the user went back (clean up)
@@ -224,23 +218,16 @@ $(document).ready(function() {
             }
 
             form.validate().settings.ignore = ":disabled,:hidden";
+            if(form.valid() && newIndex == 2) {
+                $(".steps-validation").submit();
+            }
             return form.valid();
         },
         onInit: function (event, currentIndex) {
-            if (currentIndex > 0) {
-                $("a[href='#cancel']").parent().show()
-            } else {
-                $("a[href='#cancel']").parent().hide()
-            }
+
         },
         onStepChanged: function (event, currentIndex, priorIndex) {
             
-            if (currentIndex > 0) {
-                $("a[href='#cancel']").parent().show()
-            } else {
-                $("a[href='#cancel']").parent().hide()
-            }
-
         },
         onFinishing: function (event, currentIndex) {
             form.validate().settings.ignore = ":disabled,:hidden";

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get 'delete'
       get 'click'
       get 'chart'
+      get 'get_nganluong_checkout_return'
     end
   end
   resources :ad_positions do

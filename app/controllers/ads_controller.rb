@@ -1,5 +1,5 @@
 class AdsController < ApplicationController
-  before_action :set_ad, only: [:chart, :click, :delete, :show, :edit, :update, :destroy]
+  before_action :set_ad, only: [:get_nganluong_checkout_return, :chart, :click, :delete, :show, :edit, :update, :destroy]
 
   # GET /ads
   # GET /ads.json
@@ -107,6 +107,11 @@ class AdsController < ApplicationController
     from = params[:daterange].split(" - ")[0].to_date
     to = params[:daterange].split(" - ")[1].to_date
     render json: {days: Ad.display_chart_days(from,to), value_1: @ad.chart_values("guest",from,to).to_json, value_2: @ad.chart_values("user",from,to).to_json}
+  end
+  
+  def get_nganluong_checkout_return
+    @ad.update_attribute(:nganluong_return_url, request.original_url)
+    render nothing: true
   end
 
   private

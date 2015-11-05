@@ -62,7 +62,7 @@ class Ad < ActiveRecord::Base
     if payment_type == "per_day"
       self.price = ad_position.day_price
     elsif payment_type == "per_click"
-      self.price = ad_position.click_price
+      self.price = max_budget
     end    
   end
   
@@ -249,6 +249,40 @@ class Ad < ActiveRecord::Base
   def current_step
     return 0 if id.nil?
     return 2
+  end
+  
+  def total_price
+    if payment_type = "per_click"
+      max_budget
+    elsif payment_type = "per_day"
+      price*days
+    end
+    
+  end
+  
+  def ad_code
+    id # "MKOVN901#{((self.id*6789)%888+100)}874"
+  end
+  
+  def get_checkout_url(request)
+    return_url = request.host+ActionController::Base.helpers.url_for(controller: "ads", action: "get_nganluong_checkout_return", id: self.id)
+    email = "service@marketonline.vn"
+    note = self.name
+    amount = self.total_price
+    
+    url = (`php lib/nganluong.php get_checkout_url "#{return_url}" "#{email}" "#{note}" "#{ad_code}" "#{amount}"`).strip
+    
+    return url[1..-1]
+  end
+  
+  def check_nganluong_payment
+    client = Savon::Client.new(wsdl:"https://www.nganluong.vn/public_api.php?wsdl")
+    # client.operations
+    merchant_id = "39955"
+    param = '<ORDERS>'+ 
+              '<TOTAL>1</TOTAL> <ORDER> <ORDER_CODE>21</ORDER_CODE> <PAYMENT_ID>1</PAYMENT_ID> </ORDER> </ORDERS>'
+    checksum =  Digest::MD5.hexdigest(merchant_id + param + 'marketonlinebmn@#$') 
+    response = client.call(:check_order, message: {merchant_id: 39955, param: param, checksum: checksum})
   end
   
 end
