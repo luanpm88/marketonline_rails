@@ -53,7 +53,7 @@ class Ad < ActiveRecord::Base
   end
   
   def update_ad_image
-    if banner != "" and banner != "upload"
+    if banner != "" and banner != "upload" and !banner.include?("ads/image")
       self.remote_image_url = banner
     end    
   end
@@ -256,8 +256,7 @@ class Ad < ActiveRecord::Base
       max_budget
     elsif payment_type = "per_day"
       price*days
-    end
-    
+    end    
   end
   
   def ad_code

@@ -13,6 +13,19 @@
 						</div>
 
 	                	<%= form_for(@ad, html: {class: "form-validate-jquery steps-validation", multipart: true}) do |f| %>
+						
+							<% if @ad.errors.any? %>
+								<div id="error_explanation">
+								  <h2><%= pluralize(@ad.errors.count, "error") %> prohibited this ad from being saved:</h2>
+							
+								  <ul>
+								  <% @ad.errors.full_messages.each do |message| %>
+									<li><%= message %></li>
+								  <% end %>
+								  </ul>
+								</div>
+							<% end %>
+						
 							<h6>Vị trí & Phí Quảng Cáo</h6>
 							<fieldset>
 								<div class="row">
