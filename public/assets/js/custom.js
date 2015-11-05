@@ -404,7 +404,7 @@ $(document).ready(function() {
     $('input.number_input').number(true, 0);
     
     $('.select').select2();
-    
+
     //ajax select2 for contacts
     $('.select2-ajax').each(function() {
         var item = $(this)
