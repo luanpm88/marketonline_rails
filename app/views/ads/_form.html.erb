@@ -59,7 +59,7 @@
 													<select name="ad[payment_type]" data-placeholder="- Chọn hình thức -" class="select required">
 														<option></option>
 														<optgroup label="Tất cả hình thức">
-															<option <%= 'selected=selected' if @ad.payment_type == "per_click" %> value="per_click">Trả theo lượt nhấn</option>
+															<option <%= 'selected=selected' if @ad.payment_type.nil? || @ad.payment_type == "per_click" %> value="per_click">Trả theo lượt nhấn</option>
 															<option <%= 'selected=selected' if @ad.payment_type == "per_day" %> value="per_day">Trả theo ngày</option>
 														</optgroup>
 													</select>
@@ -81,17 +81,17 @@
 										<div class="row payment_type_group per_click_group">
 											<div class="col-md-6">
 												<div class="form-group">
-													<label>Đơn giá (VNĐ/lượt nhấn): <span class="text-danger">*</span></label>
+													<label>Đơn giá: <strong class="per_click_price"></strong> VNĐ/lượt nhấn</label>
 													<div class="text-right">
-														<strong class="per_click_price"></strong>
+														
 													</div>
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
-													<label>Tổng cộng (lượt nhấn): <span class="text-danger">*</span></label>
+													<label>Tổng cộng: <strong class="click_total_price"></strong> lượt nhấn</label>
 													<div class="text-right">
-														<strong class="click_total_price"></strong>
+														
 													</div>
 												</div>
 											</div>
@@ -100,17 +100,17 @@
 										<div class="row payment_type_group per_day_group">
 											<div class="col-md-6">
 												<div class="form-group">
-													<label>Đơn giá (VNĐ/ngày): <span class="text-danger">*</span></label>
+													<label>Đơn giá: <strong class="per_day_price"></strong> VNĐ/ngày</label>
 													<div class="text-right">
-														<strong class="per_day_price"></strong>
+														
 													</div>
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
-													<label>Thành tiền (VNĐ): <span class="text-danger">*</span></label>
+													<label>Thành tiền: <strong class="day_total_price"></strong> VNĐ</label>
 													<div class="text-right">
-														<strong class="day_total_price"></strong>
+														
 													</div>
 												</div>
 											</div>
@@ -408,6 +408,7 @@
 				box.find("i").removeClass("noimage");
 				if(box.find("i").hasClass("icon-checkmark") || $("icon-checkmark").length == 0) {
 					insertImageToPreviewBox(e.target.result)
+					$(".image-checkbutton i").removeClass("icon-checkmark")
 					if($("icon-checkmark").length == 0) {
 						box.find("i").addClass("icon-checkmark")
 					}
