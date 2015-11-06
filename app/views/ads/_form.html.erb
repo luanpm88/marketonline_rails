@@ -299,13 +299,13 @@
 		
 		var payment_detail = ""
 		if ($("select[name='ad[payment_type]']").val() == "per_day") {
-			payment_detail += '<div>Thời gian: '+$("input[name='ad[daterange]']").val()+'</div>'
-			payment_detail += '<div>Đơn giá: '+$(".per_day_price").html()+' VNĐ/ngày</div>'
+			payment_detail += '<div><span>Thời gian:</span> '+$("input[name='ad[daterange]']").val()+'</div>'
+			payment_detail += '<div><span>Đơn giá:</span> '+$(".per_day_price").html()+' VNĐ/ngày</div>'
 			s4.html($(".day_total_price").html()+" VNĐ")
 		} else {
-			payment_detail += '<div>Thời gian: '+$("input[name='ad[daterange]']").val()+'</div>'
-			payment_detail += '<div>Đơn giá: '+$(".per_click_price").html()+' VNĐ/lượt nhấn</div>'
-			payment_detail += '<div>Số lượt nhấn: '+$(".click_total_price").html()+' lượt nhấn</div>'
+			payment_detail += '<div><span>Thời gian:</span> '+$("input[name='ad[daterange]']").val()+'</div>'
+			payment_detail += '<div><span>Đơn giá:</span> '+$(".per_click_price").html()+' VNĐ/lượt nhấn</div>'
+			payment_detail += '<div><span>Số lượt nhấn:</span> '+$(".click_total_price").html()+' lượt nhấn</div>'
 			s4.html(format_number($("input[name='ad[max_budget]']").val())+" VNĐ")
 		}
 		s3.html(payment_detail)

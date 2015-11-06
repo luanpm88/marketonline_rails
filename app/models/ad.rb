@@ -252,9 +252,9 @@ class Ad < ActiveRecord::Base
   end
   
   def total_price
-    if payment_type = "per_click"
+    if payment_type == "per_click"
       max_budget
-    elsif payment_type = "per_day"
+    elsif payment_type == "per_day"
       price*days
     end    
   end
@@ -264,7 +264,7 @@ class Ad < ActiveRecord::Base
   end
   
   def get_checkout_url(request)
-    return_url = request.host+ActionController::Base.helpers.url_for(controller: "ads", action: "get_nganluong_checkout_return", id: self.id)
+    return_url = "http://"+request.host+ActionController::Base.helpers.url_for(controller: "ads", action: "get_nganluong_checkout_return", id: self.id)
     email = "service@marketonline.vn"
     note = self.name
     amount = self.total_price

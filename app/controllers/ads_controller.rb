@@ -19,6 +19,9 @@ class AdsController < ApplicationController
     @ad = Ad.new
     @ad.start_at = Time.now + 3.days
     @ad.end_at = @ad.start_at + 1.month
+    if params[:pos].present?
+      @ad.ad_position = AdPosition.get(params[:pos])
+    end    
   end
 
   # GET /ads/1/edit

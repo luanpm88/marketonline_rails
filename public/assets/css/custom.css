@@ -16,9 +16,9 @@
     list-style: outside none none;
     margin-bottom: 5px;
     margin-right: 5px;
-    width: 95px;
+    width: 91px;
 }
-.product_images ul li {
+.product_images ul li:last-child {
     margin-right: 0;
 }
 .product_images ul li img {
@@ -56,4 +56,7 @@
 }
 .banner_info_overlay {
     
+}
+.ad_summary_col strong span {
+    font-weight: normal;
 }
