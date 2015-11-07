@@ -268,12 +268,15 @@
 									</div>
 								</div>
 								
-								<legend><i class="icon-file-text position-left"></i> Thanh toán phí quản cáo</legend>
-								<p>Vui lòng nhấn vào nút bên dưới để thanh toán qua Cổng thanh toán trực tuyến <strong>NganLuong</strong></p>
-								<a target="_blank" href="<%= @ad.get_checkout_url(request) %>" >
-									<img src="https://www.nganluong.vn/data/images/buttons/11.gif"  border="0" />
-								</a> 
-								
+								<% if !@ad.paid? %>
+									<legend><i class="icon-file-text position-left"></i> Thanh toán phí quản cáo</legend>
+									<p>Vui lòng nhấn vào nút bên dưới để thanh toán qua Cổng thanh toán trực tuyến <strong>NganLuong</strong></p>
+									<a target="_blank" href="<%= @ad.get_checkout_url(request) %>" >
+										<img src="https://www.nganluong.vn/data/images/buttons/11.gif"  border="0" />
+									</a>
+									<br />
+									<input type="text" style="widh: 0; border:none; background: #fff; line-height: 0;" class="required" name="nganluong_checkout_status" value="" />
+								<% end %>
 								<hr>
 							</fieldset>
 

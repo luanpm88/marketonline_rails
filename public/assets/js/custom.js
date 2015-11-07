@@ -200,6 +200,7 @@ $(document).ready(function() {
         bodyTag: "fieldset",
         transitionEffect: "fade",
         startIndex: START_STEP,
+        enableCancelButton: true,
         titleTemplate: '<span class="number">#index#</span> #title#',
         autoFocus: true,
         onStepChanging: function (event, currentIndex, newIndex) {
@@ -235,15 +236,15 @@ $(document).ready(function() {
         },
         onCanceled: function (event) {
             form.validate().settings.ignore = ":disabled,:hidden";
-            if (form.valid()) {
+            //if (form.valid()) {
                 $(".steps-validation").submit();
-            }
+            //}
         },
         onFinished: function (event, currentIndex) {
             alert("Submitted!");
         },
         labels: {
-            cancel: "Lưu tạm",
+            cancel: "Lưu & Đóng",
             current: "Bước hiện tại:",
             pagination: "Phân trang",
             finish: "Hoàn tất",
@@ -295,6 +296,7 @@ $(document).ready(function() {
         messages: {
             "ad[ad_position_id]": "Hãy chọn vị trí.",
             "ad[image]": "Hãy chọn ảnh.",
+            "nganluong_checkout_status": "Vui lòng chọn hình thức thanh toán.",
         }
     });
     

@@ -60,3 +60,8 @@
 .ad_summary_col strong span {
     font-weight: normal;
 }
+.wizard > .actions > ul > li > a[href="#cancel"] {
+    background-color: #fcfcfc;
+    color: #333;
+    border: 1px solid #ddd;
+}

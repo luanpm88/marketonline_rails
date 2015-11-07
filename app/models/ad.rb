@@ -105,7 +105,7 @@ class Ad < ActiveRecord::Base
               "<div class=\"text-center\">#{item.created_at.strftime("%d-%m-%Y")}</div>",
               "<div class=\"text-center\">#{(item.pb_member.display_name if !item.pb_member.nil?)}</div>",
               "<div class=\"text-center\">#{item.click_count.to_s}</div>",
-              "<div class=\"text-center\"><span class=\"label bg-grey-400\">Đang soạn</span></div>",
+              "<div class=\"text-center\">#{item.display_status}</div>",
               "<div class=\"text-right\"><ul class=\"icons-list\">"+
                   "<li class=\"dropup\">"+
                       "<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\"><i class=\"icon-menu7\"></i></a>"+
@@ -281,6 +281,18 @@ class Ad < ActiveRecord::Base
     param = '<ORDERS>'+'<TOTAL>1</TOTAL><ORDER><ORDER_CODE>'+ad_code+'</ORDER_CODE><PAYMENT_ID>1</PAYMENT_ID></ORDER></ORDERS>'
     checksum =  Digest::MD5.hexdigest(merchant_id + param + 'marketonlinebmn@#$')
     response = client.call(:check_order, message: {merchant_id: 39955, param: param, checksum: checksum})
+  end
+  
+  def paid?
+    !nganluong_return_url.nil?
+  end
+  
+  def display_status
+    if paid?
+      "<span class=\"label bg-blue\">Đang chạy</span>"
+    else
+      "<span class=\"label bg-grey-400\">Đang soạn</span>"
+    end    
   end
   
 end

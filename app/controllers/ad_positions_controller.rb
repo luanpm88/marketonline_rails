@@ -94,6 +94,6 @@ class AdPositionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ad_position_params
-      params.require(:ad_position).permit(:day_price, :click_price, :name, :description)
+      params.require(:ad_position).permit(:width, :height, :day_price, :click_price, :name, :description)
     end
 end
