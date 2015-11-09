@@ -27,7 +27,7 @@
 							<% end %>
 						
 							<h6>Vị trí & Phí Quảng Cáo</h6>
-							<fieldset>
+							<fieldset class="pos_cost_tab">
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
@@ -46,7 +46,7 @@
 													<label>Thời gian đặt quảng cáo: <span class="text-danger">*</span></label>
 													<div class="input-group">
 														<span class="input-group-addon"><i class="icon-calendar22"></i></span>
-														<input type="text" name="ad[daterange]" class="form-control new_ad_daterange" value="<%= @ad.start_at.strftime("%d-%m-%Y") %> - <%= @ad.end_at.strftime("%d-%m-%Y") %>"> 
+														<input type="text" name="ad[daterange]" class="form-control new_ad_daterange"> 
 													</div>
 												</div>
 											</div>											
@@ -124,8 +124,107 @@
 							</fieldset>
 
 							<h6>Nội Dung Quảng Cáo</h6>
-							<fieldset>
+							<fieldset class="ad_detail_tab">
 								<div class="row">
+									
+									
+									<div class="col-md-6">
+										<fieldset class="text-semibold">
+											<legend><i class="icon-file-text position-left"></i> Cài đặt quảng cáo</legend>
+																								
+											<div class="ad_preview_box ad_preview_box_1">
+												
+											</div>
+											
+											<input name="check_image" style="position: absolute;border: none;background: none" />
+											
+											<div class="image_select_control image_select_control_1" rel="1">
+												<div class="product_images">
+												</div>																								
+												
+												<%= f.hidden_field "banner_1" %>
+												
+												<div class="form-group image_upload_input">
+													<label>Thay hình ảnh</label>
+													<div class="row">
+														<div class="col-md-3">
+															<%= @ad.image_link %>
+															<label class="image-checkbutton"><i image="<%= @ad.image_src(:banner) %>" class="<%= "icon-checkmark" if @ad.image.present? %> <%= "noimage" if !@ad.image.present? %>"></i></label>
+														</div>
+														<div class="col-md-7">																		
+															<input type="file" name="ad[image]" class="form-control file-styled">
+															<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
+														</div>
+													</div>
+												</div>
+											</div>
+											
+											<div class="image_select_control image_select_control_2" rel="2" style="display: none">
+												<div class="product_images">
+												</div>																								
+												
+												<%= f.hidden_field "banner_2" %>
+												
+												<div class="form-group image_upload_input">
+													<label>Thay hình ảnh</label>
+													<div class="row">
+														<div class="col-md-3">
+															<%= @ad.image_2_link %>
+															<label class="image-checkbutton"><i image="<%= @ad.image_2_src(:banner) %>" class="<%= "icon-checkmark" if @ad.image_2.present? %> <%= "noimage" if !@ad.image_2.present? %>"></i></label>
+														</div>
+														<div class="col-md-7">																		
+															<input type="file" name="ad[image_2]" class="form-control file-styled">
+															<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
+														</div>
+													</div>
+												</div>
+											</div>
+													
+											<div class="image_select_control image_select_control_3" rel="3" style="display: none">
+												<div class="product_images">
+												</div>																								
+												
+												<%= f.hidden_field "banner_3" %>
+												
+												<div class="form-group image_upload_input">
+													<label>Thay hình ảnh</label>
+													<div class="row">
+														<div class="col-md-3">
+															<%= @ad.image_3_link %>
+															<label class="image-checkbutton"><i image="<%= @ad.image_3_src(:banner) %>" class="<%= "icon-checkmark" if @ad.image_3.present? %> <%= "noimage" if !@ad.image_3.present? %>"></i></label>
+														</div>
+														<div class="col-md-7">																		
+															<input type="file" name="ad[image_3]" class="form-control file-styled">
+															<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
+														</div>
+													</div>
+												</div>
+											</div>
+													
+											<div class="image_select_control image_select_control_4" rel="4" style="display: none">
+												<div class="product_images">
+												</div>																								
+												
+												<%= f.hidden_field "banner_4" %>
+												
+												<div class="form-group image_upload_input">
+													<label>Thay hình ảnh</label>
+													<div class="row">
+														<div class="col-md-3">
+															<%= @ad.image_4_link %>
+															<label class="image-checkbutton"><i image="<%= @ad.image_4_src(:banner) %>" class="<%= "icon-checkmark" if @ad.image_4.present? %> <%= "noimage" if !@ad.image_4.present? %>"></i></label>
+														</div>
+														<div class="col-md-7">																		
+															<input type="file" name="ad[image_4]" class="form-control file-styled">
+															<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
+														</div>
+													</div>
+												</div>
+											</div>	
+											
+										</fieldset>
+									</div>
+									
 									<div class="col-md-6">
 										<fieldset class="text-semibold">
 											<legend><i class="icon-file-text position-left"></i> Thông tin cơ bản</legend>
@@ -158,43 +257,13 @@
 										</fieldset>
 									</div>
 
-									<div class="col-md-6">
-										<fieldset class="text-semibold">
-											<legend><i class="icon-file-text position-left"></i> Cài đặt quảng cáo</legend>
-																								
-											<div class="ad_preview_box ad_preview_box_1">
-												
-											</div>														
-											
-											<%= f.hidden_field "banner" %>
-												
-											<div class="product_images">
-											</div>																								
-											
-											
-											<div class="form-group image_upload_input">
-												<label>Thay hình ảnh</label>
-												<div class="row">
-													<div class="col-md-3">
-														<%= @ad.image_link %>
-														<label class="image-checkbutton"><i image="<%= @ad.image_src(:banner) %>" class="<%= "icon-checkmark" if @ad.image.present? %> <%= "noimage" if !@ad.image.present? %>"></i></label>
-													</div>
-													<div class="col-md-7">																		
-														<input type="file" name="ad[image]" class="form-control file-styled">
-														<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
-													</div>
-												</div>
-											</div>
-																					
-											
-										</fieldset>
-									</div>
+									
 									
 								</div>
 							</fieldset>
 
 							<h6>Thanh Toán</h6>
-							<fieldset>
+							<fieldset class="payment_tab">
 								<legend><i class="icon-file-text position-left"></i> Nội dung quảng cáo</legend>
 								
 								<div class="row ad_summary_detail">
@@ -380,10 +449,10 @@
 			url : '<%= get_values_ad_positions_path %>?id='+pos_id,
 			success:function(data, textStatus, jqXHR)
 			{
-				$(".per_click_price").html(format_number(data.click_price))
-				$(".per_day_price").html(format_number(data.day_price))
+				$(".per_click_price").html(format_number(data.pos.click_price))
+				$(".per_day_price").html(format_number(data.pos.day_price))
 				pd_box.show()
-				
+				loadDaterange($('.new_ad_daterange'), data.start_date, data.end_date)
 				calculateAdPrices()
 			}
 		})
@@ -399,7 +468,7 @@
 		}
 	}
 	
-	function readURL(input) {
+	function readURL(input, select_box) {
 		var box = $(input).parents(".image_upload_input")
 		var img = box.find("img")		
 		if (input.files && input.files[0]) {
@@ -410,9 +479,9 @@
 				box.find("i").attr('image', e.target.result);
 				box.find("i").removeClass("noimage");
 				if(box.find("i").hasClass("icon-checkmark") || $("icon-checkmark").length == 0) {
-					insertImageToPreviewBox(e.target.result)
-					$(".image-checkbutton i").removeClass("icon-checkmark")
-					if($("icon-checkmark").length == 0) {
+					insertImageToPreviewBox(e.target.result, select_box.attr("rel"))
+					select_box.find(".image-checkbutton i").removeClass("icon-checkmark")
+					if(select_box.find("icon-checkmark").length == 0) {
 						box.find("i").addClass("icon-checkmark")
 					}
 				}
@@ -421,10 +490,14 @@
 		}
 	}
 	
-	function insertImageToPreviewBox(src) {
+	function insertImageToPreviewBox(src, num) {
+		var subfix = ""
+		if (num != "1") {
+            subfix = "_"+num
+        }
 		if (src=="") {
-			$(".preview_box_image").html("")
-			$("input[name='ad[banner]']").val(src)
+			$(".preview_box_image"+subfix).html("")
+			$("input[name='ad[banner_"+num+"]']").val(src)
 			return
 		}
 		var img = new Image();
@@ -432,8 +505,8 @@
 			var w = this.width
 			var h = this.height
 			
-			var box_w = $(".preview_box_image").width()
-			var box_h = $(".preview_box_image").height()
+			var box_w = $(".preview_box_image"+subfix).width()
+			var box_h = $(".preview_box_image"+subfix).height()
 			
 			var new_h = 0
 			var new_w = 0
@@ -450,15 +523,16 @@
 				ma_top = (box_h-new_h)/2
 			}
 			
-			$(".preview_box_image").html('<img class="preview_box_img" src="'+src+'" style="margin-top: -10px; width:'+new_w+'px; height:'+new_h+'px;margin-left:'+ma_left+'px;;margin-top:'+ma_top+'px;" />')			
+			$(".preview_box_image"+subfix).html('<img class="preview_box_img" src="'+src+'" style="margin-top: -10px; width:'+new_w+'px; height:'+new_h+'px;margin-left:'+ma_left+'px;;margin-top:'+ma_top+'px;" />')			
 		}
 		img.src = src;
 		
 		// update input
+		var box = $(".image_select_control_"+num)
 		if (src.indexOf("data") == 0) {
-			$("input[name='ad[banner]']").val("upload")
+			box.find("input[name='ad[banner_"+num+"]']").val("upload")
 		} else {
-			$("input[name='ad[banner]']").val(src)
+			box.find("input[name='ad[banner_"+num+"]']").val(src)
 		}
 	}
 	
@@ -474,9 +548,14 @@
 				success:function(data, textStatus, jqXHR)
 				{
 					$(".ad_preview_box").html(data)
-					if($("i.icon-checkmark").length) {
-						insertImageToPreviewBox($("i.icon-checkmark").attr("image"))
-					}	
+					
+					$(".image_select_control").each(function() {
+						if($(this).find("i.icon-checkmark").length) {
+							insertImageToPreviewBox($(this).find("i.icon-checkmark").attr("image"), $(this).attr("rel"))
+						}
+					})
+					
+					$(".ad_detail_tab .box_4_style .preview_box_image_2, .ad_detail_tab .box_4_style .preview_box_image_3, .ad_detail_tab .box_4_style .preview_box_image_4, .ad_detail_tab .box_3_style .preview_box_image_3, .ad_detail_tab .box_3_style .preview_box_image_2").addClass("no_active")
 				}
 			})
 		}
@@ -545,36 +624,63 @@
 			if($(this).find("i").hasClass("noimage")) {
 				return
 			}
+			var box = $(this).parents(".image_select_control")
+			var num = box.attr("rel")
 			var checked = $(this).find("i").hasClass("icon-checkmark")
-			$(".image-checkbutton i").removeClass("icon-checkmark")
+			box.find(".image-checkbutton i").removeClass("icon-checkmark")
 			
 			if (checked) {
 				$(this).find("i").removeClass("icon-checkmark")
-				insertImageToPreviewBox("")
+				insertImageToPreviewBox("", num)
 			} else {
 				$(this).find("i").addClass("icon-checkmark")
-				insertImageToPreviewBox($(this).find("i").attr("image"))
+				insertImageToPreviewBox($(this).find("i").attr("image"), num)
 			}
 		})
 		
 		// image_upload_input
 		$(".image_upload_input input[type=file]").change(function() {
-			readURL(this)
+			readURL(this, $(this).parents(".image_select_control"))
 		})
 		
 		// custome validate
 		jQuery.validator.addMethod("select_image", function(value, element) {
-			var ok = false
-			var image = $("input[name='ad[banner]']").val()
-			if (image != "" && image != "upload") {
-				ok = true
+			var ok = true
+			
+			var banner_1 = $("input[name='ad[banner_1]']").val()
+			if (banner_1 == "") {
+				ok = false
 			}
-			if (image == "upload" && $(".image_upload_input input[type=file]").val() != "") {
-				ok = true
-			}
+				
+			if ($(".box_4_style").length) {
+                var banner_2 = $("input[name='ad[banner_2]']").val()
+				if (banner_2 == "") {
+					ok = false
+				}
+				var banner_3 = $("input[name='ad[banner_3]']").val()
+				if (banner_3 == "") {
+					ok = false
+				}
+				var banner_4 = $("input[name='ad[banner_4]']").val()
+				if (banner_4 == "") {
+					ok = false
+				}
+            }
+			
+			if ($(".box_3_style").length) {
+                var banner_2 = $("input[name='ad[banner_2]']").val()
+				if (banner_2 == "") {
+					ok = false
+				}
+				var banner_3 = $("input[name='ad[banner_3]']").val()
+				if (banner_3 == "") {
+					ok = false
+				}
+            }
+			
 			return ok
 		}, 'Chọn hình cho quảng cáo');
-		$(".image_upload_input input[type=file]").rules( "add", {
+		$("input[name=check_image]").rules( "add", {
 			select_image: true
 		});
 		
@@ -601,5 +707,17 @@
 		})
 		
 		setInterval("adSummary()", 500)
+	
+		loadDaterange($('.new_ad_daterange'), "<%= @ad.start_at.strftime("%d-%m-%Y") %>", "<%= @ad.end_at.strftime("%d-%m-%Y") %>")
+		
+		$(document).on("click", ".ad_detail_tab .box_style .box_style_item", function() {
+			var id = $(this).attr("rel")
+			$(this).parents(".box_style").find(".box_style_item").addClass("no_active")
+			$(this).removeClass("no_active")
+			$(".image_select_control").hide()
+			$(".image_select_control_"+id).show()
+		})
+		
+		
 	})
 </script>

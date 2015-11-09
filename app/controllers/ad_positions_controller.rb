@@ -82,8 +82,14 @@ class AdPositionsController < ApplicationController
   end
   
   def get_values
-    
-    render json: @ad_position
+    start_date = "#{@ad_position.get_remaining_days.strftime("%d-%m-%Y")}"
+    end_date = "#{(@ad_position.get_remaining_days+1.month).strftime("%d-%m-%Y")}"
+    render json: {pos: @ad_position, start_date: start_date, end_date: end_date}
+  end
+  
+  def get_remaining_time
+    @ad_position = AdPosition.get(params[:pos])
+    render json: {time: @ad_position.get_remaining_days("date")}
   end
 
   private
@@ -94,6 +100,6 @@ class AdPositionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ad_position_params
-      params.require(:ad_position).permit(:width, :height, :day_price, :click_price, :name, :description)
+      params.require(:ad_position).permit(:style_name, :title, :width, :height, :day_price, :click_price, :name, :description)
     end
 end

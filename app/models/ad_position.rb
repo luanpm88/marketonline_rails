@@ -112,4 +112,17 @@ class AdPosition < ActiveRecord::Base
     link_helper.link_to("<i class=\"icon-pencil\"></i> Sửa".html_safe, {controller: "ad_positions", action: "edit", id: self.id})
   end
   
+  def get_remaining_days(type=nil)
+    recent_ad = active_ads.order("end_at").where("start_at <= ? AND end_at >= ?", Time.now, Time.now).first    
+    if type == "date"
+      return "" if recent_ad.nil?
+      recent_ad.end_at.strftime("%d/%m/%Y")
+    elsif type == "day"
+      return "" if recent_ad.nil?
+      (recent_ad.end_at.to_date - Date.today).to_s
+    else
+      recent_ad.nil? ? Date.today : recent_ad.end_at
+    end
+  end
+  
 end

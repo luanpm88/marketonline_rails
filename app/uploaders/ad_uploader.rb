@@ -61,7 +61,11 @@ class AdUploader < CarrierWave::Uploader::Base
   # end
   
   def dynamic_resize_to_fill(size)
-    resize_to_fill(model.ad_position.width, model.ad_position.height)
+    if model.ad_position.style_name == "3_images_group"
+      resize_to_fill(model.ad_position.width, model.ad_position.width)
+    else
+      resize_to_fill(model.ad_position.width, model.ad_position.height)
+    end
   end
 
 end

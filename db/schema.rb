@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151105024758) do
+ActiveRecord::Schema.define(version: 20151109085324) do
 
   create_table "ad_clicks", force: :cascade do |t|
     t.integer  "ad_id",         limit: 4
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer  "height",      limit: 4
     t.decimal  "click_price",               precision: 10
     t.decimal  "day_price",                 precision: 10
+    t.string   "style_name",  limit: 255
   end
 
   create_table "ads", force: :cascade do |t|
@@ -60,6 +61,9 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.string   "payment_type",         limit: 255
     t.decimal  "price",                              precision: 10
     t.text     "nganluong_return_url", limit: 65535
+    t.string   "image_2",              limit: 255
+    t.string   "image_3",              limit: 255
+    t.string   "image_4",              limit: 255
   end
 
   create_table "email", force: :cascade do |t|
@@ -995,22 +999,16 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.string "name", limit: 255, null: false
   end
 
-  create_table "pb_links", force: :cascade do |t|
+  create_table "pb_links", id: false, force: :cascade do |t|
+    t.integer  "id",        limit: 4, null: false
     t.integer  "parent_id", limit: 4, null: false
     t.integer  "member_id", limit: 4, null: false
     t.integer  "type_id",   limit: 4, null: false
     t.datetime "created",             null: false
   end
 
-  add_index "pb_links", ["member_id"], name: "member_id", using: :btree
-  add_index "pb_links", ["member_id"], name: "member_id_2", using: :btree
-  add_index "pb_links", ["member_id"], name: "member_id_3", using: :btree
-  add_index "pb_links", ["parent_id"], name: "parent_id", using: :btree
-  add_index "pb_links", ["parent_id"], name: "parent_id_2", using: :btree
-  add_index "pb_links", ["parent_id"], name: "parent_id_3", using: :btree
-  add_index "pb_links", ["parent_id"], name: "parent_id_4", using: :btree
-
-  create_table "pb_logs", force: :cascade do |t|
+  create_table "pb_logs", id: false, force: :cascade do |t|
+    t.integer "id",            limit: 4,                      null: false
     t.string  "handle_type",   limit: 7,     default: "info", null: false
     t.string  "source_module", limit: 50,    default: "",     null: false
     t.text    "description",   limit: 65535
@@ -1019,7 +1017,8 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer "modified",      limit: 4,     default: 0,      null: false
   end
 
-  create_table "pb_markets", force: :cascade do |t|
+  create_table "pb_markets", id: false, force: :cascade do |t|
+    t.integer "id",            limit: 4,                     null: false
     t.string  "name",          limit: 255,   default: "",    null: false
     t.string  "main_business", limit: 255,   default: "",    null: false
     t.text    "content",       limit: 65535
@@ -1035,18 +1034,21 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer "modified",      limit: 4,     default: 0,     null: false
   end
 
-  create_table "pb_markettypes", force: :cascade do |t|
+  create_table "pb_markettypes", id: false, force: :cascade do |t|
+    t.integer "id",            limit: 2,                   null: false
     t.string  "name",          limit: 255, default: "",    null: false
     t.boolean "display_order",             default: false, null: false
   end
 
-  create_table "pb_membercaches", primary_key: "member_id", force: :cascade do |t|
-    t.text    "data1",      limit: 65535,             null: false
-    t.text    "data2",      limit: 65535,             null: false
-    t.integer "expiration", limit: 4,     default: 0, null: false
+  create_table "pb_membercaches", id: false, force: :cascade do |t|
+    t.integer "member_id",  limit: 4,     default: -1, null: false
+    t.text    "data1",      limit: 65535,              null: false
+    t.text    "data2",      limit: 65535,              null: false
+    t.integer "expiration", limit: 4,     default: 0,  null: false
   end
 
-  create_table "pb_memberfields", primary_key: "member_id", force: :cascade do |t|
+  create_table "pb_memberfields", force: :cascade do |t|
+    t.integer "member_id",    limit: 4,     default: 0,     null: false
     t.integer "today_logins", limit: 2,     default: 0,     null: false
     t.integer "total_logins", limit: 2,     default: 0,     null: false
     t.integer "area_id",      limit: 2,     default: 0,     null: false
@@ -1075,19 +1077,8 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.text    "intro",        limit: 65535,                 null: false
   end
 
-  add_index "pb_memberfields", ["first_name", "last_name"], name: "first_name", type: :fulltext
-  add_index "pb_memberfields", ["first_name", "last_name"], name: "first_name_3", type: :fulltext
-  add_index "pb_memberfields", ["first_name", "last_name"], name: "first_name_4", type: :fulltext
-  add_index "pb_memberfields", ["first_name", "last_name"], name: "first_name_5", type: :fulltext
-  add_index "pb_memberfields", ["first_name", "last_name"], name: "first_name_6", type: :fulltext
-  add_index "pb_memberfields", ["first_name", "last_name"], name: "first_name_7", type: :fulltext
-  add_index "pb_memberfields", ["first_name"], name: "first_name_2", type: :fulltext
-  add_index "pb_memberfields", ["first_name"], name: "first_name_8", using: :btree
-  add_index "pb_memberfields", ["last_name"], name: "last_name", type: :fulltext
-  add_index "pb_memberfields", ["last_name"], name: "last_name_2", using: :btree
-  add_index "pb_memberfields", ["school_id"], name: "school_id", using: :btree
-
-  create_table "pb_membergroups", force: :cascade do |t|
+  create_table "pb_membergroups", id: false, force: :cascade do |t|
+    t.integer "id",                limit: 2,                             null: false
     t.boolean "membertype_id",                   default: false,         null: false
     t.string  "name",              limit: 50,    default: "",            null: false
     t.text    "description",       limit: 65535
@@ -1121,13 +1112,15 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer "modified",          limit: 4,     default: 0,             null: false
   end
 
-  create_table "pb_membermembertypes", force: :cascade do |t|
+  create_table "pb_membermembertypes", id: false, force: :cascade do |t|
+    t.integer  "id",            limit: 4, null: false
     t.integer  "member_id",     limit: 4, null: false
     t.integer  "membertype_id", limit: 4, null: false
     t.datetime "created",                 null: false
   end
 
-  create_table "pb_members", force: :cascade do |t|
+  create_table "pb_members", id: false, force: :cascade do |t|
+    t.integer  "id",                        limit: 4,                   null: false
     t.string   "space_name",                limit: 255,   default: "",  null: false
     t.integer  "templet_id",                limit: 2,     default: 0,   null: false
     t.string   "username",                  limit: 25,    default: "",  null: false
@@ -1185,24 +1178,15 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer  "area_moderator",            limit: 4,     default: 0,   null: false
   end
 
-  add_index "pb_members", ["area_show"], name: "area_show", using: :btree
-  add_index "pb_members", ["current_type"], name: "current_type", using: :btree
-  add_index "pb_members", ["email"], name: "email", using: :btree
-  add_index "pb_members", ["referrer_id"], name: "referrer_id", using: :btree
-  add_index "pb_members", ["role"], name: "role", using: :btree
-  add_index "pb_members", ["space_name"], name: "space_name", using: :btree
-  add_index "pb_members", ["space_name"], name: "space_name_2", using: :btree
-  add_index "pb_members", ["typing"], name: "typing", using: :btree
-  add_index "pb_members", ["typing_time"], name: "typing_time", using: :btree
-  add_index "pb_members", ["username"], name: "username", using: :btree
-
-  create_table "pb_membertypes", force: :cascade do |t|
+  create_table "pb_membertypes", id: false, force: :cascade do |t|
+    t.integer "id",                     limit: 2,                  null: false
     t.integer "default_membergroup_id", limit: 2,     default: 0,  null: false
     t.string  "name",                   limit: 50,    default: "", null: false
     t.text    "description",            limit: 65535
   end
 
-  create_table "pb_messages", force: :cascade do |t|
+  create_table "pb_messages", id: false, force: :cascade do |t|
+    t.integer "id",                  limit: 4,                      null: false
     t.string  "type",                limit: 7,     default: "user", null: false
     t.integer "from_member_id",      limit: 4,     default: -1,     null: false
     t.string  "cache_from_username", limit: 25,    default: "",     null: false
@@ -1216,13 +1200,15 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.string  "membertype_ids",      limit: 255,                    null: false
   end
 
-  create_table "pb_metas", force: :cascade do |t|
+  create_table "pb_metas", id: false, force: :cascade do |t|
+    t.integer "id",          limit: 4,                null: false
     t.integer "object_id",   limit: 4,   default: 0,  null: false
     t.string  "object_type", limit: 100, default: "", null: false
     t.text    "content",     limit: 255,              null: false
   end
 
-  create_table "pb_moderators", force: :cascade do |t|
+  create_table "pb_moderators", id: false, force: :cascade do |t|
+    t.integer  "id",                limit: 4,     null: false
     t.integer  "member_id",         limit: 4,     null: false
     t.text     "manage_types",      limit: 65535, null: false
     t.text     "manage_industries", limit: 65535, null: false
@@ -1231,7 +1217,8 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.datetime "created",                         null: false
   end
 
-  create_table "pb_modlogs", force: :cascade do |t|
+  create_table "pb_modlogs", id: false, force: :cascade do |t|
+    t.integer  "id",              limit: 4,     null: false
     t.string   "type",            limit: 255,   null: false
     t.integer  "valid_status",    limit: 4,     null: false
     t.text     "valid_message",   limit: 65535, null: false
@@ -1240,7 +1227,8 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer  "item_id",         limit: 4,     null: false
   end
 
-  create_table "pb_navs", force: :cascade do |t|
+  create_table "pb_navs", id: false, force: :cascade do |t|
+    t.integer "id",            limit: 2,                     null: false
     t.integer "parent_id",     limit: 2,   default: 0,       null: false
     t.string  "name",          limit: 50,  default: "",      null: false
     t.string  "description",   limit: 255, default: "",      null: false
@@ -1255,7 +1243,8 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer "modified",      limit: 4,   default: 0,       null: false
   end
 
-  create_table "pb_newses", force: :cascade do |t|
+  create_table "pb_newses", id: false, force: :cascade do |t|
+    t.integer  "id",                 limit: 4,                     null: false
     t.integer  "type_id",            limit: 2,     default: 0,     null: false
     t.boolean  "type",                             default: false, null: false
     t.integer  "industry_id",        limit: 2,     default: 0,     null: false
@@ -1280,13 +1269,8 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.text     "clicked_logs",       limit: 65535
   end
 
-  add_index "pb_newses", ["picture", "status"], name: "picture", using: :btree
-  add_index "pb_newses", ["status"], name: "status", using: :btree
-  add_index "pb_newses", ["type_id", "status"], name: "type_id", using: :btree
-  add_index "pb_newses", ["type_id", "status"], name: "type_id_2", using: :btree
-  add_index "pb_newses", ["type_id", "status"], name: "type_id_3", using: :btree
-
-  create_table "pb_newstypes", force: :cascade do |t|
+  create_table "pb_newstypes", id: false, force: :cascade do |t|
+    t.integer "id",        limit: 2,                 null: false
     t.string  "name",      limit: 25, default: "",   null: false
     t.boolean "level_id",             default: true, null: false
     t.boolean "status",               default: true, null: false
@@ -1301,7 +1285,8 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer "amount",   limit: 2,  default: 1,  null: false
   end
 
-  create_table "pb_orders", force: :cascade do |t|
+  create_table "pb_orders", id: false, force: :cascade do |t|
+    t.integer "id",             limit: 2,                     null: false
     t.string  "trade_no",       limit: 16,    default: "",    null: false
     t.integer "member_id",      limit: 4,     default: -1,    null: false
     t.boolean "anonymous",                    default: false, null: false
@@ -1317,7 +1302,8 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer "modified",       limit: 4,     default: 0,     null: false
   end
 
-  create_table "pb_passports", force: :cascade do |t|
+  create_table "pb_passports", id: false, force: :cascade do |t|
+    t.integer "id",          limit: 2,                    null: false
     t.string  "name",        limit: 25,    default: "",   null: false
     t.string  "title",       limit: 25,    default: "",   null: false
     t.text    "description", limit: 65535
@@ -1328,7 +1314,8 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer "modified",    limit: 4,     default: 0,    null: false
   end
 
-  create_table "pb_payhistories", force: :cascade do |t|
+  create_table "pb_payhistories", id: false, force: :cascade do |t|
+    t.integer "id",         limit: 4,                 null: false
     t.integer "member_id",  limit: 4,  default: -1,   null: false
     t.string  "trade_no",   limit: 25, default: "-1", null: false
     t.float   "amount",     limit: 24, default: 0.0,  null: false
@@ -1338,9 +1325,8 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer "modified",   limit: 4,  default: 0,    null: false
   end
 
-  add_index "pb_payhistories", ["trade_no"], name: "one_trade_no", unique: true, using: :btree
-
-  create_table "pb_payments", force: :cascade do |t|
+  create_table "pb_payments", id: false, force: :cascade do |t|
+    t.integer "id",                limit: 2,                     null: false
     t.string  "name",              limit: 25,    default: "",    null: false
     t.string  "title",             limit: 25,    default: "",    null: false
     t.text    "description",       limit: 65535
@@ -1351,12 +1337,14 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer "modified",          limit: 4,     default: 0,     null: false
   end
 
-  create_table "pb_personals", primary_key: "member_id", force: :cascade do |t|
-    t.boolean "resume_status", default: false, null: false
-    t.boolean "max_education", default: false, null: false
+  create_table "pb_personals", id: false, force: :cascade do |t|
+    t.integer "member_id",     limit: 4, default: -1,    null: false
+    t.boolean "resume_status",           default: false, null: false
+    t.boolean "max_education",           default: false, null: false
   end
 
-  create_table "pb_plugins", force: :cascade do |t|
+  create_table "pb_plugins", id: false, force: :cascade do |t|
+    t.integer "id",          limit: 2,                    null: false
     t.string  "name",        limit: 25,    default: "",   null: false
     t.string  "title",       limit: 25,    default: "",   null: false
     t.text    "description", limit: 65535
@@ -1368,7 +1356,8 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer "modified",    limit: 4,     default: 0,    null: false
   end
 
-  create_table "pb_pointlogs", force: :cascade do |t|
+  create_table "pb_pointlogs", id: false, force: :cascade do |t|
+    t.integer "id",          limit: 4,                  null: false
     t.integer "member_id",   limit: 4,     default: -1, null: false
     t.string  "action_name", limit: 25,    default: "", null: false
     t.integer "points",      limit: 2,     default: 0,  null: false
@@ -1378,28 +1367,29 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer "modified",    limit: 4,     default: 0,  null: false
   end
 
-  create_table "pb_productads", force: :cascade do |t|
+  create_table "pb_productads", id: false, force: :cascade do |t|
+    t.integer  "id",               limit: 4,             null: false
     t.integer  "product_id",       limit: 4,             null: false
     t.integer  "productadtype_id", limit: 4,             null: false
     t.datetime "created",                                null: false
     t.integer  "order",            limit: 4, default: 0, null: false
   end
 
-  add_index "pb_productads", ["product_id"], name: "product_id", using: :btree
-  add_index "pb_productads", ["productadtype_id"], name: "productadtype_id", using: :btree
-
-  create_table "pb_productadtypes", force: :cascade do |t|
-    t.text "name", limit: 65535, null: false
+  create_table "pb_productadtypes", id: false, force: :cascade do |t|
+    t.integer "id",   limit: 4,     null: false
+    t.text    "name", limit: 65535, null: false
   end
 
-  create_table "pb_productcategories", force: :cascade do |t|
+  create_table "pb_productcategories", id: false, force: :cascade do |t|
+    t.integer "id",            limit: 2,                   null: false
     t.integer "parent_id",     limit: 2,   default: 0,     null: false
     t.boolean "level",                     default: true,  null: false
     t.string  "name",          limit: 255, default: "",    null: false
     t.boolean "display_order",             default: false, null: false
   end
 
-  create_table "pb_productcomments", force: :cascade do |t|
+  create_table "pb_productcomments", id: false, force: :cascade do |t|
+    t.integer  "id",          limit: 4,     null: false
     t.integer  "member_id",   limit: 4,     null: false
     t.integer  "company_id",  limit: 4,     null: false
     t.integer  "product_id",  limit: 4,     null: false
@@ -1409,7 +1399,8 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.string   "guest_email", limit: 255,   null: false
   end
 
-  create_table "pb_productprices", force: :cascade do |t|
+  create_table "pb_productprices", id: false, force: :cascade do |t|
+    t.integer "id",           limit: 4,                     null: false
     t.boolean "type_id",                    default: true,  null: false
     t.integer "product_id",   limit: 4,     default: -1,    null: false
     t.integer "brand_id",     limit: 2,     default: -1,    null: false
@@ -1428,7 +1419,8 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer "modified",     limit: 4,     default: 0,     null: false
   end
 
-  create_table "pb_products", force: :cascade do |t|
+  create_table "pb_products", id: false, force: :cascade do |t|
+    t.integer  "id",                              limit: 4,                     null: false
     t.integer  "member_id",                       limit: 4,     default: -1,    null: false
     t.integer  "company_id",                      limit: 4,     default: 0,     null: false
     t.string   "cache_companyname",               limit: 100,   default: "",    null: false
@@ -1490,38 +1482,14 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer  "mobile_home",                     limit: 4,     default: 0,     null: false
   end
 
-  add_index "pb_products", ["area_id"], name: "area_id", using: :btree
-  add_index "pb_products", ["area_show"], name: "area_show", using: :btree
-  add_index "pb_products", ["brand_id"], name: "brand_id", using: :btree
-  add_index "pb_products", ["category_id"], name: "category_id", using: :btree
-  add_index "pb_products", ["clicked"], name: "clicked", using: :btree
-  add_index "pb_products", ["company_id"], name: "company_id", using: :btree
-  add_index "pb_products", ["company_id"], name: "company_id_2", using: :btree
-  add_index "pb_products", ["content"], name: "content", type: :fulltext
-  add_index "pb_products", ["created"], name: "created", using: :btree
-  add_index "pb_products", ["industry_id"], name: "industry_id", using: :btree
-  add_index "pb_products", ["industry_id"], name: "industry_id_2", using: :btree
-  add_index "pb_products", ["member_id"], name: "member_id", using: :btree
-  add_index "pb_products", ["name"], name: "name", type: :fulltext
-  add_index "pb_products", ["name"], name: "name_2", type: :fulltext
-  add_index "pb_products", ["picture", "status", "state"], name: "picture", using: :btree
-  add_index "pb_products", ["picture", "status", "state"], name: "picture_2", using: :btree
-  add_index "pb_products", ["picture", "status", "state"], name: "picture_3", using: :btree
-  add_index "pb_products", ["product_code"], name: "product_code", using: :btree
-  add_index "pb_products", ["product_code"], name: "product_code_2", type: :fulltext
-  add_index "pb_products", ["producttype_id"], name: "producttype_id", using: :btree
-  add_index "pb_products", ["show"], name: "show", using: :btree
-  add_index "pb_products", ["state"], name: "state", using: :btree
-  add_index "pb_products", ["tag_ids"], name: "tag_ids", using: :btree
-  add_index "pb_products", ["tag_ids"], name: "tag_ids_2", using: :btree
-  add_index "pb_products", ["top_new_product_main_featured"], name: "top_new_product_main_featured", using: :btree
-
-  create_table "pb_productsorts", force: :cascade do |t|
+  create_table "pb_productsorts", id: false, force: :cascade do |t|
+    t.integer "id",            limit: 2,                   null: false
     t.string  "name",          limit: 255, default: "",    null: false
     t.boolean "display_order",             default: false, null: false
   end
 
-  create_table "pb_producttypes", force: :cascade do |t|
+  create_table "pb_producttypes", id: false, force: :cascade do |t|
+    t.integer "id",                        limit: 4,                  null: false
     t.integer "member_id",                 limit: 4,  default: -1,    null: false
     t.integer "company_id",                limit: 4,  default: -1,    null: false
     t.string  "name",                      limit: 25, default: "",    null: false
@@ -1532,7 +1500,8 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer "custom_parent_industry_id", limit: 4,  default: 0,     null: false
   end
 
-  create_table "pb_quotes", force: :cascade do |t|
+  create_table "pb_quotes", id: false, force: :cascade do |t|
+    t.integer "id",         limit: 2,                    null: false
     t.integer "product_id", limit: 4,     default: -1,   null: false
     t.integer "market_id",  limit: 2,     default: -1,   null: false
     t.integer "type_id",    limit: 2,     default: 0,    null: false
@@ -1552,31 +1521,36 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer "modified",   limit: 4,     default: 0,    null: false
   end
 
-  create_table "pb_quotetypes", force: :cascade do |t|
+  create_table "pb_quotetypes", id: false, force: :cascade do |t|
+    t.integer "id",            limit: 2,                   null: false
     t.integer "parent_id",     limit: 2,   default: 0,     null: false
     t.boolean "level",                     default: true,  null: false
     t.string  "name",          limit: 255, default: "",    null: false
     t.boolean "display_order",             default: false, null: false
   end
 
-  create_table "pb_roleadminers", force: :cascade do |t|
+  create_table "pb_roleadminers", id: false, force: :cascade do |t|
+    t.integer "id",           limit: 4, null: false
     t.integer "adminrole_id", limit: 4
     t.integer "adminer_id",   limit: 4
   end
 
-  create_table "pb_roleprivileges", force: :cascade do |t|
+  create_table "pb_roleprivileges", id: false, force: :cascade do |t|
+    t.integer "id",                limit: 4, null: false
     t.integer "adminrole_id",      limit: 4
     t.integer "adminprivilege_id", limit: 4
   end
 
-  create_table "pb_saleorderitems", force: :cascade do |t|
+  create_table "pb_saleorderitems", id: false, force: :cascade do |t|
+    t.integer "id",           limit: 4,   null: false
     t.integer "saleorder_id", limit: 4
     t.integer "product_id",   limit: 4
     t.string  "price",        limit: 255
     t.integer "quantity",     limit: 4
   end
 
-  create_table "pb_saleorders", force: :cascade do |t|
+  create_table "pb_saleorders", id: false, force: :cascade do |t|
+    t.integer "id",                  limit: 4,                 null: false
     t.integer "buyer_id",            limit: 4
     t.integer "seller_id",           limit: 4
     t.string  "fullname",            limit: 255
@@ -1597,21 +1571,24 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer "read",                limit: 4,     default: 0, null: false
   end
 
-  create_table "pb_schoolimagecomments", force: :cascade do |t|
+  create_table "pb_schoolimagecomments", id: false, force: :cascade do |t|
+    t.integer "id",             limit: 4,     null: false
     t.integer "schoolimage_id", limit: 4,     null: false
     t.integer "member_id",      limit: 4,     null: false
     t.text    "content",        limit: 65535, null: false
     t.text    "created",        limit: 65535, null: false
   end
 
-  create_table "pb_schoolimages", force: :cascade do |t|
+  create_table "pb_schoolimages", id: false, force: :cascade do |t|
+    t.integer  "id",          limit: 4,     null: false
     t.integer  "school_id",   limit: 4,     null: false
     t.string   "name",        limit: 255,   null: false
     t.text     "description", limit: 65535, null: false
     t.datetime "created",                   null: false
   end
 
-  create_table "pb_schools", force: :cascade do |t|
+  create_table "pb_schools", id: false, force: :cascade do |t|
+    t.integer "id",          limit: 4,                 null: false
     t.text    "name",        limit: 65535
     t.text    "description", limit: 65535
     t.string  "address",     limit: 500,               null: false
@@ -1627,11 +1604,8 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer "area_show",   limit: 4,     default: 1, null: false
   end
 
-  add_index "pb_schools", ["area_show"], name: "area_show", using: :btree
-  add_index "pb_schools", ["name"], name: "name", type: :fulltext
-  add_index "pb_schools", ["name"], name: "name_2", type: :fulltext
-
-  create_table "pb_services", force: :cascade do |t|
+  create_table "pb_services", id: false, force: :cascade do |t|
+    t.integer "id",             limit: 2,                     null: false
     t.integer "member_id",      limit: 4,     default: -1,    null: false
     t.string  "title",          limit: 25,    default: "",    null: false
     t.text    "content",        limit: 65535
@@ -1655,41 +1629,31 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer "modified",  limit: 4,     default: 0,  null: false
   end
 
-  add_index "pb_sessions", ["created"], name: "created", using: :btree
-  add_index "pb_sessions", ["expireref"], name: "expireref", using: :btree
-  add_index "pb_sessions", ["expireref"], name: "sess2_expireref", using: :btree
-  add_index "pb_sessions", ["expiry"], name: "expiry", using: :btree
-  add_index "pb_sessions", ["expiry"], name: "expiry_2", using: :btree
-  add_index "pb_sessions", ["expiry"], name: "expiry_3", using: :btree
-  add_index "pb_sessions", ["expiry"], name: "sess2_expiry", using: :btree
-  add_index "pb_sessions", ["modified"], name: "modified", using: :btree
-  add_index "pb_sessions", ["modified"], name: "modified_2", using: :btree
-  add_index "pb_sessions", ["sesskey"], name: "sesskey", using: :btree
-  add_index "pb_sessions", ["sesskey"], name: "sesskey_2", using: :btree
-
-  create_table "pb_settings", force: :cascade do |t|
+  create_table "pb_settings", id: false, force: :cascade do |t|
+    t.integer "id",       limit: 2,                     null: false
     t.boolean "type_id",                default: false, null: false
     t.string  "variable", limit: 150,   default: "",    null: false
     t.text    "valued",   limit: 65535
   end
 
-  add_index "pb_settings", ["variable"], name: "variable", unique: true, using: :btree
-
-  create_table "pb_shopvotes", force: :cascade do |t|
+  create_table "pb_shopvotes", id: false, force: :cascade do |t|
+    t.integer  "id",         limit: 4, null: false
     t.integer  "member_id",  limit: 4, null: false
     t.integer  "company_id", limit: 4, null: false
     t.integer  "rate",       limit: 4, null: false
     t.datetime "created",              null: false
   end
 
-  create_table "pb_spacecaches", primary_key: "company_id", force: :cascade do |t|
+  create_table "pb_spacecaches", id: false, force: :cascade do |t|
     t.string  "cache_spacename", limit: 255,   default: "", null: false
+    t.integer "company_id",      limit: 4,     default: -1, null: false
     t.text    "data1",           limit: 65535,              null: false
     t.text    "data2",           limit: 65535,              null: false
     t.integer "expiration",      limit: 4,     default: 0,  null: false
   end
 
-  create_table "pb_spacelinks", force: :cascade do |t|
+  create_table "pb_spacelinks", id: false, force: :cascade do |t|
+    t.integer "id",            limit: 4,                   null: false
     t.integer "member_id",     limit: 4,   default: 0,     null: false
     t.integer "company_id",    limit: 4,   default: 0,     null: false
     t.integer "display_order", limit: 2,   default: 0,     null: false
@@ -1702,7 +1666,8 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer "created",       limit: 4,   default: 0,     null: false
   end
 
-  create_table "pb_sponsors", force: :cascade do |t|
+  create_table "pb_sponsors", id: false, force: :cascade do |t|
+    t.integer  "id",               limit: 4,     null: false
     t.integer  "company_id",       limit: 4,     null: false
     t.text     "name",             limit: 65535, null: false
     t.integer  "area_id",          limit: 4,     null: false
@@ -1722,7 +1687,8 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.text     "logo",             limit: 65535, null: false
   end
 
-  create_table "pb_spreadadses", force: :cascade do |t|
+  create_table "pb_spreadadses", id: false, force: :cascade do |t|
+    t.integer "id",         limit: 4,                null: false
     t.integer "member_id",  limit: 4,   default: 0,  null: false
     t.string  "title",      limit: 250, default: "", null: false
     t.string  "desc1",      limit: 200, default: "", null: false
@@ -1733,14 +1699,16 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer "modified",   limit: 4,   default: 0,  null: false
   end
 
-  create_table "pb_spreadadstypes", force: :cascade do |t|
+  create_table "pb_spreadadstypes", id: false, force: :cascade do |t|
+    t.integer "id",        limit: 4,                null: false
     t.integer "member_id", limit: 4,   default: 0,  null: false
     t.string  "name",      limit: 250, default: "", null: false
     t.integer "created",   limit: 4,   default: 0,  null: false
     t.integer "modified",  limit: 4,   default: 0,  null: false
   end
 
-  create_table "pb_spreads", force: :cascade do |t|
+  create_table "pb_spreads", id: false, force: :cascade do |t|
+    t.integer "id",             limit: 4,                   null: false
     t.integer "member_id",      limit: 4,   default: -1,    null: false
     t.string  "keyword_name",   limit: 25,  default: "",    null: false
     t.string  "title",          limit: 50,  default: "",    null: false
@@ -1755,9 +1723,8 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer "created",        limit: 4,   default: 0,     null: false
   end
 
-  add_index "pb_spreads", ["id", "keyword_name"], name: "spread", using: :btree
-
-  create_table "pb_standards", force: :cascade do |t|
+  create_table "pb_standards", id: false, force: :cascade do |t|
+    t.integer "id",            limit: 2,                  null: false
     t.integer "attachment_id", limit: 2,     default: 0,  null: false
     t.integer "type_id",       limit: 2,     default: 0,  null: false
     t.string  "title",         limit: 255,   default: "", null: false
@@ -1771,18 +1738,21 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer "modified",      limit: 4,     default: 0,  null: false
   end
 
-  create_table "pb_standardtypes", force: :cascade do |t|
+  create_table "pb_standardtypes", id: false, force: :cascade do |t|
+    t.integer "id",            limit: 2,                   null: false
     t.string  "name",          limit: 100, default: "",    null: false
     t.boolean "display_order",             default: false, null: false
   end
 
-  create_table "pb_studyfollows", force: :cascade do |t|
+  create_table "pb_studyfollows", id: false, force: :cascade do |t|
+    t.integer  "id",        limit: 4, null: false
     t.integer  "member_id", limit: 4, null: false
     t.integer  "follow_id", limit: 4, null: false
     t.datetime "created",             null: false
   end
 
-  create_table "pb_studyfriends", force: :cascade do |t|
+  create_table "pb_studyfriends", id: false, force: :cascade do |t|
+    t.integer  "id",        limit: 4,                 null: false
     t.integer  "member_id", limit: 4,                 null: false
     t.integer  "friend_id", limit: 4,                 null: false
     t.datetime "created",                             null: false
@@ -1790,28 +1760,32 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer  "status",    limit: 4,     default: 0, null: false
   end
 
-  create_table "pb_studygroupimagecomments", force: :cascade do |t|
+  create_table "pb_studygroupimagecomments", id: false, force: :cascade do |t|
+    t.integer  "id",                 limit: 4,     null: false
     t.integer  "member_id",          limit: 4,     null: false
     t.text     "content",            limit: 65535, null: false
     t.integer  "studygroupimage_id", limit: 4,     null: false
     t.datetime "created",                          null: false
   end
 
-  create_table "pb_studygroupimages", force: :cascade do |t|
+  create_table "pb_studygroupimages", id: false, force: :cascade do |t|
+    t.integer  "id",          limit: 4,     null: false
     t.integer  "group_id",    limit: 4,     null: false
     t.string   "name",        limit: 255,   null: false
     t.text     "description", limit: 65535, null: false
     t.datetime "created",                   null: false
   end
 
-  create_table "pb_studygroupmembers", force: :cascade do |t|
+  create_table "pb_studygroupmembers", id: false, force: :cascade do |t|
+    t.integer "id",            limit: 4, null: false
     t.integer "member_id",     limit: 4, null: false
     t.integer "studygroup_id", limit: 4, null: false
     t.integer "created",       limit: 4, null: false
     t.integer "status",        limit: 4, null: false
   end
 
-  create_table "pb_studygroups", force: :cascade do |t|
+  create_table "pb_studygroups", id: false, force: :cascade do |t|
+    t.integer "id",           limit: 4,                 null: false
     t.text    "name",         limit: 65535,             null: false
     t.integer "school_id",    limit: 4,                 null: false
     t.integer "subject_id",   limit: 4,                 null: false
@@ -1829,27 +1803,31 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.text    "clicked_logs", limit: 65535,             null: false
   end
 
-  create_table "pb_studygroupviews", force: :cascade do |t|
+  create_table "pb_studygroupviews", id: false, force: :cascade do |t|
+    t.integer  "id",            limit: 4, null: false
     t.integer  "studygroup_id", limit: 4, null: false
     t.integer  "member_id",     limit: 4, null: false
     t.datetime "created",                 null: false
   end
 
-  create_table "pb_studymemberimagecomments", force: :cascade do |t|
+  create_table "pb_studymemberimagecomments", id: false, force: :cascade do |t|
+    t.integer  "id",                  limit: 4,     null: false
     t.integer  "studymemberimage_id", limit: 4,     null: false
     t.integer  "member_id",           limit: 4,     null: false
     t.text     "content",             limit: 65535, null: false
     t.datetime "created",                           null: false
   end
 
-  create_table "pb_studymemberimages", force: :cascade do |t|
+  create_table "pb_studymemberimages", id: false, force: :cascade do |t|
+    t.integer  "id",          limit: 4,     null: false
     t.integer  "member_id",   limit: 4,     null: false
     t.string   "name",        limit: 255,   null: false
     t.datetime "created",                   null: false
     t.text     "description", limit: 65535, null: false
   end
 
-  create_table "pb_studypostcomments", force: :cascade do |t|
+  create_table "pb_studypostcomments", id: false, force: :cascade do |t|
+    t.integer  "id",           limit: 4,     null: false
     t.integer  "studypost_id", limit: 4,     null: false
     t.text     "content",      limit: 65535, null: false
     t.integer  "star",         limit: 4,     null: false
@@ -1858,7 +1836,8 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer  "member_id",    limit: 4,     null: false
   end
 
-  create_table "pb_studyposts", force: :cascade do |t|
+  create_table "pb_studyposts", id: false, force: :cascade do |t|
+    t.integer  "id",                limit: 4,                 null: false
     t.integer  "school_id",         limit: 4,                 null: false
     t.integer  "group_id",          limit: 4,                 null: false
     t.integer  "member_id",         limit: 4,                 null: false
@@ -1871,16 +1850,15 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.text     "files_description", limit: 65535,             null: false
   end
 
-  create_table "pb_subjects", force: :cascade do |t|
+  create_table "pb_subjects", id: false, force: :cascade do |t|
+    t.integer "id",          limit: 4,     null: false
     t.text    "name",        limit: 65535, null: false
     t.text    "description", limit: 65535, null: false
     t.integer "created",     limit: 4,     null: false
   end
 
-  add_index "pb_subjects", ["name"], name: "name", type: :fulltext
-  add_index "pb_subjects", ["name"], name: "name_2", type: :fulltext
-
-  create_table "pb_tags", force: :cascade do |t|
+  create_table "pb_tags", id: false, force: :cascade do |t|
+    t.integer "id",        limit: 4,                   null: false
     t.integer "member_id", limit: 4,   default: 0,     null: false
     t.string  "name",      limit: 255, default: "",    null: false
     t.integer "numbers",   limit: 2,   default: 0,     null: false
@@ -1890,14 +1868,8 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer "modified",  limit: 4,   default: 0,     null: false
   end
 
-  add_index "pb_tags", ["member_id"], name: "member_id", using: :btree
-  add_index "pb_tags", ["member_id"], name: "member_id_2", using: :btree
-  add_index "pb_tags", ["member_id"], name: "member_id_3", using: :btree
-  add_index "pb_tags", ["name"], name: "name", using: :btree
-  add_index "pb_tags", ["name"], name: "name_2", using: :btree
-  add_index "pb_tags", ["name"], name: "title", using: :btree
-
-  create_table "pb_tasks", force: :cascade do |t|
+  create_table "pb_tasks", id: false, force: :cascade do |t|
+    t.integer  "id",            limit: 4,                 null: false
     t.text     "name",          limit: 65535,             null: false
     t.text     "image",         limit: 65535,             null: false
     t.integer  "status",        limit: 4,     default: 0, null: false
@@ -1907,7 +1879,8 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer  "display_order", limit: 4,     default: 0, null: false
   end
 
-  create_table "pb_templets", force: :cascade do |t|
+  create_table "pb_templets", id: false, force: :cascade do |t|
+    t.integer "id",                   limit: 2,                        null: false
     t.string  "name",                 limit: 25,    default: "",       null: false
     t.string  "title",                limit: 25,    default: "",       null: false
     t.string  "directory",            limit: 100,   default: "",       null: false
@@ -1926,7 +1899,8 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer "news_id",  limit: 2, default: 0, null: false
   end
 
-  create_table "pb_topics", force: :cascade do |t|
+  create_table "pb_topics", id: false, force: :cascade do |t|
+    t.integer "id",          limit: 2,                  null: false
     t.string  "alias_name",  limit: 100,   default: "", null: false
     t.string  "templet",     limit: 100,   default: "", null: false
     t.string  "title",       limit: 255,   default: "", null: false
@@ -1936,7 +1910,8 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer "modified",    limit: 4,     default: 0,  null: false
   end
 
-  create_table "pb_tradecomments", force: :cascade do |t|
+  create_table "pb_tradecomments", id: false, force: :cascade do |t|
+    t.integer  "id",          limit: 4,     null: false
     t.integer  "member_id",   limit: 4,     null: false
     t.integer  "company_id",  limit: 4,     null: false
     t.integer  "trade_id",    limit: 4,     null: false
@@ -1946,7 +1921,8 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.string   "guest_email", limit: 255,   null: false
   end
 
-  create_table "pb_tradefields", primary_key: "trade_id", force: :cascade do |t|
+  create_table "pb_tradefields", id: false, force: :cascade do |t|
+    t.integer "trade_id",       limit: 4,   default: 0,     null: false
     t.integer "member_id",      limit: 4,   default: 0,     null: false
     t.string  "link_man",       limit: 100, default: "",    null: false
     t.string  "address",        limit: 100, default: "",    null: false
@@ -1960,9 +1936,8 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.string  "template",       limit: 50,  default: "",    null: false
   end
 
-  add_index "pb_tradefields", ["trade_id"], name: "trade_id", unique: true, using: :btree
-
-  create_table "pb_trades", force: :cascade do |t|
+  create_table "pb_trades", id: false, force: :cascade do |t|
+    t.integer  "id",                              limit: 4,                     null: false
     t.integer  "type_id",                         limit: 1,     default: 0,     null: false
     t.integer  "industry_id",                     limit: 2,     default: 0,     null: false
     t.integer  "country_id",                      limit: 2,     default: 0,     null: false
@@ -2025,18 +2000,8 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer  "for_student",                     limit: 4,     default: 0,     null: false
   end
 
-  add_index "pb_trades", ["area_show"], name: "area_show", using: :btree
-  add_index "pb_trades", ["company_id"], name: "company_id", using: :btree
-  add_index "pb_trades", ["content"], name: "content", type: :fulltext
-  add_index "pb_trades", ["member_id"], name: "member_id", using: :btree
-  add_index "pb_trades", ["title"], name: "title", type: :fulltext
-  add_index "pb_trades", ["type_id", "picture", "status", "expire_time"], name: "type_id", using: :btree
-  add_index "pb_trades", ["type_id", "picture", "status", "expire_time"], name: "type_id_2", using: :btree
-  add_index "pb_trades", ["type_id", "picture", "status", "expire_time"], name: "type_id_5", using: :btree
-  add_index "pb_trades", ["type_id", "status", "expire_time"], name: "type_id_4", using: :btree
-  add_index "pb_trades", ["type_id", "status"], name: "type_id_3", using: :btree
-
-  create_table "pb_tradetypes", force: :cascade do |t|
+  create_table "pb_tradetypes", id: false, force: :cascade do |t|
+    t.integer "id",            limit: 2,                   null: false
     t.integer "parent_id",     limit: 2,   default: 0,     null: false
     t.string  "name",          limit: 25,  default: "",    null: false
     t.boolean "level",                     default: true,  null: false
@@ -2045,11 +2010,13 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.string  "short_name",    limit: 255,                 null: false
   end
 
-  create_table "pb_trustlogs", primary_key: "member_id", force: :cascade do |t|
+  create_table "pb_trustlogs", id: false, force: :cascade do |t|
+    t.integer "member_id",    limit: 4,             null: false
     t.integer "trusttype_id", limit: 2, default: 0, null: false
   end
 
-  create_table "pb_trusttypes", force: :cascade do |t|
+  create_table "pb_trusttypes", id: false, force: :cascade do |t|
+    t.integer "id",            limit: 2,                     null: false
     t.string  "name",          limit: 64,    default: "",    null: false
     t.text    "description",   limit: 65535
     t.string  "image",         limit: 255,   default: "",    null: false
@@ -2057,18 +2024,21 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.boolean "status",                      default: true,  null: false
   end
 
-  create_table "pb_typemodels", force: :cascade do |t|
-    t.string "title",     limit: 50, default: "", null: false
-    t.string "type_name", limit: 50, default: "", null: false
+  create_table "pb_typemodels", id: false, force: :cascade do |t|
+    t.integer "id",        limit: 2,               null: false
+    t.string  "title",     limit: 50, default: "", null: false
+    t.string  "type_name", limit: 50, default: "", null: false
   end
 
-  create_table "pb_typeoptions", force: :cascade do |t|
+  create_table "pb_typeoptions", id: false, force: :cascade do |t|
+    t.integer "id",           limit: 2,               null: false
     t.integer "typemodel_id", limit: 2,  default: 0,  null: false
     t.string  "option_value", limit: 50, default: "", null: false
     t.string  "option_label", limit: 50, default: "", null: false
   end
 
-  create_table "pb_userpages", force: :cascade do |t|
+  create_table "pb_userpages", id: false, force: :cascade do |t|
+    t.integer "id",            limit: 4,                     null: false
     t.string  "templet_name",  limit: 50,    default: "",    null: false
     t.string  "name",          limit: 50,    default: "",    null: false
     t.string  "title",         limit: 50,    default: "",    null: false
@@ -2080,20 +2050,18 @@ ActiveRecord::Schema.define(version: 20151105024758) do
     t.integer "modified",      limit: 4,     default: 0,     null: false
   end
 
-  create_table "pb_visitlogs", force: :cascade do |t|
-    t.string "salt",      limit: 32, default: "", null: false
-    t.string "date_line", limit: 15, default: "", null: false
-    t.string "type_name", limit: 15, default: "", null: false
+  create_table "pb_visitlogs", id: false, force: :cascade do |t|
+    t.integer "id",        limit: 2,               null: false
+    t.string  "salt",      limit: 32, default: "", null: false
+    t.string  "date_line", limit: 15, default: "", null: false
+    t.string  "type_name", limit: 15, default: "", null: false
   end
 
-  add_index "pb_visitlogs", ["salt"], name: "salt", using: :btree
-
-  create_table "pb_words", force: :cascade do |t|
+  create_table "pb_words", id: false, force: :cascade do |t|
+    t.integer "id",         limit: 2,               null: false
     t.string  "title",      limit: 50, default: "", null: false
     t.string  "replace_to", limit: 50, default: "", null: false
     t.integer "expiration", limit: 4,  default: 0,  null: false
   end
-
-  add_index "pb_words", ["title"], name: "word", unique: true, using: :btree
 
 end

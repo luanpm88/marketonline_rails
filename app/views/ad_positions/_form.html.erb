@@ -26,6 +26,17 @@
                                                               </div>
                                                             </div>
 														</div>
+															  
+														<div class="form-group">
+															<label>Loại hiển thị: <span class="text-danger">*</span></label>
+															<select name="ad_position[style_name]" data-placeholder="- Chọn hiển thị -" class="select required">
+																<optgroup label="Tất cả hiển thị">
+																	<option <%= 'selected=selected' if @ad_position.style_name.nil? || @ad_position.style_name == "single" %> value="single">Hình đơn</option>
+																	<option <%= 'selected=selected' if @ad_position.style_name == "3_images_group" %> value="3_images_group">Nhóm 3 hình</option>
+																	<option <%= 'selected=selected' if @ad_position.style_name == "4_images_group" %> value="4_images_group">Nhóm 4 hình</option>
+																</optgroup>
+															</select>
+														</div>
 														
 													</fieldset>
 												</div>
@@ -53,6 +64,8 @@
                                                               </div>                                                              
                                                             </div>
 														</div>
+															
+															
                                                         
 													</fieldset>
 												</div>

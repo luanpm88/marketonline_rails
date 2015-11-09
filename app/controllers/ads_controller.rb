@@ -81,9 +81,60 @@ class AdsController < ApplicationController
     if params[:id].present?
       @ad = Ad.find(params[:id])
       if @ad.image.nil?
+        file_name = "public/img/no_img.jpg"
+      else
+        file_name = @ad.image_path(params[:type])
+      end
+    else
+      file_name = "public/img/no_img.jpg"
+    end
+    
+    if params[:display] == "html"
+      if @ad.ad_position.style_name == "4_images_group"
+        render "/ads/preview", layout: nil
+      elsif @ad.ad_position.style_name == "3_images_group"
+        render "/ads/preview", layout: nil
+      else
+        render text: "<img src=\"#{@ad.image_src(params[:type])}\" />"
+      end
+    else
+      send_file file_name, :disposition => 'inline'
+    end   
+  end
+  
+  def image_2
+    if params[:id].present?
+      @ad = Ad.find(params[:id])
+      if @ad.image.nil?
         send_file "public/img/no_img.jpg", :disposition => 'inline'
       else
-        send_file @ad.image_path(params[:type]), :disposition => 'inline'
+        send_file @ad.image_2_path(params[:type]), :disposition => 'inline'
+      end
+    else
+      send_file "public/img/no_img.jpg", :disposition => 'inline'
+    end
+  end
+  
+  def image_3
+    if params[:id].present?
+      @ad = Ad.find(params[:id])
+      if @ad.image.nil?
+        send_file "public/img/no_img.jpg", :disposition => 'inline'
+      else
+        send_file @ad.image_3_path(params[:type]), :disposition => 'inline'
+      end
+    else
+      send_file "public/img/no_img.jpg", :disposition => 'inline'
+    end
+  end
+  
+  def image_4
+    if params[:id].present?
+      @ad = Ad.find(params[:id])
+      if @ad.image.nil?
+        send_file "public/img/no_img.jpg", :disposition => 'inline'
+      else
+        send_file @ad.image_4_path(params[:type]), :disposition => 'inline'
       end
     else
       send_file "public/img/no_img.jpg", :disposition => 'inline'
@@ -125,6 +176,6 @@ class AdsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ad_params
-      params.require(:ad).permit(:days, :payment_type, :max_budget, :daterange, :banner, :type_name, :product_name, :pb_product_id, :name, :description, :ad_position_id, :url, :image, :user_id, :status)
+      params.require(:ad).permit(:days, :payment_type, :max_budget, :daterange, :banner_1, :banner_2, :banner_3, :banner_4, :type_name, :product_name, :pb_product_id, :name, :description, :ad_position_id, :url, :image, :image_2, :image_3, :image_4, :user_id, :status)
     end
 end

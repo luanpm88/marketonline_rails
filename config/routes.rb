@@ -8,6 +8,9 @@ Rails.application.routes.draw do
     collection do
       get 'datatable'
       get 'image'
+      get 'image_2'
+      get 'image_3'
+      get 'image_4'
       get 'delete'
       get 'click'
       get 'chart'
@@ -21,6 +24,7 @@ Rails.application.routes.draw do
       get 'home_top_banner_frame'
       get 'preview_box'
       get 'get_values'
+      get 'get_remaining_time'
     end
   end
   resources :pb_products do

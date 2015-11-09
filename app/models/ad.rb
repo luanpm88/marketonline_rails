@@ -1,9 +1,16 @@
 class Ad < ActiveRecord::Base
   attr_accessor :product_name
-  attr_accessor :banner
+  attr_accessor :banner_1
+  attr_accessor :banner_2
+  attr_accessor :banner_3
+  attr_accessor :banner_4
   attr_accessor :daterange
   
   mount_uploader :image, AdUploader
+  mount_uploader :image_2, AdUploader
+  mount_uploader :image_3, AdUploader
+  mount_uploader :image_4, AdUploader
+  
   
   # validates :name, presence: true
   validates :ad_position_id, presence: true
@@ -53,9 +60,18 @@ class Ad < ActiveRecord::Base
   end
   
   def update_ad_image
-    if banner != "" and banner != "upload" and !banner.include?("ads/image")
-      self.remote_image_url = banner
-    end    
+    if banner_1 != "" and banner_1 != "upload" and !banner_1.include?("ads/image")
+      self.remote_image_url = banner_1
+    end
+    if banner_2 != "" and banner_2 != "upload" and !banner_2.include?("ads/image")
+      self.remote_image_2_url = banner_2
+    end
+    if banner_3 != "" and banner_3 != "upload" and !banner_3.include?("ads/image")
+      self.remote_image_3_url = banner_3
+    end
+    if banner_4 != "" and banner_4 != "upload" and !banner_4.include?("ads/image")
+      self.remote_image_4_url = banner_4
+    end   
   end
   
   def update_ad_price
@@ -140,6 +156,7 @@ class Ad < ActiveRecord::Base
     ad_clicks.count
   end
   
+  # IMAGE 1
   def image_path(version = nil)
     if self.image_url.nil?
       return "public/img/avatar.jpg"
@@ -150,11 +167,11 @@ class Ad < ActiveRecord::Base
     end
   end
   
-  def image_src(version = nil)
+  def image_src(version = nil, display="inline")
     ActionView::Base.send(:include, Rails.application.routes.url_helpers)
     link_helper = ActionController::Base.helpers
     
-    link_helper.url_for(controller: "ads", action: "image", id: self.id, type: version)
+    link_helper.url_for(controller: "ads", action: "image", id: self.id, type: version, display: display)
   end
   
   def display_image(version = nil)
@@ -164,8 +181,96 @@ class Ad < ActiveRecord::Base
   def image_link
     ActionView::Base.send(:include, Rails.application.routes.url_helpers)
     link_helper = ActionController::Base.helpers
+    link_helper.link_to(display_image(:square), image_src(:banner, "html"), class: "fancybox.ajax fancybox ad_link", title: name)
+  end
+  
+  # IMAGE 2
+  def image_2_path(version = nil)
+    if self.image_2_url.nil?
+      return "public/img/avatar.jpg"
+    elsif !version.nil?
+      return self.image_2_url(version)
+    else
+      return self.image_2_url
+    end
+  end
+  
+  def image_2_src(version = nil)
+    ActionView::Base.send(:include, Rails.application.routes.url_helpers)
+    link_helper = ActionController::Base.helpers
     
-    link_helper.link_to(display_image(:square), image_src(:banner), class: "fancybox.image fancybox ad_link", title: name)
+    link_helper.url_for(controller: "ads", action: "image_2", id: self.id, type: version)
+  end
+  
+  def display_image_2(version = nil)
+    "<img src='#{image_2_src(version)}' />".html_safe
+  end
+  
+  def image_2_link
+    ActionView::Base.send(:include, Rails.application.routes.url_helpers)
+    link_helper = ActionController::Base.helpers
+    
+    link_helper.link_to(display_image_2(:square), image_src(:banner), class: "fancybox.image fancybox ad_link", title: name)
+  end
+  
+  
+  # IMAGE 3
+  def image_3_path(version = nil)
+    if self.image_3_url.nil?
+      return "public/img/avatar.jpg"
+    elsif !version.nil?
+      return self.image_3_url(version)
+    else
+      return self.image_3_url
+    end
+  end
+  
+  def image_3_src(version = nil)
+    ActionView::Base.send(:include, Rails.application.routes.url_helpers)
+    link_helper = ActionController::Base.helpers
+    
+    link_helper.url_for(controller: "ads", action: "image_3", id: self.id, type: version)
+  end
+  
+  def display_image_3(version = nil)
+    "<img src='#{image_3_src(version)}' />".html_safe
+  end
+  
+  def image_3_link
+    ActionView::Base.send(:include, Rails.application.routes.url_helpers)
+    link_helper = ActionController::Base.helpers
+    
+    link_helper.link_to(display_image_3(:square), image_src(:banner), class: "fancybox.image fancybox ad_link", title: name)
+  end
+  
+  
+  # IMAGE 4
+  def image_4_path(version = nil)
+    if self.image_4_url.nil?
+      return "public/img/avatar.jpg"
+    elsif !version.nil?
+      return self.image_4_url(version)
+    else
+      return self.image_4_url
+    end
+  end
+  
+  def image_4_src(version = nil)
+    ActionView::Base.send(:include, Rails.application.routes.url_helpers)
+    link_helper = ActionController::Base.helpers
+    
+    link_helper.url_for(controller: "ads", action: "image_4", id: self.id, type: version)
+  end
+  
+  def display_image_4(version = nil)
+    "<img src='#{image_4_src(version)}' />".html_safe
+  end
+  
+  def image_4_link
+    ActionView::Base.send(:include, Rails.application.routes.url_helpers)
+    link_helper = ActionController::Base.helpers
+    
+    link_helper.link_to(display_image_4(:square), image_src(:banner), class: "fancybox.image fancybox ad_link", title: name)
   end
   
   def destroy_link

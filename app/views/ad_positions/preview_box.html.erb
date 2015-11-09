@@ -1,21 +1,86 @@
-<div class="form-group">
-    <label>Hình ảnh quảng cáo (<%= @ad_position.width %> x <%= @ad_position.height %>)</span></label>
-    <div class="text-center">
-        <div class="preview_box_image" style="width: 100%; max-width: <%= @ad_position.width %>px">
-        
+<% if @ad_position.style_name == "4_images_group" %>
+    <div class="form-group">
+        <label>Hình ảnh quảng cáo (<%= @ad_position.width %> x <%= @ad_position.height %>)</span></label>
+        <div class="text-center">
+            <div class="box_size box_4_style box_style">
+                <div class="preview_box_image_style box_style_item item_4_style preview_box_image" rel="1" style="width: 100%; max-width: <%= @ad_position.width %>px">
+                
+                </div>
+                <div class="preview_box_image_style box_style_item item_4_style preview_box_image_2" rel="2" style="width: 100%; max-width: <%= @ad_position.width %>px">
+                
+                </div>
+                <div class="preview_box_image_style box_style_item item_4_style preview_box_image_3" rel="3" style="width: 100%; max-width: <%= @ad_position.width %>px">
+                
+                </div>
+                <div class="preview_box_image_style box_style_item item_4_style preview_box_image_4" rel="4" style="width: 100%; max-width: <%= @ad_position.width %>px">
+                
+                </div>
+            </div>
         </div>
     </div>
-</div>
+<% elsif @ad_position.style_name == "3_images_group" %>
+    <div class="form-group">
+        <label>Hình ảnh quảng cáo (<%= @ad_position.width %> x <%= @ad_position.height %>)</span></label>
+        <div class="text-center">
+            <div class="box_size box_3_style box_style" style="width: 100%; max-width: <%= @ad_position.width %>px">
+                <div class="preview_box_image_style box_style_item item_3_style preview_box_image" rel="1" style="width: 100%; max-width: <%= @ad_position.width %>px">
+                
+                </div>
+                <div class="preview_box_image_style box_style_item item_3_style preview_box_image_2" rel="2" style="width: 100%; max-width: <%= @ad_position.width %>px">
+                
+                </div>
+                <div class="preview_box_image_style box_style_item item_3_style preview_box_image_3" rel="3" style="width: 100%; max-width: <%= @ad_position.width %>px">
+                
+                </div>
+            </div>
+        </div>
+    </div>
+<% else %>
+    <div class="form-group">
+        <label>Hình ảnh quảng cáo (<%= @ad_position.width %> x <%= @ad_position.height %>)</span></label>
+        <div class="text-center">
+            <div class="box_size preview_box_image_style preview_box_image" style="width: 100%; max-width: <%= @ad_position.width %>px">
+            
+            </div>
+        </div>
+    </div>
+<% end %>
 
 <script>
-    var box_width = $(".ad_preview_box_1 .preview_box_image").width()
+    var box_width = $(".ad_preview_box_1 .box_size").width()
     if ($(".steps ul li").eq(0).hasClass("current")) {
-        box_width = $(".ad_preview_box_0 .preview_box_image").width()
+        box_width = $(".ad_preview_box_0 .box_size").width()
     }
     if ($(".steps ul li").eq(2).hasClass("current")) {
-        box_width = $(".ad_preview_box_2 .preview_box_image").width()
+        box_width = $(".ad_preview_box_2 .box_size").width()
     }
     var box_height = box_width/<%= @ad_position.width.to_f/@ad_position.height.to_f %>
-    $(".preview_box_image").height(box_height)
-    $(".preview_box_image").width(box_width)
+    $(".box_size").height(box_height)
+    $(".box_size").width(box_width)
+    
+    // 4 box style
+    var box_sub_height = box_width*0.25 - 7
+    var box_main_height = box_width*0.75 - 17
+    
+    $(".box_4_style .preview_box_image").height(box_main_height)
+    $(".box_4_style .preview_box_image").width(box_main_height)
+    
+    $(".box_4_style .preview_box_image_2").height(box_sub_height)
+    $(".box_4_style .preview_box_image_2").width(box_sub_height)
+    $(".box_4_style .preview_box_image_3").height(box_sub_height)
+    $(".box_4_style .preview_box_image_3").width(box_sub_height)
+    $(".box_4_style .preview_box_image_4").height(box_sub_height)
+    $(".box_4_style .preview_box_image_4").width(box_sub_height)
+    
+    // 3 box style
+    var box_sub_height = box_width*0.5 - 3
+    var box_main_height = box_width
+    
+    $(".box_3_style .preview_box_image").height(box_main_height)
+    $(".box_3_style .preview_box_image").width(box_main_height)
+    
+    $(".box_3_style .preview_box_image_2").height(box_sub_height)
+    $(".box_3_style .preview_box_image_2").width(box_sub_height)
+    $(".box_3_style .preview_box_image_3").height(box_sub_height)
+    $(".box_3_style .preview_box_image_3").width(box_sub_height)
 </script>
