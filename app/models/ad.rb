@@ -102,7 +102,7 @@ class Ad < ActiveRecord::Base
               item.image_link,
               item.name,
               "<div class=\"text-center\">#{item.ad_position.display_name}</div>",                     
-              "<div class=\"text-center\">#{item.created_at.strftime("%d-%m-%Y")}</div>",
+              "<div class=\"text-center\">#{item.display_valid_time}</div>",
               "<div class=\"text-center\">#{(item.pb_member.display_name if !item.pb_member.nil?)}</div>",
               "<div class=\"text-center\">#{item.click_count.to_s}</div>",
               "<div class=\"text-center\">#{item.display_status}</div>",
@@ -128,6 +128,12 @@ class Ad < ActiveRecord::Base
     result["data"] = data
     
     return {result: result}
+  end
+  
+  def display_valid_time
+    s = start_at.nil? ? "" : start_at.strftime("%d-%b-%Y")
+    e = end_at.nil? ? "" : end_at.strftime("%d-%b-%Y")
+    "Từ ngày:<br /><strong>#{s}</strong><br />Đến ngày:<br /><strong>#{e}</strong>"
   end
   
   def click_count
