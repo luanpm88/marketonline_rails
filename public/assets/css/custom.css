@@ -161,3 +161,14 @@
     border-color: #888;
     color: #888;
 }
+.panel {
+    border-color: #00897b;
+}
+.panel-white > .panel-heading {
+    background: #4db6ac none repeat scroll 0 0;
+    border-bottom-color: #00897b;
+    color: #fff;
+}
+.steps {
+    margin-bottom: 50px;
+}
