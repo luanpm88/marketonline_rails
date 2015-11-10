@@ -37,6 +37,9 @@ class Ad < ActiveRecord::Base
   def price=(new)
     self[:price] = new.to_s.gsub(/\,/, '')
   end
+  def display_price=(new)
+    self[:display_price] = new.to_s.gsub(/\,/, '')
+  end
   
   def main_ad_clicks
     ad_clicks.order("created_at DESC")
@@ -366,7 +369,7 @@ class Ad < ActiveRecord::Base
     if payment_type == "per_click"
       max_budget
     elsif payment_type == "per_day"
-      price*days
+      price.to_f*days
     end    
   end
   

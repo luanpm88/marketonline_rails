@@ -1,5 +1,5 @@
 <% if @ad_position.style_name == "4_images_group" %>
-    <div class="form-group">
+    <div class="form-group <%= @ad_position.name %>">
         <label>Hình ảnh quảng cáo (<%= @ad_position.width %> x <%= @ad_position.height %>)</span></label>
         <div class="text-center">
             <div class="box_size box_4_style box_style">
@@ -19,7 +19,7 @@
         </div>
     </div>
 <% elsif @ad_position.style_name == "3_images_group" %>
-    <div class="form-group">
+    <div class="form-group <%= @ad_position.name %>">
         <label>Hình ảnh quảng cáo (<%= @ad_position.width %> x <%= @ad_position.height %>)</span></label>
         <div class="text-center">
             <div class="box_size box_3_style box_style" style="width: 100%; max-width: <%= @ad_position.width %>px">
@@ -36,7 +36,7 @@
         </div>
     </div>
 <% else %>
-    <div class="form-group">
+    <div class="form-group <%= @ad_position.name %>">
         <label>Hình ảnh quảng cáo (<%= @ad_position.width %> x <%= @ad_position.height %>)</span></label>
         <div class="text-center">
             <div class="box_size preview_box_image_style preview_box_image" style="width: 100%; max-width: <%= @ad_position.width %>px">

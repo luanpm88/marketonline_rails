@@ -6,7 +6,7 @@
             <% @pos_1.active_ads.each do |ad| %>
               <li>
                 <a href="<%= click_ads_path(id: ad) %>" target="_blank">
-                  <img title="<%= ad.name %>" src="<%= ad.image_src(:banner) %>" />
+                  <img title="" src="<%= ad.image_src(:banner) %>" />
                 </a>
               </li>
             <% end %>
@@ -19,7 +19,7 @@
             <% @pos_2.active_ads.each do |ad| %>
               <li>
                 <a>
-                  <img title="<%= ad.name %>" src="<%= ad.image_src(:banner) %>" />
+                  <img title="" src="<%= ad.image_src(:banner) %>" />
                 </a>
               </li>
             <% end %>
@@ -38,6 +38,10 @@
             <br />
             <a class="home_top_banner_3_title" href="">
               <%= ad.name %>
+            </a>
+            <br />
+            <a class="home_top_banner_3_price" href="">
+              <%= format_price(ad.display_price) %> VNĐ<%= "/#{ad.display_price_unit}" if ad.display_price_unit.present? %>
             </a>
           </li>
         <% end %>
