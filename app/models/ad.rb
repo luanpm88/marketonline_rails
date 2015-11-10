@@ -389,7 +389,7 @@ class Ad < ActiveRecord::Base
     client = Savon::Client.new(wsdl:"https://www.nganluong.vn/public_api.php?wsdl")
     # client.operations
     merchant_id = "39955"
-    param = '<ORDERS>'+'<TOTAL>1</TOTAL><ORDER><ORDER_CODE>'+ad_code+'</ORDER_CODE><PAYMENT_ID>1</PAYMENT_ID></ORDER></ORDERS>'
+    param = '<ORDERS><TOTAL>1</TOTAL><ORDER><ORDER_CODE>21</ORDER_CODE><PAYMENT_ID>17992700</PAYMENT_ID></ORDER></ORDERS>'
     checksum =  Digest::MD5.hexdigest(merchant_id + param + 'marketonlinebmn@#$')
     response = client.call(:check_order, message: {merchant_id: 39955, param: param, checksum: checksum})
   end

@@ -1,0 +1,24 @@
+<% if !@ad.nil? %>
+  <div class="home_feature_4_images_group">
+    <div class="box box_1">
+      <a href="<%= click_ads_path(id: @ad) %>" target="_blank">
+        <img title="<%= @ad.name %>" src="<%= @ad.image_src(:banner) %>" />
+      </a>
+    </div>
+    <div class="box box_2">
+      <a href="<%= click_ads_path(id: @ad) %>" target="_blank">
+        <img title="<%= @ad.name %>" src="<%= @ad.image_2_src(:banner) %>" />
+      </a>
+    </div>
+    <div class="box box_3">
+      <a href="<%= click_ads_path(id: @ad) %>" target="_blank">
+        <img title="<%= @ad.name %>" src="<%= @ad.image_3_src(:banner) %>" />
+      </a>
+    </div>
+    <div class="box box_4">
+      <a href="<%= click_ads_path(id: @ad) %>" target="_blank">
+        <img title="<%= @ad.name %>" src="<%= @ad.image_4_src(:banner) %>" />
+      </a>
+    </div>
+  </div>
+<% end %>

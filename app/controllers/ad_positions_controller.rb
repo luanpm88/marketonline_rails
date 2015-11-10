@@ -69,7 +69,7 @@ class AdPositionsController < ApplicationController
     render json: result[:result]
   end
 
-  def home_top_banner_frame
+  def iframe_home_top_banner_frame
     @pos_1 = AdPosition.get("home_top_banner_1")
     @pos_2 = AdPosition.get("home_top_banner_2")
     @pos_3 = AdPosition.get("home_top_banner_3")
@@ -90,6 +90,12 @@ class AdPositionsController < ApplicationController
   def get_remaining_time
     @ad_position = AdPosition.get(params[:pos])
     render json: {time: @ad_position.get_remaining_days("date")}
+  end
+  
+  def iframe_home_feature_4_images_box
+    @pos = AdPosition.get(params[:pos])
+    @ad = @pos.active_ads.first
+    render layout: "ad_frame"
   end
 
   private
