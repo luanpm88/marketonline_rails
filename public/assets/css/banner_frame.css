@@ -59,3 +59,74 @@ body {
     color: #333;
     font-weight: bold;
 }
+.home_feature_4_images_group {
+    width: 573px;
+    background: #fff;
+}
+.home_feature_4_images_group img {
+    width: 100%;
+}
+.home_feature_4_images_group .box {
+    float: left;
+    border: solid 1px #ddd;
+    overflow: hidden;
+}
+.home_feature_4_images_group .box_1 {
+    border-right: medium none;
+    height: 417px;
+    overflow: hidden;
+    width: 430px;
+}
+.home_feature_4_images_group .box_1 img {
+    height: 417px;
+    width: 430px;
+}
+.home_feature_4_images_group .box_2 {
+    width: 140px;
+    height: 138px;
+    border-bottom: none;
+}
+.home_feature_4_images_group .box_3 {
+    width: 140px;
+    height: 138px;
+    border-bottom: none;
+}
+.home_feature_4_images_group .box_4 {
+    width: 140px;
+    height: 138px;
+}
+.home_feature_4_images_group .box_2 img {
+    width: 140px;
+    height: 140px;
+}
+.home_feature_4_images_group .box_3 img {
+    width: 140px;
+    height: 140px;
+}
+.home_feature_4_images_group .box_4 img {
+    width: 140px;
+    height: 140px;
+}
+.box_4_banner_title {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #ddd #ddd -moz-use-text-color;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 1px medium;
+    float: left;
+    margin: 0;
+    padding: 10px;
+    width: 551px;
+    background: #fff;
+}
+.box_4_banner_title h3 {
+    font-size: 16px;
+    margin: 0;
+}
+.box_4_banner_title p {
+    font-size: 14px;
+    margin: 0;
+}

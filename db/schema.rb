@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151109085324) do
+ActiveRecord::Schema.define(version: 20151110034253) do
 
   create_table "ad_clicks", force: :cascade do |t|
     t.integer  "ad_id",         limit: 4
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20151109085324) do
     t.string   "image_2",              limit: 255
     t.string   "image_3",              limit: 255
     t.string   "image_4",              limit: 255
+    t.text     "description_2",        limit: 65535
   end
 
   create_table "email", force: :cascade do |t|

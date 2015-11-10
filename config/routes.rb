@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     collection do
       get 'datatable'
       get 'delete'
-      get 'iframe_home_top_banner_frame'
+      get 'iframe_home_top_banner'
       get 'iframe_home_feature_4_images_box'
       get 'preview_box'
       get 'get_values'

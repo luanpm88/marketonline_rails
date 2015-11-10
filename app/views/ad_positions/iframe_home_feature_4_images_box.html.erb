@@ -1,4 +1,9 @@
 <% if !@ad.nil? %>
+  
+  <div class="box_4_banner_title">
+    <h3><%= @ad.name %></h3>
+    <p><%= @ad.description %></p>
+  </div>
   <div class="home_feature_4_images_group">
     <div class="box box_1">
       <a href="<%= click_ads_path(id: @ad) %>" target="_blank">
@@ -21,4 +26,6 @@
       </a>
     </div>
   </div>
+  <br style="clear:both" />
+  <p><%= @ad.description_2 %></p>
 <% end %>

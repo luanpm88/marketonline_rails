@@ -254,6 +254,11 @@
 												<label>Mô tả</label>
 												<%= f.text_area :description, class: "form-control" %>
 											</div>
+											
+											<div class="form-group more_info_input">
+												<label>Thông tin giới thiệu dưới quảng cáo</label>
+												<%= f.text_area :description_2, class: "form-control" %>
+											</div>
 										</fieldset>
 									</div>
 
@@ -453,7 +458,7 @@
 				$(".per_day_price").html(format_number(data.pos.day_price))
 				pd_box.show()
 				loadDaterange($('.new_ad_daterange'), data.start_date, data.end_date)
-				calculateAdPrices()
+				calculateAdPrices()				
 			}
 		})
 	}
@@ -556,6 +561,12 @@
 					})
 					
 					$(".ad_detail_tab .box_4_style .preview_box_image_2, .ad_detail_tab .box_4_style .preview_box_image_3, .ad_detail_tab .box_4_style .preview_box_image_4, .ad_detail_tab .box_3_style .preview_box_image_3, .ad_detail_tab .box_3_style .preview_box_image_2").addClass("no_active")
+					
+					// hide/show more info input
+					$(".more_info_input").hide()
+					if ($(".box_4_style").length) {
+						$(".more_info_input").show()
+					}
 				}
 			})
 		}
