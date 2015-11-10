@@ -97,6 +97,12 @@ class AdPositionsController < ApplicationController
     @ad = @pos.active_ads.first
     render layout: "ad_frame"
   end
+  
+  def iframe_home_feature_3_images_box
+    @pos = AdPosition.get(params[:pos])
+    @ad = @pos.active_ads.first
+    render layout: "ad_frame"
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

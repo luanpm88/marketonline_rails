@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       get 'delete'
       get 'iframe_home_top_banner'
       get 'iframe_home_feature_4_images_box'
+      get 'iframe_home_feature_3_images_box'
       get 'preview_box'
       get 'get_values'
       get 'get_remaining_time'
