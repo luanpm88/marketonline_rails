@@ -48,10 +48,7 @@
 
 <script>
     var box_width = $(".ad_preview_box_1 .box_size").width()
-    if ($(".steps ul li").eq(0).hasClass("current")) {
-        box_width = $(".ad_preview_box_0 .box_size").width()
-    }
-    if ($(".steps ul li").eq(2).hasClass("current")) {
+    if ($(".steps ul li").eq(1).hasClass("current")) {
         box_width = $(".ad_preview_box_2 .box_size").width()
     }
     var box_height = box_width/<%= @ad_position.width.to_f/@ad_position.height.to_f %>

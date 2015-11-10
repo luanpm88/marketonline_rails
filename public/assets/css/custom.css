@@ -157,3 +157,7 @@
 .fancybox-skin {
     padding: 0 !important;
 }
+.wizard > .steps .number {
+    border-color: #888;
+    color: #888;
+}

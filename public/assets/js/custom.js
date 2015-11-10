@@ -1,33 +1,42 @@
 function loadDaterange(item, start_date, end_date) {
-    // Basic initialization
-    item.daterangepicker({
-        applyClass: 'bg-slate-600',
-        cancelClass: 'btn-default',
-        startDate: start_date,
-        endDate: end_date,
-        locale: {
-            format: 'DD-MM-YYYY',
-            closeText: "Đóng",
-            prevText: "Trước",
-            nextText: "Sau",
-            currentText: "Hôm nay",
-            monthNames: ["Tháng một", "Tháng hai", "Tháng ba", "Tháng tư", "Tháng năm", "Tháng sáu", "Tháng bảy", "Tháng tám", "Tháng chín", "Tháng mười", "Tháng mười một", "Tháng mười hai"],
-            monthNamesShort: ["Một", "Hai", "Ba", "Bốn", "Năm", "Sáu", "Bảy", "Tám", "Chín", "Mười", "Mười một", "Mười hai"],
-            dayNames: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"],
-            dayNamesShort: ["CN", "Hai", "Ba", "Tư", "Năm", "Sáu", "Bảy"],
-            daysOfWeek: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
-            weekHeader: "Tuần",
-            dateFormat: "dd/mm/yy",
-            firstDay: 1,
-            isRTL: false,
-            showMonthAfterYear: false,
-            cancelLabel: "Đóng",
-            applyLabel: "Lưu",
-            startLabel: "Bắt đầu",
-            endLabel: "Kết thúc",
-            customRangeLabel: "Tùy chọn"
-        }
+    // Date Picker
+    $('#ad_start_at').AnyTime_picker({
+        format: "%d-%m-%Z"
     });
+    
+    $('#ad_end_at').AnyTime_picker({
+        format: "%d-%m-%Z"
+    });
+    
+    //// Basic initialization
+    //item.daterangepicker({
+    //    applyClass: 'bg-slate-600',
+    //    cancelClass: 'btn-default',
+    //    startDate: start_date,
+    //    endDate: end_date,
+    //    locale: {
+    //        format: 'DD-MM-YYYY',
+    //        closeText: "Đóng",
+    //        prevText: "Trước",
+    //        nextText: "Sau",
+    //        currentText: "Hôm nay",
+    //        monthNames: ["Tháng một", "Tháng hai", "Tháng ba", "Tháng tư", "Tháng năm", "Tháng sáu", "Tháng bảy", "Tháng tám", "Tháng chín", "Tháng mười", "Tháng mười một", "Tháng mười hai"],
+    //        monthNamesShort: ["Một", "Hai", "Ba", "Bốn", "Năm", "Sáu", "Bảy", "Tám", "Chín", "Mười", "Mười một", "Mười hai"],
+    //        dayNames: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"],
+    //        dayNamesShort: ["CN", "Hai", "Ba", "Tư", "Năm", "Sáu", "Bảy"],
+    //        daysOfWeek: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
+    //        weekHeader: "Tuần",
+    //        dateFormat: "dd/mm/yy",
+    //        firstDay: 1,
+    //        isRTL: false,
+    //        showMonthAfterYear: false,
+    //        cancelLabel: "Đóng",
+    //        applyLabel: "Lưu",
+    //        startLabel: "Bắt đầu",
+    //        endLabel: "Kết thúc",
+    //        customRangeLabel: "Tùy chọn"
+    //    }
+    //});
 }
 
 function parseDate(str) {
@@ -218,6 +227,7 @@ function renderBasicAreaChart(chart_id, days, values_1, values_2) {
 
 
 $(document).ready(function() {
+    
     //
     // Wizard with validation
     //
@@ -257,18 +267,24 @@ $(document).ready(function() {
             return form.valid();
         },
         onInit: function (event, currentIndex) {
-
+        
         },
         onStepChanged: function (event, currentIndex, priorIndex) {
-            
+            if (currentIndex >= 0) {
+                $("a[href='#cancel']").show()
+            } else {
+                $("a[href='#cancel']").hide()
+            }
         },
         onFinishing: function (event, currentIndex) {
             form.validate().settings.ignore = ":disabled,:hidden";
             return form.valid();
         },
         onCanceled: function (event) {
-            form.validate().settings.ignore = ":disabled,:hidden";
+            //$(".steps-validation").submit();
+            //form.validate().settings.ignore = ":disabled,:hidden";
             //if (form.valid()) {
+                form.validate().settings.ignore = "*";
                 $(".steps-validation").submit();
             //}
         },
@@ -501,6 +517,7 @@ $(document).ready(function() {
             customRangeLabel: "Tùy chọn"
         }
     });
+    
     
     
 });

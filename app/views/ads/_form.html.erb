@@ -27,208 +27,230 @@
 							<% end %>
 						
 							<h6>Vị trí & Phí Quảng Cáo</h6>
-							<fieldset class="pos_cost_tab">
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>Vị trí đặt <span class="text-danger">*</span></label>
-											<%= f.select("ad_position_id", AdPosition.all.collect {|p| [ p.display_name_option, p.id ] }, { include_blank: "- Chọn vị trí -"} , {class: "select", required: "required" }) %>
-										</div>
-										<div class="ad_preview_box ad_preview_box_0">
-												
-										</div>
-									</div>
-									<div class="col-md-6 payment_detail_box">
-										
-										<div class="row">
-											<div class="col-md-12">
-												<div class="form-group">
-													<label>Thời gian đặt quảng cáo: <span class="text-danger">*</span></label>
-													<div class="input-group">
-														<span class="input-group-addon"><i class="icon-calendar22"></i></span>
-														<input type="text" name="ad[daterange]" class="form-control new_ad_daterange"> 
-													</div>
-												</div>
-											</div>											
-										</div>
-										
-										<div class="row">
-											<div class="col-md-6">
-												<div class="form-group">
-													<label>Hình thức trả phí: <span class="text-danger">*</span></label>
-													<select name="ad[payment_type]" data-placeholder="- Chọn hình thức -" class="select required">
-														<option></option>
-														<optgroup label="Tất cả hình thức">
-															<option <%= 'selected=selected' if @ad.payment_type.nil? || @ad.payment_type == "per_click" %> value="per_click">Trả theo lượt nhấn</option>
-															<option <%= 'selected=selected' if @ad.payment_type == "per_day" %> value="per_day">Trả theo ngày</option>
-														</optgroup>
-													</select>
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group payment_type_group per_click_group">
-													<label>Số tiền tối đa (VNĐ): <span class="text-danger">*</span></label>
-													<%= f.text_field :max_budget, required: "required", class: "form-control text-right number_input" %>
-												</div>
-
-												<div class="form-group payment_type_group per_day_group">
-													<label>Số ngày quảng cáo: <span class="text-danger">*</span></label>
-													<%= f.text_field :days, required: "required", class: "form-control text-right number_input" %>
-												</div>
-											</div>
-										</div>
-										
-										<div class="row payment_type_group per_click_group">
-											<div class="col-md-6">
-												<div class="form-group">
-													<label>Đơn giá: <strong class="per_click_price"></strong> VNĐ/lượt nhấn</label>
-													<div class="text-right">
-														
-													</div>
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<label>Tổng cộng: <strong class="click_total_price"></strong> lượt nhấn</label>
-													<div class="text-right">
-														
-													</div>
-												</div>
-											</div>
-										</div>
-										
-										<div class="row payment_type_group per_day_group">
-											<div class="col-md-6">
-												<div class="form-group">
-													<label>Đơn giá: <strong class="per_day_price"></strong> VNĐ/ngày</label>
-													<div class="text-right">
-														
-													</div>
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<label>Thành tiền: <strong class="day_total_price"></strong> VNĐ</label>
-													<div class="text-right">
-														
-													</div>
-												</div>
-											</div>
-											
-										</div>
-									</div>
-								</div>
-									
-								
-								
-							</fieldset>
-
-							<h6>Nội Dung Quảng Cáo</h6>
 							<fieldset class="ad_detail_tab">
 								<div class="row">
-									
-									
 									<div class="col-md-6">
+										
+										<!--<div class="ad_preview_box ad_preview_box_0">
+												
+										</div>-->
 										<fieldset class="text-semibold">
 											<legend><i class="icon-file-text position-left"></i> Cài đặt quảng cáo</legend>
-																								
-											<div class="ad_preview_box ad_preview_box_1">
-												
+											
+											<div class="form-group">
+												<label>Vị trí đặt <span class="text-danger">*</span></label>
+												<%= f.select("ad_position_id", AdPosition.all.collect {|p| [ p.display_name_option, p.id ] }, { include_blank: "- Chọn vị trí -"} , {class: "select", required: "required" }) %>
 											</div>
 											
-											<input name="check_image" style="position: absolute;border: none;background: none" />
-											
-											<div class="image_select_control image_select_control_1" rel="1">
-												<div class="product_images">
-												</div>																								
-												
-												<%= f.hidden_field "banner_1" %>
-												
-												<div class="form-group image_upload_input">
-													<label>Thay hình ảnh</label>
-													<div class="row">
-														<div class="col-md-3">
-															<%= @ad.image_link %>
-															<label class="image-checkbutton"><i image="<%= @ad.image_src(:banner) %>" class="<%= "icon-checkmark" if @ad.image.present? %> <%= "noimage" if !@ad.image.present? %>"></i></label>
-														</div>
-														<div class="col-md-7">																		
-															<input type="file" name="ad[image]" class="form-control file-styled">
-															<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
-														</div>
-													</div>
-												</div>
-											</div>
-											
-											<div class="image_select_control image_select_control_2" rel="2" style="display: none">
-												<div class="product_images">
-												</div>																								
-												
-												<%= f.hidden_field "banner_2" %>
-												
-												<div class="form-group image_upload_input">
-													<label>Thay hình ảnh</label>
-													<div class="row">
-														<div class="col-md-3">
-															<%= @ad.image_2_link %>
-															<label class="image-checkbutton"><i image="<%= @ad.image_2_src(:banner) %>" class="<%= "icon-checkmark" if @ad.image_2.present? %> <%= "noimage" if !@ad.image_2.present? %>"></i></label>
-														</div>
-														<div class="col-md-7">																		
-															<input type="file" name="ad[image_2]" class="form-control file-styled">
-															<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
-														</div>
-													</div>
-												</div>
-											</div>
+											<div class="picture_box" style="display: none">
+												<div class="ad_preview_box ad_preview_box_1">
 													
-											<div class="image_select_control image_select_control_3" rel="3" style="display: none">
-												<div class="product_images">
-												</div>																								
-												
-												<%= f.hidden_field "banner_3" %>
-												
-												<div class="form-group image_upload_input">
-													<label>Thay hình ảnh</label>
-													<div class="row">
-														<div class="col-md-3">
-															<%= @ad.image_3_link %>
-															<label class="image-checkbutton"><i image="<%= @ad.image_3_src(:banner) %>" class="<%= "icon-checkmark" if @ad.image_3.present? %> <%= "noimage" if !@ad.image_3.present? %>"></i></label>
-														</div>
-														<div class="col-md-7">																		
-															<input type="file" name="ad[image_3]" class="form-control file-styled">
-															<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
-														</div>
-													</div>
 												</div>
-											</div>
+												
+												<input name="check_image" style="position: absolute;border: none;background: none" />
+												
+												<div class="image_select_control image_select_control_1" rel="1">
+													<div class="product_images">
+													</div>																								
 													
-											<div class="image_select_control image_select_control_4" rel="4" style="display: none">
-												<div class="product_images">
-												</div>																								
-												
-												<%= f.hidden_field "banner_4" %>
-												
-												<div class="form-group image_upload_input">
-													<label>Thay hình ảnh</label>
-													<div class="row">
-														<div class="col-md-3">
-															<%= @ad.image_4_link %>
-															<label class="image-checkbutton"><i image="<%= @ad.image_4_src(:banner) %>" class="<%= "icon-checkmark" if @ad.image_4.present? %> <%= "noimage" if !@ad.image_4.present? %>"></i></label>
-														</div>
-														<div class="col-md-7">																		
-															<input type="file" name="ad[image_4]" class="form-control file-styled">
-															<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
+													<%= f.hidden_field "banner_1" %>
+													
+													<div class="form-group image_upload_input">
+														<label>Tải hình</label>
+														<div class="row">
+															<div class="col-md-3">
+																<%= @ad.image_link %>
+																<label class="image-checkbutton"><i image="<%= @ad.image_src(:banner) %>" class="<%= "icon-checkmark" if @ad.image.present? %> <%= "noimage" if !@ad.image.present? %>"></i></label>
+															</div>
+															<div class="col-md-7">																		
+																<input type="file" name="ad[image]" class="form-control file-styled">
+																<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
+															</div>
 														</div>
 													</div>
 												</div>
+												
+												<div class="image_select_control image_select_control_2" rel="2" style="display: none">
+													<div class="product_images">
+													</div>																								
+													
+													<%= f.hidden_field "banner_2" %>
+													
+													<div class="form-group image_upload_input">
+														<label>Thay hình ảnh</label>
+														<div class="row">
+															<div class="col-md-3">
+																<%= @ad.image_2_link %>
+																<label class="image-checkbutton"><i image="<%= @ad.image_2_src(:banner) %>" class="<%= "icon-checkmark" if @ad.image_2.present? %> <%= "noimage" if !@ad.image_2.present? %>"></i></label>
+															</div>
+															<div class="col-md-7">																		
+																<input type="file" name="ad[image_2]" class="form-control file-styled">
+																<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
+															</div>
+														</div>
+													</div>
+												</div>
+														
+												<div class="image_select_control image_select_control_3" rel="3" style="display: none">
+													<div class="product_images">
+													</div>																								
+													
+													<%= f.hidden_field "banner_3" %>
+													
+													<div class="form-group image_upload_input">
+														<label>Thay hình ảnh</label>
+														<div class="row">
+															<div class="col-md-3">
+																<%= @ad.image_3_link %>
+																<label class="image-checkbutton"><i image="<%= @ad.image_3_src(:banner) %>" class="<%= "icon-checkmark" if @ad.image_3.present? %> <%= "noimage" if !@ad.image_3.present? %>"></i></label>
+															</div>
+															<div class="col-md-7">																		
+																<input type="file" name="ad[image_3]" class="form-control file-styled">
+																<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
+															</div>
+														</div>
+													</div>
+												</div>
+														
+												<div class="image_select_control image_select_control_4" rel="4" style="display: none">
+													<div class="product_images">
+													</div>																								
+													
+													<%= f.hidden_field "banner_4" %>
+													
+													<div class="form-group image_upload_input">
+														<label>Thay hình ảnh</label>
+														<div class="row">
+															<div class="col-md-3">
+																<%= @ad.image_4_link %>
+																<label class="image-checkbutton"><i image="<%= @ad.image_4_src(:banner) %>" class="<%= "icon-checkmark" if @ad.image_4.present? %> <%= "noimage" if !@ad.image_4.present? %>"></i></label>
+															</div>
+															<div class="col-md-7">																		
+																<input type="file" name="ad[image_4]" class="form-control file-styled">
+																<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
+															</div>
+														</div>
+													</div>
+												</div>	
 											</div>	
 											
 										</fieldset>
 									</div>
-									
-									<div class="col-md-6">
+									<div class="col-md-6 payment_detail_box">
 										<fieldset class="text-semibold">
-											<legend><i class="icon-file-text position-left"></i> Thông tin cơ bản</legend>
+											<legend><i class="icon-file-text position-left"></i> Hình thức thanh toán</legend>
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Thời gian đặt quảng cáo từ ngày: <span class="text-danger">*</span></label>
+														<div class="input-group">
+															<span class="input-group-addon"><i class="icon-calendar3"></i></span>
+															<%= f.text_field :start_at, class: "form-control", value: (@ad.start_at.nil? ? "" : @ad.start_at.strftime("%d-%m-%Y")) %>															
+														</div>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Đến ngày: <span class="text-danger">*</span></label>
+														<div class="input-group">
+															<span class="input-group-addon"><i class="icon-calendar3"></i></span>
+															<%= f.text_field :end_at, class: "form-control", value: (@ad.end_at.nil? ? "" : @ad.end_at.strftime("%d-%m-%Y")) %>															
+														</div>
+													</div>
+												</div>	
+											</div>
 											
+											<!--<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Từ ngày: <span class="text-danger">*</span></label>
+														<div class="input-group">
+															<span class="input-group-addon">
+																<i class="icon-calendar5"></i>
+															</span>
+															<input type="text" class="form-control pickadate" placeholder="Try me&hellip;">
+														</div>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Đến ngày: <span class="text-danger">*</span></label>
+														<div class="input-group">
+															<span class="input-group-addon"><i class="icon-calendar22"></i></span>
+															<input type="text" name="ad[daterange]" class="form-control new_ad_daterange"> 
+														</div>
+													</div>
+												</div>
+											</div>-->
+											
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Hình thức trả phí: <span class="text-danger">*</span></label>
+														<select name="ad[payment_type]" data-placeholder="- Chọn hình thức -" class="select required">
+															<option></option>
+															<optgroup label="Tất cả hình thức">
+																<option <%= 'selected=selected' if @ad.payment_type.nil? || @ad.payment_type == "per_day" %> value="per_day">Trả theo ngày</option>
+																<option <%= 'selected=selected' if @ad.payment_type == "per_click" %> value="per_click">Trả theo lượt nhấn</option>																
+															</optgroup>
+														</select>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group payment_type_group per_click_group">
+														<label>Số tiền tối đa (VNĐ): <span class="text-danger">*</span></label>
+														<%= f.text_field :max_budget, required: "required", class: "form-control text-right number_input" %>
+													</div>
+	
+													<div class="form-group payment_type_group per_day_group">
+														<label>Số ngày quảng cáo: <span class="text-danger">*</span></label>
+														<%= f.text_field :days, required: "required", class: "form-control text-right number_input" %>
+													</div>
+												</div>
+											</div>
+											
+											<div class="row payment_type_group per_click_group">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Đơn giá: <strong class="per_click_price"></strong> VNĐ/lượt nhấn</label>
+														<div class="text-right">
+															
+														</div>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Tổng cộng: <strong class="click_total_price"></strong> lượt nhấn</label>
+														<div class="text-right">
+															
+														</div>
+													</div>
+												</div>
+											</div>
+											
+											<div class="row payment_type_group per_day_group">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Đơn giá: <strong class="per_day_price"></strong> VNĐ/ngày</label>
+														<div class="text-right">
+															
+														</div>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Thành tiền: <strong class="day_total_price"></strong> VNĐ</label>
+														<div class="text-right">
+															
+														</div>
+													</div>
+												</div>
+												
+											</div>
+										
+										</fieldset>
+										<fieldset class="text-semibold">
+											<legend><i class="icon-file-text position-left"></i> Thông tin chi tiết</legend>
 											<div class="form-group">
 												<label>Loại quảng cáo <span class="text-danger">*</span></label>
 												<%= select_tag "ad[type_name]", options_for_select(Ad.type_name_options, @ad.type_name), class: "modern_select select required" %>
@@ -276,11 +298,31 @@
 											</div>
 										</fieldset>
 									</div>
+											
+										
+								</div>
+									
+								<div class="row">
+									
+									
+									<div class="col-md-6">
+										
+									</div>
+									
+									<div class="col-md-6">
+										
+									</div>
 
 									
 									
 								</div>
+								
 							</fieldset>
+
+							<!--<h6>Nội Dung Quảng Cáo</h6>
+							<fieldset class="ad_detail_tab">
+								
+							</fieldset>-->
 
 							<h6>Thanh Toán</h6>
 							<fieldset class="payment_tab">
@@ -326,7 +368,7 @@
 									<div class="col-md-3 ad_summary_col">
 										<div class="form-group">
 											<label>Loại quảng cáo</label>
-											<div class="text-right">
+											<div class="text-left">
 												<strong></strong>
 											</div>
 										</div>
@@ -334,7 +376,7 @@
 									<div class="col-md-2 ad_summary_col">
 										<div class="form-group">
 											<label>Hình thức trả phí</label>
-											<div class="text-right">
+											<div class="text-left">
 												<strong class="payment_type"></strong>
 											</div>
 										</div>
@@ -342,7 +384,7 @@
 									<div class="col-md-4 ad_summary_col">
 										<div class="form-group">
 											<label>Nội dung thanh tóan</label>
-											<div class="text-right">
+											<div class="text-left">
 												<strong></strong>
 											</div>
 										</div>
@@ -391,7 +433,7 @@
 		
 		var payment_detail = ""
 		if ($("select[name='ad[payment_type]']").val() == "per_day") {
-			payment_detail += '<div><span>Thời gian:</span> '+$("input[name='ad[daterange]']").val()+'</div>'
+			payment_detail += '<div><span>Thời gian:</span> <span>Từ</span> '+$("input[name='ad[start_at]']").val()+' <span>Đến</span> '+$("input[name='ad[end_at]']").val()+'</div>'
 			payment_detail += '<div><span>Đơn giá:</span> '+$(".per_day_price").html()+' VNĐ/ngày</div>'
 			s4.html($(".day_total_price").html()+" VNĐ")
 		} else {
@@ -427,12 +469,10 @@
 		
 		// count days between dates
 		var input_days_count = 0
-		if ($("input[name='ad[daterange]']").length && $("input[name='ad[daterange]']").val() != "") {
-			var daterange = $("input[name='ad[daterange]']").val()
-			b_date = daterange.split(' - ')[0]
-			e_date = daterange.split(' - ')[1]
+		if ($("input[name='ad[start_at]']").length && $("input[name='ad[start_at]']").val() != "" && $("input[name='ad[end_at]']").length && $("input[name='ad[end_at]']").val() != "") {
+			var b_date = $("input[name='ad[start_at]']").val()
+			var e_date = $("input[name='ad[end_at]']").val()
 			input_days_count = daydiff(parseDate(b_date), parseDate(e_date))
-			
 			$("input[name='ad[days]']").val(input_days_count)
 		}
 		
@@ -472,7 +512,8 @@
 				$(".per_click_price").html(format_number(data.pos.click_price))
 				$(".per_day_price").html(format_number(data.pos.day_price))
 				pd_box.show()
-				loadDaterange($('.new_ad_daterange'), data.start_date, data.end_date)
+				$('#ad_start_at').val(data.start_date)
+				$('#ad_end_at').val(data.end_date)
 				calculateAdPrices()				
 			}
 		})
@@ -561,12 +602,17 @@
 			var id = $("select[name='ad[ad_position_id]']").select2("val")
 			if (id == "") {
 				$(".ad_preview_box").html("")
+				$(".picture_box").hide()
 				return
 			}
 			$.ajax({
 				url : '<%= preview_box_ad_positions_path %>?id='+id,
 				success:function(data, textStatus, jqXHR)
 				{
+					//show picture box
+					$(".picture_box").show()
+					
+					
 					$(".ad_preview_box").html(data)
 					
 					$(".image_select_control").each(function() {
@@ -587,6 +633,8 @@
 					if ($(".home_top_banner_3").length) {
 						$(".ad_display_price").show()
 					}
+					
+					
 				}
 			})
 		}
@@ -733,7 +781,7 @@
 			getAdPositionValues()
 		})
 		
-		$(document).on("keyup change", "input[name='ad[max_budget]'], input[name='ad[days]'], input[name='ad[daterange]']", function() {
+		$(document).on("keyup change", "input[name='ad[max_budget]'], input[name='ad[days]'], input[name='ad[start_at]'], input[name='ad[end_at]']", function() {
 			calculateAdPrices()
 		})
 		
@@ -749,6 +797,7 @@
 			$(".image_select_control_"+id).show()
 		})
 		
-		
+		//
+		$("a[href='#cancel']").hide()
 	})
 </script>
