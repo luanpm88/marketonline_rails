@@ -394,7 +394,7 @@ class Ad < ActiveRecord::Base
     merchant_id = "39955"
     param = '<ORDERS><TOTAL>1</TOTAL><ORDER><ORDER_CODE>21</ORDER_CODE><PAYMENT_ID>17992700</PAYMENT_ID></ORDER></ORDERS>'
     checksum =  Digest::MD5.hexdigest(merchant_id + param + 'marketonlinebmn@#$')
-    response = client.call(:check_order, message: {merchant_id: 39955, param: param, checksum: checksum})
+    response = client.call(:check_order, message: {merchant_id: merchant_id, param: param, checksum: checksum})
   end
   
   def paid?

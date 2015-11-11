@@ -225,7 +225,7 @@ function renderBasicAreaChart(chart_id, days, values_1, values_2) {
 }
 
 
-
+var xhr;
 $(document).ready(function() {
     
     //
@@ -374,6 +374,7 @@ $(document).ready(function() {
     });
     
     // AJAX sourced data
+    
     $('.datatable-ajax').each (function() {
         var item = $(this)
         var box = $(this).parents(".datatable_box")
@@ -390,7 +391,11 @@ $(document).ready(function() {
         if (typeof(item.attr("item-id")) != "undefined") {
             item_id = item.attr("item-id")
         }
-        item.dataTable({
+        xhr = item.on('preXhr.dt', function ( e, settings, data ) {
+                if(xhr.dataTableSettings[0].jqXHR != null) {
+                    xhr.dataTableSettings[0].jqXHR.abort()
+                }
+            } ).dataTable({
             "order": [],
             "columnDefs": [ { "targets": orders, "orderable": false } ],
             "processing": true,
@@ -401,6 +406,9 @@ $(document).ready(function() {
                     d.filters = filters.serialize()
                 }
             },
+            //"fnServerData": function ( sSource, aoData, fnCallback ) {
+            //    alert("aaa");
+            //},
             "language": {
                 "url": URL+"assets/js/datatable_vietnamese.json"
             },
