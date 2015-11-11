@@ -100,14 +100,16 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown dropdown-user">
 					<a class="dropdown-toggle" data-toggle="dropdown">
-						<img src="<%= root_path %>assets/images/placeholder.jpg" alt="">
+						<img src="<%= root_path %><%= @current_user.image %>" alt="">
 						<span><%= @current_user.display_name %></span>
 						<i class="caret"></i>
 					</a>
 
 					<ul class="dropdown-menu dropdown-menu-right">
-						<!--<li><a href="#"><i class="icon-user-plus"></i> My profile</a></li>
-						<li><a href="#"><i class="icon-coins"></i> My balance</a></li>
+						<li><a href="/redirect.php?url=/virtual-office/"><i class="icon-cog5"></i> Trang quản lý</a></li>
+						<li class="divider"></li>
+						<li><a href="/logging.php?action=logout"><i class="icon-switch2"></i> Đăng xuất</a></li>
+						<!--<li><a href="#"><i class="icon-coins"></i> My balance</a></li>
 						<li><a href="#"><span class="badge bg-teal-400 pull-right">58</span> <i class="icon-comment-discussion"></i> Messages</a></li>
 						<li class="divider"></li>
 						<li><a href="#"><i class="icon-cog5"></i> Account settings</a></li>
@@ -134,21 +136,21 @@
 					<div class="sidebar-user">
 						<div class="category-content">
 							<div class="media">
-								<a href="#" class="media-left"><img src="<%= root_path %>assets/images/placeholder.jpg" class="img-circle img-sm" alt=""></a>
+								<a href="#" class="media-left"><img src="<%= root_path %><%= @current_user.image %>" class="img-circle img-sm" alt=""></a>
 								<div class="media-body">
 									<span class="media-heading text-semibold"><%= @current_user.display_name %></span>
 									<div class="text-size-mini text-muted">
-										<i class="icon-pin text-size-small"></i> &nbsp;HCM City, Viet Nam
+										<!--<i class="icon-pin text-size-small"></i> &nbsp;HCM City, Viet Nam-->
 									</div>
 								</div>
 
-								<div class="media-right media-middle">
+								<!--<div class="media-right media-middle">
 									<ul class="icons-list">
 										<li>
 											<a href="#"><i class="icon-cog3"></i></a>
 										</li>
 									</ul>
-								</div>
+								</div>-->
 							</div>
 						</div>
 					</div>
@@ -162,9 +164,9 @@
 
 								<!-- Main -->
 								<li class="navigation-header"><span>Danh mục</span> <i class="icon-menu" title="Main pages"></i></li>
-								<li <%= 'class=active' if ["home"].include?(params[:controller]) %>>
+								<!--<li <%= 'class=active' if ["home"].include?(params[:controller]) %>>
 									<a href="<%= root_path %>"><i class="icon-home4"></i> <span>Trang chính</span></a>
-								</li>
+								</li>-->
                                 <li <%= 'class=active' if ["ad_types","ads"].include?(params[:controller]) %>>
 									<a href="#"><i class="icon-stack2"></i> <span>Quảng cáo</span></a>
 									<ul>

@@ -4,7 +4,6 @@ class Ad < ActiveRecord::Base
   attr_accessor :banner_2
   attr_accessor :banner_3
   attr_accessor :banner_4
-  attr_accessor :daterange
   
   mount_uploader :image, AdUploader
   mount_uploader :image_2, AdUploader
@@ -24,7 +23,6 @@ class Ad < ActiveRecord::Base
   
   before_validation :update_ad_name
   before_validation :update_ad_image
-  before_validation :update_ad_daterange
   before_validation :update_ad_price
   after_save :update_product_name
   
@@ -49,12 +47,6 @@ class Ad < ActiveRecord::Base
     ad_clicks.create(customer_code: session[:session_id], ip: request.remote_ip, pb_member_id: user.id)
   end
   
-  def update_ad_daterange
-    if daterange.present?
-      self.start_at = daterange.split(" - ")[0].to_datetime.beginning_of_day
-      self.end_at = daterange.split(" - ")[1].to_datetime.end_of_day
-    end
-  end
   
   def update_ad_name
     if product_name.present? and type_name == 'product'
@@ -91,8 +83,13 @@ class Ad < ActiveRecord::Base
     end
   end
   
-  def self.datatable(params)    
+  def self.datatable(params, user)    
     @records = self.joins(:ad_position).all
+    
+    if user.role != "admin"
+      @records = @records.where(pb_member_id: user.id)
+    end
+    
     
     order = "ads.created_at DESC"
     if !params["order"].nil?
@@ -408,5 +405,4 @@ class Ad < ActiveRecord::Base
       "<span class=\"label bg-grey-400\">Đang soạn</span>"
     end    
   end
-  
 end

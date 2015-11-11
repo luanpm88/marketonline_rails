@@ -14,14 +14,45 @@
       <%= javascript_include_tag '/assets/js/plugins/jquery.bxslider/jquery.bxslider.min.js' %>
       
       <script>
+        function moveSlide3Lest() {
+            var per_line = 5
+            var step = 1
+            var count = $(".home_top_banner_3_slide li").length
+            var item_width = $(".home_top_banner_3_slide li").width()+1
+            var width = (item_width)*count
+            var current_left = parseInt($(".home_top_banner_3_slide").css("left"))
+            $(".home_top_banner_3_slide").width(width)
+            //// move left
+            //$(".home_top_banner_3_slide").css("left", current_left-item_width)
+            $(".home_top_banner_3_slide").animate({
+              opacity: 0.25,
+              left: "-="+(item_width*step)
+            }, 500, function() {
+              $(".home_top_banner_3_slide").animate({
+                opacity: 1,
+              }, 500)
+              if(width+current_left <= item_width*per_line+item_width) {
+                $(".home_top_banner_3_slide").css("left", item_width*per_line - item_width*(count/2+1)+item_width)
+                 
+              }
+            });              
+        }
         $(document).ready(function() {
           $('.home_top_banner_1_slide, .home_top_banner_2_slide').bxSlider({
             mode: 'fade',
             captions: true,
             pager: false,
             auto: true,
-            controls: false
+            controls: false,
+            speed: 2000
           });
+          
+          // slide show
+          //append more item
+          $(".home_top_banner_3_slide li").each(function() {
+            $(".home_top_banner_3_slide").append($(this).clone())
+          })
+          setInterval("moveSlide3Lest()", 3000)
         })
       </script>
   </head>

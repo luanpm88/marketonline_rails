@@ -40,6 +40,7 @@ gem 'geokit-rails'
 gem 'geocoder'
 gem 'geo_ip'
 gem 'savon'
+gem "cancan"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

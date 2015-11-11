@@ -4,12 +4,17 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   before_filter :app_variable
-
+  
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to "/logging.php?return_page=#{Rack::Utils.escape(root_path(:only_path => false))}"
+  end
+  
   def app_variable
-    @current_user = PbMember.first # PbSession.get_current_user(cookies)
-    if !["home_top_banner_frame","click","image"].include?(params[:action])
-      redirect_to "http://test.marketonline.vn/logging.php?return_page=#{Rack::Utils.escape(root_path(:only_path => false))}" if @current_user.nil?
-    end
+    @current_user = current_user
+  end
+  
+  def current_user
+    PbSession.get_current_user(cookies)
   end
   
 end

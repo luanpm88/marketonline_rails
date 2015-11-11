@@ -4,10 +4,14 @@ function loadDaterange(item, start_date, end_date) {
         format: "%d-%m-%Z"
     });
     
+    setTimeout('$("#ad_start_at").val( "'+start_date+'" );', 1000)
+    
     $('#ad_end_at').AnyTime_picker({
         format: "%d-%m-%Z"
     });
     
+    setTimeout('$("#ad_end_at").val( "'+end_date+'" );', 1000)
+    setTimeout('calculateAdPrices()', 2000)
     //// Basic initialization
     //item.daterangepicker({
     //    applyClass: 'bg-slate-600',
@@ -97,9 +101,15 @@ function loadAdDetailChart(box, daterange) {
         type: "GET",
         success:function(data, textStatus, jqXHR)
         {
-            $(".total-click-count").html(format_number(JSON.parse(data.value_1).length+JSON.parse(data.value_2).length))
-            $(".user-click-count").html(format_number(JSON.parse(data.value_2).length))
-            $(".guest-click-count").html(format_number(JSON.parse(data.value_1).length))
+            var aa = 0
+            var bb = 0
+            for(var i = 0; i < JSON.parse(data.value_1).length; i++) {
+                aa += parseInt(JSON.parse(data.value_1)[i]);
+                bb += parseInt(JSON.parse(data.value_2)[i]);
+            }
+            $(".total-click-count").html(format_number(aa+bb))
+            $(".user-click-count").html(format_number(bb))
+            $(".guest-click-count").html(format_number(aa))
             renderBasicAreaChart(chart_id, data.days, JSON.parse(data.value_1), JSON.parse(data.value_2))
             datatable.dataTable().fnFilter();
         }
@@ -270,11 +280,11 @@ $(document).ready(function() {
         
         },
         onStepChanged: function (event, currentIndex, priorIndex) {
-            if (currentIndex >= 0) {
-                $("a[href='#cancel']").show()
-            } else {
-                $("a[href='#cancel']").hide()
-            }
+            //if (currentIndex >= 0) {
+            //    $("a[href='#cancel']").show()
+            //} else {
+            //    $("a[href='#cancel']").hide()
+            //}
         },
         onFinishing: function (event, currentIndex) {
             form.validate().settings.ignore = ":disabled,:hidden";
@@ -417,7 +427,7 @@ $(document).ready(function() {
                 // ------------------------------
             
                 // Add placeholder to the datatable filter option
-                $('.dataTables_filter input[type=search]').attr('placeholder','Type to filter...');
+                $('.dataTables_filter input[type=search]').attr('placeholder','Gõ từ khóa để tìm kiếm...');
             
             
                 // Enable Select2 select for the length option

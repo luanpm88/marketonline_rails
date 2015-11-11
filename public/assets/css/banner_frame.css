@@ -193,3 +193,23 @@ body {
     font-size: 14px;
     margin: 0;
 }
+.home_top_banner_3_slide {
+    float: left;
+    margin-left: -100px;
+    width: 2110px;
+}
+.home_top_banner_3 {
+    float: left;
+    height: 259px;
+    width: 979px;
+    overflow: hidden;
+}
+.home_top_banner_3_slide {
+    float: left;
+    width: 9000px;
+    position: absolute;
+    position: relative
+}
+.home_top_banner_3_slide li {
+    width: 195px;
+}

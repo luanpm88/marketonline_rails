@@ -1,4 +1,7 @@
 class AdsController < ApplicationController
+  load_and_authorize_resource
+  skip_load_resource :only => [:create]
+  
   before_action :set_ad, only: [:get_nganluong_checkout_return, :chart, :click, :delete, :show, :edit, :update, :destroy]
 
   # GET /ads
@@ -36,7 +39,7 @@ class AdsController < ApplicationController
 
     respond_to do |format|
       if @ad.save
-        format.html { redirect_to edit_ad_path(@ad), notice: 'Đã thêm quảng cáo thành công.' }
+        format.html { redirect_to ads_path, notice: 'Đã thêm quảng cáo thành công.' }
         format.json { render :show, status: :created, location: @ad }
       else
         format.html { render :new }
@@ -52,7 +55,7 @@ class AdsController < ApplicationController
       if @ad.update(ad_params)
         @ad.image.recreate_versions!
         
-        format.html { redirect_to edit_ad_path(@ad), notice: 'Đã cập nhật quảng cáo thành công.' }
+        format.html { redirect_to ads_path, notice: 'Đã cập nhật quảng cáo thành công.' }
         format.json { render :show, status: :ok, location: @ad }
       else
         format.html { render :edit }
@@ -72,7 +75,7 @@ class AdsController < ApplicationController
   end
   
   def datatable
-    result = Ad.datatable(params)
+    result = Ad.datatable(params, @current_user)
     
     render json: result[:result]
   end
@@ -90,12 +93,16 @@ class AdsController < ApplicationController
     end
     
     if params[:display] == "html"
-      if @ad.ad_position.style_name == "4_images_group"
-        render "/ads/preview", layout: nil
-      elsif @ad.ad_position.style_name == "3_images_group"
-        render "/ads/preview", layout: nil
+      if @ad.present?
+        if @ad.ad_position.style_name == "4_images_group"
+          render "/ads/preview", layout: nil
+        elsif @ad.ad_position.style_name == "3_images_group"
+          render "/ads/preview", layout: nil
+        else
+          render text: "<img src=\"#{@ad.image_src(params[:type])}\" />"
+        end
       else
-        render text: "<img src=\"#{@ad.image_src(params[:type])}\" />"
+        render text: "<img src=\"#{root_path}img/no_img.jpg\" />"
       end
     else
       send_file file_name, :disposition => 'inline'
@@ -176,6 +183,6 @@ class AdsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ad_params
-      params.require(:ad).permit(:display_price_unit, :display_price, :days, :payment_type, :max_budget, :daterange, :banner_1, :banner_2, :banner_3, :banner_4, :type_name, :product_name, :pb_product_id, :name, :description, :description_2, :ad_position_id, :url, :image, :image_2, :image_3, :image_4, :user_id, :status)
+      params.require(:ad).permit(:start_at, :end_at, :display_price_unit, :display_price, :days, :payment_type, :max_budget, :banner_1, :banner_2, :banner_3, :banner_4, :type_name, :product_name, :pb_product_id, :name, :description, :description_2, :ad_position_id, :url, :image, :image_2, :image_3, :image_4, :user_id, :status)
     end
 end

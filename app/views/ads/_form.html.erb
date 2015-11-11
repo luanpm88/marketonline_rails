@@ -13,7 +13,6 @@
 						</div>
 
 	                	<%= form_for(@ad, html: {class: "form-validate-jquery steps-validation", multipart: true}) do |f| %>
-						
 							<% if @ad.errors.any? %>
 								<div id="error_explanation">
 								  <h2><%= pluralize(@ad.errors.count, "error") %> prohibited this ad from being saved:</h2>
@@ -433,11 +432,11 @@
 		
 		var payment_detail = ""
 		if ($("select[name='ad[payment_type]']").val() == "per_day") {
-			payment_detail += '<div><span>Thời gian:</span> <span>Từ</span> '+$("input[name='ad[start_at]']").val()+' <span>Đến</span> '+$("input[name='ad[end_at]']").val()+'</div>'
+			payment_detail += '<div><span>Thời gian:</span> <span>Từ ngày</span> '+$("input[name='ad[start_at]']").val()+' <span>Đến ngày</span> '+$("input[name='ad[end_at]']").val()+'</div>'
 			payment_detail += '<div><span>Đơn giá:</span> '+$(".per_day_price").html()+' VNĐ/ngày</div>'
 			s4.html($(".day_total_price").html()+" VNĐ")
 		} else {
-			payment_detail += '<div><span>Thời gian:</span> '+$("input[name='ad[daterange]']").val()+'</div>'
+			payment_detail += '<div><span>Thời gian:</span> <span>Từ ngày</span> '+$("input[name='ad[start_at]']").val()+' <span>Đến ngày</span> '+$("input[name='ad[end_at]']").val()+'</div>'
 			payment_detail += '<div><span>Đơn giá:</span> '+$(".per_click_price").html()+' VNĐ/lượt nhấn</div>'
 			payment_detail += '<div><span>Số lượt nhấn:</span> '+$(".click_total_price").html()+' lượt nhấn</div>'
 			s4.html(format_number($("input[name='ad[max_budget]']").val())+" VNĐ")
@@ -789,6 +788,7 @@
 	
 		loadDaterange($('.new_ad_daterange'), "<%= @ad.start_at.strftime("%d-%m-%Y") %>", "<%= @ad.end_at.strftime("%d-%m-%Y") %>")
 		
+		
 		$(document).on("click", ".ad_detail_tab .box_style .box_style_item", function() {
 			var id = $(this).attr("rel")
 			$(this).parents(".box_style").find(".box_style_item").addClass("no_active")
@@ -796,8 +796,5 @@
 			$(".image_select_control").hide()
 			$(".image_select_control_"+id).show()
 		})
-		
-		//
-		$("a[href='#cancel']").hide()
 	})
 </script>
