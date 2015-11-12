@@ -186,3 +186,10 @@
 .navbar-brand {
     font-size: 22px;
 }
+.panel-flat > .panel-heading {
+    background-color: #ff7043;
+    color: #fff;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}

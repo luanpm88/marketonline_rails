@@ -213,3 +213,35 @@ body {
 .home_top_banner_3_slide li {
     width: 195px;
 }
+.iframe_6_items_list {
+    float: left;
+    margin: 23px 0 0 0;
+    padding: 0;
+}
+.iframe_6_items_list li img {
+    width: 181px;
+    height: 181px;
+}
+.iframe_6_items_list li {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #aaa;
+    height: auto;
+    margin-bottom: 12px;
+    margin-right: 19px;
+    width: 179px;
+    list-style: none;
+    float: left;
+    overflow: hidden;
+}
+.iframe_6_items_list li a {
+    
+}
+
+.iframe_6_items_list li a.title {
+    display: block;
+    height: 30px;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+    color: #333;
+}
