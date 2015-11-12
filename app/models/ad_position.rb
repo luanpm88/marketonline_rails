@@ -26,7 +26,7 @@ class AdPosition < ActiveRecord::Base
   def self.datatable(params)    
     @records = self.all
     
-    order = "ad_positions.created_at DESC"
+    order = "ad_positions.name"
     if !params["order"].nil?
       case params["order"]["0"]["column"]
       when "0"
