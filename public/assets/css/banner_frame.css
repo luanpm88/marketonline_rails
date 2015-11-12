@@ -32,6 +32,7 @@ body {
 .home_top_banner_frame .banner_item ul li {
     list-style: none;
     background: #fff;
+    padding: 5px;
 }
 .home_top_banner_frame .banner_item ul li a {
     text-decoration: none;
