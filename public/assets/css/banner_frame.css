@@ -37,7 +37,7 @@ body {
     text-decoration: none;
 }
 .home_top_banner_frame .banner_item ul li img {
-    
+    width: 100%;
 }
 .home_top_banner_frame .bx-wrapper .bx-viewport {
     border: none;
