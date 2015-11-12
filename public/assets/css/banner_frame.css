@@ -238,12 +238,13 @@ body {
 .iframe_6_items_list li a {
     
 }
-
 .iframe_6_items_list li a.title {
+    color: #333;
     display: block;
+    font-size: 14px;
     height: 30px;
+    line-height: 26px;
     text-align: center;
     text-decoration: none;
     width: 100%;
-    color: #333;
 }
