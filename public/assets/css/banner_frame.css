@@ -32,7 +32,6 @@ body {
 .home_top_banner_frame .banner_item ul li {
     list-style: none;
     background: #fff;
-    padding: 5px;
 }
 .home_top_banner_frame .banner_item ul li a {
     text-decoration: none;
@@ -212,7 +211,7 @@ body {
     position: relative
 }
 .home_top_banner_3_slide li {
-    width: 183px;
+    width: 195px;
 }
 .iframe_6_items_list {
     float: left;
