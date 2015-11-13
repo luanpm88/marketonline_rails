@@ -216,3 +216,6 @@
 .content-wrapper {
     
 }
+.navbar-nav > .dropdown-user img, .media-left img:not(.media-preview), .media-right img:not(.media-preview), .thumbnail .media img:not(.media-preview) {
+    border: 2px solid rgba(255, 255, 255, 0.7);
+}
