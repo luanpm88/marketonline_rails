@@ -208,6 +208,9 @@
         position: absolute;
         z-index: 100;
     }
+    .content-wrapper {
+        padding-bottom: 130px;
+    }
 }
 
 .content-wrapper {
