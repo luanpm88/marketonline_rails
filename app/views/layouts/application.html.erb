@@ -138,9 +138,10 @@
 							<div class="media">
 								<a href="#" class="media-left"><img src="<%= @current_user.image %>" class="img-circle img-sm" alt=""></a>
 								<div class="media-body">
-									<span class="media-heading text-semibold"><%= @current_user.display_name %></span>
+									<% if @current_user.pb_company.present? %><span class="media-heading text-semibold"><%= @current_user.pb_company.shop_name %></span><% end %>
+									
 									<div class="text-size-mini text-muted">
-										<!--<i class="icon-pin text-size-small"></i> &nbsp;HCM City, Viet Nam-->
+										<span class="media-heading text-size-small"><i class="icon-user text-size-small"></i> <%= @current_user.display_name %></span>
 									</div>
 								</div>
 
