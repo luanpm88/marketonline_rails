@@ -116,7 +116,7 @@ class AdPosition < ActiveRecord::Base
     recent_ad = active_ads.order("end_at").where("start_at <= ? AND end_at >= ?", Time.now, Time.now).first    
     if type == "date"
       return "" if recent_ad.nil?
-      recent_ad.end_at.strftime("%d/%m/%Y")
+      {time: recent_ad.end_at.strftime("%d/%m/%Y"), pos: self}
     elsif type == "day"
       return "" if recent_ad.nil?
       (recent_ad.end_at.to_date - Date.today).to_s
