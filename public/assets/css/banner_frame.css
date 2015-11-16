@@ -109,11 +109,7 @@ body {
     height: 140px;
 }
 .box_4_banner_title {
-    -moz-border-bottom-colors: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
-    border-color: #ddd #ddd -moz-use-text-color;
+    border-color: #ddd;
     border-image: none;
     border-style: solid solid none;
     border-width: 1px 1px medium;
@@ -248,8 +244,6 @@ body {
     text-decoration: none;
     width: 100%;
 }
-
-
 .iframe_3_wide_banners {
     margin: 0;
     padding: 0;
