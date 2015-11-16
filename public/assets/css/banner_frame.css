@@ -169,11 +169,7 @@ body {
     height: 132px;
 }
 .box_3_banner_title {
-    -moz-border-bottom-colors: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
-    border-color: #ddd #ddd -moz-use-text-color;
+    border-color: #ddd;
     border-image: none;
     border-style: solid solid none;
     border-width: 1px 1px medium;
