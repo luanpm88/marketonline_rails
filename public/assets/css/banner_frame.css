@@ -280,3 +280,11 @@ body {
 .iframe_3_wide_banners li a img {
     
 }
+.home_top_banner_frame .loading {
+    background: #fff url("../../img/ajax_loading.gif") no-repeat scroll center center;
+    display: block;
+    height: 640px;
+    position: absolute;
+    width: 979px;
+    z-index: 100;
+}
