@@ -1,0 +1,28 @@
+<ul class="iframe_3_wide_banners">
+  <% @pos.active_ads.limit(3).each do |ad| %>
+    <li>
+      <a href="<%= click_ads_path(id: ad) %>" target="_blank">
+        <img title="" src="<%= ad.image_src(:banner) %>" />
+      </a>
+      <a class="title" class="title" href="<%= click_ads_path(id: ad) %>" target="_blank">
+        <%= ad.name %>
+      </a>
+    </li>
+    <li>
+      <a href="<%= click_ads_path(id: ad) %>" target="_blank">
+        <img title="" src="<%= ad.image_src(:banner) %>" />
+      </a>
+      <a class="title" href="<%= click_ads_path(id: ad) %>" target="_blank">
+        <%= ad.name %>
+      </a>
+    </li>
+    <li>
+      <a href="<%= click_ads_path(id: ad) %>" target="_blank">
+        <img title="" src="<%= ad.image_src(:banner) %>" />
+      </a>
+      <a class="title" href="<%= click_ads_path(id: ad) %>" target="_blank">
+        <%= ad.name %>
+      </a>
+    </li>
+  <% end %>
+</ul>

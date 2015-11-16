@@ -248,3 +248,35 @@ body {
     text-decoration: none;
     width: 100%;
 }
+
+
+.iframe_3_wide_banners {
+    margin: 0;
+    padding: 0;
+}
+.iframe_3_wide_banners li {
+    float: left;
+    list-style: outside none none;
+    border: solid 1px #aaa;
+    margin-right: 20px;
+    height: 140px;
+    position: relative;
+    width:380px;
+    overflow: hidden;
+}
+.iframe_3_wide_banners li a {
+    color: #333;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+}
+.iframe_3_wide_banners li a.title {
+    background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0;
+    margin-top: -23px;
+    position: absolute;
+    width: 100%;
+    color: #fff;
+}
+.iframe_3_wide_banners li a img {
+    
+}

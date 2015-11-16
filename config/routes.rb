@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       get 'iframe_home_feature_4_images_box'
       get 'iframe_home_feature_3_images_box'
       get 'iframe_6_items_list'
+      get 'iframe_3_wide_banners'
       get 'preview_box'
       get 'get_values'
       get 'get_remaining_time'
