@@ -315,13 +315,14 @@ class Ad < ActiveRecord::Base
   def self.type_name_options
     [
       ["Hình ảnh & Liên kết","image"],
-      ["Sản phẩm/Dịch vụ","product"],
-      ["Thương mại","trade"],
-      ["Thương hiệu","company"],
-      ["Tuyển dụng","employer"],
-      ["Ứng viên","employee"],
-      ["Trường học","school"],
-      ["Lớp học","class"]
+      ["Sản phẩm/Dịch vụ","product"]
+      #,
+      #["Thương mại","trade"],
+      #["Thương hiệu","company"],
+      #["Tuyển dụng","employer"],
+      #["Ứng viên","employee"],
+      #["Trường học","school"],
+      #["Lớp học","class"]
     ]
   end
   
