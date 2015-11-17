@@ -274,8 +274,18 @@ body {
 .home_top_banner_frame .loading {
     background: #fff url("../../img/ajax_loading.gif") no-repeat scroll center center;
     display: block;
-    height: 640px;
+    height: 380px;
+    margin: 0 0 0 1px;
     position: absolute;
-    width: 979px;
+    width: 685px;
     z-index: 100;
+}
+.home_top_banner_frame .loading.pos2 {
+    margin-left: 686px;
+    width: 293px;
+}
+.home_top_banner_frame .loading.pos3 {
+    height: 258px;
+    margin-top: 381px;
+    width: 978px;
 }

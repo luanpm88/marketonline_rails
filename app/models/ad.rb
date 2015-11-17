@@ -44,7 +44,7 @@ class Ad < ActiveRecord::Base
   end
   
   def click(request, session, user)
-    ad_clicks.create(customer_code: session[:session_id], ip: request.remote_ip, pb_member_id: user.id)
+    ad_clicks.create(customer_code: session[:session_id], ip: request.remote_ip, pb_member_id: (user.nil? ? "" : user.id))
   end
   
   
