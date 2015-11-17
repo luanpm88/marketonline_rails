@@ -401,9 +401,9 @@ class Ad < ActiveRecord::Base
   
   def display_status
     if paid?
-      "<span class=\"label bg-blue\">Đang chạy</span>"
+      "<span class=\"ad_status label bg-blue\">Đang chạy</span>"
     else
-      "<span class=\"label bg-draft\">Đang soạn</span>"
+      "<span class=\"ad_status label bg-draft\">Đang soạn</span>"
     end    
   end
 end
