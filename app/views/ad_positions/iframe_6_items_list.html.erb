@@ -1,5 +1,5 @@
 <ul class="iframe_6_items_list">
-  <% @pos.active_ads.limit(12).each do |ad| %>
+  <% @pos.active_ads.each do |ad| %>
     <li>
       <a href="<%= click_ads_path(id: ad) %>" target="_blank">
         <img title="" src="<%= ad.image_src(:banner) %>" />

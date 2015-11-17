@@ -7,7 +7,7 @@ class AdPosition < ActiveRecord::Base
   end
   
   def active_ads
-    ads
+    ads.limit(number_of_ad)
   end
   
   def width=(new)
