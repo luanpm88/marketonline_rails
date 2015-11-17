@@ -113,7 +113,7 @@ class AdPosition < ActiveRecord::Base
   end
   
   def available_date
-    active_ads.order("end_at").where("end_at >= ?", Time.now).first
+    result = active_ads.order("end_at").where("end_at >= ?", Time.now).first
     result.nil? ? Time.now : result.end_at
   end
   
