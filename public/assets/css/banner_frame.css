@@ -271,20 +271,28 @@ body {
 .iframe_3_wide_banners li a img {
     
 }
-.home_top_banner_frame .loading {
+.ad_loading {
     background: #fff url("../../img/ajax_loading.gif") no-repeat scroll center center;
     display: block;
-    height: 380px;
     position: absolute;
-    width: 685px;
     z-index: 100;
 }
-.home_top_banner_frame .loading.pos2 {
+.home_top_banner_frame .ad_loading {
+    height: 380px;
+    width: 685px;
+}
+.home_top_banner_frame .ad_loading.pos2 {
     margin-left: 686px;
     width: 293px;
 }
-.home_top_banner_frame .loading.pos3 {
+.home_top_banner_frame .ad_loading.pos3 {
     height: 258px;
     margin-top: 381px;
     width: 979px;
+}
+.home_feature_4_images_group .ad_loading {
+    
+}
+.home_feature_3_images_group .ad_loading {
+    
 }

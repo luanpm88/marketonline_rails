@@ -1,4 +1,5 @@
 <ul class="iframe_3_wide_banners">
+  <div class="loading"></div>
   <% @pos.active_ads.limit(3).each do |ad| %>
     <li>
       <a href="<%= click_ads_path(id: ad) %>" target="_blank">
