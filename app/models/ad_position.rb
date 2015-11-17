@@ -115,13 +115,13 @@ class AdPosition < ActiveRecord::Base
   def get_remaining_days(type=nil)
     recent_ad = active_ads.order("end_at").where("end_at >= ?", Time.now).first
     if type == "date"
-      return "" if recent_ad.nil?
+      return {time: "", pos: self} if recent_ad.nil?
       {time: recent_ad.end_at.strftime("%d/%m/%Y"), pos: self}
     elsif type == "day"
-      return "" if recent_ad.nil?
+      return {time: "", pos: self} if recent_ad.nil?
       (recent_ad.end_at.to_date - Date.today).to_s
     else
-      recent_ad.nil? ? Date.today : recent_ad.end_at
+      recent_ad.nil? ? {time: "", pos: self} : {time: recent_ad.end_at.strftime("%d/%m/%Y"), pos: self}
     end
   end
   
