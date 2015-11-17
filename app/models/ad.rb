@@ -122,7 +122,6 @@ class Ad < ActiveRecord::Base
               "<div class=\"text-center\">#{(item.pb_member.display_name if !item.pb_member.nil?)}</div>",
               "<div class=\"text-center\">#{item.click_count.to_s}</div>",
               "<div class=\"text-center\">#{item.display_status}</div>",
-              "<div class=\"text-center\">#{item.display_active_status}</div>",
               "<div class=\"text-right\"><ul class=\"icons-list\">"+
                   "<li class=\"dropup\">"+
                       "<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\"><i class=\"icon-menu7\"></i></a>"+
@@ -413,11 +412,15 @@ class Ad < ActiveRecord::Base
   end
   
   def display_status
-    if paid?
-      "<span class=\"ad_status label bg-blue\">Đã thanh toán</span>"
+    if active == 1
+      "<span class=\"ad_status label bg-green\">Đã kích hoạt</span>"
     else
-      "<span class=\"ad_status label bg-draft\">Đang soạn</span>"
-    end    
+      if paid?
+        "<span class=\"ad_status label bg-blue\" title=\"Đang chờ kích hoạt\">Đã thanh toán</span>"
+      else
+        "<span class=\"ad_status label bg-draft\" title=\"Đang đợi thanh toán\">Đang soạn</span>"
+      end
+    end
   end
   
   def display_active_status
