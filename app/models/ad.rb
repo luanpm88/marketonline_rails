@@ -360,7 +360,7 @@ class Ad < ActiveRecord::Base
   
   def current_step
     return 0 if id.nil?
-    return 1
+    return 0
   end
   
   def total_price
