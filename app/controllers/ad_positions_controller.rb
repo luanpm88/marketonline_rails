@@ -82,8 +82,8 @@ class AdPositionsController < ApplicationController
   end
   
   def get_values
-    start_date = "#{@ad_position.get_remaining_days[:time]}"
-    end_date = ""
+    start_date = "#{@ad_position.available_date.strftime("%d-%m-%Y")}"
+    end_date = "#{(@ad_position.available_date+1.month).strftime("%d-%m-%Y")}"
     render json: {pos: @ad_position, start_date: start_date, end_date: end_date}
   end
   
