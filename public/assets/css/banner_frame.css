@@ -5,17 +5,17 @@ body {
 }
 .home_top_banner_frame {
     float: left;
-    border: solid 1px #eee;
+    border: solid 1px #ddd;
     border-left: none;
     height: 639px;
 }
 .home_top_banner_1_2 {
     float: left;
-    border-bottom: solid 1px #eee;
+    border-bottom: solid 1px #ddd;
 }
 .home_top_banner_1 {
     float: left;
-    border-right: solid 1px #eee;
+    border-right: solid 1px #ddd;
 }
 .home_top_banner_2 {
     float: left;
@@ -275,7 +275,6 @@ body {
     background: #fff url("../../img/ajax_loading.gif") no-repeat scroll center center;
     display: block;
     height: 380px;
-    margin: 0 0 0 1px;
     position: absolute;
     width: 685px;
     z-index: 100;
