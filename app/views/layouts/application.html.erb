@@ -150,7 +150,11 @@
 									<img src="<%= @current_user.image %>" class="img-circle img-sm" alt="">
 								<% end %>
 								<div class="media-body">
-									<% if @current_user.pb_company.present? %><span class="media-heading text-semibold"><%= @current_user.pb_company.shop_name %></span><% end %>
+									<% if @current_user.pb_company.present? %>
+										<a target="_blank" href="<%= @current_user.shop_url %>">
+											<span class="media-heading text-semibold"><%= @current_user.pb_company.shop_name %></span>
+										</a>
+									<% end %>
 									
 									<div class="text-size-mini text-muted">
 										<span class="media-heading text-size-small"><i class="icon-user text-size-small"></i> <%= @current_user.display_name %></span>
