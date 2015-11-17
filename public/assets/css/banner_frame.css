@@ -74,7 +74,7 @@ body {
 }
 .home_feature_4_images_group .box_1 {
     border-right: medium none;
-    height: 417px;
+    height: 416px;
     overflow: hidden;
     width: 430px;
 }
@@ -291,8 +291,13 @@ body {
     width: 979px;
 }
 .home_feature_4_images_group .ad_loading {
-    
+    height: 475px;
+    margin: 1px 0 0 1px;
+    width: 571px;
 }
+
 .home_feature_3_images_group .ad_loading {
-    
+    height: 457px;
+    margin: 1px 0 0 1px;
+    width: 265px;
 }
