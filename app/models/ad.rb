@@ -403,7 +403,7 @@ class Ad < ActiveRecord::Base
     if paid?
       "<span class=\"label bg-blue\">Đang chạy</span>"
     else
-      "<span class=\"label bg-grey-400\">Đang soạn</span>"
+      "<span class=\"label bg-draft\">Đang soạn</span>"
     end    
   end
 end
