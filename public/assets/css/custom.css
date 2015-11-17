@@ -226,8 +226,18 @@
     background: #ff7043
 }
 .ad_status {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
     border-radius: 20px;
-    padding: 1px 8px;
+    border: none;
+    font-size: 100%;
+    font-weight: bold;
+    padding: 0;
+    color: #03a9f4;
+    text-transform: none;
+    font-weight: normal;
+}
+.ad_status.bg-draft {
+    color: #ff7043;
 }
 a:hover {
     opacity: 0.8;
