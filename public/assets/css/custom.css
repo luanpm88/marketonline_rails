@@ -201,6 +201,8 @@
     display: block;
     position: relative;
     width: 100%;
+    margin-left: 0;
+    margin-right: 0;
 }
 @media screen and (min-width: 769px) {
     .footer {
@@ -232,5 +234,8 @@ a:hover {
 }
 .footer_inner {
     border-top: 2px solid #fff;
+    display: block;
+    float: left;
     padding: 20px 40px;
+    width: 100%;
 }
