@@ -239,3 +239,8 @@ a:hover {
     padding: 20px 40px;
     width: 100%;
 }
+legend {
+    font-size: 13px;
+    color: #3b984c;
+    font-weight: bold;
+}
