@@ -413,7 +413,7 @@ class Ad < ActiveRecord::Base
   
   def display_status
     if active == 1
-      "<span class=\"ad_status label bg-green\">Đã kích hoạt</span>"
+      "<span class=\"ad_status label bg-green\" title=\"Đang chạy quảng cáo\">Đã kích hoạt</span>"
     else
       if paid?
         "<span class=\"ad_status label bg-blue\" title=\"Đang chờ kích hoạt\">Đã thanh toán</span>"
