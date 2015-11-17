@@ -113,12 +113,12 @@ class AdPosition < ActiveRecord::Base
   end
   
   def available_date
-    result = active_ads.order("end_at").where("end_at >= ?", Time.now).first
+    result = active_ads.order("end_at").where("end_at >= ?", Time.now).limit(self.number_of_ad)
+    result = result[self.number_of_ad-1]
     result.nil? ? Time.now : result.end_at
   end
   
   def get_remaining_days(type=nil)
-    
     if type == "date"
       return {time: "", pos: self} if available_date < Time.now.end_of_day
       {time: available_date.strftime("%d-%m-%Y"), pos: self}
