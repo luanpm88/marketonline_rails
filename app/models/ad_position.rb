@@ -121,12 +121,12 @@ class AdPosition < ActiveRecord::Base
     
     if type == "date"
       return {time: "", pos: self} if available_date < Time.now.end_of_day
-      {time: available_date.end_at.strftime("%d-%m-%Y"), pos: self}
+      {time: available_date.strftime("%d-%m-%Y"), pos: self}
     elsif type == "day"
       return {time: "", pos: self} if available_date < Time.now.end_of_day
-      (available_date.end_at.to_date - Date.today).to_s
+      (available_date.to_date - Date.today).to_s
     else
-      available_date < Time.now.end_of_day ? {time: "", pos: self} : {time: available_date.end_at.strftime("%d-%m-%Y"), pos: self}
+      available_date < Time.now.end_of_day ? {time: "", pos: self} : {time: available_date.strftime("%d-%m-%Y"), pos: self}
     end
   end
   
