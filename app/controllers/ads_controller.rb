@@ -174,6 +174,24 @@ class AdsController < ApplicationController
     @ad.update_attribute(:nganluong_return_url, request.original_url)
     render nothing: true
   end
+  
+  def enable
+    @message = "Quảng cáo <strong>#{@ad.name}</strong> đã được kích hoạt."
+    @ad.update_attribute(:active, 1)
+    respond_to do |format|      
+      format.html { render "/home/ajax_success", layout: nil }
+      format.json { head :no_content }
+    end
+  end
+  
+  def disable
+    @message = "Quảng cáo <strong>#{@ad.name}</strong> đã được hủy kích hoạt."
+    @ad.update_attribute(:active, 0)
+    respond_to do |format|      
+      format.html { render "/home/ajax_success", layout: nil }
+      format.json { head :no_content }
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

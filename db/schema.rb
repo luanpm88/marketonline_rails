@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151117042838) do
+ActiveRecord::Schema.define(version: 20151117082309) do
 
   create_table "ad_clicks", force: :cascade do |t|
     t.integer  "ad_id",         limit: 4
@@ -50,8 +50,8 @@ ActiveRecord::Schema.define(version: 20151117042838) do
     t.string   "image",                limit: 255
     t.integer  "user_id",              limit: 4
     t.string   "status",               limit: 255
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
+    t.datetime "created_at",                                                    null: false
+    t.datetime "updated_at",                                                    null: false
     t.integer  "pb_member_id",         limit: 4
     t.string   "type_name",            limit: 255
     t.integer  "pb_product_id",        limit: 4
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 20151117042838) do
     t.decimal  "price",                              precision: 10
     t.decimal  "display_price",                      precision: 10
     t.string   "display_price_unit",   limit: 255
+    t.integer  "active",               limit: 4,                    default: 0
   end
 
   create_table "email", force: :cascade do |t|

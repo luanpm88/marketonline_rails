@@ -122,12 +122,14 @@ class Ad < ActiveRecord::Base
               "<div class=\"text-center\">#{(item.pb_member.display_name if !item.pb_member.nil?)}</div>",
               "<div class=\"text-center\">#{item.click_count.to_s}</div>",
               "<div class=\"text-center\">#{item.display_status}</div>",
+              "<div class=\"text-center\">#{item.display_active_status}</div>",
               "<div class=\"text-right\"><ul class=\"icons-list\">"+
                   "<li class=\"dropup\">"+
                       "<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\"><i class=\"icon-menu7\"></i></a>"+
                       "<ul class=\"dropdown-menu dropdown-menu-right\">"+
                           "<li>#{item.statistic_link}</li>"+
                           "<li>#{item.edit_link}</li>"+
+                          "<li>#{item.enable_disable_link}</li>"+
                           "<li>#{item.destroy_link}</li>"+
                       "</ul>"+
                   "</li>"+
@@ -280,6 +282,17 @@ class Ad < ActiveRecord::Base
     link_helper.link_to("<i class=\"icon-bin\"></i> Xóa".html_safe, {controller: "ads", action: "delete", id: self.id}, method: :delete, data: { confirm: 'Bạn có chắc muốn xóa quảng cáo này?' }, class: "ajax_link")
   end
   
+  def enable_disable_link
+    ActionView::Base.send(:include, Rails.application.routes.url_helpers)
+    link_helper = ActionController::Base.helpers
+    
+    if active == 1
+      link_helper.link_to("<i class=\"icon-cross2\"></i> Hủy kích hoạt".html_safe, {controller: "ads", action: "disable", id: self.id}, method: :delete, data: { confirm: 'Bạn có chắc muốn hủy kích hoạt quảng cáo này?' }, class: "ajax_link")
+    else
+      link_helper.link_to("<i class=\"icon-checkmark\"></i> Kích hoạt".html_safe, {controller: "ads", action: "enable", id: self.id}, method: :delete, data: { confirm: 'Bạn có chắc muốn kích hoạt quảng cáo này?' }, class: "ajax_link")
+    end
+  end
+  
   def edit_link
     ActionView::Base.send(:include, Rails.application.routes.url_helpers)
     link_helper = ActionController::Base.helpers
@@ -401,9 +414,17 @@ class Ad < ActiveRecord::Base
   
   def display_status
     if paid?
-      "<span class=\"ad_status label bg-blue\">Đang chạy</span>"
+      "<span class=\"ad_status label bg-blue\">Đã thanh toán</span>"
     else
       "<span class=\"ad_status label bg-draft\">Đang soạn</span>"
+    end    
+  end
+  
+  def display_active_status
+    if active == 1
+      "<span class=\"ad_status label bg-blue\">Đã kích hoạt</span>"
+    else
+      "<span class=\"ad_status label bg-draft\">Chưa kích hoạt</span>"
     end    
   end
 end

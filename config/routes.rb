@@ -15,6 +15,8 @@ Rails.application.routes.draw do
       get 'click'
       get 'chart'
       get 'get_nganluong_checkout_return'
+      get 'enable'
+      get 'disable'
     end
   end
   resources :ad_positions do
