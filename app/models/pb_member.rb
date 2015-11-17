@@ -17,4 +17,8 @@ class PbMember < ActiveRecord::Base
       "/app/assets/images/placeholder.jpg"
     end
   end
+  
+  def shop_url
+    pb_company.nil? ? nil : "/#{pb_company.cache_spacename}"
+  end
 end

@@ -100,7 +100,13 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown dropdown-user">
 					<a class="dropdown-toggle" data-toggle="dropdown">
-						<img src="<%= @current_user.image %>" alt="">
+						<% !if @current_user.shop_url.nil? %>
+							<a target="_blank" href="<%= @current_user.shop_url %>">
+								<img src="<%= @current_user.image %>" alt="">
+							</a>
+						<% else %>
+							<img src="<%= @current_user.image %>" alt="">
+						<% end %>
 						<span><%= @current_user.display_name %></span>
 						<i class="caret"></i>
 					</a>
@@ -136,7 +142,13 @@
 					<div class="sidebar-user">
 						<div class="category-content">
 							<div class="media">
-								<a href="#" class="media-left"><img src="<%= @current_user.image %>" class="img-circle img-sm" alt=""></a>
+								<% if !@current_user.shop_url.nil? %>
+									<a target="_blank" href="<%= @current_user.shop_url %>" class="media-left">
+										<img src="<%= @current_user.image %>" class="img-circle img-sm" alt="">
+									</a>
+								<% else %>
+									<img src="<%= @current_user.image %>" class="img-circle img-sm" alt="">
+								<% end %>
 								<div class="media-body">
 									<% if @current_user.pb_company.present? %><span class="media-heading text-semibold"><%= @current_user.pb_company.shop_name %></span><% end %>
 									
