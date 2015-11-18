@@ -264,11 +264,12 @@ body {
     text-decoration: none;
 }
 .iframe_3_wide_banners li a.title {
-    background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0;
+    background: rgba(0, 120, 0, 0.8) none repeat scroll 0 0;
     color: #fff;
     float: right;
-    margin-top: -25px;
-    padding: 0 10px;
+    height: 28px;
+    margin-top: -29px;
+    padding: 2px 10px;
     position: absolute;
     width: auto;
 }
