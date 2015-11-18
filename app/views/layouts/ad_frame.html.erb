@@ -16,12 +16,12 @@
       <script>
         
         function customSlide(class_name, per_line, time) {
-          var slide = $("."+class_name)
+          var slide = $(class_name)
           slide.find("li").each(function() {
               slide.append($(this).clone())
           })
           
-          setInterval("moveSlide3Lest($('."+class_name+"'), 5)", time)
+          setInterval("moveSlide3Lest($('"+class_name+"'), 5)", time)
         }
         
         function moveSlide3Lest(slide, per_line) {         
