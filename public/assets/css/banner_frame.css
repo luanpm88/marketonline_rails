@@ -245,6 +245,7 @@ body {
     margin: 0;
     padding: 0;
     width: 9000000px;
+    position: absolute;
 }
 .iframe_3_wide_banners li {
     float: left;
@@ -304,10 +305,11 @@ body {
     margin: 1px 0 0 1px;
     width: 265px;
 }
-
 .ad_slider {
     display: block;
     float: left;
+    height: 140px;
     overflow: hidden;
+    position: absolute;
     width: 1188px;
 }
