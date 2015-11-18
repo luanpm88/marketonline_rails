@@ -17,7 +17,7 @@
         
         function customSlide(class_name, per_line, space, time) {          
           var slide = $(class_name)
-          if (slide.find("li").length <= per_line ) {
+          if (slide.find("li").length < per_line ) {
             return
           }
           slide.find("li").each(function() {
