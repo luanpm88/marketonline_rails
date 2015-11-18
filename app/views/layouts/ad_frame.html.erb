@@ -24,10 +24,11 @@
               slide.append($(this).clone())
           })
           
-          setInterval("moveSlide3Lest($('"+class_name+"'), 5, "+space+")", time)
+          setInterval("moveSlide3Lest("+class_name+", "+per_line+", "+space+")", time)
         }
         
-        function moveSlide3Lest(slide, per_line, space) {         
+        function moveSlide3Lest(class_name, per_line, space) {
+            var slide = $(class_name)
             var step = 1
             var count = slide.find("li").length
             var item_width = slide.find("li").width()+space
@@ -61,7 +62,7 @@
           // slide show
           //append more item
           customSlide(".home_top_banner_3_slide", 5, 1, 3000)
-          customSlide(".iframe_3_wide_banners", 3, 22, 3000)
+          //customSlide(".iframe_3_wide_banners", 3, 22, 3000)
         })
       </script>
   </head>
