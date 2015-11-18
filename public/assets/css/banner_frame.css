@@ -264,7 +264,7 @@ body {
     text-decoration: none;
 }
 .iframe_3_wide_banners li a.title {
-    background: rgba(0, 120, 0, 0.8) none repeat scroll 0 0;
+    background: #7cb342; /*rgba(0, 120, 0, 0.8) none repeat scroll 0 0;*/
     color: #fff;
     float: right;
     height: 28px;
