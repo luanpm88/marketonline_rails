@@ -41,6 +41,7 @@ gem 'geocoder'
 gem 'geo_ip'
 gem 'savon'
 gem "cancan"
+gem 'rack-cors', :require => 'rack/cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
