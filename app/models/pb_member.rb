@@ -10,9 +10,9 @@ class PbMember < ActiveRecord::Base
   
   def image
     if !pb_company.nil? && pb_company.picture.present?
-      "/attachment/#{pb_company.picture}"
+      "http://marketonline.vn/attachment/#{pb_company.picture}"
     elsif photo.present?
-      "/attachment/#{photo}"
+      "http://marketonline.vn/attachment/#{photo}"
     else
       "/app/assets/images/placeholder.jpg"
     end

@@ -11,7 +11,7 @@ class PbCompany < ActiveRecord::Base
     if !photo.present?
       "assets/images/placeholder.jpg"
     else
-      "attachment/#{photo}"
+      "http://marketonline.vn/attachment/#{photo}"
     end
   end
 end
