@@ -244,3 +244,6 @@ legend {
     color: #ff7043;
     font-weight: bold;
 }
+.width100 {
+    width: 70%;
+}

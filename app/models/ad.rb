@@ -90,6 +90,17 @@ class Ad < ActiveRecord::Base
       @records = @records.where(pb_member_id: user.id)
     end
     
+    # FILTERS
+    filters = {}
+    if params["filters"].present?      
+      params["filters"].split('&').each do |row|
+        filters[row.split("=")[0]] = row.split("=")[1]
+      end
+      
+      if filters["ad_position_id"].present?
+        @records = @records.where(ad_position_id: filters["ad_position_id"])
+      end      
+    end    
     
     order = "ads.name DESC"
     if !params["order"].nil?

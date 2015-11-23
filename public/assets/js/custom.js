@@ -383,8 +383,7 @@ $(document).ready(function() {
         }
     });
     
-    // AJAX sourced data
-    
+    // AJAX sourced data    
     $('.datatable-ajax').each (function() {
         var item = $(this)
         var box = $(this).parents(".datatable_box")
@@ -416,9 +415,6 @@ $(document).ready(function() {
                     d.filters = filters.serialize()
                 }
             },
-            //"fnServerData": function ( sSource, aoData, fnCallback ) {
-            //    alert("aaa");
-            //},
             "language": {
                 "url": URL+"assets/js/datatable_vietnamese.json"
             },
@@ -436,6 +432,11 @@ $(document).ready(function() {
                 });
             }            
         });
+    })
+    
+    $(".datatable_filter select").change(function() {
+        var box = $(this).parents(".datatable_box")
+        box.find("table").dataTable().fnFilter()
     })
     
     //var validator = $(".form-validate-jquery").validate({
@@ -471,7 +472,7 @@ $(document).ready(function() {
     
     $('input.number_input').number(true, 0);
     
-    $('.select').select2();
+    $('.select').select2({ width: 'resolve' });
 
     //ajax select2 for contacts
     $('.select2-ajax').each(function() {
