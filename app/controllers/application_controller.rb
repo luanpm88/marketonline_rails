@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   before_filter :app_variable
   
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to "http://marketonline.vn/logging.php?return_page=#{Rack::Utils.escape(request.fullpath)}"
+    redirect_to "http://marketonline.vn/logging.php?return_page=#{Rack::Utils.escape("http://marketonline.vn:3000"+request.fullpath)}"
   end
   
   def app_variable
