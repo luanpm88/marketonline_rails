@@ -14,13 +14,11 @@ function formatAdPositionOption(result) {
                 icon = 'transmission'
             } else if(text.indexOf("thương hiệu") > -1) {
                 icon = 'users4'
-            } else if(text.indexOf("thương hiệu") > -1) {
-                icon = 'users4'
             } else if(text.indexOf("học") > -1) {
                 icon = 'compose'
             }
             
-            return "<i class=\"icon-"+icon+"\"></i> "+result.text
+            return "<i class=\"ad_position_icon icon-"+icon+"\"></i> "+result.text
         }
 
 function loadDaterange(item, start_date, end_date) {

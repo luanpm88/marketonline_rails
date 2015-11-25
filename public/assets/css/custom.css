@@ -247,3 +247,24 @@ legend {
 .width100 {
     width: 100%;
 }
+.ad_position_icon.vcard {
+    
+}
+.ad_position_icon.home2 {
+    color: #e53238;
+}
+.ad_position_icon.alarm {
+    color: #ffa544;
+}
+.ad_position_icon.cart5 {
+    color: #1acfac;
+}
+.ad_position_icon.transmission {
+    color: #57BAE8;
+}
+.ad_position_icon.users4 {
+    color: #fe7477;
+}
+.ad_position_icon.compose {
+    color: #7ad04d;
+}
