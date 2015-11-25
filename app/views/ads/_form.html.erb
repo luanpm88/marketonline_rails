@@ -38,10 +38,10 @@
 											
 											<div class="form-group">
 												<div class="row">
-													<div class="col-md-3" style="min-width: 140px">
+													<div class="col-md-3">
 														<label>Vị trí đặt Quảng cáo <span class="text-danger">*</span></label>
 													</div>
-													<div class="col-md-8">
+													<div class="col-md-9">
 														<%= f.select("ad_position_id", AdPosition.order("name").collect {|p| [ p.display_name_option, p.id ] }, { include_blank: "- Chọn vị trí -"} , {class: "select width100", required: "required" }) %>
 													</div>
 												</div>
