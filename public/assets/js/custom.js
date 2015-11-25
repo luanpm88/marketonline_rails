@@ -1,13 +1,11 @@
 function formatAdPositionOption(result) {
-            var icon = '';
-             
-            if (result.text) {
-                //code
+            var icon = ''
+            var text = result.text.toLowerCase()
+            if (s.indexOf("trang chủ") > -1) {
+                icon = 'home'
             }
             
-            alert(result.text.toLowerCase())
-            
-            return "<i class=\"option-\"></i> "+result.text
+            return "<i class=\"option-"+icon+"\"></i> "+result.text
         }
 
 function loadDaterange(item, start_date, end_date) {
