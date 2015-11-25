@@ -337,8 +337,8 @@ class Ad < ActiveRecord::Base
   
   def self.type_name_options
     [
-      ["Hình ảnh & Liên kết","image"],
-      ["Sản phẩm/Dịch vụ","product"]
+      ["Liên kết đến trang","image"],
+      ["Sản phẩm/Dịch vụ từ Gian hàng trên MatketOnline","product"]
       #,
       #["Thương mại","trade"],
       #["Thương hiệu","company"],
