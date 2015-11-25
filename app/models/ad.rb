@@ -339,13 +339,6 @@ class Ad < ActiveRecord::Base
     [
       ["Liên kết đến trang","image"],
       ["Sản phẩm/Dịch vụ từ Gian hàng trên MatketOnline","product"]
-      #,
-      #["Thương mại","trade"],
-      #["Thương hiệu","company"],
-      #["Tuyển dụng","employer"],
-      #["Ứng viên","employee"],
-      #["Trường học","school"],
-      #["Lớp học","class"]
     ]
   end
   
