@@ -16,6 +16,8 @@ function formatAdPositionOption(result) {
                 icon = 'users4'
             } else if(text.indexOf("thương hiệu") > -1) {
                 icon = 'users4'
+            } else if(text.indexOf("học") > -1) {
+                icon = 'compose'
             }
             
             return "<i class=\"icon-"+icon+"\"></i> "+result.text
