@@ -22,6 +22,9 @@ class AdPosition < ActiveRecord::Base
   def day_price=(new)
     self[:day_price] = new.to_s.gsub(/\,/, '')
   end
+  def display_order=(new)
+    self[:display_order] = new.to_s.gsub(/\,/, '')
+  end
   
   def self.datatable(params)    
     @records = self.all_items
