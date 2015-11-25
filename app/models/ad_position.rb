@@ -96,28 +96,24 @@ class AdPosition < ActiveRecord::Base
 
   def display_name_option
     "#{title} (#{display_size})"
-  end
-  
+  end  
   def destroy_link
     ActionView::Base.send(:include, Rails.application.routes.url_helpers)
     link_helper = ActionController::Base.helpers
     
     link_helper.link_to("<i class=\"icon-bin\"></i> Xóa".html_safe, {controller: "ad_positions", action: "delete", id: self.id}, method: :delete, data: { confirm: 'Are you sure?' })
-  end
-  
+  end  
   def edit_link
     ActionView::Base.send(:include, Rails.application.routes.url_helpers)
     link_helper = ActionController::Base.helpers
     
     link_helper.link_to("<i class=\"icon-pencil\"></i> Sửa".html_safe, {controller: "ad_positions", action: "edit", id: self.id})
-  end
-  
+  end  
   def available_date
     result = active_ads.order("end_at").where("end_at >= ?", Time.now).limit(self.number_of_ad)
-    result = result[self.number_of_ad-1]
+    result = result.first
     result.nil? ? Time.now : result.end_at
-  end
-  
+  end  
   def get_remaining_days(type=nil)
     if type == "date"
       return {time: "", pos: self} if available_date < Time.now.end_of_day
