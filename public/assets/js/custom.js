@@ -1,7 +1,7 @@
 function formatAdPositionOption(result) {
             var icon = ''
             var text = result.text.toLowerCase()
-            if (s.indexOf("trang chủ") > -1) {
+            if (text.indexOf("trang chủ") > -1) {
                 icon = 'home'
             }
             
