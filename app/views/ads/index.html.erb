@@ -18,7 +18,7 @@
 									<div class="col-md-1" style="min-width: 140px">
 										<label>Vị trí đặt Quảng cáo</label>
 									</div>
-									<div class="col-md-6">										
+									<div class="col-md-5">										
 										<%= select_tag "ad_position_id", options_for_select(AdPosition.order("name").collect {|p| [ p.display_name_option, p.id ] }), {include_blank: "Tất cả", class: "select width100"} %>
 									</div>
 								</div>
