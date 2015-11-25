@@ -1,25 +1,13 @@
 function formatAdPositionOption(result) {
-            var url = '';
+            var icon = '';
              
-            switch (result.text) {
-              case 'apple':
-                url = 'apple.png';
-                break;
-              case 'banana':
-                url = 'banana.png';
-                break;
-              case 'grape':
-                url = 'grapes.gif';
-                break;
-              case 'lime':
-                url = 'lime.png';
-                break;
-              case 'orange':
-                url = 'orange.png';
-                break;
+            if (result.text) {
+                //code
             }
             
-            return "<i class=\"icon-home2\"></i> "+result.text
+            alert(result.text.toLowerCase())
+            
+            return "<i class=\"option-\"></i> "+result.text
         }
 
 function loadDaterange(item, start_date, end_date) {
