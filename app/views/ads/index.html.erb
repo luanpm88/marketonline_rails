@@ -15,7 +15,7 @@
 						<div class="panel-body">
 							<form class="datatable_filter">
 								<div class="row">
-									<div class="col-md-6">
+									<div class="col-md-7">
 										<label>Vị trí đặt Quảng cáo</label>
 										<%= select_tag "ad_position_id", options_for_select(AdPosition.order("name").collect {|p| [ p.display_name_option, p.id ] }), {include_blank: "Tất cả", class: "select width100"} %>
 									</div>
