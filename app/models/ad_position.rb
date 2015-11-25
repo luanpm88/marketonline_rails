@@ -127,7 +127,7 @@ class AdPosition < ActiveRecord::Base
   end
   
   def self.all_items
-    self.order("diplay_order")
+    self.order("display_order")
   end
   
 end
