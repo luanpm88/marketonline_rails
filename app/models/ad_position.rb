@@ -24,7 +24,7 @@ class AdPosition < ActiveRecord::Base
   end
   
   def self.datatable(params)    
-    @records = self.all
+    @records = self.all_items
     
     order = "ad_positions.name"
     if !params["order"].nil?
@@ -124,6 +124,10 @@ class AdPosition < ActiveRecord::Base
     else
       available_date < Time.now.end_of_day ? {time: "", pos: self} : {time: available_date.strftime("%d-%m-%Y"), pos: self}
     end
+  end
+  
+  def self.all_items
+    self.order("diplay_order")
   end
   
 end

@@ -19,7 +19,7 @@
 										<label>Vị trí đặt Quảng cáo</label>
 									</div>
 									<div class="col-md-5">										
-										<%= select_tag "ad_position_id", options_for_select(AdPosition.order("name").collect {|p| [ p.display_name_option, p.id ] }), {include_blank: "Tất cả", class: "select width100"} %>
+										<%= select_tag "ad_position_id", options_for_select(AdPosition.all_items.collect {|p| [ p.display_name_option, p.id ] }), {include_blank: "Tất cả", class: "select width100"} %>
 									</div>
 								</div>
 							</form>
