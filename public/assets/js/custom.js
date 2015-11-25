@@ -1,5 +1,5 @@
 function formatAdPositionOption(result) {
-            var icon = ''
+            var icon = 'menu9'
             var text = result.text.toLowerCase()
             
             if (text.indexOf("trang chủ cá nhân") > -1) {
