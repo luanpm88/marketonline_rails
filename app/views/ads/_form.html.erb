@@ -486,7 +486,7 @@
 		if ($("input[name='ad[max_budget]']").length && $("input[name='ad[max_budget]']").val() != "") {
 			input_click_budget = parseFloat($("input[name='ad[max_budget]']").val().replace(/,/g,""))
 		}
-		alert(input_click_budget)
+		// alert(input_click_budget)
 		if ($("input[name='ad[days]']").length && $("input[name='ad[days]']").val() != "") {
 			input_day_number = parseFloat($("input[name='ad[days]']").val().replace(/,/g,""))
 		}
@@ -787,7 +787,11 @@
 			getAdPositionValues()
 		})
 		
-		$(document).on("keyup change", "input[name='ad[max_budget]'], input[name='ad[days]'], input[name='ad[start_at]'], input[name='ad[end_at]']", function() {
+		$(document).on("keyup", "input[name='ad[max_budget]'], input[name='ad[days]'], input[name='ad[start_at]'], input[name='ad[end_at]']", function() {
+			calculateAdPrices()
+		})
+		
+		$(document).on("change", "input[name='ad[max_budget]'], input[name='ad[days]'], input[name='ad[start_at]'], input[name='ad[end_at]']", function() {
 			calculateAdPrices()
 		})
 		
