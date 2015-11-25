@@ -3,6 +3,8 @@ function formatAdPositionOption(result) {
             var text = result.text.toLowerCase()
             if (text.indexOf("trang chủ") > -1) {
                 icon = 'home2'
+            } else if(text.indexOf("dịch vụ") > -1) {
+                icon = 'alarm'
             }
             
             return "<i class=\"icon-"+icon+"\"></i> "+result.text
