@@ -58,6 +58,7 @@ class AdPosition < ActiveRecord::Base
               "<div class=\"text-center\">#{item.display_size}</div>",              
               "<div class=\"text-center\">#{item.created_at.strftime("%d-%m-%Y")}</div>",              
               "<div class=\"text-right\">#{item.display_prices}</div>",
+              "<div class=\"text-center\">#{item.display_order}</div>",
               "<div class=\"text-right\"><ul class=\"icons-list\">"+
                   "<li class=\"dropup\">"+
                       "<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\"><i class=\"icon-menu7\"></i></a>"+
