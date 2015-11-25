@@ -45,7 +45,6 @@
 														<%= f.select("ad_position_id", AdPosition.order("name").collect {|p| [ p.display_name_option, p.id ] }, { include_blank: "- Chọn vị trí -"} , {class: "select width100", required: "required" }) %>
 													</div>
 												</div>
-												
 											</div>
 											
 											<div class="picture_box" style="display: none">
