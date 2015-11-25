@@ -787,11 +787,9 @@
 			getAdPositionValues()
 		})
 		
-		$(document).on("keyup", "input[name='ad[max_budget]'], input[name='ad[days]'], input[name='ad[start_at]'], input[name='ad[end_at]']", function() {
+		$("input[name='ad[max_budget]'], input[name='ad[days]'], input[name='ad[start_at]'], input[name='ad[end_at]']").keyup(function() {
 			calculateAdPrices()
-			alert("ddd")
 		})
-		
 		$(document).on("change", "input[name='ad[max_budget]'], input[name='ad[days]'], input[name='ad[start_at]'], input[name='ad[end_at]']", function() {
 			calculateAdPrices()
 		})
