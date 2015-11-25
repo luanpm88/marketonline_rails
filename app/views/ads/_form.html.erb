@@ -18,13 +18,13 @@
 								  <h2><%= pluralize(@ad.errors.count, "error") %> prohibited this ad from being saved:</h2>
 							
 								  <ul>
-								  <% @ad.errors.full_messages.each do |message| %>
-									<li><%= message %></li>
-								  <% end %>
+									<% @ad.errors.full_messages.each do |message| %>
+									  <li><%= message %></li>
+									<% end %>
 								  </ul>
 								</div>
 							<% end %>
-						
+
 							<h6>Nội dung Quảng cáo</h6>
 							<fieldset class="ad_detail_tab">
 								<div class="row">
@@ -522,7 +522,7 @@
 				pd_box.show()
 				$('#ad_start_at').val(data.start_date)
 				$('#ad_end_at').val(data.end_date)
-				calculateAdPrices()				
+				calculateAdPrices()
 			}
 		})
 	}
@@ -641,8 +641,6 @@
 					if ($(".home_top_banner_3").length) {
 						$(".ad_display_price").show()
 					}
-					
-					
 				}
 			})
 		}
