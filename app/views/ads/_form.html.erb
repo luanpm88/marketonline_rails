@@ -35,7 +35,6 @@
 										</div>-->
 										<fieldset class="text-semibold">
 											<legend><i class="icon-file-text position-left"></i> Cài đặt quảng cáo</legend>
-											
 											<div class="form-group">
 												<div class="row">
 													<div class="col-md-2" style="padding-right: 0">
@@ -192,7 +191,7 @@
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>Hình thức trả phí: <span class="text-danger">*</span></label>
-														<select name="ad[payment_type]" data-placeholder="- Chọn hình thức -" class="select required">
+														<select name="ad[payment_type]" data-placeholder="- Chọn hình thức -" class="select required width100">
 															<option></option>
 															<optgroup label="Tất cả hình thức">
 																<option <%= 'selected=selected' if @ad.payment_type.nil? || @ad.payment_type == "per_day" %> value="per_day">Trả theo ngày</option>
@@ -258,7 +257,7 @@
 											<legend><i class="icon-file-text position-left"></i> Thông tin chi tiết</legend>
 											<div class="form-group">
 												<label>Loại quảng cáo <span class="text-danger">*</span></label>
-												<%= select_tag "ad[type_name]", options_for_select(Ad.type_name_options, @ad.type_name), class: "modern_select select required" %>
+												<%= select_tag "ad[type_name]", options_for_select(Ad.type_name_options, @ad.type_name), class: "modern_select select required width100" %>
 											</div>
 											
 											<div class="form-group type_group product_type_group">

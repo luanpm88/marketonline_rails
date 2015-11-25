@@ -247,8 +247,7 @@ legend {
 .width100 {
     width: 100%;
 }
-.ad_position_icon.icon-vcard {
-    
+.ad_position_icon.icon-vcard {    
 }
 .ad_position_icon.icon-home2 {
     color: #e53238;
@@ -268,4 +267,7 @@ legend {
 }
 .ad_position_icon.icon-compose {
     color: #7ad04d;
+}
+.payment_type_group {
+    margin-top: -20px;
 }
