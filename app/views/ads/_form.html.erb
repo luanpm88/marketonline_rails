@@ -38,7 +38,7 @@
 											
 											<div class="form-group">
 												<label>Vị trí đặt Quảng cáo <span class="text-danger">*</span></label>
-												<%= f.select("ad_position_id", AdPosition.order("name").collect {|p| [ p.display_name_option, p.id ] }, { include_blank: "- Chọn vị trí -"} , {class: "select", required: "required" }) %>
+												<%= f.select("ad_position_id", AdPosition.order("name").collect {|p| [ p.display_name_option, p.id ] }, { include_blank: "- Chọn vị trí -"} , {class: "select width100", required: "required" }) %>
 											</div>
 											
 											<div class="picture_box" style="display: none">
