@@ -1,10 +1,21 @@
 function formatAdPositionOption(result) {
             var icon = ''
             var text = result.text.toLowerCase()
-            if (text.indexOf("trang chủ") > -1) {
+            
+            if (text.indexOf("trang chủ cá nhân") > -1) {
+                icon = 'vcard'
+            } else if (text.indexOf("trang chủ") > -1) {
                 icon = 'home2'
             } else if(text.indexOf("dịch vụ") > -1) {
                 icon = 'alarm'
+            } else if(text.indexOf("sản phẩm") > -1) {
+                icon = 'cart5'
+            } else if(text.indexOf("thương mại") > -1) {
+                icon = 'transmission'
+            } else if(text.indexOf("thương hiệu") > -1) {
+                icon = 'users4'
+            } else if(text.indexOf("thương hiệu") > -1) {
+                icon = 'users4'
             }
             
             return "<i class=\"icon-"+icon+"\"></i> "+result.text
