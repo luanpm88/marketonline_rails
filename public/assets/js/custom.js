@@ -539,7 +539,7 @@ $(document).ready(function() {
     
     $(".select_ad_position").select2({        
         formatResult: function(result) {
-            return "<i class=\"icon-plus\"></i> "+result.text
+            return "<i class=\"icon-home2\"></i> "+result.text
         }
     });
     
