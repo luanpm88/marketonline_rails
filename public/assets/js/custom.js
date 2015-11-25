@@ -539,6 +539,49 @@ $(document).ready(function() {
     
     $(".select_ad_position").select2({        
         formatResult: function(result) {
+            var url = '';
+             
+            switch (result.text) {
+              case 'apple':
+                url = 'apple.png';
+                break;
+              case 'banana':
+                url = 'banana.png';
+                break;
+              case 'grape':
+                url = 'grapes.gif';
+                break;
+              case 'lime':
+                url = 'lime.png';
+                break;
+              case 'orange':
+                url = 'orange.png';
+                break;
+            }
+            
+            return "<i class=\"icon-home2\"></i> "+result.text
+        },
+        formatSelection: function(result) {
+            var url = '';
+             
+            switch (result.text) {
+              case 'apple':
+                url = 'apple.png';
+                break;
+              case 'banana':
+                url = 'banana.png';
+                break;
+              case 'grape':
+                url = 'grapes.gif';
+                break;
+              case 'lime':
+                url = 'lime.png';
+                break;
+              case 'orange':
+                url = 'orange.png';
+                break;
+            }
+            
             return "<i class=\"icon-home2\"></i> "+result.text
         }
     });
