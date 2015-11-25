@@ -247,24 +247,24 @@ legend {
 .width100 {
     width: 100%;
 }
-.ad_position_icon.vcard {
+.ad_position_icon.icon-vcard {
     
 }
-.ad_position_icon.home2 {
+.ad_position_icon.icon-home2 {
     color: #e53238;
 }
-.ad_position_icon.alarm {
+.ad_position_icon.icon-alarm {
     color: #ffa544;
 }
-.ad_position_icon.cart5 {
+.ad_position_icon.icon-cart5 {
     color: #1acfac;
 }
-.ad_position_icon.transmission {
+.ad_position_icon.icon-transmission {
     color: #57BAE8;
 }
-.ad_position_icon.users4 {
+.ad_position_icon.icon-users4 {
     color: #fe7477;
 }
-.ad_position_icon.compose {
+.ad_position_icon.icon-compose {
     color: #7ad04d;
 }
