@@ -1,3 +1,4 @@
+<% fullurl = "http://marketonline.vn:3000" %>
 <div class="home_top_banner_frame">
   <div class="ad_loading"></div>
   <div class="ad_loading pos2"></div>
@@ -8,8 +9,8 @@
           <ul class="home_top_banner_1_slide">
             <% @pos_1.active_ads.each do |ad| %>
               <li>
-                <a href="<%= click_ads_path(id: ad) %>" target="_blank">
-                  <img title="" src="<%= ad.image_src(:banner) %>" />
+                <a href="<%= fullurl %><%= click_ads_path(id: ad) %>" target="_blank">
+                  <img title="" src="<%= fullurl %><%= ad.image_src(:banner) %>" />
                 </a>
               </li>
             <% end %>
@@ -21,8 +22,8 @@
           <ul class="home_top_banner_2_slide">
             <% @pos_2.active_ads.each do |ad| %>
               <li>
-                <a href="<%= click_ads_path(id: ad) %>" target="_blank">
-                  <img title="" src="<%= ad.image_src(:banner) %>" />
+                <a href="<%= fullurl %><%= click_ads_path(id: ad) %>" target="_blank">
+                  <img title="" src="<%= fullurl %><%= ad.image_src(:banner) %>" />
                 </a>
               </li>
             <% end %>
@@ -35,8 +36,8 @@
       <ul class="home_top_banner_3_slide">
         <% @pos_3.active_ads.each do |ad| %>
           <li>
-            <a href="<%= click_ads_path(id: ad) %>" target="_blank">
-              <img title="<%= ad.name %>" src="<%= ad.image_src(:banner) %>" />
+            <a href="<%= fullurl %><%= click_ads_path(id: ad) %>" target="_blank">
+              <img title="<%= ad.name %>" src="<%= fullurl %><%= ad.image_src(:banner) %>" />
             </a>
             <br />
             <a class="home_top_banner_3_title" href="">
