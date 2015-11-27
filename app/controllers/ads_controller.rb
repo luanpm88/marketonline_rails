@@ -99,7 +99,7 @@ class AdsController < ApplicationController
         elsif @ad.ad_position.style_name == "3_images_group"
           render "/ads/preview", layout: nil
         else
-          render text: "<img src=\"#{@ad.image_src(params[:type])}\" />"
+          render text: "<img src=\"#{@ad.image_url(params[:type])}\" />"
         end
       else
         render text: "<img src=\"#{root_path}img/no_img.jpg\" />"
