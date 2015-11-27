@@ -222,7 +222,7 @@ class Ad < ActiveRecord::Base
     ActionView::Base.send(:include, Rails.application.routes.url_helpers)
     link_helper = ActionController::Base.helpers
     
-    link_helper.link_to(display_image_2(:square), image_url(:banner), class: "fancybox.image fancybox ad_link", title: name)
+    link_helper.link_to(display_image_2(:square), image_src(:banner), class: "fancybox.image fancybox ad_link", title: name)
   end
   
   
@@ -252,7 +252,7 @@ class Ad < ActiveRecord::Base
     ActionView::Base.send(:include, Rails.application.routes.url_helpers)
     link_helper = ActionController::Base.helpers
     
-    link_helper.link_to(display_image_3(:square), image_url(:banner), class: "fancybox.image fancybox ad_link", title: name)
+    link_helper.link_to(display_image_3(:square), image_src(:banner), class: "fancybox.image fancybox ad_link", title: name)
   end
   
   
@@ -282,7 +282,7 @@ class Ad < ActiveRecord::Base
     ActionView::Base.send(:include, Rails.application.routes.url_helpers)
     link_helper = ActionController::Base.helpers
     
-    link_helper.link_to(display_image_4(:square), image_url(:banner), class: "fancybox.image fancybox ad_link", title: name)
+    link_helper.link_to(display_image_4(:square), image_src(:banner), class: "fancybox.image fancybox ad_link", title: name)
   end
   
   def destroy_link
