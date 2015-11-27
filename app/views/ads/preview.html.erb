@@ -1,28 +1,28 @@
 <% if @ad.ad_position.style_name == "3_images_group" %>
   <div class="box_3_style_preview">
     <div class="box box_1">
-      <img src="<%= @ad.image_src(:banner) %>" />
+      <img src="<%= @ad.image_url(:banner) %>" />
     </div>
     <div class="box box_2">
-      <img src="<%= @ad.image_2_src(:banner) %>" />
+      <img src="<%= @ad.image_2_url(:banner) %>" />
     </div>
     <div class="box box_3">
-      <img src="<%= @ad.image_3_src(:banner) %>" />
+      <img src="<%= @ad.image_3_url(:banner) %>" />
     </div>
   </div>
 <% else %>
   <div class="box_4_style_preview">
     <div class="box box_1">
-      <img src="<%= @ad.image_src(:banner) %>" />
+      <img src="<%= @ad.image_url(:banner) %>" />
     </div>
     <div class="box box_2">
-      <img src="<%= @ad.image_2_src(:banner) %>" />
+      <img src="<%= @ad.image_2_url(:banner) %>" />
     </div>
     <div class="box box_3">
-      <img src="<%= @ad.image_3_src(:banner) %>" />
+      <img src="<%= @ad.image_3_url(:banner) %>" />
     </div>
     <div class="box box_4">
-      <img src="<%= @ad.image_4_src(:banner) %>" />
+      <img src="<%= @ad.image_4_url(:banner) %>" />
     </div>
   </div>
 <% end %>

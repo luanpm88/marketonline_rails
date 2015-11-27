@@ -7,17 +7,17 @@
     <div class="ad_loading"></div>
     <div class="box box_1">
       <a href="<%= click_ads_path(id: @ad) %>" target="_blank">
-        <img title="<%= @ad.name %>" src="<%= @ad.image_src(:banner) %>" />
+        <img title="<%= @ad.name %>" src="<%= @ad.image_url(:banner) %>" />
       </a>
     </div>
     <div class="box box_2">
       <a href="<%= click_ads_path(id: @ad) %>" target="_blank">
-        <img title="<%= @ad.name %>" src="<%= @ad.image_2_src(:banner) %>" />
+        <img title="<%= @ad.name %>" src="<%= @ad.image_2_url(:banner) %>" />
       </a>
     </div>
     <div class="box box_3">
       <a href="<%= click_ads_path(id: @ad) %>" target="_blank">
-        <img title="<%= @ad.name %>" src="<%= @ad.image_3_src(:banner) %>" />
+        <img title="<%= @ad.name %>" src="<%= @ad.image_3_url(:banner) %>" />
       </a>
     </div>
 
