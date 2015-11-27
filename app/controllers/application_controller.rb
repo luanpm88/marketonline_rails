@@ -14,7 +14,8 @@ class ApplicationController < ActionController::Base
   end
   
   def current_user
-    PbSession.get_current_user(cookies)
+    PbMember.first
+    #PbSession.get_current_user(cookies)
   end
   
 end
