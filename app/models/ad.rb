@@ -187,7 +187,8 @@ class Ad < ActiveRecord::Base
   end
   
   def display_image(version = nil)
-    "<img src='#{image_url(version)}' />".html_safe
+    src = !image_url.present? ? "/img/no_img.jpg" : image_url(version)
+    "<img src='#{src}' />".html_safe
   end
   
   def image_link

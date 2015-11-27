@@ -92,7 +92,7 @@ class AdsController < ApplicationController
       file_name = "public/img/no_img.jpg"
     end
     
-    if params[:display] == "html"
+    if params[:display] == "html"      
       if @ad.present?
         if @ad.ad_position.style_name == "4_images_group"
           render "/ads/preview", layout: nil
@@ -105,6 +105,7 @@ class AdsController < ApplicationController
         render text: "<img src=\"#{root_path}img/no_img.jpg\" />"
       end
     else
+      
       send_file file_name, :disposition => 'inline'
     end   
   end
