@@ -64,7 +64,7 @@
 														<div class="row">
 															<div class="col-md-3">
 																<label>Xem trước</label>
-																<%= @ad.image_link %>
+																<img src="http://marketonline.vn:3000<%= @ad.image_src(version) %>" />
 																<label class="image-checkbutton"><i image="<%= @ad.image_url(:banner) %>" class="<%= "icon-checkmark" if @ad.image.present? %> <%= "noimage" if !@ad.image.present? %>"></i></label>
 															</div>
 															<div class="col-md-7">
