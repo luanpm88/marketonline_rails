@@ -193,7 +193,7 @@ class Ad < ActiveRecord::Base
   def image_link
     ActionView::Base.send(:include, Rails.application.routes.url_helpers)
     link_helper = ActionController::Base.helpers
-    link_helper.link_to("http://marketonline.vn:3000"+display_image(:square), image_src(:banner, "html"), class: "fancybox.ajax fancybox ad_link", title: name)
+    link_helper.link_to(display_image(:square), image_src(:banner, "html"), class: "fancybox.ajax fancybox ad_link", title: name)
   end
   
   # IMAGE 2
