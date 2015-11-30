@@ -86,7 +86,7 @@ class AdsController < ApplicationController
       if @ad.image.nil?
         file_name = "public/img/no_img.jpg"
       else
-        file_name = @ad.image_path(params[:type])
+        file_name = "public"+@ad.image_path(params[:type])
       end
     else
       file_name = "public/img/no_img.jpg"

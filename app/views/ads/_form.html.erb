@@ -268,6 +268,11 @@
 												<%= f.text_field :product_name, { class: "form-control product_name_input", value: @ad.name } %>
 											</div>
 											
+											<div class="form-group industry_group">
+												<label>Danh mục <span class="text-danger">*</span></label>
+												<%= select_tag "ad[pb_industry_id]", options_for_select(PbIndustry.input_options(@current_user), @ad.pb_industry_id), class: "modern_select select required width100" %>
+											</div>
+											
 											<div class="form-group type_group image_type_group">
 												<label>Tiêu đề quảng cáo <span class="text-danger">*</span></label>
 												<%= f.text_field :name, required: "required", class: "form-control" %>
@@ -637,10 +642,12 @@
 						$(".more_info_input").show()
 					}
 					
+					// hide/show display price
 					$(".ad_display_price").hide()
 					if ($(".home_top_banner_3").length) {
 						$(".ad_display_price").show()
 					}
+										
 				}
 			})
 		}

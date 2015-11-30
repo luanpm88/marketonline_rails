@@ -80,4 +80,10 @@
     $(".box_3_style .preview_box_image_2").width(box_sub_height)
     $(".box_3_style .preview_box_image_3").height(box_sub_height)
     $(".box_3_style .preview_box_image_3").width(box_sub_height)
+    
+    // hide/show industry
+    $(".industry_group").hide()
+    <% if @ad_position.name == "product_detail_bottom" %>
+        $(".industry_group").show()
+    <% end %>
 </script>
