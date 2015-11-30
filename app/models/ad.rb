@@ -55,16 +55,16 @@ class Ad < ActiveRecord::Base
   end
   
   def update_ad_image
-    if banner_1 != "" and banner_1 != "upload" and !banner_1.include?("ads/image")
+    if banner_1 != "" and banner_1 != "upload" and !banner_1.include?("ad/image")
       self.remote_image_url = banner_1
     end
-    if banner_2 != "" and banner_2 != "upload" and !banner_2.include?("ads/image")
+    if banner_2 != "" and banner_2 != "upload" and !banner_2.include?("ad/image")
       self.remote_image_2_url = banner_2
     end
-    if banner_3 != "" and banner_3 != "upload" and !banner_3.include?("ads/image")
+    if banner_3 != "" and banner_3 != "upload" and !banner_3.include?("ad/image")
       self.remote_image_3_url = banner_3
     end
-    if banner_4 != "" and banner_4 != "upload" and !banner_4.include?("ads/image")
+    if banner_4 != "" and banner_4 != "upload" and !banner_4.include?("ad/image")
       self.remote_image_4_url = banner_4
     end   
   end
