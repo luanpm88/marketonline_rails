@@ -317,18 +317,19 @@ body {
 }
 
 .iframe_4_wide_banners {
-    background: #ddd none repeat scroll 0 0;
     float: left;
     margin: 0;
     padding: 0;
     width: 1200px;
 }
+
 .iframe_4_wide_banners li {
     float: left;
     list-style: outside none none;
     margin-right: 10px;
     overflow: hidden;
-    width: 390px;
+    width: 287px;
+    text-align: center
 }
 .iframe_4_wide_banners li a {
     color: #333;
