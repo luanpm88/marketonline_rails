@@ -139,6 +139,8 @@ class AdPositionsController < ApplicationController
     @pos = AdPosition.get(params[:pos])
     @ads = @pos.active_ads(@top_industry.id)
     
+    @member = PbMember.find(params[:member_id])
+    
     if @ads.count < @pos.number_of_ad
       @ads += @pos.active_ads(-1).limit(@pos.number_of_ad - @ads.count)
     end
