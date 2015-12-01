@@ -1,13 +1,13 @@
 <div class="ad_slider_6">
   
 <ul class="iframe_6_wide_banners">
-    <% if @member.pb_company.present? %>
+    <% if @referrer.pb_company.present? %>
         <li>
-          <a href="<%= @member.pb_company.url %>" target="_blank">
-            <img title="" src="<%= @member.pb_company.image %>.small.jpg" />
+          <a href="<%= @referrer.pb_company.url %>" target="_blank">
+            <img title="" src="<%= @referrer.pb_company.image %>.small.jpg" />
           </a>
-          <a class="title" class="title" href="<%= @member.pb_company.url %>" target="_blank">
-              <%= @member.pb_company.name %>
+          <a class="title" class="title" href="<%= @referrer.pb_company.url %>" target="_blank">
+              <%= @referrer.pb_company.name %>
           </a>
         </li>
     <% end %>

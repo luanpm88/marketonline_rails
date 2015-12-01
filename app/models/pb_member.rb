@@ -26,4 +26,8 @@ class PbMember < ActiveRecord::Base
   def shop_url
     pb_company.nil? ? nil : "/#{pb_company.cache_spacename}"
   end
+  
+  def referrer
+    (referrer_id.present? and referrer_id > 0) ? PbMember.find(referrer_id) : PbMember.first
+  end
 end
