@@ -360,3 +360,25 @@ body {
     height: auto;
     width: 230px;
 }
+.iframe_6_wide_banners {
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 1200px;
+}
+.iframe_6_wide_banners li {
+    float: left;
+    list-style: outside none none;
+    margin-right: 10px;
+    overflow: hidden;
+    width: 190px;
+    text-align: center
+}
+.iframe_6_wide_banners li a {
+    color: #333;
+    text-decoration: none;
+}
+.iframe_6_wide_banners li a img {
+    height: auto;
+    width: 190px;
+}
