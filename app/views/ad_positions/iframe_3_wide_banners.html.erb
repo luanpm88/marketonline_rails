@@ -13,5 +13,30 @@
     
   <% end %>
   
+  <% if @pos_2.present? %>
+    <% @pos_2.active_ads.each do |ad| %>
+      <li>
+        <a href="<%= click_ads_path(id: ad) %>" target="_blank">
+          <img title="" src="<%= ad.image_url(:banner) %>" />
+        </a>
+        <a class="title" class="title" href="<%= click_ads_path(id: ad) %>" target="_blank">
+          <%= ad.name %>
+        </a>
+      </li>      
+    <% end %>
+  <% end %>
+  
+  <% if @pos_3.present? %>
+    <% @pos_3.active_ads.each do |ad| %>
+      <li>
+        <a href="<%= click_ads_path(id: ad) %>" target="_blank">
+          <img title="" src="<%= ad.image_url(:banner) %>" />
+        </a>
+        <a class="title" class="title" href="<%= click_ads_path(id: ad) %>" target="_blank">
+          <%= ad.name %>
+        </a>
+      </li>      
+    <% end %>
+  <% end %>
 </ul>
 </div>
