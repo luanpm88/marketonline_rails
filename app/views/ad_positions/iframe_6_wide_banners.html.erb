@@ -3,24 +3,27 @@
 <ul class="iframe_6_wide_banners">
     <% if @referrer.pb_company.present? %>
         <li>
-          <a href="<%= @referrer.pb_company.url %>" target="_blank">
-            <img title="" src="<%= @referrer.pb_company.image %>.small.jpg" />
-          </a>
-          <a class="title" class="title" href="<%= @referrer.pb_company.url %>" target="_blank">
-              <%= @referrer.pb_company.name %>
-          </a>
+            <a href="<%= @referrer.pb_company.url %>" target="_blank">
+              <img title="" src="<%= @referrer.pb_company.image %>.small.jpg" />
+            </a>
+            <a class="title" class="title" href="<%= @referrer.pb_company.url %>" target="_blank">
+                <%= @referrer.pb_company.name %>
+            </a>
         </li>
     <% end %>
     <li>
-      <a href="<%= @member.all_pb_products.last.name %>" target="_blank" style="display: block;
-          height: 173px;
-          margin-bottom: 4px;
-          overflow: hidden;">
-            <img title="" src="<%= @member.all_pb_products.last.default_image %>" />
-      </a>
-      <a class="title" class="title" href="<%= @member.pb_company.url %>" target="_blank">
-          <%= @member.all_pb_products.last.name %>
-      </a>
+        <a href="<%= @referrer.all_pb_products.last.name %>" target="_blank"
+                    style="
+                        display: block;
+                        height: 173px;
+                        margin-bottom: 4px;
+                        overflow: hidden;"
+        >
+            <img title="" src="<%= @referrer.all_pb_products.last.default_image %>" />
+        </a>
+        <a class="title" class="title" href="<%= @referrer.pb_company.url %>" target="_blank">
+            <%= @referrer.all_pb_products.last.name %>
+        </a>
     </li>
   <% @pos.active_ads.each do |ad| %>
     <li>
