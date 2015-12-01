@@ -10,7 +10,7 @@ class PbMember < ActiveRecord::Base
   end
   
   def all_pb_products
-    pb_products.where(status: 1).where(valid_status: 1).where(show: 1)
+    pb_products.where(status: 1).where(valid_status: 1).where(show: 1).where(state: 1)
   end
   
   def image
