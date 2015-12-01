@@ -1,0 +1,33 @@
+<div class="ad_slider_6">
+  
+<ul class="iframe_6_wide_banners">    
+    <li>
+      <a href="<%= @member.pb_company.url %>" target="_blank">
+        <img title="" src="<%= @member.pb_company.image %>" />
+      </a>
+      <a class="title" class="title" href="<%= @member.pb_company.url %>" target="_blank">
+          <%= @member.pb_company.name %>
+      </a>
+    </li>
+    <li>
+      <a href="<%= @member.all_pb_products.last.name %>" target="_blank" style="display: block;
+          height: 190px;
+          overflow: hidden;">
+            <img title="" src="<%= @member.all_pb_products.last.default_image %>" />
+      </a>
+      <a class="title" class="title" href="<%= @member.pb_company.url %>" target="_blank">
+          <%= @member.all_pb_products.last.name %>
+      </a>
+    </li>
+  <% @pos.active_ads.each do |ad| %>
+    <li>
+      <a href="<%= click_ads_path(id: ad) %>" target="_blank">
+        <img title="" src="<%= ad.image_src(:banner) %>" />
+      </a>
+      <a class="title" class="title" href="<%= click_ads_path(id: ad) %>" target="_blank">
+          <%= ad.name %>
+      </a>
+    </li>    
+  <% end %>
+</ul>
+</div>
