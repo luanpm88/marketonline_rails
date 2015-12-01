@@ -7,12 +7,12 @@
               <img title="" src="<%= @referrer.pb_company.image %>.small.jpg" />
             </a>
             <a class="title" class="title" href="<%= @referrer.pb_company.url %>" target="_blank">
-                <%= @referrer.pb_company.name %>
+                <%= @referrer.pb_company.shop_name %>
             </a>
         </li>
     <% end %>
     <li>
-        <a href="<%= @referrer.all_pb_products.last.name %>" target="_blank"
+        <a href="<%= @referrer.all_pb_products.last.url %>" target="_blank"
                     style="
                         display: block;
                         height: 173px;
