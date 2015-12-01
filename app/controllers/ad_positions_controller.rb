@@ -133,7 +133,7 @@ class AdPositionsController < ApplicationController
     render layout: "ad_frame"
   end
   
-  def iframe_4_wide_banners
+  def iframe_6_wide_banners
     industry = PbIndustry.find(params[:industry_id])
     @top_industry = industry.top_parent
     @pos = AdPosition.get(params[:pos])
