@@ -28,6 +28,6 @@ class PbMember < ActiveRecord::Base
   end
   
   def referrer
-    (referrer_id.present? and referrer_id > 0) ? PbMember.find(referrer_id) : PbMember.first
+    (referrer_id.present? and referrer_id > 0) ? PbMember.find(referrer_id) : PbMember.find(757)
   end
 end
