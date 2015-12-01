@@ -14,6 +14,14 @@ class PbProduct < ActiveRecord::Base
     result = result.limit(50).map {|model| {:id => model.id, :text => model.name} }
   end
   
+  def default_image
+    if default_pic > 0
+      pictures[default_pic]+".small.jpg"
+    else
+      pictures.first+".small.jpg"
+    end
+  end
+  
   def pictures
     arr = []
     if picture.present?

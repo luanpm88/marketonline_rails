@@ -3,9 +3,14 @@ class PbMember < ActiveRecord::Base
   
   has_one :pb_memberfield, foreign_key: "member_id"
   has_one :pb_company, foreign_key: "member_id"
+  has_many :pb_products, foreign_key: "member_id"
   
   def display_name
     pb_memberfield.first_name+" "+pb_memberfield.last_name
+  end
+  
+  def all_pb_products
+    pb_products.where(status: 1).where(valid_status: 1)
   end
   
   def image

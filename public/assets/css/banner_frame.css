@@ -338,3 +338,25 @@ body {
 .iframe_4_wide_banners li a img {
     
 }
+.iframe_5_wide_banners {
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 1200px;
+}
+.iframe_5_wide_banners li {
+    float: left;
+    list-style: outside none none;
+    margin-right: 10px;
+    overflow: hidden;
+    width: 230px;
+    text-align: center
+}
+.iframe_5_wide_banners li a {
+    color: #333;
+    text-decoration: none;
+}
+.iframe_5_wide_banners li a img {
+    height: 230px;
+    width: 230px;
+}

@@ -8,10 +8,15 @@ class PbCompany < ActiveRecord::Base
   end
   
   def image
-    if !photo.present?
+    if !picture.present?
       "assets/images/placeholder.jpg"
     else
-      "http://marketonline.vn/attachment/#{photo}"
+      "http://marketonline.vn/attachment/#{picture}"
     end
   end
+  
+  def url
+    "http://marketonline.vn/#{cache_spacename}"
+  end
+  
 end

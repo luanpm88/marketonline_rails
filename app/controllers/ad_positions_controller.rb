@@ -120,6 +120,7 @@ class AdPositionsController < ApplicationController
   end
   
   def iframe_5_wide_banners
+    @member = PbMember.find(params[:member_id])
     @pos = AdPosition.get(params[:pos])
     render layout: "ad_frame"
   end
