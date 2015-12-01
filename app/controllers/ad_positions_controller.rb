@@ -140,10 +140,16 @@ class AdPositionsController < ApplicationController
   end
   
   def iframe_6_wide_banners
-    industry = PbIndustry.find(params[:industry_id])
-    @top_industry = industry.top_parent
+    if params[:industry_id] != "-1"
+      industry = PbIndustry.find(params[:industry_id])
+      @top_industry = industry.top_parent
+      iid = @top_industry.id
+    else
+      iid = -1
+    end
+    
     @pos = AdPosition.get(params[:pos])
-    @ads = @pos.active_ads(@top_industry.id)
+    @ads = @pos.active_ads(iid)
     
     @member = PbMember.find(params[:member_id])
     @referrer = @member.referrer
