@@ -4,7 +4,7 @@
     <% if @member.pb_company.present? %>
         <li>
           <a href="<%= @member.pb_company.url %>" target="_blank">
-            <img title="" src="<%= @member.pb_company.image %>" />
+            <img title="" src="<%= @member.pb_company.image %>.small.jpg" />
           </a>
           <a class="title" class="title" href="<%= @member.pb_company.url %>" target="_blank">
               <%= @member.pb_company.name %>
