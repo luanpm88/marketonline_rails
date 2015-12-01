@@ -371,7 +371,7 @@ body {
     list-style: outside none none;
     margin-right: 30px;
     overflow: hidden;
-    width: 173px;
+    width: 172px;
     text-align: center
 }
 .iframe_6_wide_banners li a {
@@ -380,8 +380,8 @@ body {
 }
 .iframe_6_wide_banners li a img {
     height: auto;
-    width: 173px;
-    min-height: 173px;
+    width: 172px;
+    min-height: 172px;
 }
 .iframe_6_wide_banners li a.title {
     clear: both;
