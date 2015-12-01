@@ -383,3 +383,7 @@ body {
     width: 190px;
     min-height: 190px;
 }
+.iframe_6_wide_banners li a.title {
+    clear: both;
+    display: block;
+}
