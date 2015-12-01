@@ -115,7 +115,15 @@ class AdPositionsController < ApplicationController
   end
   
   def iframe_4_wide_banners
+    industry = PbIndustry.find(params[:industry_id])
+    @top_industry = industry.top_parent
     @pos = AdPosition.get(params[:pos])
+    @ads = @pos.active_ads(@top_industry.id)
+    
+    if @ads.count < @pos.number_of_ad
+      @ads += @pos.active_ads(-1).limit(@pos.number_of_ad - @ads.count)
+    end
+    
     render layout: "ad_frame"
   end
   
@@ -125,9 +133,16 @@ class AdPositionsController < ApplicationController
     render layout: "ad_frame"
   end
   
-  def iframe_6_wide_banners
-    @member = PbMember.find(params[:member_id])
+  def iframe_4_wide_banners
+    industry = PbIndustry.find(params[:industry_id])
+    @top_industry = industry.top_parent
     @pos = AdPosition.get(params[:pos])
+    @ads = @pos.active_ads(@top_industry.id)
+    
+    if @ads.count < @pos.number_of_ad
+      @ads += @pos.active_ads(-1).limit(@pos.number_of_ad - @ads.count)
+    end
+    
     render layout: "ad_frame"
   end
   

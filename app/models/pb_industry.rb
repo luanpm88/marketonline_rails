@@ -6,4 +6,8 @@ class PbIndustry < ActiveRecord::Base
     end
     options += self.where(level: lvl).order("display_order").collect {|p| [p.name, p.id]}        
   end
+  
+  def top_parent
+    top_parentid == 0 ? self : PbIndustry.find(top_parentid)
+  end
 end

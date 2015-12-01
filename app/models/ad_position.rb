@@ -6,8 +6,12 @@ class AdPosition < ActiveRecord::Base
     self.where(name: pos).first
   end
   
-  def active_ads
-    ads.where(active: 1).limit(number_of_ad)
+  def active_ads(industry_id=-1)
+    result = ads.where(active: 1).limit(number_of_ad)
+    if industry_id != -1
+      result = result.where(pb_industry_id: industry_id)
+    end
+    return result
   end
   
   def width=(new)

@@ -1,6 +1,6 @@
 <div class="ad_slider_4">
 <ul class="iframe_4_wide_banners">
-  <% @pos.active_ads.each do |ad| %>
+  <% @ads.each do |ad| %>
     <li>
       <a href="<%= click_ads_path(id: ad) %>" target="_blank">
         <img title="" src="<%= ad.image_src(:banner) %>" />
