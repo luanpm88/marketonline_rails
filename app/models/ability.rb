@@ -28,10 +28,10 @@ class Ability
           c.pb_member_id = user.id
         end
         can :update, Ad do |c|
-          c.pb_member_id = user.id
+          c.pb_member_id = user.id && c.active != 1
         end
         can :destroy, Ad do |c|
-          c.pb_member_id = user.id
+          c.pb_member_id = user.id && c.active != 1
         end
         can :get_nganluong_checkout_return, Ad do |c|
           c.pb_member_id = user.id
