@@ -8,6 +8,6 @@ class PbIndustry < ActiveRecord::Base
   end
   
   def top_parent
-    top_parentid == 0 ? self : PbIndustry.find(top_parentid)
+    top_parentid <= 0 ? self : PbIndustry.find(top_parentid)
   end
 end
