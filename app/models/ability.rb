@@ -12,6 +12,9 @@ class Ability
     can :iframe_home_feature_4_images_box, AdPosition
     can :iframe_home_feature_3_images_box, AdPosition
     can :iframe_6_items_list, AdPosition
+    can :iframe_3_wide_banners, AdPosition
+    can :iframe_4_wide_banners, AdPosition
+    can :iframe_5_wide_banners, AdPosition
     
     if user.present?
       if user.present?
