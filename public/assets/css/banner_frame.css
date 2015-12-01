@@ -357,6 +357,6 @@ body {
     text-decoration: none;
 }
 .iframe_5_wide_banners li a img {
-    height: 230px;
+    height: auto;
     width: 230px;
 }
