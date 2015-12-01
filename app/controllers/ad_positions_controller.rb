@@ -130,6 +130,12 @@ class AdPositionsController < ApplicationController
     @pos = AdPosition.get(params[:pos])
     render layout: "ad_frame"
   end
+  
+  def iframe_7_wide_banners
+    @member = PbMember.find(params[:member_id])
+    @pos = AdPosition.get(params[:pos])
+    render layout: "ad_frame"
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

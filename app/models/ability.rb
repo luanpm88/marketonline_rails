@@ -16,6 +16,7 @@ class Ability
     can :iframe_4_wide_banners, AdPosition
     can :iframe_5_wide_banners, AdPosition
     can :iframe_6_wide_banners, AdPosition
+    can :iframe_7_wide_banners, AdPosition
     
     if user.present?
       if user.present?
