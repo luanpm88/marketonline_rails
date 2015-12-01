@@ -10,7 +10,7 @@ class PbMember < ActiveRecord::Base
   end
   
   def all_pb_products
-    pb_products.where(status: 1).where(valid_status: 1)
+    pb_products.where(status: 1).where(valid_status: 1).where(show: 1)
   end
   
   def image
@@ -28,6 +28,6 @@ class PbMember < ActiveRecord::Base
   end
   
   def referrer
-    (referrer_id.present? and referrer_id > 0) ? PbMember.find(referrer_id) : PbMember.find(757)
+    (referrer_id.present? and referrer_id > 0) ? PbMember.find(referrer_id) : PbMember.first
   end
 end
