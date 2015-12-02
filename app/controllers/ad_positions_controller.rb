@@ -106,6 +106,7 @@ class AdPositionsController < ApplicationController
   
   def iframe_6_items_list
     @pos = AdPosition.get(params[:pos])
+    @ads = @pos.active_ads
     render layout: "ad_frame"
   end
   
