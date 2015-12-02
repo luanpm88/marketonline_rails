@@ -3,7 +3,7 @@
   <div class="loading"></div>
   <% @ads.each do |ad| %>
     <li>
-      <a href="<%= click_ads_path(id: ad) %>" target="_blank">
+      <a title="<%= ad.name %>" href="<%= click_ads_path(id: ad) %>" target="_blank">
         <img title="" src="<%= ad.image_url(:banner) %>" />
       </a>
       <!--<a class="title" class="title" href="<%= click_ads_path(id: ad) %>" target="_blank">
