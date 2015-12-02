@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       get 'iframe_home_feature_4_images_box'
       get 'iframe_home_feature_3_images_box'
       get 'iframe_6_items_list'
+      get 'iframe_1_wide_banners'
       get 'iframe_3_wide_banners'
       get 'iframe_4_wide_banners'
       get 'iframe_5_wide_banners'
