@@ -249,14 +249,14 @@ body {
     position: absolute;
 }
 .iframe_3_wide_banners li {
+    border: 1px solid #ddd;
     float: left;
+    height: 166px;
     list-style: outside none none;
-    border: solid 1px #ddd;
     margin-right: 20px;
-    height: 138px;
-    position: relative;
-    width:378px;
     overflow: hidden;
+    position: relative;
+    width: 378px;
 }
 .iframe_3_wide_banners li a {
     color: #333;
@@ -265,13 +265,13 @@ body {
     text-decoration: none;
 }
 .iframe_3_wide_banners li a.title {
-    background: #7cb342; /*rgba(0, 120, 0, 0.8) none repeat scroll 0 0;*/
-    color: #fff;
-    float: right;
-    height: 28px;
-    margin-top: -29px;
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    color: #000;
+    float: none;
+    height: 13px;
+    margin-top: -2px;
     padding: 2px 10px;
-    position: absolute;
+    position: inherit;
     width: auto;
 }
 .iframe_3_wide_banners li a img {
@@ -309,13 +309,11 @@ body {
 }
 .ad_slider {
     display: block;
-    float: left;
-    height: 140px;
+    height: 168px;
     overflow: hidden;
     position: absolute;
     width: 1188px;
 }
-
 .iframe_4_wide_banners {
     float: left;
     margin: 0;
