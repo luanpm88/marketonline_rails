@@ -417,7 +417,8 @@ body {
 }
 
 .iframe_1_wide_banners {
-    
+    margin: 0;
+    padding: 0
 }
 .iframe_1_wide_banners li a {
     border: 1px solid #ddd;
@@ -429,6 +430,6 @@ body {
 .iframe_1_wide_banners li a img {
     width: 100%;
 }
-.iframe_1_wide_banners li a.title {
-    
+.iframe_1_wide_banners li {
+    list-style: none;
 }
