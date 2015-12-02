@@ -18,6 +18,7 @@ class Ad < ActiveRecord::Base
   belongs_to :pb_member
   belongs_to :pb_product
   belongs_to :ad
+  belongs_to :pb_industry
   
   has_many :ad_clicks
   
@@ -124,7 +125,8 @@ class Ad < ActiveRecord::Base
     @records = @records.limit(params[:length]).offset(params["start"])
     data = []
     
-    @records.each do |item|      
+    @records.each do |item|
+      industry_info = !item.pb_industry.nil? ? "<div class=\"text-muted text-size-small\">#{item.pb_industry.name}</div>" : ""
       row = [
               item.image_link,
               item.name,
