@@ -83,7 +83,7 @@
     
     // hide/show industry
     $(".industry_group").hide()
-    <% if @ad_position.name == "product_detail_bottom" or @ad_position.name == "product_detail_bottom_2" %>
+    <% if @ad_position.name == "product_detail_bottom" or @ad_position.name == "product_detail_bottom_2" or @ad_position.name == "product_category_main" %>
         $(".industry_group").show()
     <% end %>
 </script>
