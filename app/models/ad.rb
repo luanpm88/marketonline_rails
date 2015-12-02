@@ -126,7 +126,7 @@ class Ad < ActiveRecord::Base
     data = []
     
     @records.each do |item|
-      industry_info = !item.pb_industry.nil? ? "<div class=\"text-muted text-size-small\">#{item.pb_industry.name}</div>" : ""
+      industry_info = !item.pb_industry.nil? ? "<div class=\"text-muted text-size-small\">#{item.pb_industry.name}</div>" : (item.pb_industry_id == -1 ? "<div class=\"text-muted text-size-small\">Mặc định</div>" : "")
       row = [
               item.image_link,
               item.name+industry_info,
