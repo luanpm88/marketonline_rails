@@ -129,7 +129,7 @@ class Ad < ActiveRecord::Base
       industry_info = !item.pb_industry.nil? ? "<div class=\"text-muted text-size-small\">#{item.pb_industry.name}</div>" : ""
       row = [
               item.image_link,
-              item.name,
+              item.name+industry_info,
               "<div class=\"text-center\">#{item.ad_position.display_name}</div>",                     
               "<div class=\"text-center\">#{item.display_valid_time}</div>",
               "<div class=\"text-center\">#{(item.pb_member.display_name if !item.pb_member.nil?)}</div>",
