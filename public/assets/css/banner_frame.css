@@ -420,10 +420,14 @@ body {
     
 }
 .iframe_1_wide_banners li a {
-    
+    border: 1px solid #ddd;
+    display: block;
+    float: left;
+    line-height: 0;
+    width: 932px;
 }
 .iframe_1_wide_banners li a img {
-    
+    width: 100%;
 }
 .iframe_1_wide_banners li a.title {
     
