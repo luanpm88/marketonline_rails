@@ -251,12 +251,12 @@ body {
 .iframe_3_wide_banners li {
     border: 1px solid #ddd;
     float: left;
-    height: 180px;
     list-style: outside none none;
     margin-right: 20px;
     overflow: hidden;
     position: relative;
     width: 378px;
+    height: 201px;
 }
 .iframe_3_wide_banners li a {
     color: #333;
@@ -268,8 +268,8 @@ body {
     background: #fff none repeat scroll 0 0;
     color: #000;
     float: none;
-    font-weight: bold;
-    height: 24px;
+    height: auto;
+    line-height: 20px;
     margin-top: 0;
     padding: 7px 10px;
     position: inherit;
@@ -311,7 +311,7 @@ body {
 }
 .ad_slider {
     display: block;
-    height: 182px;
+    height: 203px;
     overflow: hidden;
     position: absolute;
     width: 1188px;
