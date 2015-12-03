@@ -111,7 +111,7 @@ class AdPositionsController < ApplicationController
   end
   
   def iframe_1_wide_banners
-    if params[:industry_id] != "-1"
+    if params[:industry_id] != "-1" and params[:industry_id] != "0"
       industry = PbIndustry.find(params[:industry_id])
       @top_industry = industry.top_parent
       iid = @top_industry.id
