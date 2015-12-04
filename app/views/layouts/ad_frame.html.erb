@@ -54,7 +54,7 @@
             });
         }
         $(document).ready(function() {
-          $('.home_top_banner_1_slide, .home_top_banner_2_slide').bxSlider({
+          $('.home_top_banner_1_slide').bxSlider({
             mode: 'fade',
             captions: true,
             pager: false,
@@ -62,6 +62,17 @@
             controls: false,
             speed: 2000
           });
+          
+          <% if params[:device] != "mobile" %>
+            $('.home_top_banner_2_slide').bxSlider({
+              mode: 'fade',
+              captions: true,
+              pager: false,
+              auto: true,
+              controls: false,
+              speed: 2000
+            });
+          <% end %>
           
           // slide show
           //append more item
