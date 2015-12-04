@@ -1,9 +1,7 @@
 .home_top_banner_frame {
-    display: block;
-    float: none;
-    margin: 15px auto;
+    border: 1px solid #ddd;
     overflow: hidden;
-    width: 98%;
+    width: 100%;
 }
 .home_top_banner_3 {
     height: auto !important;
