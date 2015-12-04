@@ -33,6 +33,7 @@
 .home_top_banner_2 {
     width: 100%;
     border: none;
+    margin-bottom: 6%;
 }
 .home_top_banner_frame .home_top_banner_2 .banner_item ul li {
     float: left;
