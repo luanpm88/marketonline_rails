@@ -64,6 +64,6 @@
     width: auto !important;
     height: auto !important;
 }
-.home_top_banner_3mobile .banner_item a {
+.home_top_banner_frame .home_top_banner_3mobile .banner_item ul li a {
     line-height: normal;
 }
