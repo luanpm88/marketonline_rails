@@ -1,5 +1,5 @@
 .home_top_banner_frame {
-    border: 1px solid #ddd;
+    border: none;
     overflow: hidden;
     width: 100%;
 }
@@ -25,9 +25,11 @@
 }
 .home_top_banner_1 {
     width: 100%;
+    border: none;
 }
 .home_top_banner_2 {
     width: 29.9%;
+    border: none;
 }
 .home_top_banner_frame .home_top_banner_1 .banner_item {
     width: 100% !important;
