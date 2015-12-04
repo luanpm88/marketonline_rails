@@ -61,7 +61,7 @@
     line-height: 0;
 }
 .home_top_banner_3mobile .banner_item {
-    width: auto !important;
+    width: 100% !important;
     height: auto !important;
 }
 .home_top_banner_frame .home_top_banner_3mobile .banner_item ul li a {
@@ -71,4 +71,7 @@
     float: left;
     margin-right: 2%;
     width: 48.9%;
+}
+.home_top_banner_frame .home_top_banner_3mobile ul li:last-child {
+    margin-right: 0;
 }
