@@ -57,3 +57,6 @@
     float: left;
     width: 100%;
 }
+.home_top_banner_frame .banner_item ul li a {
+    line-height: 0;
+}
