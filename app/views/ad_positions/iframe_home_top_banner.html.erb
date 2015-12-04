@@ -39,13 +39,15 @@
               <img title="<%= ad.name %>" src="<%= ad.image_url(:banner) %>" />
             </a>
             <br />
-            <a class="home_top_banner_3_title" href="">
-              <%= ad.name %>
-            </a>
-            <br />
-            <a class="home_top_banner_3_price" href="">
-              <%= format_price(ad.display_price) %> VNĐ<%= "/#{ad.display_price_unit}" if ad.display_price_unit.present? %>
-            </a>
+            <div class="" style="">
+              <a class="home_top_banner_3_title" href="">
+                <%= ad.name %>
+              </a>
+              <br />
+              <a class="home_top_banner_3_price" href="">
+                <%= format_price(ad.display_price) %> VNĐ<%= "/#{ad.display_price_unit}" if ad.display_price_unit.present? %>
+              </a>
+            </div>
           </li>
           
           <% if params[:device] == "mobile" and num%2 == 1 %>
