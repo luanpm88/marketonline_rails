@@ -1,3 +1,11 @@
+.home_top_banner_3 {
+    height: auto !important;
+}
+.home_top_banner_3 .banner_item {
+    height: 298px;
+    overflow-x: auto;
+    width: 100%;
+}
 .home_top_banner_frame {
     width: 100%;
     overflow: hidden;
