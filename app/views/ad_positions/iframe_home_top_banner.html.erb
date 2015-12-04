@@ -33,7 +33,7 @@
   <div class="home_top_banner_3<%= params[:device] %>">
     <div class="banner_item" style="width:<%= (@pos_1.width+@pos_2.width) %>px;height:<%= @pos_3.height %>px;">
       <ul class="home_top_banner_3_slide<%= params[:device] %>">
-        <% @pos_3.active_ads.each do |ad| %>
+        <% @pos_3.active_ads.each_with_index do |ad, num| %>
           <li>
             <a href="<%= click_ads_path(id: ad) %>" target="_blank">
               <img title="<%= ad.name %>" src="<%= ad.image_url(:banner) %>" />
@@ -47,6 +47,11 @@
               <%= format_price(ad.display_price) %> VNĐ<%= "/#{ad.display_price_unit}" if ad.display_price_unit.present? %>
             </a>
           </li>
+          
+          <% if params[:device] == "mobile" and num%2 == 1 %>
+            </ul><ul class="home_top_banner_3_slide<%= params[:device] %>">
+          <% end %>
+          
         <% end %>
       </ul>
     </div>    

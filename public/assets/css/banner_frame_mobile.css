@@ -68,5 +68,7 @@
     line-height: normal;
 }
 .home_top_banner_frame .home_top_banner_3mobile ul li {
-    
+    float: left;
+    margin-right: 2%;
+    width: 48.9%;
 }
