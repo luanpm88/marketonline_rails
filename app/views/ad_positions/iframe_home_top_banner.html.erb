@@ -34,7 +34,7 @@
     <div class="banner_item" style="width:<%= (@pos_1.width+@pos_2.width) %>px;height:<%= @pos_3.height %>px;">
       <ul class="home_top_banner_3_slide<%= params[:device] %>">
         <% @pos_3.active_ads.each_with_index do |ad, num| %>
-          <li>
+          <li <%= 'style="display:none"' if num == 4 and params[:device] == "mobile" %>>
             <a href="<%= click_ads_path(id: ad) %>" target="_blank">
               <img title="<%= ad.name %>" src="<%= ad.image_url(:banner) %>" />
             </a>
