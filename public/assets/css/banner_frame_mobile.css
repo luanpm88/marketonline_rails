@@ -76,7 +76,7 @@
 .home_top_banner_frame .home_top_banner_3mobile ul li:last-child {
     margin-right: 0;
 }
-.home_top_banner_frame .home_top_banner_3_slidemobile {
+.home_top_banner_frame ul.home_top_banner_3_slidemobile {
     float: left;
     margin-bottom: 2%;
     width: 100%;
