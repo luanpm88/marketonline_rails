@@ -2,9 +2,9 @@
     height: auto !important;
 }
 .home_top_banner_3 .banner_item {
-    height: 298px;
+    height: auto !important;
     overflow-x: auto;
-    width: 100%;
+    width: auto !important;
 }
 .home_top_banner_frame {
     width: 100%;
