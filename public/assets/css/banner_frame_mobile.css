@@ -7,7 +7,8 @@
 }
 .home_top_banner_3 {
     height: auto !important;
-    margin-top: 20px
+    margin-top: 20px;
+    border-top: solid 1px #ddd;
 }
 .home_top_banner_3 .banner_item {
     height: auto !important;
