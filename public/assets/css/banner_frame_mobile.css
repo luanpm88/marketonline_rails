@@ -22,6 +22,7 @@
 }
 .home_top_banner_1_2 {
     width: 100%;
+    border: none;
 }
 .home_top_banner_1 {
     width: 100%;
@@ -49,4 +50,7 @@
 .home_top_banner_frame .home_top_banner_2 .banner_item {
     width: 100% !important;
     height: auto !important;
+}
+.home_top_banner_frame .banner_item ul li a {
+    float: left;
 }
