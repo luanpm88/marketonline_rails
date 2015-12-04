@@ -5,3 +5,6 @@
 .home_top_banner_1 {
     width: 100%;
 }
+.home_top_banner_frame .home_top_banner_1 .banner_item ul li {
+    width: 100% !important;
+}
