@@ -54,4 +54,5 @@
 }
 .home_top_banner_frame .banner_item ul li a {
     float: left;
+    width: 100%;
 }
