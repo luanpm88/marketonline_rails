@@ -60,3 +60,7 @@
 .home_top_banner_frame .banner_item ul li a {
     line-height: 0;
 }
+.home_top_banner_3mobile .banner_item {
+    width: auto !important;
+    height: auto !important;
+}
