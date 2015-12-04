@@ -30,9 +30,9 @@
         </div>      
     </div>
   </div>
-  <div class="home_top_banner_3<%= params[:deveice] %>">
+  <div class="home_top_banner_3<%= params[:device] %>">
     <div class="banner_item" style="width:<%= (@pos_1.width+@pos_2.width) %>px;height:<%= @pos_3.height %>px;">
-      <ul class="home_top_banner_3_slide<%= params[:deveice] %>">
+      <ul class="home_top_banner_3_slide<%= params[:device] %>">
         <% @pos_3.active_ads.each do |ad| %>
           <li>
             <a href="<%= click_ads_path(id: ad) %>" target="_blank">
