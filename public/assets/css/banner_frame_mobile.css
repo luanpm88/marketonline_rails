@@ -2,8 +2,11 @@
     width: 100%;
     overflow: hidden;
 }
-.home_top_banner_1 {
+.home_top_banner_1_2 {
     width: 100%;
+}
+.home_top_banner_1 {
+    width: 70%;
 }
 .home_top_banner_frame .home_top_banner_1 .banner_item {
     width: 100% !important;
