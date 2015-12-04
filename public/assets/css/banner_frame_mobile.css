@@ -39,6 +39,7 @@
 }
 .home_top_banner_frame .home_top_banner_2 .banner_item ul li:last-child {
     float: right;
+    line-height: 0;
 }
 .home_top_banner_frame .home_top_banner_1 .banner_item {
     width: 100% !important;
