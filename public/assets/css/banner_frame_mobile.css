@@ -19,6 +19,7 @@
 .home_top_banner_frame {
     width: 100%;
     overflow: hidden;
+    height: auto;
 }
 .home_top_banner_1_2 {
     width: 100%;
