@@ -141,6 +141,7 @@ p {
 }
 .home_feature_3_images_group .box {
     width: 49.2%;
+    height: auto;
 }
 .home_feature_3_images_group .box img {
     height: auto;
