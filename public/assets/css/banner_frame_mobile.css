@@ -93,3 +93,13 @@
 .box_4_banner_title {
     width: 100%;
 }
+.home_feature_4_images_group .box_1 img {
+    height: auto;
+    width: 100%;
+}
+.home_feature_4_images_group {
+    width: 100%;
+}
+.home_feature_4_images_group .box_1 {
+    width: 70%;
+}
