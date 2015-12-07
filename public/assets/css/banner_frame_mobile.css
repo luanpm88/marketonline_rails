@@ -151,3 +151,15 @@ p {
 .box_3_banner_title {
     width: 93%;
 }
+.box_3_banner_title h3 {
+    font-size: 16px;
+    height: 20px;
+    margin: 0;
+    overflow: hidden;
+}
+.box_3_banner_title p {
+    font-size: 14px;
+    height: 16px;
+    margin: 0;
+    overflow: hidden;
+}
