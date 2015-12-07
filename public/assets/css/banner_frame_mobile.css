@@ -91,7 +91,7 @@
     display: none !important;
 }
 .box_4_banner_title {
-    width: 100%;
+    width: 99.3%;
 }
 .home_feature_4_images_group .box_1 img {
     height: auto;
@@ -115,7 +115,4 @@
 .home_feature_4_images_group .box_1 {
     height: auto;
     width: 74%;
-}
-.box_4_banner_title {
-    padding: 0;
 }
