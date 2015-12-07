@@ -104,6 +104,10 @@
     height: auto;
     width: 24.61%;
 }
+.home_feature_4_images_group .box {
+    display: block;
+    line-height: 0;
+}
 .home_feature_4_images_group .box img {
     height: auto;
     width: 100%;
