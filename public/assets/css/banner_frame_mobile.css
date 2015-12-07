@@ -100,15 +100,15 @@
 .home_feature_4_images_group {
     width: 100%;
 }
-.home_feature_4_images_group .box_1 {
-    width: 70%;
-    height: auto;
-}
-.home_feature_4_images_group .box_2 {
+.home_feature_4_images_group .box {
     height: auto;
     width: 29.5%;
 }
-.home_feature_4_images_group .box_2 img {
+.home_feature_4_images_group .box img {
     height: auto;
     width: 100%;
+}
+.home_feature_4_images_group .box_1 {
+    width: 70%;
+    height: auto;
 }
