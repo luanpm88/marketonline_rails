@@ -139,6 +139,9 @@ p {
     height: auto;
     width: 100%;
 }
+.home_feature_3_images_group .box {
+    width: 33%;
+}
 .home_feature_3_images_group .box_1 {
     border-bottom: medium none;
     height: auto;
