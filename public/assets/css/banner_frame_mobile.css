@@ -140,7 +140,11 @@ p {
     width: 100%;
 }
 .home_feature_3_images_group .box {
-    width: 33%;
+    width: 49.2%;
+}
+.home_feature_3_images_group .box img {
+    height: auto;
+    width: 100%;
 }
 .home_feature_3_images_group .box_1 {
     border-bottom: medium none;
@@ -148,6 +152,7 @@ p {
     overflow: hidden;
     width: 99%;
 }
+
 .home_feature_3_images_group {
     width: 99%;
 }
