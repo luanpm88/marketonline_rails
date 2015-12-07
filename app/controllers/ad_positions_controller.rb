@@ -71,12 +71,12 @@ class AdPositionsController < ApplicationController
 
   def iframe_home_top_banner
     
-    render text: request.remote_ip
-    #@pos_1 = AdPosition.get("home_top_banner_1")
-    #@pos_2 = AdPosition.get("home_top_banner_2")
-    #@pos_3 = AdPosition.get("home_top_banner_3")
-
-    #render layout: "ad_frame"
+    
+    @pos_1 = AdPosition.get("home_top_banner_1")
+    @pos_2 = AdPosition.get("home_top_banner_2")
+    @pos_3 = AdPosition.get("home_top_banner_3")
+    
+    render layout: "ad_frame"
   end
   
   def preview_box
