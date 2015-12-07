@@ -135,3 +135,19 @@ p {
     overflow: hidden;
     padding: 10px 0;
 }
+.home_feature_3_images_group .box_1 img {
+    height: auto;
+    width: 100%;
+}
+.home_feature_3_images_group .box_1 {
+    border-bottom: medium none;
+    height: auto;
+    overflow: hidden;
+    width: 100%;
+}
+.home_feature_3_images_group {
+    width: 100%;
+}
+.box_3_banner_title {
+    width: 100%;
+}
