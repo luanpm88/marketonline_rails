@@ -1,5 +1,5 @@
 <ul class="iframe_6_items_list">
-  <% @ads.each do |ad| %>
+  <% @ads.each_with_index do |ad,num| %>
     <li>
       <a href="<%= click_ads_path(id: ad) %>" target="_blank">
         <img title="" src="<%= ad.image_url(:banner) %>" />
