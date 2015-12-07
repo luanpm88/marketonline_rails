@@ -8,5 +8,10 @@
         <%= ad.name %>
       </a>
     </li>
+    
+    <% if params[:device] == "mobile" and num%2 == 1 %>
+      </ul><ul class="iframe_6_items_list">
+    <% end %>
+    
   <% end %>
 </ul>
