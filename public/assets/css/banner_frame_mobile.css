@@ -190,3 +190,8 @@ p {
     height: auto;
     width: 100%;
 }
+.iframe_6_items_list li {
+    float: left;
+    margin: 0 0 2%;
+    width: 49%;
+}
