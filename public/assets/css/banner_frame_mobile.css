@@ -176,3 +176,17 @@ p {
     line-height: 0;
     float: left;
 }
+.iframe_6_items_list li {
+    width: 49%;
+    float: left;
+}
+.iframe_6_items_list li:last-child {
+    float: right;
+}
+.iframe_6_items_list {
+    width: 100%;
+}
+.iframe_6_items_list li img {
+    height: auto;
+    width: 100%;
+}
