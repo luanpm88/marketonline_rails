@@ -45,6 +45,18 @@
           
         }
         
+        function customSlide_2(class_name, per_line, space, time) {          
+          var slide = $(class_name)
+          if (slide.find("li").length <= per_line ) {
+            return
+          }
+          slide.find("li").each(function() {
+              slide.append($(this).clone())
+          })
+          
+          //setInterval("moveSlide3Lest('"+class_name+"', "+per_line+", "+space+")", time)
+        }
+        
         function customSlide(class_name, per_line, space, time) {          
           var slide = $(class_name)
           if (slide.find("li").length <= per_line ) {
