@@ -90,6 +90,7 @@ class AdPositionsController < ApplicationController
   
   def get_remaining_time
     @ad_position = AdPosition.get(params[:pos])
+    
     render json: @ad_position.get_remaining_days("date")
   end
   
