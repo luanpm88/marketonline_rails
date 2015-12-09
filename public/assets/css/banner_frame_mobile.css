@@ -196,11 +196,20 @@ p {
     width: 48.5%;
 }
 .iframe_3_wide_banners li {
+    height: auto;
     width: 33.3%;
 }
+.iframe_3_wide_banners li:last-child {
+    margin-right: 0;
+}
 .iframe_3_wide_banners {
-    width: 100%;
+    position: relative;
+    width: 107%;
 }
 .ad_slidermobile {
     width: 300%;
+}
+.iframe_3_wide_banners li a img {
+    height: auto;
+    width: 100%;
 }
