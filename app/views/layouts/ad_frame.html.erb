@@ -27,7 +27,11 @@
           }
           
           var width = $(".ad_slidermobile li").width()+22
-          $(".ad_slidermobile").css("margin-left", -width*banner3_pos)
+          //$(".ad_slidermobile").css("margin-left", -width*banner3_pos)
+          
+          $(".ad_slidermobile li").animate({
+            left: "="+(-width*banner3_pos)
+          }, 500);
           
         }
         

@@ -208,6 +208,8 @@ p {
 }
 .ad_slidermobile {
     width: 300%;
+    position: absolute;
+    left: 0;
 }
 .iframe_3_wide_banners li a img {
     height: auto;
