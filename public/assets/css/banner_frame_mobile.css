@@ -195,3 +195,12 @@ p {
     margin: 0 0 2%;
     width: 48.5%;
 }
+.iframe_3_wide_banners li {
+    width: 33.3%;
+}
+.iframe_3_wide_banners {
+    width: 100%;
+}
+.ad_slider {
+    width: 300%;
+}
