@@ -69,8 +69,7 @@ class AdPositionsController < ApplicationController
     render json: result[:result]
   end
 
-  def iframe_home_top_banner
-    
+  def iframe_home_top_banner    
     
     @pos_1 = AdPosition.get("home_top_banner_1")
     @pos_2 = AdPosition.get("home_top_banner_2")
