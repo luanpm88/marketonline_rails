@@ -18,6 +18,18 @@
       <%= javascript_include_tag '/assets/js/plugins/jquery.bxslider/jquery.bxslider.min.js' %>
       
       <script>
+        var banner3_pos = 0
+        function banner3_move() {
+          if (banner_3_pos < 2){
+            banner3_pos += 1
+          } else {
+            banner3_pos = 0
+          }
+          
+          var width = $(".ad_slidermobile li").width()+22
+          $(".ad_slidermobile").css("margin-left", -width*banner3_pos)
+          
+        }
         
         function customSlide(class_name, per_line, space, time) {          
           var slide = $(class_name)
