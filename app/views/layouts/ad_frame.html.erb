@@ -20,6 +20,8 @@
       <script>
         var banner3_pos = 0
         function banner3_move() {
+          var current = parseInt($(".ad_slidermobile").css("left"))
+
           if (banner3_pos < 2){
             banner3_pos += 1
           } else {
@@ -27,10 +29,18 @@
           }
           
           var width = $(".ad_slidermobile li").width()+22
+          var target = width*banner3_pos
+          
+          var amount = target-(-current)
+          
+          if(target == 0) {
+            amount = current
+          }
+          
           //$(".ad_slidermobile").css("margin-left", -width*banner3_pos)
           
-          $(".ad_slidermobile li").animate({
-            left: "="+(-width*banner3_pos)
+          $(".ad_slidermobile").animate({
+            left: "+="+(-amount)
           }, 500);
           
         }
