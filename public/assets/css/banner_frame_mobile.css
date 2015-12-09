@@ -213,3 +213,6 @@ p {
     height: auto;
     width: 100%;
 }
+body {
+    overflow: hidden;
+}
