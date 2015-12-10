@@ -55,6 +55,12 @@
           })
           slide.find("li").css("width", $(this).width())
           
+          var count = slide.find("li").length
+          var item_width = slide.find("li").width()+space
+          var width = (item_width)*count
+          
+          slide.width(width)
+          
           setInterval("moveSlide3Lest('"+class_name+"', "+per_line+", "+space+")", time)
         }
         
