@@ -440,6 +440,19 @@ class Ad < ActiveRecord::Base
   end
   
   def pb_area_name
-    pb_area_id == -1 ? "Mặc định" : (pb_area.nil? ? "" : pb_area.full_name_inverse)
+    if pb_area_id == -1
+      result = "Mặc định"
+    elsif pb_area_id == -2
+      result = "Miền Nam"
+    elsif pb_area_id == -3
+      result = "Miền Trung"
+    elsif pb_area_id == -4
+      result = "Miền Bắc"
+    else
+      # check if area nil? return ""
+      result = pb_area.nil? ? "" : pb_area.full_name_inverse
+    end
+    
+    return result
   end
 end
