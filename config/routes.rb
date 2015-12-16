@@ -33,6 +33,7 @@ Rails.application.routes.draw do
       get 'iframe_5_wide_banners'
       get 'iframe_6_wide_banners'
       get 'iframe_7_wide_banners'
+      get 'iframe_area_top_3_banner'
       get 'preview_box'
       get 'get_values'
       get 'get_remaining_time'
