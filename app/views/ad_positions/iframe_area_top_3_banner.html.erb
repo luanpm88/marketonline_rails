@@ -15,7 +15,7 @@
       </a>
     </li>
   <% end %>
-  <% if !params[:area_id].present? %>
+  <% if !params[:area_id].present? and !params[:areatype_id].present? %>
     <% @pos_3.area_ads(params[:area_id]).each do |ad| %>
       <li>
         <a title="<%= ad.name %>" href="<%= click_ads_path(id: ad) %>" target="_blank">
