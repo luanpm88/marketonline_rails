@@ -1,21 +1,21 @@
 <div class="">
 <ul class="iframe_area_top_3_banner">
   <div class="loading"></div>
-  <% @pos.active_ads.each do |ad| %>
+  <% @pos.area_ads.each do |ad| %>
     <li>
       <a title="<%= ad.name %>" href="<%= click_ads_path(id: ad) %>" target="_blank">
         <img title="" src="<%= ad.image_url(:banner) %>" />
       </a>
     </li>
   <% end %>
-  <% @pos_2.active_ads.each do |ad| %>
+  <% @pos_2.area_ads.each do |ad| %>
     <li>
       <a title="<%= ad.name %>" href="<%= click_ads_path(id: ad) %>" target="_blank">
         <img title="" src="<%= ad.image_url(:banner) %>" />
       </a>
     </li>
   <% end %>
-  <% @pos_3.active_ads.each do |ad| %>
+  <% @pos_3.area_ads.each do |ad| %>
     <li>
       <a title="<%= ad.name %>" href="<%= click_ads_path(id: ad) %>" target="_blank">
         <img title="" src="<%= ad.image_url(:banner) %>" />
