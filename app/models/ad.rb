@@ -128,7 +128,7 @@ class Ad < ActiveRecord::Base
     
     @records.each do |item|
       industry_info = !item.pb_industry.nil? ? "<div class=\"text-muted text-size-small\">#{item.pb_industry.name}</div>" : (item.pb_industry_id == -1 ? "<div class=\"text-muted text-size-small\">Mặc định</div>" : "")
-      area_info = !item.pb_area.nil? ? "<div class=\"text-muted text-size-small\">#{item.pb_area.full_name_inverse}</div>" : (item.pb_area_id == -1 ? "<div class=\"text-muted text-size-small\">Mặc định</div>" : "")
+      area_info = "<div class=\"text-muted text-size-small\">#{item.pb_area_name}</div>"
       row = [
               item.image_link,
               item.name+industry_info+area_info,
