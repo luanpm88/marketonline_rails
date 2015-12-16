@@ -502,7 +502,7 @@ $(document).ready(function() {
         var item = $(this)
         item.select2({
             placeholder: item.attr("placeholder"),
-            minimumInputLength: 1,
+            minimumInputLength: 0,
             allowClear: true,
             multiple: item.hasClass("multiple"),
             ajax: {
