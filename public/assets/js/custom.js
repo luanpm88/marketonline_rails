@@ -414,7 +414,7 @@ $(document).ready(function() {
         var orders = []
         var num = 0
         var item_id = ""
-        $('.datatable-ajax').find("th").each(function() {
+        $(this).find("th").each(function() {
           if(!$(this).hasClass("sortable")) {
             orders.push(num)
           }

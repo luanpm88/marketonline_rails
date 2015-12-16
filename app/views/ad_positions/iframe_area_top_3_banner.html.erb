@@ -1,0 +1,13 @@
+<div class="">
+<ul class="iframe_area_top_3_banner">
+  <div class="loading"></div>
+  <% @ads.each do |ad| %>
+    <li>
+      <a title="<%= ad.name %>" href="<%= click_ads_path(id: ad) %>" target="_blank">
+        <img title="" src="<%= ad.image_url(:banner) %>" />
+      </a>
+    </li>
+    
+  <% end %>
+</ul>
+</div>

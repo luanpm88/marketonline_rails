@@ -78,6 +78,13 @@ class AdPositionsController < ApplicationController
     render layout: "ad_frame"
   end
   
+  def iframe_area_top_3_banner    
+    @pos = AdPosition.get(params[:pos])
+    @ads = @pos.active_ads
+    
+    render layout: "ad_frame"
+  end
+  
   def preview_box
     render layout: nil
   end
