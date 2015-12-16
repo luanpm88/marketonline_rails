@@ -15,7 +15,7 @@ class AdPosition < ActiveRecord::Base
   end
   
   def area_ads(area_id=-1)
-    result = active_ads.where(pb_area_id: area_id)
+    result = active_ads.where(pb_area_id: -1)
 
     return result
   end
