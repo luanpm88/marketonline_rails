@@ -433,9 +433,6 @@ body {
 .iframe_1_wide_banners li {
     list-style: none;
 }
-
-
-
 .iframe_area_top_3_banner {
     margin: 0;
     padding: 0
@@ -454,5 +451,5 @@ body {
 .iframe_area_top_3_banner li {
     list-style: none;
     float: left;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
