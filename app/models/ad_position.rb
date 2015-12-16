@@ -14,6 +14,12 @@ class AdPosition < ActiveRecord::Base
     return result
   end
   
+  def area_ads(area_id=-1)
+    result = active_ads.where(pb_area_id: area_id)
+
+    return result
+  end
+  
   def width=(new)
     self[:width] = new.to_s.gsub(/\,/, '')
   end

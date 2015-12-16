@@ -19,6 +19,7 @@ class Ad < ActiveRecord::Base
   belongs_to :pb_product
   belongs_to :ad
   belongs_to :pb_industry
+  belongs_to :pb_area
   
   has_many :ad_clicks
   
@@ -435,5 +436,9 @@ class Ad < ActiveRecord::Base
     else
       "<span class=\"ad_status label bg-draft\">Chưa kích hoạt</span>"
     end    
+  end
+  
+  def pb_area_name
+    pb_area_id == -1 ? "Mặc định" : (pb_area.nil? ? "" : pb_area.full_name_inverse)
   end
 end

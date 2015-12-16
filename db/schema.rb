@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151130064739) do
+ActiveRecord::Schema.define(version: 20151216034604) do
 
   create_table "ad_clicks", force: :cascade do |t|
     t.integer  "ad_id",         limit: 4
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20151130064739) do
     t.string   "display_price_unit",   limit: 255
     t.integer  "active",               limit: 4,                    default: 0
     t.integer  "pb_industry_id",       limit: 4
+    t.integer  "pb_area_id",           limit: 4
   end
 
   create_table "email", force: :cascade do |t|

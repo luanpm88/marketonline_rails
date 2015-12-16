@@ -273,6 +273,11 @@
 												<%= select_tag "ad[pb_industry_id]", options_for_select(PbIndustry.input_options(@current_user), @ad.pb_industry_id), class: "modern_select select required width100" %>
 											</div>
 											
+											<div class="form-group area_group">
+												<label>Khu vực <span class="text-danger">*</span></label>
+												<%= f.text_field :pb_area_id, required: "required", class: "select2-ajax", data_link: pb_areas_path(format: "json"), placeholder: "Tìm khu vực...", value: @ad.pb_area_id, text: @ad.pb_area_name %>
+											</div>
+											
 											<div class="form-group type_group image_type_group">
 												<label>Tiêu đề quảng cáo <span class="text-danger">*</span></label>
 												<%= f.text_field :name, required: "required", class: "form-control" %>
