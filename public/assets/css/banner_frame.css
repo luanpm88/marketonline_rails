@@ -449,7 +449,10 @@ body {
 }
 .iframe_area_top_3_banner li a img {
     width: 100%;
+    height: 135px;
 }
 .iframe_area_top_3_banner li {
     list-style: none;
+    float: left;
+    margin-bottom: 10px;
 }
