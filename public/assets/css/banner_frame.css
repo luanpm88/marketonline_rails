@@ -433,3 +433,23 @@ body {
 .iframe_1_wide_banners li {
     list-style: none;
 }
+
+
+
+.iframe_area_top_3_banner {
+    margin: 0;
+    padding: 0
+}
+.iframe_area_top_3_banner li a {
+    border: 1px solid #ddd;
+    display: block;
+    float: left;
+    line-height: 0;
+    width: 930px;
+}
+.iframe_area_top_3_banner li a img {
+    width: 100%;
+}
+.iframe_area_top_3_banner li {
+    list-style: none;
+}
