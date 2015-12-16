@@ -445,7 +445,7 @@ body {
     display: block;
     float: left;
     line-height: 0;
-    width: 930px;
+    width: 100%;
 }
 .iframe_area_top_3_banner li a img {
     width: 100%;
