@@ -6,6 +6,10 @@ class PbArea < ActiveRecord::Base
     result = result.where("LOWER(pb_areas.name) LIKE ?", "%#{params[:q].strip.downcase}%")
    
     result = result.limit(50).map {|model| {:id => model.id, :text => model.full_name_inverse} }
+    result.unshift({"text": "Miền Nam", "id": -2})
+    result.unshift({"text": "Miền Trung", "id": -3})
+    result.unshift({"text": "Miền Bắc", "id": -4})
+    
     if user.role == "admin"
         result.unshift({"text": "Mặc định", "id": -1})
     end
