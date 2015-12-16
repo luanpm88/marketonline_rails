@@ -17,7 +17,7 @@ class AdPosition < ActiveRecord::Base
   def area_ads(area_id=nil)
     area_id = -1 if !area_id.present?
     result = active_ads.where(pb_area_id: area_id)
-
+    reeult = active_ads.where(pb_area_id: -1) if result.count == 0
     return result
   end
   
