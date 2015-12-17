@@ -47,6 +47,12 @@ module ApplicationHelper
         title = 'Tranh chính'
         
       end
+    elsif ["pb_areatypeinfos"].include?(params[:controller])
+      if ["index"].include?(params[:action])
+        #breadcrumb += '<li><a href="#">Thêm quảng cáo</a></li>'
+        title = 'Quản lý thông tin vị trí địa lý'
+        
+      end
     end
     
     breadcrumb += '</ul>'
