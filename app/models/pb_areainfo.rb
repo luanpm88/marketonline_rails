@@ -17,7 +17,7 @@ class PbAreainfo < ActiveRecord::Base
     
     @records.each do |item|
       row = [
-              "<a target=\"_blank\"href=\"http://marketonline.vn:/thi-truong/#{item.pb_area.areatype.name.downcase.unaccent.strip.gsub(" ","-")}/#{item.pb_area.id.to_s}/#{item.pb_area.name.downcase.unaccent.strip.gsub(" ","-")}\">"+item.pb_area.name+"</a>",
+              "<a target=\"_blank\"href=\"http://marketonline.vn:/thi-truong/#{item.pb_area.areatype.name.downcase.unaccent.strip.gsub(" ","-")}/#{item.pb_area.id.to_s}/#{item.pb_area.name.downcase.unaccent.strip.gsub(" ","-")}\">"+item.pb_area.full_name_inverse+"</a>",
               item.content,
               (item.pb_member.present? ? item.pb_member.display_name : ""),
               item.created.strftime("%d/%m/%Y, %H:%I"),
