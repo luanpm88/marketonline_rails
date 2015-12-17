@@ -49,6 +49,20 @@ Rails.application.routes.draw do
       
     end
   end
+  
+  resources :pb_areatypeinfos do
+    collection do
+      get 'datatable'
+      get 'delete'
+    end
+  end
+  
+  resources :pb_areainfos do
+    collection do
+      get 'datatable'
+      get 'delete'
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

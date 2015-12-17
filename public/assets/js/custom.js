@@ -260,7 +260,7 @@ function renderBasicAreaChart(chart_id, days, values_1, values_2) {
 }
 
 
-var xhr;
+var xhr = {};
 $(document).ready(function() {
     
     //
@@ -408,8 +408,9 @@ $(document).ready(function() {
         }
     });
     
+    
     // AJAX sourced data    
-    $('.datatable-ajax').each (function() {
+    $('.datatable-ajax').each (function(num) {
         var item = $(this)
         var box = $(this).parents(".datatable_box")
         var filters = box.find(".datatable_filter")
@@ -425,11 +426,13 @@ $(document).ready(function() {
         if (typeof(item.attr("item-id")) != "undefined") {
             item_id = item.attr("item-id")
         }
-        xhr = item.on('preXhr.dt', function ( e, settings, data ) {
-                if(xhr.dataTableSettings[0].jqXHR != null) {
-                    xhr.dataTableSettings[0].jqXHR.abort()
-                }
-            } ).dataTable({
+        //xhr[num] = item.on('preXhr.dt', function ( e, settings, data ) {
+        //        if(xhr[num].dataTableSettings[0].jqXHR != null) {
+        //            xhr[num].dataTableSettings[0].jqXHR.abort()
+        //        }
+        //    } ).dataTable({
+        
+        item.dataTable({
             "order": [],
             "columnDefs": [ { "targets": orders, "orderable": false } ],
             "processing": true,

@@ -1,5 +1,6 @@
 class PbArea < ActiveRecord::Base
   belongs_to :parent, class_name: "PbArea", foreign_key: "parent_id"
+  belongs_to :pb_areatype, class_name: "PbAreatype", foreign_key: "areatype_id"
   
   def self.general_search(params, user)
     result = self.where.not(id: 1)
@@ -15,6 +16,14 @@ class PbArea < ActiveRecord::Base
     end
     
     return result
+  end
+  
+  def areatype
+    if self.level == 3
+      self.parent.pb_areatype
+    else
+      self.pb_areatype
+    end    
   end
   
   def full_name
