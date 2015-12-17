@@ -21,6 +21,7 @@ class PbAreatypeinfo < ActiveRecord::Base
               item.content,
               (item.pb_member.present? ? item.pb_member.display_name : ""),
               item.created.strftime("%d/%m/%Y, %H:%I"),
+              item.display_status,
               "<div class=\"text-right\"><ul class=\"icons-list\">"+
                   "<li class=\"dropup\">"+
                       "<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\"><i class=\"icon-menu7\"></i></a>"+
@@ -41,6 +42,14 @@ class PbAreatypeinfo < ActiveRecord::Base
     result["data"] = data
     
     return {result: result}
+  end
+  
+  def display_status
+    if status == 1
+      "<span class=\"ad_status label bg-green\" title=\"Đã chọn\">Đã chọn</span>"
+    else
+      "<span class=\"ad_status label bg-draft\" title=\"Đang đợi duyệt\">Đợi duyệt</span>"
+    end
   end
   
   def destroy_link
