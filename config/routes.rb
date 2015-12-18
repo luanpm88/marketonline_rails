@@ -63,6 +63,14 @@ Rails.application.routes.draw do
       get 'delete'
     end
   end
+  
+  resources :pb_settings do
+    collection do
+      get 'datatable'
+      get 'save'
+    end
+  end
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
