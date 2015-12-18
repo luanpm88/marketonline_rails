@@ -1,0 +1,49 @@
+<%= form_for(@deal) do |f| %>
+  <% if @deal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@deal.errors.count, "error") %> prohibited this deal from being saved:</h2>
+
+      <ul>
+      <% @deal.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :pb_product_id %><br>
+    <%= f.number_field :pb_product_id %>
+  </div>
+  <div class="field">
+    <%= f.label :pb_company_id %><br>
+    <%= f.number_field :pb_company_id %>
+  </div>
+  <div class="field">
+    <%= f.label :start_at %><br>
+    <%= f.datetime_select :start_at %>
+  </div>
+  <div class="field">
+    <%= f.label :end_at %><br>
+    <%= f.datetime_select :end_at %>
+  </div>
+  <div class="field">
+    <%= f.label :quantity %><br>
+    <%= f.number_field :quantity %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br>
+    <%= f.text_field :price %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.text_area :status %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

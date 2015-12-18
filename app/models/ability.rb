@@ -48,6 +48,7 @@ class Ability
         can :manage, PbAreainfo
         can :manage, PbAreatypeinfo
         can :manage, PbSetting
+        can :manage, Deal
       end
     end
     

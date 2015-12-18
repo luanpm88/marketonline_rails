@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Pb product:</strong>
+  <%= @deal.pb_product_id %>
+</p>
+
+<p>
+  <strong>Pb member:</strong>
+  <%= @deal.pb_member_id %>
+</p>
+
+<p>
+  <strong>Start at:</strong>
+  <%= @deal.start_at %>
+</p>
+
+<p>
+  <strong>End at:</strong>
+  <%= @deal.end_at %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @deal.quantity %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @deal.price %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @deal.status %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @deal.description %>
+</p>
+
+<%= link_to 'Edit', edit_deal_path(@deal) %> |
+<%= link_to 'Back', deals_path %>

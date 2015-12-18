@@ -53,6 +53,12 @@ module ApplicationHelper
         title = 'Quản lý thông tin vị trí địa lý'
         
       end
+    elsif ["deals"].include?(params[:controller])
+      if ["index"].include?(params[:action])
+        #breadcrumb += '<li><a href="#">Thêm quảng cáo</a></li>'
+        title = 'Quản lý sản phẩm DEAL'
+        
+      end
     end
     
     breadcrumb += '</ul>'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151216034604) do
+ActiveRecord::Schema.define(version: 20151218083524) do
 
   create_table "ad_clicks", force: :cascade do |t|
     t.integer  "ad_id",         limit: 4
@@ -73,6 +73,24 @@ ActiveRecord::Schema.define(version: 20151216034604) do
     t.integer  "pb_industry_id",       limit: 4
     t.integer  "pb_area_id",           limit: 4
   end
+
+  create_table "deals", force: :cascade do |t|
+    t.integer  "pb_product_id", limit: 4
+    t.integer  "pb_company_id", limit: 4
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.integer  "quantity",      limit: 4
+    t.decimal  "price",                       precision: 10
+    t.text     "status",        limit: 65535
+    t.text     "description",   limit: 65535
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+  end
+
+  add_index "deals", ["end_at"], name: "index_deals_on_end_at", using: :btree
+  add_index "deals", ["pb_company_id"], name: "index_deals_on_pb_company_id", using: :btree
+  add_index "deals", ["pb_product_id"], name: "index_deals_on_pb_product_id", using: :btree
+  add_index "deals", ["start_at"], name: "index_deals_on_start_at", using: :btree
 
   create_table "email", force: :cascade do |t|
     t.string "email", limit: 100,  null: false
@@ -1641,6 +1659,7 @@ ActiveRecord::Schema.define(version: 20151216034604) do
     t.integer "id",       limit: 2,                     null: false
     t.boolean "type_id",                default: false, null: false
     t.string  "variable", limit: 150,   default: "",    null: false
+    t.text    "name",     limit: 65535,                 null: false
     t.text    "valued",   limit: 65535
   end
 

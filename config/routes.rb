@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :deals do
+    collection do
+      get 'datatable'
+      get 'delete'
+    end
+  end
   resources :ad_clicks do
     collection do
       get 'datatable'

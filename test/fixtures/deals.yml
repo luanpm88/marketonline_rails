@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pb_product_id: 1
+  pb_member_id: 1
+  start_at: 
+  end_at: 2015-12-18 00:35:25
+  quantity: 1
+  price: 9.99
+  status: MyText
+  description: MyText
+
+two:
+  pb_product_id: 1
+  pb_member_id: 1
+  start_at: 
+  end_at: 2015-12-18 00:35:25
+  quantity: 1
+  price: 9.99
+  status: MyText
+  description: MyText
