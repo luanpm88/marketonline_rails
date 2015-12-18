@@ -196,14 +196,16 @@
 										<!--<li><a href="#">Thống kê</a></li>-->
 									</ul>
 								</li>
-								<li <%= 'class=active' if ["deals"].include?(params[:controller]) %>>
-									<a href="#"><i class="icon-price-tags"></i> <span>Quản lý DEAL</span></a>
-									<ul>
-										<li <%= 'class=active' if ["deals"].include?(params[:controller]) && ["index"].include?(params[:action]) %>><a href="<%= deals_path %>">Quản lý DEAL</a></li>
-										<li <%= 'class=active' if ["deals"].include?(params[:controller]) && ["zz"].include?(params[:action]) %>><a href="<%= new_ad_path %>">Cộng tác viên</a></li>
-										<li <%= 'class=active' if ["deals"].include?(params[:controller]) && ["zz"].include?(params[:action]) %>><a href="<%= new_ad_path %>">Khách hàng</a></li>
-									</ul>
-								</li>
+								<% if ["admin"].include? @current_user.role %>
+									<li <%= 'class=active' if ["deals"].include?(params[:controller]) %>>
+										<a href="#"><i class="icon-price-tags"></i> <span>Quản lý DEAL</span></a>
+										<ul>
+											<li <%= 'class=active' if ["deals"].include?(params[:controller]) && ["index"].include?(params[:action]) %>><a href="<%= deals_path %>">Quản lý DEAL</a></li>
+											<li <%= 'class=active' if ["deals"].include?(params[:controller]) && ["zz"].include?(params[:action]) %>><a href="<%= new_ad_path %>">Cộng tác viên</a></li>
+											<li <%= 'class=active' if ["deals"].include?(params[:controller]) && ["zz"].include?(params[:action]) %>><a href="<%= new_ad_path %>">Khách hàng</a></li>
+										</ul>
+									</li>
+								<% end %>
 								<% if ["admin"].include? @current_user.role %>
 									<li <%= 'class=active' if ["pb_areatypeinfos"].include?(params[:controller]) %>>
 										<a href="#"><i class="icon-cog5"></i> <span>Quản lý</span></a>
