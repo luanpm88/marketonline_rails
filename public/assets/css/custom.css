@@ -279,3 +279,9 @@ legend {
 .form-control:focus {
     border-color: #4caf50;
 }
+.select2-drop {
+    border-color: #4caf50;
+}
+.select2-dropdown-open .select2-choice {
+    border-color: #4caf50;
+}
