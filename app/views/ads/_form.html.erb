@@ -625,8 +625,7 @@
 					$(".ad_display_price").hide()
 					if ($(".home_top_banner_3").length) {
 						$(".ad_display_price").show()
-					}
-										
+					}										
 				}
 			})
 		}
@@ -784,7 +783,6 @@
 		setInterval("adSummary()", 500)
 	
 		loadDaterange($('.new_ad_daterange'), "<%= @ad.start_at.strftime("%d-%m-%Y") %>", "<%= @ad.end_at.strftime("%d-%m-%Y") %>")
-		
 		
 		$(document).on("click", ".ad_detail_tab .box_style .box_style_item", function() {
 			var id = $(this).attr("rel")
