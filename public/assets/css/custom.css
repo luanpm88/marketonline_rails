@@ -276,3 +276,6 @@ legend {
 .daterangepicker .calendar {
     border-color: #4caf50;
 }
+.form-control:focus {
+    border-color: #4caf50;
+}
