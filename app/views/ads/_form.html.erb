@@ -3,13 +3,6 @@
 		            <div class="panel panel-white">
 						<div class="panel-heading">
 							<h6 class="panel-title">Đăng quảng cáo gồm 3 bước</h6>
-							<div class="heading-elements">
-								<ul class="icons-list">
-			                		<li><a data-action="collapse"></a></li>
-			                		<li><a data-action="reload"></a></li>
-			                		<li><a data-action="close"></a></li>
-			                	</ul>
-		                	</div>
 						</div>
 
 	                	<%= form_for(@ad, html: {class: "form-validate-jquery steps-validation", multipart: true}) do |f| %>
@@ -25,12 +18,13 @@
 								</div>
 							<% end %>
 
-							<h6>Nội dung Quảng cáo</h6>
+							<h6>Vị trí Quảng cáo</h6>
 							<fieldset class="ad_detail_tab">
 								<div class="row">
 									<div class="col-md-6">
 										<fieldset class="text-semibold">
 											<legend><i class="icon-file-text position-left"></i> Cài đặt quảng cáo</legend>
+											
 											<div class="form-group">							
 												<label>Vị trí đặt Quảng cáo <span class="text-danger">*</span></label>
 												<div class="">
@@ -38,9 +32,23 @@
 												</div>
 											</div>
 											
+											<div class="ad_preview_box ad_preview_box_1">
+												
+											</div>
+											
+										</fieldset>
+									</div>
+								</div>
+							</fieldset>
+							
+							<h6>Nội dung Quảng cáo</h6>
+							<fieldset class="ad_detail_tab">
+								<div class="row">
+									<div class="col-md-6">
+										<fieldset class="text-semibold">
+											<legend><i class="icon-file-text position-left"></i> Hình ảnh Quảng cáo</legend>
 											<div class="picture_box" style="display: none">
 												<div class="ad_preview_box ad_preview_box_1">
-													
 												</div>
 												
 												<input name="check_image" style="position: absolute;border: none;background: none" />
@@ -130,8 +138,7 @@
 														</div>
 													</div>
 												</div>	
-											</div>	
-											
+											</div>
 										</fieldset>
 									</div>
 									<div class="col-md-6 payment_detail_box">
