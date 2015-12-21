@@ -40,7 +40,7 @@
 											<div class="col-md-6">
 												<div class="form-group">
 													<label>Số lượng <span class="text-danger">*</span></label>
-													<%= f.text_field :price, required: "required", class: "text-right form-control number_input required", placeholder: "Số lượng sản phẩm deal" %>												
+													<%= f.text_field :quantity, required: "required", class: "text-right form-control number_input required", placeholder: "Số lượng sản phẩm deal" %>												
 												</div>
 											</div>
 										</div>
@@ -253,6 +253,5 @@
 	$('#deal_share_price').keyup(function() {
 		updateFormPrice()
 	})
-	
 	
 </script>
