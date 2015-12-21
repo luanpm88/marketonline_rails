@@ -229,9 +229,6 @@
     border-radius: 20px;
     padding: 1px 8px;
 }
-a:hover {
-    opacity: 0.8;
-}
 .footer_inner {
     border-top: 2px solid #fff;
     display: block;
@@ -272,6 +269,7 @@ legend {
     color: #c5a169;
 }
 .payment_type_group {
+    
 }
 .daterangepicker .calendar {
     border-color: #4caf50;

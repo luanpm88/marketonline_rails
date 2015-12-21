@@ -17,33 +17,19 @@
 								  </ul>
 								</div>
 							<% end %>
-
+							
 							<h6>Vị trí Quảng cáo</h6>
 							<fieldset class="ad_detail_tab">
 								<div class="row">
 									<div class="col-md-6">
 										<fieldset class="text-semibold">
 											<legend><i class="icon-file-text position-left"></i> Cài đặt quảng cáo</legend>
-											
 											<div class="form-group">							
 												<label>Vị trí đặt Quảng cáo <span class="text-danger">*</span></label>
 												<div class="">
 													<%= f.select("ad_position_id", AdPosition.all_items.collect {|p| [ p.display_name_option, p.id ] }, { include_blank: "- Chọn vị trí -"} , {class: "select_ad_position width100", required: "required" }) %>
 												</div>
 											</div>
-											
-											
-											
-										</fieldset>
-									</div>
-									<div class="col-md-6">
-										<fieldset class="text-semibold">
-											<legend><i class="icon-file-text position-left"></i> Hình ảnh Quảng cáo</legend>
-											
-											<div class="ad_preview_box ad_preview_box_1">
-												
-											</div>
-											
 										</fieldset>
 									</div>
 								</div>
@@ -56,7 +42,7 @@
 										<fieldset class="text-semibold">
 											<legend><i class="icon-file-text position-left"></i> Hình ảnh Quảng cáo</legend>
 											<div class="picture_box" style="display: none">
-												<div class="ad_preview_box ad_preview_box_1">
+												<div class="ad_preview_box ad_preview_box_2">
 												</div>
 												
 												<input name="check_image" style="position: absolute;border: none;background: none" />
@@ -172,29 +158,6 @@
 													</div>
 												</div>	
 											</div>
-											
-											<!--<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<label>Từ ngày: <span class="text-danger">*</span></label>
-														<div class="input-group">
-															<span class="input-group-addon">
-																<i class="icon-calendar5"></i>
-															</span>
-															<input type="text" class="form-control pickadate" placeholder="Try me&hellip;">
-														</div>
-													</div>
-												</div>
-												<div class="col-md-6">
-													<div class="form-group">
-														<label>Đến ngày: <span class="text-danger">*</span></label>
-														<div class="input-group">
-															<span class="input-group-addon"><i class="icon-calendar22"></i></span>
-															<input type="text" name="ad[daterange]" class="form-control new_ad_daterange"> 
-														</div>
-													</div>
-												</div>
-											</div>-->
 											
 											<div class="row">
 												<div class="col-md-6">
@@ -804,6 +767,7 @@
 		getAdPositionValues()
 		$("select[name='ad[ad_position_id]']").change(function() {
 			getAdPositionValues()
+			$(".steps-validation").steps("next")
 		})
 		
 		$("input[name='ad[max_budget]'], input[name='ad[days]'], input[name='ad[start_at]'], input[name='ad[end_at]']").keyup(function() {

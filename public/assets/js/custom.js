@@ -360,6 +360,11 @@ $(document).ready(function() {
             } else {
                 $("a[href='#cancel']").hide()
             }
+            
+            var pos_id = $("select[name='ad[ad_position_id]']").val()
+            if (currentIndex == 0 && pos_id != "") {
+                        $(".steps-validation").steps("next")
+            }
         },
         onStepChanged: function (event, currentIndex, priorIndex) {
             if (currentIndex >= 1) {
