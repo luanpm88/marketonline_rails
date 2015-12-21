@@ -35,14 +35,10 @@
 										</div>-->
 										<fieldset class="text-semibold">
 											<legend><i class="icon-file-text position-left"></i> Cài đặt quảng cáo</legend>
-											<div class="form-group">
-												<div class="row">
-													<div class="col-md-2" style="padding-right: 0">
-														<label>Vị trí đặt<br />Quảng cáo <span class="text-danger">*</span></label>
-													</div>
-													<div class="col-md-10">
-														<%= f.select("ad_position_id", AdPosition.all_items.collect {|p| [ p.display_name_option, p.id ] }, { include_blank: "- Chọn vị trí -"} , {class: "select_ad_position width100", required: "required" }) %>
-													</div>
+											<div class="form-group">							
+												<label>Vị trí đặt Quảng cáo <span class="text-danger">*</span></label>
+												<div class="">
+													<%= f.select("ad_position_id", AdPosition.all_items.collect {|p| [ p.display_name_option, p.id ] }, { include_blank: "- Chọn vị trí -"} , {class: "select_ad_position width100", required: "required" }) %>
 												</div>
 											</div>
 											

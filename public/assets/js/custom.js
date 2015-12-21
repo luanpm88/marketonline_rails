@@ -24,15 +24,29 @@ function formatAdPositionOption(result) {
         }
 
 function loadDaterange(item, start_date, end_date) {
-    // Date Picker
-    $('#ad_start_at').AnyTime_picker({
-        format: "%d-%m-%Z"
+    //// Date Picker
+    //$('#ad_start_at').AnyTime_picker({
+    //    format: "%d-%m-%Z"
+    //});
+    //
+    //setTimeout('$("#ad_start_at").val( "'+start_date+'" );', 1000)
+    //
+    //$('#ad_end_at').AnyTime_picker({
+    //    format: "%d-%m-%Z"
+    //});
+    
+    $('#ad_start_at').daterangepicker({ 
+        singleDatePicker: true,
+        locale: {
+                        format: 'DD-MM-YYYY'
+            },
     });
     
-    setTimeout('$("#ad_start_at").val( "'+start_date+'" );', 1000)
-    
-    $('#ad_end_at').AnyTime_picker({
-        format: "%d-%m-%Z"
+    $('#ad_end_at').daterangepicker({ 
+        singleDatePicker: true,
+        locale: {
+                        format: 'DD-MM-YYYY'
+            },
     });
     
     setTimeout('$("#ad_end_at").val( "'+end_date+'" );', 1000)
