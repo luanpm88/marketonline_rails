@@ -45,6 +45,8 @@ class Ability
       
       if user.role == "admin"
         can :manage, Ad
+        can :manage, AdPosition
+        can :manage, PbArea
         can :manage, PbAreainfo
         can :manage, PbAreatypeinfo
         can :manage, PbSetting

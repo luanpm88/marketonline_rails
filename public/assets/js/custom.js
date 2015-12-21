@@ -554,7 +554,7 @@ $(document).ready(function() {
     
     $('input.number_input').number(true, 0);
     
-    $('.select').select2({ width: 'resolve' });
+    $('.select').select2({ width: 'resolve', minimumResultsForSearch: -1});
 
     //ajax select2 for contacts
     $('.select2-ajax').each(function() {
@@ -621,7 +621,8 @@ $(document).ready(function() {
     
     $(".select_ad_position").select2({        
         formatResult: formatAdPositionOption,
-        formatSelection: formatAdPositionOption
+        formatSelection: formatAdPositionOption,
+        minimumResultsForSearch: -1
     });
     
 });

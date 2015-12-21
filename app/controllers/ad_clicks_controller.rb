@@ -1,4 +1,5 @@
 class AdClicksController < ApplicationController
+  load_and_authorize_resource
   before_action :set_ad_click, only: [:show, :edit, :update, :destroy]
 
   # GET /ad_clicks

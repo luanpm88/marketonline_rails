@@ -1,4 +1,5 @@
 class AdPositionsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_ad_position, only: [:get_values, :preview_box, :show, :edit, :update, :destroy]
 
   # GET /ad_positions
