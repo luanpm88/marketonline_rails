@@ -335,12 +335,11 @@ $(document).ready(function() {
         titleTemplate: '<span class="number">#index#</span> #title#',
         autoFocus: true,
         onStepChanging: function (event, currentIndex, newIndex) {
-
             // Allways allow previous action even if the current form is not valid!
             if (currentIndex > newIndex) {
                 return true;
             }
-
+            
             // Needed in some cases if the user went back (clean up)
             if (currentIndex < newIndex) {
 
@@ -356,14 +355,18 @@ $(document).ready(function() {
             return form.valid();
         },
         onInit: function (event, currentIndex) {
-        
+            if (currentIndex >= 1) {
+                $("a[href='#cancel']").show()
+            } else {
+                $("a[href='#cancel']").hide()
+            }
         },
         onStepChanged: function (event, currentIndex, priorIndex) {
-            //if (currentIndex >= 0) {
-            //    $("a[href='#cancel']").show()
-            //} else {
-            //    $("a[href='#cancel']").hide()
-            //}
+            if (currentIndex >= 1) {
+                $("a[href='#cancel']").show()
+            } else {
+                $("a[href='#cancel']").hide()
+            }
         },
         onFinishing: function (event, currentIndex) {
             form.validate().settings.ignore = ":disabled,:hidden";
