@@ -273,3 +273,6 @@ legend {
 }
 .payment_type_group {
 }
+.daterangepicker .calendar {
+    border-color: #4caf50;
+}
