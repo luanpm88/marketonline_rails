@@ -363,7 +363,7 @@ $(document).ready(function() {
             
             var pos_id = $("select[name='ad[ad_position_id]']").val()
             if (currentIndex == 0 && pos_id != "") {
-                        $(".steps-validation").steps("next")
+                        $("a[href='#next']").click();
             }
         },
         onStepChanged: function (event, currentIndex, priorIndex) {
