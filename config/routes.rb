@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     collection do
       get 'datatable'
       get 'delete'
+      get 'show_product_details'
     end
   end
   resources :ad_clicks do

@@ -6,7 +6,7 @@
 						</div>
 						
 						<div class="panel-body">
-							<%= form_for(@deal, html: {class: "form-validate-jquery", multipart: true}) do |f| %>
+							<%= form_for(@deal, html: {class: "form-validate", multipart: true}) do |f| %>
 								<% if @deal.errors.any? %>
 									<div id="error_explanation">
 									  <h2><%= pluralize(@deal.errors.count, "error") %> prohibited this ad from being saved:</h2>
@@ -21,71 +21,96 @@
 							
 							<div class="row">
 								<div class="col-md-6">
-									<div class="form-group">
-										<label>Sản phẩm deal <span class="text-danger">*</span></label>
-										<%= f.text_field :pb_product_id, required: "required", class: "select2-ajax", data_link: pb_products_path(format: "json"), placeholder: "Tìm sản phẩm...", text: (!@deal.pb_product.nil? ? @deal.pb_product.name : ""), value: 	@deal.pb_product_id %>										
-									</div>									
-									<div class="row">
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>Giá <span class="text-danger">*</span></label>
-												<%= f.text_field :price, required: "required", class: "text-right form-control number_input", placeholder: "Giá đã deal của sản phẩm" %>												
-											</div>
+									<fieldset class="text-semibold">
+										<legend><i class="icon-file-text position-left"></i> Thông tin sản phẩm</legend>
+										<div class="form-group">
+											<label>Sản phẩm deal <span class="text-danger">*</span></label>
+											<%= f.text_field :pb_product_id, required: "required", class: "select2-ajax", data_link: pb_products_path(format: "json"), placeholder: "Tìm sản phẩm...", text: (!@deal.pb_product.nil? ? @deal.pb_product.name : ""), value: 	@deal.pb_product_id %>										
 										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>Số lượng <span class="text-danger">*</span></label>
-												<%= f.text_field :price, required: "required", class: "text-right form-control number_input", placeholder: "Số lượng sản phẩm deal" %>												
-											</div>
+										<div class="bottom_group_info product_details">
+											
 										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-6">
-											<div class="form-group has-feedback">
-												<label>Giảm giá cho Cộng tác viên <span class="text-danger">*</span></label>
-												<%= f.text_field :price, required: "required", class: "form-control text-right number_input", placeholder: "" %>
-												<div class="form-control-feedback">
-													%
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>Đơn giá sau khi deal <span class="text-danger">*</span></label>
+													<%= f.text_field :price, required: "required", class: "text-right form-control number_input required", placeholder: "Giá đã deal của sản phẩm" %>												
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>Số lượng <span class="text-danger">*</span></label>
+													<%= f.text_field :price, required: "required", class: "text-right form-control number_input required", placeholder: "Số lượng sản phẩm deal" %>												
 												</div>
 											</div>
 										</div>
-										<div class="col-md-6">
-											<div class="form-group has-feedback">
-												<label>Giảm giá cho người được giới thiệu <span class="text-danger">*</span></label>
-												<%= f.text_field :price, required: "required", class: "form-control text-right number_input", placeholder: "" %>	
-												<div class="form-control-feedback">
-													%
+									</fieldset>
+									
+									<fieldset class="text-semibold">
+										<legend><i class="icon-file-text position-left"></i> Chia sẻ & Cộng tác viên</legend>
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group has-feedback">
+														<label>Giảm giá cho Cộng tác viên <span class="text-danger">*</span></label>
+														<%= f.text_field :agent_price, required: "required", class: "form-control text-right number_input required", placeholder: "" %>
+														<div class="form-control-feedback">
+															%
+														</div>
+													</div>
+													<div class="bottom_group_info agent_remain">
+														<div class="text-right">
+															Còn lại: <span class="agent_remain_price"></span> <span class="copied_product_unit"></span>
+														</div>
+													</div>
 												</div>
-											</div>											
-										</div>
-									</div>
+												<div class="col-md-6">
+													<div class="form-group has-feedback">
+														<label>Giảm giá cho người được giới thiệu <span class="text-danger">*</span></label>
+														<%= f.text_field :share_price, required: "required", class: "form-control text-right number_input required", placeholder: "" %>	
+														<div class="form-control-feedback">
+															%
+														</div>
+													</div>
+													<div class="bottom_group_info share_remain">
+														<div class="text-right">
+															Còn lại: <span class="share_remain_price"></span> <span class="copied_product_unit"></span>
+														</div>
+													</div>
+												</div>
+											</div>
+									</fieldset>
 								</div>
 								<div class="col-md-6">
-									<div class="row">
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>Thời gian đặt deal từ ngày: <span class="text-danger">*</span></label>
-												<div class="input-group">
-													<span class="input-group-addon"><i class="icon-calendar3"></i></span>
-													<%= f.text_field :start_at, class: "form-control", value: (@deal.start_at.nil? ? "" : @deal.start_at.strftime("%d-%m-%Y")) %>															
+									<fieldset class="text-semibold">
+										<legend><i class="icon-file-text position-left"></i> Chi tiết & Cài đặt DEAL</legend>
+										
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>Thời gian đặt deal từ ngày: <span class="text-danger">*</span></label>
+													<div class="input-group">
+														<span class="input-group-addon"><i class="icon-calendar3"></i></span>
+														<%= f.text_field :start_at, class: "form-control", value: (@deal.start_at.nil? ? "" : @deal.start_at.strftime("%d-%m-%Y")) %>															
+													</div>
 												</div>
 											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>Đến ngày: <span class="text-danger">*</span></label>
+													<div class="input-group">
+														<span class="input-group-addon"><i class="icon-calendar3"></i></span>
+														<%= f.text_field :end_at, class: "form-control", value: (@deal.end_at.nil? ? "" : @deal.end_at.strftime("%d-%m-%Y")) %>															
+													</div>
+												</div>
+											</div>	
 										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>Đến ngày: <span class="text-danger">*</span></label>
-												<div class="input-group">
-													<span class="input-group-addon"><i class="icon-calendar3"></i></span>
-													<%= f.text_field :end_at, class: "form-control", value: (@deal.end_at.nil? ? "" : @deal.end_at.strftime("%d-%m-%Y")) %>															
-												</div>
-											</div>
-										</div>	
-									</div>
 									
-									<div class="form-group">
-										<label>Giới thiệu và deal <span class="text-danger">*</span></label>
-										<%= f.text_area :description, required: "required", class: "form-control", placeholder: "Nội dung mô tả" %>												
-									</div>
+										<div class="form-group">
+											<label>Giới thiệu về deal <span class="text-danger">*</span></label>
+											<%= f.text_area :description, required: "required", class: "form-control required", placeholder: "Nội dung mô tả", style: "height:118px" %>												
+										</div>
+									
+									</fieldset>
 									
 								</div>
 							</div>
@@ -100,59 +125,60 @@
 				<% end %>
 
 
-<%= form_for(@deal) do |f| %>
-  <% if @deal.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@deal.errors.count, "error") %> prohibited this deal from being saved:</h2>
-
-      <ul>
-      <% @deal.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :pb_product_id %><br>
-    <%= f.number_field :pb_product_id %>
-  </div>
-  <div class="field">
-    <%= f.label :pb_company_id %><br>
-    <%= f.number_field :pb_company_id %>
-  </div>
-  <div class="field">
-    <%= f.label :start_at %><br>
-    <%= f.datetime_select :start_at %>
-  </div>
-  <div class="field">
-    <%= f.label :end_at %><br>
-    <%= f.datetime_select :end_at %>
-  </div>
-  <div class="field">
-    <%= f.label :quantity %><br>
-    <%= f.number_field :quantity %>
-  </div>
-  <div class="field">
-    <%= f.label :price %><br>
-    <%= f.text_field :price %>
-  </div>
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= f.text_area :status %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
-
-
-
 <script>
+	
+	function updateFormPrice() {
+        if($("#deal_price").val() != "") {
+			var origin = parseFloat($("#deal_price").val().replace(/,/g,""))
+			var unit = $(".product_unit").html()
+			
+			// update unit
+			$(".copied_product_unit").html(unit)
+			
+			// Calculate agent price
+			if ($("#deal_agent_price").val() != "") {
+                $(".agent_remain").show()
+				
+				var value = parseFloat($("#deal_agent_price").val().replace(/,/g,""))
+				var remain = origin*(1 - value/100)
+				
+				$(".agent_remain_price").html(ReplaceNumberWithDots(remain.toFixed(0)))
+            } else {
+				$(".agent_remain").hide()
+			}
+			
+			// Calculate share price
+			if ($("#deal_share_price").val() != "") {
+                $(".share_remain").show()
+				
+				var value = parseFloat($("#deal_share_price").val().replace(/,/g,""))
+				var remain = origin*(1 - value/100)
+				
+				$(".share_remain_price").html(ReplaceNumberWithDots(remain.toFixed(0)))
+            } else {
+				$(".share_remain").hide()
+			}
+		} else {
+			$(".agent_remain").hide()
+			$(".share_remain").hide()
+		}
+    }
+	
+	function renderProductDetail(id) {
+		if (id == "") {
+			$(".product_details").html("")
+			return
+		}
+		$.ajax({
+            url : '<%= show_product_details_deals_path %>?product_id='+id,
+            success:function(data, textStatus, jqXHR)
+            {
+                $(".product_details").html(data)
+				updateFormPrice()
+            }
+        })
+	}
+	
 	$('#deal_start_at, #deal_end_at').daterangepicker({ 
             singleDatePicker: true,
             locale: {
@@ -179,4 +205,54 @@
 
             },
     });
+	
+	var validator = $(".new_deal").validate({
+        lang: 'vi',
+        ignore: ':hidden', // ignore hidden fields
+        errorClass: 'validation-error-label',
+        successClass: 'validation-valid-label',
+        highlight: function(element, errorClass) {  
+            $(element).removeClass(errorClass);
+        },
+        unhighlight: function(element, errorClass) {
+            $(element).removeClass(errorClass);
+        },
+        validClass: "validation-valid-label",
+        success: function(label) {
+            label.addClass("validation-valid-label").text("Hoàn tất.")
+        },
+        messages: {
+            "deal[pb_product_id]": "Hãy chọn sản phẩm.",
+        }
+    });
+	
+	renderProductDetail($('input[name="deal[pb_product_id]"]').val())
+	$('input[name="deal[pb_product_id]"]').change(function() {
+		renderProductDetail($(this).val())
+	})
+	
+	updateFormPrice()
+	
+	$('#deal_price').change(function() {
+		updateFormPrice()
+	})
+	$('#deal_price').keyup(function() {
+		updateFormPrice()
+	})
+	
+	$('#deal_agent_price').change(function() {
+		updateFormPrice()
+	})
+	$('#deal_agent_price').keyup(function() {
+		updateFormPrice()
+	})
+	
+	$('#deal_share_price').change(function() {
+		updateFormPrice()
+	})
+	$('#deal_share_price').keyup(function() {
+		updateFormPrice()
+	})
+	
+	
 </script>

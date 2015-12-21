@@ -1,5 +1,5 @@
 class DealsController < ApplicationController
-  load_and_authorize_resource
+  # load_and_authorize_resource
   before_action :set_deal, only: [:delete, :show, :edit, :update, :destroy]
 
   # GET /deals
@@ -29,7 +29,7 @@ class DealsController < ApplicationController
 
     respond_to do |format|
       if @deal.save
-        format.html { redirect_to @deal, notice: 'Deal was successfully created.' }
+        format.html { redirect_to deals_path, notice: 'DEAL đã được tạo thành công!' }
         format.json { render :show, status: :created, location: @deal }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class DealsController < ApplicationController
   def update
     respond_to do |format|
       if @deal.update(deal_params)
-        format.html { redirect_to @deal, notice: 'Deal was successfully updated.' }
+        format.html { redirect_to deals_path, notice: 'DEAL đã được sửa thành công!' }
         format.json { render :show, status: :ok, location: @deal }
       else
         format.html { render :edit }
@@ -70,11 +70,17 @@ class DealsController < ApplicationController
   
   def delete
     @message = "DEAL sản phẩm <strong>#{@deal.pb_product.name}</strong> đã được xóa."
-    #@deal.destroy
+    @deal.destroy
     respond_to do |format|      
       format.html { render "/home/ajax_success", layout: nil }
       format.json { head :no_content }
     end
+  end
+  
+  def show_product_details
+    @product = PbProduct.find(params[:product_id])
+    
+    render layout: nil
   end
 
   private
@@ -85,6 +91,6 @@ class DealsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def deal_params
-      params.require(:deal).permit(:pb_product_id, :pb_company_id, :start_at, :end_at, :quantity, :price, :status, :description)
+      params.require(:deal).permit(:agent_price, :share_price, :pb_product_id, :pb_company_id, :start_at, :end_at, :quantity, :price, :status, :description)
     end
 end

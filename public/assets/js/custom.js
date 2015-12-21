@@ -1,3 +1,7 @@
+function ReplaceNumberWithDots(yourNumber) {
+            yourNumber = yourNumber.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            return yourNumber
+}
 function formatAdPositionOption(result) {
             var icon = 'menu9'
             var text = result.text.toLowerCase()
@@ -19,7 +23,7 @@ function formatAdPositionOption(result) {
             } else if(text.indexOf("thị trường") > -1) {
                 icon = 'earth'
             }
-            
+
             return "<i class=\"ad_position_icon icon-"+icon+"\"></i> "+result.text
         }
 
@@ -529,26 +533,26 @@ $(document).ready(function() {
         box.find("table").dataTable().fnFilter()
     })
     
-    //var validator = $(".form-validate-jquery").validate({
-    //    lang: 'vi',
-    //    ignore: ':hidden', // ignore hidden fields
-    //    errorClass: 'validation-error-label',
-    //    successClass: 'validation-valid-label',
-    //    highlight: function(element, errorClass) {  
-    //        $(element).removeClass(errorClass);
-    //    },
-    //    unhighlight: function(element, errorClass) {
-    //        $(element).removeClass(errorClass);
-    //    },
-    //    validClass: "validation-valid-label",
-    //    success: function(label) {
-    //        label.addClass("validation-valid-label").text("Hoàn tất.")
-    //    },
-    //    messages: {
-    //        "ad[ad_position_id]": "Hãy chọn vị trí.",
-    //        "ad[image]": "Hãy chọn ảnh.",
-    //    }
-    //});
+    var validator = $(".form-validate").validate({
+        lang: 'vi',
+        ignore: ':hidden', // ignore hidden fields
+        errorClass: 'validation-error-label',
+        successClass: 'validation-valid-label',
+        highlight: function(element, errorClass) {  
+            $(element).removeClass(errorClass);
+        },
+        unhighlight: function(element, errorClass) {
+            $(element).removeClass(errorClass);
+        },
+        validClass: "validation-valid-label",
+        success: function(label) {
+            label.addClass("validation-valid-label").text("Hoàn tất.")
+        },
+        messages: {
+            "ad[ad_position_id]": "Hãy chọn vị trí.",
+            "ad[image]": "Hãy chọn ảnh.",
+        }
+    });
     
     $(document).on("mouseover", ".fancybox", function(e) {                
         $(this).fancybox();

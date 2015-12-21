@@ -1,0 +1,5 @@
+                                        <div class="row">
+											<div class="col-md-12 text-right product_price" rel="<%= @product.price %>">
+												Giá gốc: <%= format_price(@product.price) %> <span class="product_unit">VNĐ<%= "/"+@product.price_unit if @product.price_unit.present? %></span>
+											</div>
+										</div>

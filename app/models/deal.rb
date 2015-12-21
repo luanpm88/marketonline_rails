@@ -2,6 +2,16 @@ class Deal < ActiveRecord::Base
   belongs_to :pb_company
   belongs_to :pb_product
   
+  def price=(new)
+    self[:price] = new.to_s.gsub(/\,/, '')
+  end  
+  def agent_price=(new)
+    self[:agent_price] = new.to_s.gsub(/\,/, '')
+  end
+  def share_price=(new)
+    self[:share_price] = new.to_s.gsub(/\,/, '')
+  end
+  
   def self.datatable(params, user)    
     @records = self.all
     
@@ -21,9 +31,9 @@ class Deal < ActiveRecord::Base
               "<div class=\"text-right\"><ul class=\"icons-list\">"+
                   "<li class=\"dropup\">"+
                       "<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\"><i class=\"icon-menu7\"></i></a>"+
-                      "<ul class=\"dropdown-menu dropdown-menu-right\">"+                          
-                          "<li>#{item.destroy_link}</li>"+
+                      "<ul class=\"dropdown-menu dropdown-menu-right\">"+
                           "<li>#{item.edit_link}</li>"+
+                          "<li>#{item.destroy_link}</li>"+                          
                       "</ul>"+
                   "</li>"+
               "</ul></div>"

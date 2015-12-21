@@ -283,3 +283,6 @@ legend {
 .select2-dropdown-open .select2-choice {
     border-color: #4caf50;
 }
+.bottom_group_info {
+    margin: -10px 0 20px;
+}
