@@ -22,7 +22,7 @@ class Deal < ActiveRecord::Base
     @records.each do |item|
       row = [
               "<div class=\"\"><img src=\"#{item.pb_product.default_image}\" width=\"100\" /></div>",
-              "<div class=\"\">#{item.pb_product.name}</div>",
+              "<div class=\"\"><a target=\"_blank\" href=\"#{item.pb_product.url}\">#{item.pb_product.name}</a></div>",
               "<div class=\"\">#{ApplicationController.helpers.format_price(item.price)} VNĐ</div>",
               "<div class=\"\">#{ApplicationController.helpers.format_price(item.quantity)} #{item.pb_product.price_unit}</div>",
               "<div class=\"\">0</div>",
@@ -33,7 +33,7 @@ class Deal < ActiveRecord::Base
                       "<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\"><i class=\"icon-menu7\"></i></a>"+
                       "<ul class=\"dropdown-menu dropdown-menu-right\">"+
                           "<li>#{item.edit_link}</li>"+
-                          "<li>#{item.destroy_link}</li>"+                          
+                          "<li>#{item.destroy_link}</li>"+
                       "</ul>"+
                   "</li>"+
               "</ul></div>"
