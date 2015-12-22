@@ -5,7 +5,7 @@ class Deal < ActiveRecord::Base
   belongs_to :pb_product
   has_many :pb_saleorderitems
   
-  has_many :pb_saleorders, :throught => :pb_saleorderitems, foreign_key: "deal_id"
+  has_many :pb_saleorders, :through => :pb_saleorderitems, foreign_key: "deal_id"
   
   def price=(new)
     self[:price] = new.to_s.gsub(/\,/, '')
