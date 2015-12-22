@@ -56,7 +56,11 @@ module ApplicationHelper
     elsif ["deals"].include?(params[:controller])
       if ["index"].include?(params[:action])
         #breadcrumb += '<li><a href="#">Thêm quảng cáo</a></li>'
-        title = 'Quản lý sản phẩm DEAL'
+        title = 'Quản lý sản phẩm DEAL'        
+      end
+      if ["show"].include?(params[:action])
+        deal = Deal.find(params[:id])
+        title = 'Chi tiết DEAL: '+deal.pb_product.name
         
       end
     end

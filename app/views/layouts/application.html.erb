@@ -200,7 +200,7 @@
 									<li <%= 'class=active' if ["deals"].include?(params[:controller]) %>>
 										<a href="#"><i class="icon-price-tags"></i> <span>Quản lý DEAL</span></a>
 										<ul>
-											<li <%= 'class=active' if ["deals"].include?(params[:controller]) && ["index"].include?(params[:action]) %>><a href="<%= deals_path %>">Quản lý DEAL</a></li>
+											<li <%= 'class=active' if ["deals"].include?(params[:controller]) && ["index","show"].include?(params[:action]) %>><a href="<%= deals_path %>">Quản lý DEAL</a></li>
 											<li <%= 'class=active' if ["deals"].include?(params[:controller]) && ["zz"].include?(params[:action]) %>><a href="<%= new_ad_path %>">Cộng tác viên</a></li>
 											<li <%= 'class=active' if ["deals"].include?(params[:controller]) && ["zz"].include?(params[:action]) %>><a href="<%= new_ad_path %>">Khách hàng</a></li>
 										</ul>

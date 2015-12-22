@@ -5,6 +5,8 @@ class Deal < ActiveRecord::Base
   belongs_to :pb_product
   has_many :pb_saleorderitems
   
+  has_many :pb_saleorders, :throught => :pb_saleorderitems, foreign_key: "deal_id"
+  
   def price=(new)
     self[:price] = new.to_s.gsub(/\,/, '')
   end  
@@ -36,6 +38,7 @@ class Deal < ActiveRecord::Base
                   "<li class=\"dropup\">"+
                       "<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\"><i class=\"icon-menu7\"></i></a>"+
                       "<ul class=\"dropdown-menu dropdown-menu-right\">"+
+                          "<li>#{item.show_link}</li>"+
                           "<li>#{item.edit_link}</li>"+
                           "<li>#{item.destroy_link}</li>"+
                       "</ul>"+
@@ -65,8 +68,8 @@ class Deal < ActiveRecord::Base
   
   def display_price
     str = ["<div class=\"text-nowrap deal_label_col\">"]
-    str << "<label>Giá gốc: </label>"
-    str << "<div><span class=\"text-bold\">"+ApplicationController.helpers.format_price(price)+"</span></div>"
+    str << "<label>Giá deal/Giá gốc: </label>"
+    str << "<div><span class=\"text-bold\">"+ApplicationController.helpers.format_price(price)+"</span>/<span class=\"text-bold\">"+ApplicationController.helpers.format_price(pb_product.price)+"</span></div>"
     str << "<label>Giá cho cộng tác viên: </label>"
     str << "<div><span class=\"text-bold\">"+ApplicationController.helpers.format_price(agent_amount)+"</span> (giảm #{agent_price}%)</div>"
     str << "<label>Giá người được giới thiệu: </label>"
@@ -108,5 +111,11 @@ class Deal < ActiveRecord::Base
     link_helper = ActionController::Base.helpers
     
     link_helper.link_to("<i class=\"icon-pencil\"></i> Sửa".html_safe, {controller: "deals", action: "edit", id: self.id})
+  end
+  def show_link
+    ActionView::Base.send(:include, Rails.application.routes.url_helpers)
+    link_helper = ActionController::Base.helpers
+    
+    link_helper.link_to("<i class=\"icon-zoomin3\"></i> Xem chi tiết".html_safe, {controller: "deals", action: "show", id: self.id})
   end
 end
