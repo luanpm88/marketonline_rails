@@ -28,7 +28,7 @@ class Deal < ActiveRecord::Base
               "<div class=\"\"><a target=\"_blank\" href=\"#{item.pb_product.url}\">#{item.pb_product.name}</a></div>",
               "<div class=\"\">#{ApplicationController.helpers.format_price(item.price)} VNĐ</div>",
               "<div class=\"\">#{ApplicationController.helpers.format_price(item.quantity)} #{item.pb_product.price_unit}</div>",
-              "<div class=\"\">#{ApplicationController.helpers.format_price(item.sold_items_count.to_s)}</div>",
+              "<div class=\"\">#{ApplicationController.helpers.format_price(item.sold_items_count.to_s)} #{item.pb_product.price_unit}</div>",
               "<div class=\"\">Từ: #{item.start_at.strftime("%d-%m-%Y")}<br />Đến: #{item.end_at.strftime("%d-%m-%Y")}</div>",
               "<div class=\"\"></div>",
               "<div class=\"text-right\"><ul class=\"icons-list\">"+
