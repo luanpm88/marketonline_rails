@@ -9,7 +9,7 @@ class Deal < ActiveRecord::Base
   
   def price=(new)
     self[:price] = new.to_s.gsub(/\,/, '')
-  end  
+  end
   def agent_price=(new)
     self[:agent_price] = new.to_s.gsub(/\,/, '')
   end

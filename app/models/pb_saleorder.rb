@@ -1,4 +1,6 @@
 class PbSaleorder < ActiveRecord::Base
+  self.primary_key = :id
+  
   has_many :pb_saleorderitems, foreign_key: "saleorder_id"
   belongs_to :buyer, class_name: "PbMember", foreign_key: "buyer_id"
   belongs_to :seller, class_name: "PbMember", foreign_key: "seller_id"
