@@ -3,6 +3,7 @@ class Deal < ActiveRecord::Base
   
   belongs_to :pb_company
   belongs_to :pb_product
+  has_many :pb_saleorderitems
   
   def price=(new)
     self[:price] = new.to_s.gsub(/\,/, '')
