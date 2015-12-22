@@ -286,3 +286,11 @@ legend {
 .bottom_group_info {
     margin: -10px 0 20px;
 }
+.deal_label_col label {
+    font-size: 12px;
+    margin-bottom: 0;
+    margin-top: 3px;
+}
+.table td {
+    vertical-align: top !important;
+}
