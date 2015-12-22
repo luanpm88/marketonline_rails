@@ -42,7 +42,7 @@ class Deal < ActiveRecord::Base
             ]
       data << row      
     end
-    
+
     result = {
               "drawn" => params[:drawn],
               "recordsTotal" => total,
