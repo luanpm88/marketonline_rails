@@ -30,7 +30,7 @@ class Deal < ActiveRecord::Base
               "<div class=\"\">#{item.pb_product.price_unit}</div>",
               "<div class=\"\">#{ApplicationController.helpers.format_price(item.remain_items_count.to_s)}</div>",
               "<div class=\"\">#{ApplicationController.helpers.format_price(item.sold_items_count.to_s)}/#{ApplicationController.helpers.format_price(item.quantity.to_s)}</div>",
-              "<div class=\"\">Từ: #{item.start_at.strftime("%d-%m-%Y")}<br />Đến: #{item.end_at.strftime("%d-%m-%Y")}</div>",
+              "<div class=\"text-nowrap\">Từ: #{item.start_at.strftime("%d-%m-%Y")}<br />Đến: #{item.end_at.strftime("%d-%m-%Y")}</div>",
               "<div class=\"\"></div>",
               "<div class=\"text-right\"><ul class=\"icons-list\">"+
                   "<li class=\"dropup\">"+
