@@ -26,7 +26,7 @@ class Deal < ActiveRecord::Base
       row = [
               "<div class=\"\"><img src=\"#{item.pb_product.default_image}\" width=\"100\" /></div>",
               "<div class=\"\"><a target=\"_blank\" href=\"#{item.pb_product.url}\">#{item.pb_product.name}</a></div>",
-              "<div class=\"\">#{ApplicationController.helpers.format_price(item.price)} VNĐ</div>",
+              "<div class=\"\">#{ApplicationController.helpers.format_price(item.price)}</div>",
               "<div class=\"\">#{item.pb_product.price_unit}</div>",
               "<div class=\"\">#{ApplicationController.helpers.format_price(item.remain_items_count.to_s)}</div>",
               "<div class=\"\">#{ApplicationController.helpers.format_price(item.sold_items_count.to_s)}/#{ApplicationController.helpers.format_price(item.quantity.to_s)}</div>",
