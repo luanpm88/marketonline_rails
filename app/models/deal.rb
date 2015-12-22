@@ -1,4 +1,6 @@
 class Deal < ActiveRecord::Base
+  self.table_name = "pb_deals"
+  
   belongs_to :pb_company
   belongs_to :pb_product
   
