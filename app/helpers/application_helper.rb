@@ -9,19 +9,19 @@ module ApplicationHelper
       title = "Quản lý quảng cáo"
       
       if ["new"].include?(params[:action])
-        breadcrumb += '<li><a href="#">Thêm quảng cáo</a></li>'
+        breadcrumb += '<li class="active">Thêm quảng cáo</li>'
         title = 'Thêm quảng cáo'
         
       end
       if ["edit"].include?(params[:action])
         ad = Ad.find(params[:id])
-        breadcrumb += '<li><a href="#">'+ad.name+'</a></li>'
+        breadcrumb += '<li class="active">'+ad.name+'</li>'
         title = 'Sửa quảng cáo: '+ad.name
         
       end
       if ["show"].include?(params[:action])
         ad = Ad.find(params[:id])
-        breadcrumb += '<li><a href="#">'+ad.name+'</a></li>'
+        breadcrumb += '<li class="active">'+ad.name+'</li>'
         title = 'Thống kê quảng cáo: '+ad.name
         
       end
@@ -30,13 +30,13 @@ module ApplicationHelper
       title = "Vị trí đặt quảng cáo"
       
       if ["new"].include?(params[:action])
-        breadcrumb += '<li><a href="#">Thêm vị trí</a></li>'
+        breadcrumb += '<li class="active">Thêm vị trí</li>'
         title = 'Thêm vị trí'
         
       end
       if ["edit"].include?(params[:action])
         ad = AdPosition.find(params[:id])
-        breadcrumb += '<li><a href="#">'+ad.title+'</a></li>'
+        breadcrumb += '<li class="active">'+ad.title+'</li>'
         title = 'Sửa vị trí: '+ad.title
         
       end
@@ -55,11 +55,13 @@ module ApplicationHelper
       end
     elsif ["deals"].include?(params[:controller])
       if ["index"].include?(params[:action])
-        #breadcrumb += '<li><a href="#">Thêm quảng cáo</a></li>'
+        breadcrumb += '<li class="active">Danh sách DEAL</li>'
         title = 'Quản lý sản phẩm DEAL'        
       end
       if ["show"].include?(params[:action])
         deal = Deal.find(params[:id])
+        breadcrumb += '<li><a href="'+deals_path+'">Danh sách DEAL</a></li>'
+        breadcrumb += '<li class="active">'+deal.pb_product.name+'</li>'
         title = 'Chi tiết DEAL: '+deal.pb_product.name
         
       end

@@ -19,6 +19,7 @@ class Ability
     can :iframe_6_wide_banners, AdPosition
     can :iframe_7_wide_banners, AdPosition
     can :iframe_area_top_3_banner, AdPosition
+    can :get_remaining_time, AdPosition
     
     if user.present?
       if user.present?
@@ -52,6 +53,7 @@ class Ability
         can :manage, PbSetting
         can :manage, Deal
         can :manage, PbSaleorderitem
+        can :manage, PbMember
       end
     end
     

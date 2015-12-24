@@ -27,23 +27,14 @@ class Deal < ActiveRecord::Base
     @records.each do |item|
       row = [
               "<div class=\"\"><img src=\"#{item.pb_product.default_image}\" width=\"100\" /></div>",
-              "<div class=\"\"><a target=\"_blank\" href=\"#{item.pb_product.url}\">#{item.pb_product.name}</a><br/>#{item.description}</div>",
+              "<div class=\"\">#{item.show_link(item.pb_product.name)}<br/>#{item.description}</div>",
               "<div class=\"\">#{item.display_price}</div>",
               "<div class=\"\">#{item.pb_product.price_unit}</div>",
               "<div class=\"\">#{ApplicationController.helpers.format_price(item.remain_items_count.to_s)}</div>",
               "<div class=\"\">#{ApplicationController.helpers.format_price(item.sold_items_count.to_s)}/#{ApplicationController.helpers.format_price(item.quantity.to_s)}</div>",
               "<div class=\"text-nowrap\">#{item.display_time}</div>",
               "<div class=\"\"></div>",
-              "<div class=\"text-right\"><ul class=\"icons-list\">"+
-                  "<li class=\"dropup\">"+
-                      "<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\"><i class=\"icon-menu7\"></i></a>"+
-                      "<ul class=\"dropdown-menu dropdown-menu-right\">"+
-                          "<li>#{item.show_link}</li>"+
-                          "<li>#{item.edit_link}</li>"+
-                          "<li>#{item.destroy_link}</li>"+
-                      "</ul>"+
-                  "</li>"+
-              "</ul></div>"
+              "<div class=\"text-left text-nowrap\">#{item.show_link}<br />#{item.edit_link}<br />#{item.destroy_link}</div>"
             ]
       data << row      
     end
@@ -112,10 +103,15 @@ class Deal < ActiveRecord::Base
     
     link_helper.link_to("<i class=\"icon-pencil\"></i> Sửa".html_safe, {controller: "deals", action: "edit", id: self.id})
   end
-  def show_link
+  def show_link(title=nil)
     ActionView::Base.send(:include, Rails.application.routes.url_helpers)
     link_helper = ActionController::Base.helpers
     
-    link_helper.link_to("<i class=\"icon-zoomin3\"></i> Xem chi tiết".html_safe, {controller: "deals", action: "show", id: self.id})
+    title = !title.nil? ? title : "<i class=\"icon-zoomin3\"></i> Xem chi tiết".html_safe
+    link_helper.link_to(title, {controller: "deals", action: "show", id: self.id})
+  end
+  
+  def buyers
+    PbMember.joins(:pb_saleorders => :pb_saleorderitems).where(pb_saleorderitems: {deal_id: self.id}).uniq
   end
 end

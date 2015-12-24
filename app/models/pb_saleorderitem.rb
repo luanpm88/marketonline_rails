@@ -3,8 +3,9 @@ class PbSaleorderitem < ActiveRecord::Base
   
   belongs_to :deal
   belongs_to :pb_saleorder, foreign_key: "saleorder_id"
+  belongs_to :pb_product, foreign_key: "product_id"
   
-  def self.datatable(params, user)   
+  def self.datatable(params, user)
     # FILTERS
     filters = {}
     params["filters"].split('&').each do |row|
@@ -24,13 +25,13 @@ class PbSaleorderitem < ActiveRecord::Base
     
     @records.each do |item|
       row = [
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              ""
+              "<div class=\"text-nowrap\">#{item.buyer.display_name}</div>",
+              item.pb_product.name,
+              item.quantity,
+              "<div class=\"text-nowrap text-right\">#{item.diplay_total}</div>",
+              item.customer_type,
+              "<div class=\"text-nowrap\">#{item.ordered_time.to_datetime.strftime("%d-%m-%Y, %H:%I %p")}</div>",
+              "<div class=\"text-nowrap\">#{item.display_status}</div>",
             ]
       data << row      
     end
@@ -43,6 +44,34 @@ class PbSaleorderitem < ActiveRecord::Base
     result["data"] = data
     
     return {result: result}
+  end
+  
+  def ordered_time
+    Time.at(pb_saleorder.created).to_datetime
+  end
+  
+  def customer_type
+    "Mua trực tiếp"
+  end
+  
+  def total
+    price.to_f*quantity.to_f
+  end
+  
+  def diplay_total
+    str = ["#{ApplicationController.helpers.format_price(total)}"]
+    if quantity.to_f > 0
+      str << "<br />(#{ApplicationController.helpers.format_price(price.to_f)}x#{quantity})"
+    end
+    return str.join("") 
+  end
+  
+  def buyer
+    pb_saleorder.buyer
+  end
+  
+  def display_status
+    "Đã đặt hàng"
   end
   
 end
