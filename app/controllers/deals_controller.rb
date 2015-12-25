@@ -61,13 +61,13 @@ class DealsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   def datatable
     result = Deal.datatable(params, @current_user)
     
     render json: result[:result]
   end
-  
+
   def delete
     @message = "DEAL sản phẩm <strong>#{@deal.pb_product.name}</strong> đã được xóa."
     @deal.destroy
@@ -76,7 +76,7 @@ class DealsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   def show_product_details
     @product = PbProduct.find(params[:product_id])
     
@@ -93,4 +93,5 @@ class DealsController < ApplicationController
     def deal_params
       params.require(:deal).permit(:agent_price, :share_price, :pb_product_id, :pb_company_id, :start_at, :end_at, :quantity, :price, :status, :description)
     end
+
 end

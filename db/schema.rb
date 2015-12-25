@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151222031141) do
+ActiveRecord::Schema.define(version: 20151225044533) do
 
   create_table "ad_clicks", force: :cascade do |t|
     t.integer  "ad_id",         limit: 4
@@ -338,9 +338,10 @@ ActiveRecord::Schema.define(version: 20151222031141) do
   end
 
   create_table "pb_cartitems", force: :cascade do |t|
-    t.integer "cart_id",    limit: 4,             null: false
-    t.integer "product_id", limit: 4,             null: false
-    t.integer "quantity",   limit: 4, default: 1
+    t.integer "cart_id",        limit: 4,               null: false
+    t.integer "product_id",     limit: 4,               null: false
+    t.integer "quantity",       limit: 4,   default: 1
+    t.string  "agent_username", limit: 512,             null: false
   end
 
   add_index "pb_cartitems", ["cart_id", "product_id"], name: "cart_id_2", using: :btree
@@ -1570,16 +1571,16 @@ ActiveRecord::Schema.define(version: 20151222031141) do
   end
 
   create_table "pb_saleorderitems", id: false, force: :cascade do |t|
-    t.integer "id",           limit: 4,   null: false
-    t.integer "saleorder_id", limit: 4
-    t.integer "product_id",   limit: 4
-    t.string  "price",        limit: 255
-    t.integer "quantity",     limit: 4
-    t.integer "deal_id",      limit: 4
+    t.integer "id",             limit: 4,   null: false
+    t.integer "saleorder_id",   limit: 4
+    t.integer "product_id",     limit: 4
+    t.string  "price",          limit: 255
+    t.integer "quantity",       limit: 4
+    t.integer "deal_id",        limit: 4
+    t.string  "agent_username", limit: 255
   end
 
-  create_table "pb_saleorders", id: false, force: :cascade do |t|
-    t.integer "id",                  limit: 4,                 null: false
+  create_table "pb_saleorders", force: :cascade do |t|
     t.integer "buyer_id",            limit: 4
     t.integer "seller_id",           limit: 4
     t.string  "fullname",            limit: 255
