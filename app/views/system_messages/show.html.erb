@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @system_message.code %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @system_message.name %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @system_message.content %>
+</p>
+
+<%= link_to 'Edit', edit_system_message_path(@system_message) %> |
+<%= link_to 'Back', system_messages_path %>

@@ -114,4 +114,9 @@ class Deal < ActiveRecord::Base
   def buyers
     PbMember.joins(:pb_saleorders => :pb_saleorderitems).where(pb_saleorderitems: {deal_id: self.id}).uniq
   end
+  
+  def pb_salesorderitems
+    pb_salesorderitems.where.not(agent_username: nil)
+  end
+  
 end

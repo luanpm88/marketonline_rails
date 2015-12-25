@@ -165,7 +165,7 @@ function ajaxLink(item) {
             {
                 modernAlert(data)
                 if(table.length) {
-                    table.dataTable().fnFilter();
+                    table.dataTable().fnDraw(true);
                 } else {
                     location.reload(); 
                 }

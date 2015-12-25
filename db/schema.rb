@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151225044533) do
+ActiveRecord::Schema.define(version: 20151225075325) do
 
   create_table "ad_clicks", force: :cascade do |t|
     t.integer  "ad_id",         limit: 4
@@ -609,6 +609,7 @@ ActiveRecord::Schema.define(version: 20151225044533) do
     t.datetime "updated_at",                                 null: false
     t.decimal  "agent_price",                 precision: 10
     t.decimal  "share_price",                 precision: 10
+    t.string   "name",          limit: 255
   end
 
   add_index "pb_deals", ["end_at"], name: "index_deals_on_end_at", using: :btree
@@ -1886,6 +1887,14 @@ ActiveRecord::Schema.define(version: 20151225044533) do
     t.text    "name",        limit: 65535, null: false
     t.text    "description", limit: 65535, null: false
     t.integer "created",     limit: 4,     null: false
+  end
+
+  create_table "pb_system_messages", force: :cascade do |t|
+    t.string   "code",       limit: 255
+    t.string   "name",       limit: 255
+    t.text     "content",    limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "pb_tags", id: false, force: :cascade do |t|

@@ -65,6 +65,19 @@ module ApplicationHelper
         title = 'Chi tiết DEAL: '+deal.pb_product.name
         
       end
+      if ["new"].include?(params[:action])
+        breadcrumb += '<li><a href="'+deals_path+'">Danh sách DEAL</a></li>'
+        breadcrumb += '<li class="active">Tạo mới DEAL</li>'
+        title = 'Tạo mới DEAL'
+        
+      end
+      if ["edit"].include?(params[:action])
+        deal = Deal.find(params[:id])
+        breadcrumb += '<li><a href="'+deals_path+'">Danh sách DEAL</a></li>'
+        breadcrumb += '<li class="active">'+deal.pb_product.name+'</li>'
+        title = 'Chỉnh sửa DEAL: '+deal.pb_product.name
+        
+      end
     end
     
     breadcrumb += '</ul>'

@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :system_messages do
+    collection do
+      get 'datatable'
+      get 'delete'
+    end
+  end
   resources :deals do
     collection do
       get 'datatable'

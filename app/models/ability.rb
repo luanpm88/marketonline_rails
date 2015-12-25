@@ -54,6 +54,7 @@ class Ability
         can :manage, Deal
         can :manage, PbSaleorderitem
         can :manage, PbMember
+        can :manage, SystemMessage
       end
     end
     

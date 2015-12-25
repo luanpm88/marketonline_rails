@@ -55,7 +55,7 @@ class PbSaleorderitem < ActiveRecord::Base
   end
   
   def total
-    price.to_f*quantity.to_f
+    total = price.to_f*quantity.to_f    
   end
   
   def diplay_total
@@ -72,6 +72,11 @@ class PbSaleorderitem < ActiveRecord::Base
   
   def display_status
     "Đã đặt hàng"
+  end
+  
+  def agent
+    return nil if agent_username.nil?
+    PbMember.where(username: agent_username).first
   end
   
 end
