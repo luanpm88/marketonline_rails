@@ -346,3 +346,6 @@ legend {
 .demo-color:hover .box-background i {
   color: rgba(0, 0, 0, 0.6);
 }
+.tooltip-inner {
+    background: #00ba00;
+}
