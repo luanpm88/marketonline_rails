@@ -43,7 +43,7 @@ class SystemMessage < ActiveRecord::Base
     ActionView::Base.send(:include, Rails.application.routes.url_helpers)
     link_helper = ActionController::Base.helpers
     
-    link_helper.link_to("<i class=\"icon-bin\"></i> Xóa".html_safe, {controller: "system_messages", action: "delete", id: self.id}, method: :delete, class: "ajax_link")
+    link_helper.link_to("<i class=\"icon-bin\"></i> Xóa".html_safe, {controller: "system_messages", action: "delete", id: self.id}, method: :delete, class: "ajax_link", style: "display:none")
   end
   def edit_link
     ActionView::Base.send(:include, Rails.application.routes.url_helpers)
