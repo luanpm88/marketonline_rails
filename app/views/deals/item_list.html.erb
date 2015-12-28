@@ -1,0 +1,27 @@
+<!-- Basic column chart -->
+<div class="panel panel-flat datatable_box">
+    <div class="panel-heading" style="margin-bottom: 0">
+        <h5 class="panel-title">Lịch sử bán hàng</h5>
+    </div>
+    
+    <form class="datatable_filter" style="position: absolute; top: -9000px">
+        <input type="hidden" name="deal_id" value="" />
+    </form>
+
+    <div class="panel-body">
+        <table class="table table-striped table-hover no-footer datatable-ajax" url="<%= datatable_pb_saleorderitems_path(format: "json") %>">
+            <thead>
+                <tr class="border-double">
+                    <th class="text-nowrap">Người mua</th>
+                    <th class="text-nowrap">DEAL (Sản phẩm)</th>
+                    <th class="text-nowrap">Số lượng</th>					                
+                    <th class="text-nowrap text-right">Giá mua (VNĐ)</th>
+                    <th class="text-nowrap">Loại khách hàng</th>
+                    <th class="text-nowrap">Thời gian bán</th>									
+                    <th class="text-nowrap">Trạng thái</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<!-- /basic column chart -->

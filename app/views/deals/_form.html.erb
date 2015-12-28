@@ -51,7 +51,7 @@
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group has-feedback">
-														<label>Giảm giá cho Cộng tác viên <span class="text-danger">*</span></label>
+														<label>Chiết khấu cho Cộng tác viên <span class="text-danger">*</span></label>
 														<%= f.text_field :agent_price, required: "required", class: "form-control text-right number_input required", placeholder: "", "data-popup": "tooltip", title: SystemMessage.get("deal_agent_discount_tooltip") %>
 														<div class="form-control-feedback">
 															%
@@ -59,7 +59,7 @@
 													</div>
 													<div class="bottom_group_info agent_remain">
 														<div class="text-right">
-															Còn lại: <span class="agent_remain_price"></span> <span class="copied_product_unit"></span>
+															Được chiết khấu: <span class="agent_remain_price"></span> <span class="copied_product_unit"></span>
 														</div>
 													</div>
 												</div>
@@ -140,7 +140,7 @@
                 $(".agent_remain").show()
 				
 				var value = parseFloat($("#deal_agent_price").val().replace(/,/g,""))
-				var remain = origin*(1 - value/100)
+				var remain = origin*(value/100)
 				
 				$(".agent_remain_price").html(ReplaceNumberWithDots(remain.toFixed(0)))
             } else {

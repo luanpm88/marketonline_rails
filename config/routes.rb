@@ -10,6 +10,9 @@ Rails.application.routes.draw do
       get 'datatable'
       get 'delete'
       get 'show_product_details'
+      get 'agent_list'
+      get 'customer_list'
+      get 'item_list'
     end
   end
   resources :ad_clicks do
@@ -84,6 +87,12 @@ Rails.application.routes.draw do
     end
   end
   
+  resources :pb_saleorders do
+    collection do
+      get 'datatable'
+    end
+  end
+  
   resources :pb_saleorderitems do
     collection do
       get 'datatable'
@@ -93,6 +102,7 @@ Rails.application.routes.draw do
   resources :pb_members do
     collection do
       get 'deal_customers'
+      get 'deal_agents'
     end
   end
   

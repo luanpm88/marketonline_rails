@@ -67,6 +67,26 @@ class DealsController < ApplicationController
     
     render json: result[:result]
   end
+  
+  def agent_list
+    respond_to do |format|
+      format.html
+      format.json {
+        result = Deal.agent_list(params, @current_user)    
+        render json: result[:result]
+      }
+    end    
+  end
+  
+  def customer_list
+    respond_to do |format|
+      format.html
+      format.json {
+        result = Deal.customer_list(params, @current_user)    
+        render json: result[:result]
+      }
+    end    
+  end
 
   def delete
     @message = "DEAL sản phẩm <strong>#{@deal.pb_product.name}</strong> đã được xóa."

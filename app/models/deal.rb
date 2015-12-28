@@ -7,6 +7,8 @@ class Deal < ActiveRecord::Base
   
   has_many :pb_saleorders, :through => :pb_saleorderitems, foreign_key: "deal_id"
   
+  has_many :agents, :through => :pb_saleorderitems, :source => :pb_member, foreign_key: "agent_username", primary_key: "username"
+  
   def price=(new)
     self[:price] = new.to_s.gsub(/\,/, '')
   end
@@ -49,9 +51,93 @@ class Deal < ActiveRecord::Base
     return {result: result}
   end
   
+  def self.agent_list(params, user)
+    # FILTERS
+    filters = {}
+    params["filters"].split('&').each do |row|
+      filters[row.split("=")[0]] = row.split("=")[1]
+    end
+    
+    #@deal = Deal.find(filters["deal_id"])
+    @records = user.agents
+    
+    ## Keyword search
+    #q = params["search"]["value"].strip.downcase
+    #@records = @records.where("pb_saleorders.name LIKE ?", "%#{q}%") if !q.empty?
+    
+    total = @records.count
+    @records = @records.limit(params[:length]).offset(params["start"])
+    data = []
+    
+    @records.uniq.each do |item|
+      row = [
+              item.display_name,
+              item.agent_sales_items_count,
+              ApplicationController.helpers.format_price(item.agent_info({seller_id: user.id})[:total]),
+              ApplicationController.helpers.format_price(item.agent_income({seller_id: user.id})), 
+              "Chưa thanh toán: <br>0/#{ApplicationController.helpers.format_price(item.agent_income({seller_id: user.id}))}",
+              "<div class=\"text-left text-nowrap\">#{item.agent_history_link}</div>"
+            ]
+      data << row      
+    end
+    
+    result = {
+              "drawn" => params[:drawn],
+              "recordsTotal" => total,
+              "recordsFiltered" => total
+    }
+    result["data"] = data
+    
+    return {result: result}
+  end
+  
+  
+  def self.customer_list(params, user)
+    # FILTERS
+    filters = {}
+    params["filters"].split('&').each do |row|
+      filters[row.split("=")[0]] = row.split("=")[1]
+    end
+    
+    #@deal = Deal.find(filters["deal_id"])
+    @records = user.customers
+    
+    ## Keyword search
+    #q = params["search"]["value"].strip.downcase
+    #@records = @records.where("pb_saleorders.name LIKE ?", "%#{q}%") if !q.empty?
+    
+    total = @records.count
+    @records = @records.limit(params[:length]).offset(params["start"])
+    data = []
+    
+    @records.uniq.each do |item|
+      row = [
+              item.display_name,
+              item.deal_saleorderitems_count({seller_id: user.id}),
+              ApplicationController.helpers.format_price(item.deal_saleorderitems_total({seller_id: user.id})),
+              "<div class=\"text-nowrap\">#{item.last_bought({seller_id: user.id}).strftime("%d-%m-%Y, %H:%I %p")}</div>",
+              "<div class=\"text-nowrap\">#{item.first_bought({seller_id: user.id}).strftime("%d-%m-%Y, %H:%I %p")}</div>",
+              "Đã mua hàng"
+            ]
+      data << row      
+    end
+    
+    result = {
+              "drawn" => params[:drawn],
+              "recordsTotal" => total,
+              "recordsFiltered" => total
+    }
+    result["data"] = data
+    
+    return {result: result}
+  end
+  
+  
   def share_amout
     price*(1.0-share_price/100.0)
   end
+  
+  
   
   def agent_amount
     price*(1.0-agent_price/100.0)
@@ -115,8 +201,8 @@ class Deal < ActiveRecord::Base
     PbMember.joins(:pb_saleorders => :pb_saleorderitems).where(pb_saleorderitems: {deal_id: self.id}).uniq
   end
   
-  def pb_salesorderitems
-    pb_salesorderitems.where.not(agent_username: nil)
+  def agent_orders
+    pb_saleorders.joins(:pb_saleorderitems).where("pb_saleorderitems.agent_username IS NOT NULL").uniq
   end
   
 end

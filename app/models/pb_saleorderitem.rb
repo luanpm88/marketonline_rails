@@ -5,19 +5,31 @@ class PbSaleorderitem < ActiveRecord::Base
   belongs_to :pb_saleorder, foreign_key: "saleorder_id"
   belongs_to :pb_product, foreign_key: "product_id"
   
+  belongs_to :pb_member, foreign_key: "agent_username", primary_key: "username"
+  
+  belongs_to :agent, foreign_key: "agent_username", primary_key: "username", class_name: "PbMember"
+  
   def self.datatable(params, user)
+    @records = user.pb_sell_saleorderitems #.where.not(deal_id: nil)
+    
     # FILTERS
     filters = {}
     params["filters"].split('&').each do |row|
       filters[row.split("=")[0]] = row.split("=")[1]
     end
     
-    @deal = Deal.find(filters["deal_id"])
-    @records = @deal.pb_saleorderitems.includes(:pb_saleorder).order("pb_saleorders.created DESC")
+    if filters["deal_id"].present?
+      @deal = Deal.find(filters["deal_id"])
+      @deal = Deal.find(filters["deal_id"])
+    end    
+    
+    #@records = @deal.pb_saleorderitems.includes(:pb_saleorder).order("pb_saleorders.created DESC")
     
     ## Keyword search
     #q = params["search"]["value"].strip.downcase
     #@records = @records.where("pb_saleorders.name LIKE ?", "%#{q}%") if !q.empty?
+    
+    @records = @records.order("pb_saleorders.created DESC")
     
     total = @records.count
     @records = @records.limit(params[:length]).offset(params["start"])
@@ -51,7 +63,11 @@ class PbSaleorderitem < ActiveRecord::Base
   end
   
   def customer_type
-    "Mua trực tiếp"
+    if agent.nil?
+      return "Mua trực tiếp"
+    else
+      return "<span class=\"text-nowrap\">Mua từ Cộng tác viên:</span><br >"+agent.display_name
+    end
   end
   
   def total
