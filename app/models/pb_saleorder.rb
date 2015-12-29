@@ -22,14 +22,14 @@ class PbSaleorder < ActiveRecord::Base
     
     @records.uniq.each do |item|
       row = [
-              "<div class=\"text-nowrap\">#{item.receiver_fullname}</div>",
+              "<div class=\"\">#{item.receiver_fullname}</div>",
               item.display_products,
               item.display_quantities,
               "<div class=\"text-nowrap text-right\">#{item.display_single_prices}</div>",
               "<div class=\"text-nowrap text-right\">#{item.display_prices}</div>",
               "<div class=\"text-nowrap\">#{item.ordered_time.to_datetime.strftime("%d-%m-%Y, %H:%I %p")}</div>",
-              "<div class=\"text-nowrap\">Đã đặt hàng</div>",
-              "<div class=\"text-left text-nowrap\">#{item.show_link}</div>"
+              "<div class=\"text-nowrap\">#{item.display_statuses}</div>",
+              "<div class=\"text-left text-nowrap\">#{item.show_link}#{item.finish_link}#{item.cancel_link}</div>"
             ]
       data << row      
     end
@@ -61,13 +61,13 @@ class PbSaleorder < ActiveRecord::Base
     
     @records.uniq.each do |item|
       row = [
-              "<div class=\"text-nowrap\">#{item.seller_name}</div>",
+              "<div class=\"\">#{item.seller_name}</div>",
               item.display_products,
               item.display_quantities,
               "<div class=\"text-nowrap text-right\">#{item.display_single_prices}</div>",
               "<div class=\"text-nowrap text-right\">#{item.display_prices}</div>",
               "<div class=\"text-nowrap\">#{item.ordered_time.to_datetime.strftime("%d-%m-%Y, %H:%I %p")}</div>",
-              "<div class=\"text-nowrap\">Đã đặt hàng</div>",
+              "<div class=\"text-nowrap\">#{item.display_statuses}</div>",
               "<div class=\"text-left text-nowrap\">#{item.show_link}</div>"
             ]
       data << row      
@@ -81,6 +81,17 @@ class PbSaleorder < ActiveRecord::Base
     result["data"] = data
     
     return {result: result}
+  end
+  
+  def display_statuses
+    if finished == 1
+      "<span class=\"text-success\">Hoàn tất</span>"
+    elsif finished == -1
+      "<span class=\"text-grey\">Đã hủy</span>"
+    else
+      "<span class=\"text-danger\">Mới đặt hàng</span>"
+    end
+    
   end
   
   def buyer_name
@@ -111,8 +122,17 @@ class PbSaleorder < ActiveRecord::Base
   
   def display_prices
     prices = pb_saleorderitems.uniq.map {|p| ApplicationController.helpers.format_price(p.total)}
-    
+    prices << ["<hr style=\"margin: 0\">#{ApplicationController.helpers.format_price(self.total)}"] if pb_saleorderitems.uniq.count > 1
     return prices.join("<br>")
+  end
+  
+  def total
+    total = 0.0
+    pb_saleorderitems.each do |od|
+      total += od.total
+    end
+    
+    return total
   end
   
   def ordered_time
@@ -125,6 +145,26 @@ class PbSaleorder < ActiveRecord::Base
     
     title = !title.nil? ? title : "<i class=\"icon-zoomin3\"></i> Xem chi tiết".html_safe
     link_helper.link_to(title, {controller: "pb_saleorders", action: "show", id: self.id})
+  end
+  
+  def finish_link(title=nil)
+    return "" if finished == 1 or finished == -1
+    
+    ActionView::Base.send(:include, Rails.application.routes.url_helpers)
+    link_helper = ActionController::Base.helpers
+    
+    title = !title.nil? ? title : "<i class=\"icon-checkmark\"></i> Hoàn tất".html_safe
+    "<div>"+link_helper.link_to(title, {controller: "pb_saleorders", action: "finish", id: self.id}, class: "ajax_link text-success")+"</div>"
+  end
+  
+  def cancel_link(title=nil)
+    return "" if finished == 1 or finished == -1
+    
+    ActionView::Base.send(:include, Rails.application.routes.url_helpers)
+    link_helper = ActionController::Base.helpers
+    
+    title = !title.nil? ? title : "<i class=\"icon-close2\"></i> Hủy đơn hàng".html_safe
+    "<div>"+link_helper.link_to(title, {controller: "pb_saleorders", action: "cancel", id: self.id}, class: "ajax_link text-grey")+"</div>"
   end
   
 end

@@ -104,7 +104,7 @@
                           <div class="row order_details">
                             <div class="col-md-12">
                               <h4>Chi tiết đơn hàng</h4>
-                              <table class="table">
+                              <table class="table table-striped table-hover no-footer">
                                 <tr>
                                   <th class="text-nowrap">Sản phẩm</th>
                                   <th class="text-nowrap">Số lượng</th>
@@ -122,8 +122,8 @@
                                 <% end %>
                                 
                                 <tr>
-                                  <td class="text-right">Tổng cộng:</td>
-                                  <td class="text-nowrap text-right"><%= format_price(@pb_saleorder.total) %></td>
+                                  <td colspan="3" class="text-right">Tổng cộng:</td>
+                                  <td class="text-nowrap text-right"><strong><%= format_price(@pb_saleorder.total) %></strong></td>
                                 </tr>
                                 
                               </table>

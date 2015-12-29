@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151229034801) do
+ActiveRecord::Schema.define(version: 20151229081051) do
 
   create_table "ad_clicks", force: :cascade do |t|
     t.integer  "ad_id",         limit: 4
@@ -1601,6 +1601,7 @@ ActiveRecord::Schema.define(version: 20151229034801) do
     t.string  "status",              limit: 255
     t.integer "created",             limit: 4
     t.integer "read",                limit: 4,     default: 0, null: false
+    t.integer "finished",            limit: 4,     default: 0
   end
 
   create_table "pb_schoolimagecomments", id: false, force: :cascade do |t|

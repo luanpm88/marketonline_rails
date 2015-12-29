@@ -205,4 +205,8 @@ class PbMember < ActiveRecord::Base
     link_helper.link_to(title, {controller: "pb_members", action: "index", id: self.id})
   end
   
+  def saleorders_alert_count
+    pb_sell_saleorders.where(finished: 0).count
+  end
+  
 end

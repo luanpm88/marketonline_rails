@@ -1,7 +1,7 @@
 class PbSaleordersController < ApplicationController
   load_and_authorize_resource
   
-  before_action :set_pb_saleorder, only: [:delete, :show, :edit, :update, :destroy]
+  before_action :set_pb_saleorder, only: [:cancel, :finish, :delete, :show, :edit, :update, :destroy]
   
   def show
   end
@@ -22,6 +22,24 @@ class PbSaleordersController < ApplicationController
         result = PbSaleorder.buy_orders(params, @current_user)
         render json: result[:result]
       }
+    end
+  end
+  
+  def finish
+    @message = "Đơn hàng đã hoàn tất."
+    @pb_saleorder.update_attribute(:finished, 1) if @pb_saleorder.finished == 0
+    respond_to do |format|      
+      format.html { render "/home/ajax_success", layout: nil }
+      format.json { head :no_content }
+    end
+  end
+  
+  def cancel
+    @message = "Đơn hàng đã bị hủy."
+    @pb_saleorder.update_attribute(:finished, -1) if @pb_saleorder.finished == 0
+    respond_to do |format|      
+      format.html { render "/home/ajax_success", layout: nil }
+      format.json { head :no_content }
     end
   end
   

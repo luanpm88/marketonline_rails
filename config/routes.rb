@@ -91,6 +91,8 @@ Rails.application.routes.draw do
     collection do
       get 'datatable'
       get 'buy_orders'
+      get 'finish'
+      get 'cancel'
     end
   end
   

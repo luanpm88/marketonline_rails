@@ -80,13 +80,24 @@ module ApplicationHelper
       end
     elsif ["pb_saleorders"].include?(params[:controller])
       if ["index"].include?(params[:action])
-        breadcrumb += '<li class="active">Quản lý đơn hàng bán</li>'
-        title = 'Quản lý đơn hàng bán'
+        breadcrumb += '<li class="active">Đơn đặt hàng từ khách</li>'
+        title = 'Đơn đặt hàng từ khách'
         
       end
       if ["buy_orders"].include?(params[:action])
-        breadcrumb += '<li class="active">Quản lý đơn hàng mua</li>'
-        title = 'Quản lý đơn hàng mua'
+        breadcrumb += '<li class="active">Lịch sử mua hàng</li>'
+        title = 'Lịch sử mua hàng'
+        
+      end
+      if ["show"].include?(params[:action])
+        item = PbSaleorder.find(params[:id])
+        if item.seller == @current_user
+          breadcrumb += '<li><a href="'+pb_saleorders_path+'">Đơn đặt hàng từ khách</a></</li>'
+        else
+          breadcrumb += '<li><a href="'+buy_orders_pb_saleorders_path+'">Lịch sử mua hàng</a></</li>'
+        end         
+        breadcrumb += '<li class="active">Chi tiết đơn hàng</li>'
+        title = 'Chi tiết đơn hàng'
         
       end
     end

@@ -354,3 +354,23 @@ legend {
     height: 20px;
     overflow: hidden;
 }
+.order_details .form-group {
+    margin-bottom: 5px;
+}
+.order_details .form-group label {
+    display: block;
+    position: absolute;
+}
+.order_details .form-group div {
+    display: inline-block;
+    margin-left: 80px;
+}
+.menu_bagde {
+    border-radius: 20px;
+    font-size: 13px;
+    line-height: 16px;
+    margin-top: 8px !important;
+    padding: 2px 7px;
+    position: absolute;
+    right: 5px;
+}
