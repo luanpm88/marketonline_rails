@@ -15,7 +15,7 @@ class PbProduct < ActiveRecord::Base
   end
   
   def default_image
-    if default_pic > 0
+    if default_pic > 0 and pictures[default_pic].present?
       pictures[default_pic].to_s+".small.jpg"
     else
       pictures.first.to_s+".small.jpg"
