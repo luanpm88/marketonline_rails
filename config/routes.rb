@@ -90,12 +90,13 @@ Rails.application.routes.draw do
   resources :pb_saleorders do
     collection do
       get 'datatable'
+      get 'buy_orders'
     end
   end
   
   resources :pb_saleorderitems do
     collection do
-      get 'datatable'
+      get 'datatable'      
     end
   end
   

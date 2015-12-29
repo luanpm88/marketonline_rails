@@ -78,6 +78,17 @@ module ApplicationHelper
         title = 'Chỉnh sửa DEAL: '+deal.pb_product.name
         
       end
+    elsif ["pb_saleorders"].include?(params[:controller])
+      if ["index"].include?(params[:action])
+        breadcrumb += '<li class="active">Quản lý đơn hàng bán</li>'
+        title = 'Quản lý đơn hàng bán'
+        
+      end
+      if ["buy_orders"].include?(params[:action])
+        breadcrumb += '<li class="active">Quản lý đơn hàng mua</li>'
+        title = 'Quản lý đơn hàng mua'
+        
+      end
     end
     
     breadcrumb += '</ul>'

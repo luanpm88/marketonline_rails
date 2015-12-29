@@ -10,21 +10,21 @@ class PbSaleorderitem < ActiveRecord::Base
   belongs_to :agent, foreign_key: "agent_username", primary_key: "username", class_name: "PbMember"
   
   def self.datatable(params, user)
-    @records = user.pb_sell_saleorderitems #.where.not(deal_id: nil)
+    @records = user.pb_sell_saleorderitems.where.not(deal_id: nil)
     
     # FILTERS
     filters = {}
     params["filters"].split('&').each do |row|
       filters[row.split("=")[0]] = row.split("=")[1]
     end
-    
+
     if filters["deal_id"].present?
       @deal = Deal.find(filters["deal_id"])
       @deal = Deal.find(filters["deal_id"])
     end    
-    
+
     #@records = @deal.pb_saleorderitems.includes(:pb_saleorder).order("pb_saleorders.created DESC")
-    
+
     ## Keyword search
     #q = params["search"]["value"].strip.downcase
     #@records = @records.where("pb_saleorders.name LIKE ?", "%#{q}%") if !q.empty?
@@ -68,6 +68,10 @@ class PbSaleorderitem < ActiveRecord::Base
     else
       return "<span class=\"text-nowrap\">Mua từ Cộng tác viên:</span><br >"+agent.display_name
     end
+  end
+  
+  def pb_product_name
+    return pb_product.nil? ? "" : pb_product.name
   end
   
   def total

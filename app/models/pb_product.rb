@@ -16,9 +16,9 @@ class PbProduct < ActiveRecord::Base
   
   def default_image
     if default_pic > 0
-      pictures[default_pic]+".small.jpg"
+      pictures[default_pic].to_s+".small.jpg"
     else
-      pictures.first+".small.jpg"
+      pictures.first.to_s+".small.jpg"
     end
   end
   

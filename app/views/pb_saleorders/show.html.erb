@@ -1,0 +1,134 @@
+                      <div class="panel panel-white">
+						<div class="panel-heading">
+							<h6 class="panel-title">Chi tiết đơn hàng</h6>
+						</div>
+                        <div class="panel-body">
+                          <div class="row order_details">
+                            <div class="col-md-4">
+                              <h4>Thông tin người mua</h4>
+                              <div class="form-group">
+                                <label>Tên đầy đủ:</label>
+                                <div>
+                                  <strong><%= @pb_saleorder.fullname %></strong>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label>Địa chỉ:</label>
+                                <div>
+                                  <strong><%= @pb_saleorder.address %></strong>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label>Di động:</label>
+                                <div>
+                                  <strong><%= @pb_saleorder.mobile %></strong>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label>Email:</label>
+                                <div>
+                                  <strong><%= @pb_saleorder.email %></strong>
+                                </div>
+                              </div>                              
+                            </div>
+                            <div class="col-md-4">
+                              <h4>Người nhận hàng</h4>
+                              <div class="form-group">
+                                <label>Tên đầy đủ:</label>
+                                <div>
+                                  <strong><%= @pb_saleorder.receiver_fullname %></strong>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label>Địa chỉ:</label>
+                                <div>
+                                  <strong><%= @pb_saleorder.receiver_address %></strong>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label>Di động:</label>
+                                <div>
+                                  <strong><%= @pb_saleorder.receiver_mobile %></strong>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label>Email:</label>
+                                <div>
+                                  <strong><%= @pb_saleorder.receiver_email %></strong>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <h4>Người bán</h4>
+                              <div class="form-group">
+                                <label>Tên đầy đủ:</label>
+                                <div>
+                                  <strong><%= @pb_saleorder.seller.pb_company.name %></strong>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label>Địa chỉ:</label>
+                                <div>
+                                  <strong><%= @pb_saleorder.seller.pb_company.display_address %></strong>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label>Di động:</label>
+                                <div>
+                                  <strong><%= @pb_saleorder.seller.pb_company.tel %></strong>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label>Email:</label>
+                                <div>
+                                  <strong><%= @pb_saleorder.seller.pb_company.email %></strong>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <% if @pb_saleorder.message.present? %>
+                            <div class="row order_details">
+                              <div class="col-md-12">
+                                <h4>Ghi chú thêm</h4>
+                                <div class="form-group">
+                                  
+                                  <div>
+                                    <strong><%= @pb_saleorder.message %></strong>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          <% end %>
+                          
+                          <div class="row order_details">
+                            <div class="col-md-12">
+                              <h4>Chi tiết đơn hàng</h4>
+                              <table class="table">
+                                <tr>
+                                  <th class="text-nowrap">Sản phẩm</th>
+                                  <th class="text-nowrap">Số lượng</th>
+                                  <th class="text-nowrap text-right">Đơn giá (VNĐ)</th>
+                                  <th class="text-nowrap text-right">Giá mua (VNĐ)</th>
+                                </tr>
+                                
+                                <% @pb_saleorder.pb_saleorderitems.each do |item| %>
+                                  <tr>
+                                    <td class="text-nowrap"><%= item.pb_product.name %></td>
+                                    <td class="text-nowrap"><%= item.quantity %></td>
+                                    <td class="text-nowrap text-right"><%= format_price(item.price) %></td>
+                                    <td class="text-nowrap text-right"><%= format_price(item.total) %></td>
+                                  </tr>
+                                <% end %>
+                                
+                                <tr>
+                                  <td class="text-right">Tổng cộng:</td>
+                                  <td class="text-nowrap text-right"><%= format_price(@pb_saleorder.total) %></td>
+                                </tr>
+                                
+                              </table>
+                            </div>
+                          </div>
+                          
+                        </div>
+                      </div>

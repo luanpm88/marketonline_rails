@@ -8,7 +8,7 @@ class PbMember < ActiveRecord::Base
   has_many :pb_saleorderitems, :through => :pb_saleorders
   has_many :customers, :through => :pb_saleorders, :source => :buyer, foreign_key: "buyer_id", primary_key: "id"
   
-  has_many :pb_sell_saleorders, foreign_key: "buyer_id", class_name: "PbSaleorder"
+  has_many :pb_sell_saleorders, foreign_key: "seller_id", class_name: "PbSaleorder"
   has_many :pb_sell_saleorderitems, :through => :pb_sell_saleorders, :source => :pb_saleorderitems, class_name: "PbSaleorderitem"
   
   has_many :agent_orderitems, foreign_key: "agent_username", primary_key: "username", class_name: "PbSaleorderitem"

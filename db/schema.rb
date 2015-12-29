@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151225075325) do
+ActiveRecord::Schema.define(version: 20151229034801) do
 
   create_table "ad_clicks", force: :cascade do |t|
     t.integer  "ad_id",         limit: 4
@@ -610,6 +610,7 @@ ActiveRecord::Schema.define(version: 20151225075325) do
     t.decimal  "agent_price",                 precision: 10
     t.decimal  "share_price",                 precision: 10
     t.string   "name",          limit: 255
+    t.integer  "pb_member_id",  limit: 4
   end
 
   add_index "pb_deals", ["end_at"], name: "index_deals_on_end_at", using: :btree

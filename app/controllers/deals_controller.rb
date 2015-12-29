@@ -5,7 +5,10 @@ class DealsController < ApplicationController
   # GET /deals
   # GET /deals.json
   def index
-    @deals = Deal.all
+    respond_to do |format|
+      format.html { redirect_to deals_url, notice: 'Deal was successfully destroyed.' }
+      format.json { render json: Deal.select2_options(params, @current_user) }
+    end
   end
 
   # GET /deals/1
@@ -26,7 +29,7 @@ class DealsController < ApplicationController
   # POST /deals.json
   def create
     @deal = Deal.new(deal_params)
-
+    @deal.pb_member_id = @current_user.id
     respond_to do |format|
       if @deal.save
         format.html { redirect_to deals_path, notice: 'DEAL đã được tạo thành công!' }

@@ -205,4 +205,18 @@ class Deal < ActiveRecord::Base
     pb_saleorders.joins(:pb_saleorderitems).where("pb_saleorderitems.agent_username IS NOT NULL").uniq
   end
   
+  def self.select2_options(params, user)
+    result = self.where(pb_member_id: user.id)
+    
+    if params[:type] == "agents"
+      result = user.agents.map{|item| {text: item.display_name, value: item.id}}
+    elsif params[:type] == "customers"
+      result = user.customers.uniq.map{|item| {text: item.display_name, value: item.id}}
+    else
+      result = result.map{|item| {text: item.pb_product.name, value: item.id}}
+    end
+    
+    return result
+  end
+  
 end

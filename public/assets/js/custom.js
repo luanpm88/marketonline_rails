@@ -572,6 +572,7 @@ $(document).ready(function() {
     $('.select2-ajax').each(function() {
         var item = $(this)
         item.select2({
+            minimumResultsForSearch: 10,
             placeholder: item.attr("placeholder"),
             minimumInputLength: 0,
             allowClear: true,

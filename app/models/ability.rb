@@ -55,6 +55,7 @@ class Ability
         can :manage, PbSaleorderitem
         can :manage, PbMember
         can :manage, SystemMessage
+        can :manage, PbSaleorder
       end
     end
     

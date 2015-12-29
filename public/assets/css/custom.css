@@ -349,3 +349,8 @@ legend {
 .tooltip-inner {
     background: #00ba00;
 }
+.sale_product_name {
+    display: block;
+    height: 20px;
+    overflow: hidden;
+}
