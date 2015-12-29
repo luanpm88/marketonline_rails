@@ -22,7 +22,7 @@ class PbSaleorder < ActiveRecord::Base
     
     @records.uniq.each do |item|
       row = [
-              "<div class=\"\">#{item.receiver_fullname}</div>",
+              "<div class=\"\">#{item.fullname}</div>",
               item.display_products,
               item.display_quantities,
               "<div class=\"text-nowrap text-right\">#{item.display_single_prices}</div>",
@@ -83,6 +83,45 @@ class PbSaleorder < ActiveRecord::Base
     return {result: result}
   end
   
+  def self.admin_list(params, user)
+    @records = self.all
+    
+    # FILTERS
+    filters = {}
+    params["filters"].split('&').each do |row|
+      filters[row.split("=")[0]] = row.split("=")[1]
+    end
+    
+    @records = @records.order("pb_saleorders.created DESC")
+    
+    total = @records.count
+    @records = @records.limit(params[:length]).offset(params["start"])
+    data = []
+    
+    @records.uniq.each do |item|
+      row = [
+              "<div class=\"\">#{item.fullname}</div>",
+              item.display_products,
+              item.display_quantities,
+              "<div class=\"text-nowrap text-right\">#{item.display_single_prices}</div>",
+              "<div class=\"text-nowrap text-right\">#{item.display_prices}</div>",
+              "<div class=\"text-nowrap\">#{item.ordered_time.to_datetime.strftime("%d-%m-%Y, %H:%I %p")}</div>",
+              "<div class=\"text-nowrap\">#{item.display_statuses}</div>",
+              "<div class=\"text-left text-nowrap\">#{item.show_link}#{item.finish_link}#{item.cancel_link}</div>"
+            ]
+      data << row      
+    end
+    
+    result = {
+              "drawn" => params[:drawn],
+              "recordsTotal" => total,
+              "recordsFiltered" => total
+    }
+    result["data"] = data
+    
+    return {result: result}
+  end
+  
   def display_statuses
     if finished == 1
       "<span class=\"text-success\">Hoàn tất</span>"
@@ -103,7 +142,7 @@ class PbSaleorder < ActiveRecord::Base
   end
   
   def display_products
-    names = pb_saleorderitems.uniq.map {|p| "<div title=\"#{p.pb_product_name}\" class=\"sale_product_name\">#{p.pb_product_name}<div>"}
+    names = pb_saleorderitems.uniq.map {|p| "<div title=\"#{p.pb_product_name}\" class=\"sale_product_name\"><a target=\"_blank\" href=\"#{p.pb_product.url}\">#{p.pb_product_name}</a><div>"}
     
     return names.join("<br>")
   end

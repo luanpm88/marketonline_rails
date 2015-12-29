@@ -93,6 +93,7 @@ Rails.application.routes.draw do
       get 'buy_orders'
       get 'finish'
       get 'cancel'
+      get 'admin_list'
     end
   end
   

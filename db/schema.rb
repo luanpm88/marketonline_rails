@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151229081051) do
+ActiveRecord::Schema.define(version: 20151229091252) do
 
   create_table "ad_clicks", force: :cascade do |t|
     t.integer  "ad_id",         limit: 4
@@ -1583,25 +1583,26 @@ ActiveRecord::Schema.define(version: 20151229081051) do
   end
 
   create_table "pb_saleorders", force: :cascade do |t|
-    t.integer "buyer_id",            limit: 4
-    t.integer "seller_id",           limit: 4
-    t.string  "fullname",            limit: 255
-    t.string  "email",               limit: 255
-    t.string  "mobile",              limit: 50
-    t.integer "country_id",          limit: 4
-    t.integer "area_id",             limit: 4
-    t.string  "address",             limit: 255
-    t.string  "receiver_fullname",   limit: 255
-    t.string  "receiver_mobile",     limit: 255
-    t.string  "receiver_email",      limit: 255
-    t.integer "receiver_country_id", limit: 4
-    t.integer "receiver_area_id",    limit: 4
-    t.string  "receiver_address",    limit: 255
-    t.text    "message",             limit: 65535
-    t.string  "status",              limit: 255
-    t.integer "created",             limit: 4
-    t.integer "read",                limit: 4,     default: 0, null: false
-    t.integer "finished",            limit: 4,     default: 0
+    t.integer  "buyer_id",            limit: 4
+    t.integer  "seller_id",           limit: 4
+    t.string   "fullname",            limit: 255
+    t.string   "email",               limit: 255
+    t.string   "mobile",              limit: 50
+    t.integer  "country_id",          limit: 4
+    t.integer  "area_id",             limit: 4
+    t.string   "address",             limit: 255
+    t.string   "receiver_fullname",   limit: 255
+    t.string   "receiver_mobile",     limit: 255
+    t.string   "receiver_email",      limit: 255
+    t.integer  "receiver_country_id", limit: 4
+    t.integer  "receiver_area_id",    limit: 4
+    t.string   "receiver_address",    limit: 255
+    t.text     "message",             limit: 65535
+    t.string   "status",              limit: 255
+    t.integer  "created",             limit: 4
+    t.integer  "read",                limit: 4,     default: 0, null: false
+    t.integer  "finished",            limit: 4,     default: 0
+    t.datetime "updated_at"
   end
 
   create_table "pb_schoolimagecomments", id: false, force: :cascade do |t|

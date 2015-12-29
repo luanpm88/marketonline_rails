@@ -25,6 +25,16 @@ class PbSaleordersController < ApplicationController
     end
   end
   
+  def admin_list
+    respond_to do |format|
+      format.html
+      format.json {
+        result = PbSaleorder.admin_list(params, @current_user)
+        render json: result[:result]
+      }
+    end
+  end
+  
   def finish
     @message = "Đơn hàng đã hoàn tất."
     @pb_saleorder.update_attribute(:finished, 1) if @pb_saleorder.finished == 0
