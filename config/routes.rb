@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :agent_payments do
+    collection do
+      get 'datatable'
+      get 'user_payments'
+    end
+  end
   resources :system_messages do
     collection do
       get 'datatable'
@@ -11,8 +17,15 @@ Rails.application.routes.draw do
       get 'delete'
       get 'show_product_details'
       get 'agent_list'
+      get 'admin_agent_list'
+      get 'admin_deal_list'
       get 'customer_list'
       get 'item_list'
+      get 'agent_page'
+      get 'corp_deals'
+      get 'corp_members'
+      get 'corp_customers'
+      get 'approve'
     end
   end
   resources :ad_clicks do

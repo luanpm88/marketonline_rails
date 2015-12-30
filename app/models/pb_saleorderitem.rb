@@ -10,7 +10,7 @@ class PbSaleorderitem < ActiveRecord::Base
   belongs_to :agent, foreign_key: "agent_username", primary_key: "username", class_name: "PbMember"
   
   def self.datatable(params, user)
-    @records = user.pb_sell_saleorderitems.where.not(deal_id: nil)
+    @records = user.pb_sell_saleorderitems.includes(:pb_saleorder).where.not(deal_id: nil)
     
     # FILTERS
     filters = {}
@@ -19,9 +19,16 @@ class PbSaleorderitem < ActiveRecord::Base
     end
 
     if filters["deal_id"].present?
-      @deal = Deal.find(filters["deal_id"])
-      @deal = Deal.find(filters["deal_id"])
-    end    
+      @records = @records.where(deal_id: filters["deal_id"])
+    end
+    
+    if filters["agent_id"].present?      
+      @records = @records.where(agent_username: PbMember.find(filters["agent_id"]).username)
+    end
+    
+    if filters["customer_id"].present?
+      @records = @records.where(pb_saleorders: {buyer_id: filters["customer_id"]})
+    end
 
     #@records = @deal.pb_saleorderitems.includes(:pb_saleorder).order("pb_saleorders.created DESC")
 
@@ -43,7 +50,63 @@ class PbSaleorderitem < ActiveRecord::Base
               "<div class=\"text-nowrap text-right\">#{item.diplay_total}</div>",
               item.customer_type,
               "<div class=\"text-nowrap\">#{item.ordered_time.to_datetime.strftime("%d-%m-%Y, %H:%I %p")}</div>",
-              "<div class=\"text-nowrap\">#{item.display_status}</div>",
+              "<div class=\"text-nowrap\">#{item.pb_saleorder.display_statuses}</div>",
+            ]
+      data << row      
+    end
+    
+    result = {
+              "drawn" => params[:drawn],
+              "recordsTotal" => total,
+              "recordsFiltered" => total
+    }
+    result["data"] = data
+    
+    return {result: result}
+  end
+  
+  def self.agent_corp_list(params, user)
+    @records = self.includes(:pb_saleorder).where.not(deal_id: nil).where(agent_username: user.username)
+    
+    # FILTERS
+    filters = {}
+    params["filters"].split('&').each do |row|
+      filters[row.split("=")[0]] = row.split("=")[1]
+    end
+
+    if filters["deal_id"].present?
+      @records = @records.where(deal_id: filters["deal_id"])
+    end
+    
+    if filters["customer_id"].present?
+      @records = @records.where(pb_saleorders: {buyer_id: filters["customer_id"]})
+    end
+    
+    if filters["seller_id"].present?
+      @records = @records.where(pb_saleorders: {seller_id: filters["seller_id"]})
+    end
+
+    #@records = @deal.pb_saleorderitems.includes(:pb_saleorder).order("pb_saleorders.created DESC")
+
+    ## Keyword search
+    #q = params["search"]["value"].strip.downcase
+    #@records = @records.where("pb_saleorders.name LIKE ?", "%#{q}%") if !q.empty?
+    
+    @records = @records.order("pb_saleorders.created DESC")
+    
+    total = @records.count
+    @records = @records.limit(params[:length]).offset(params["start"])
+    data = []
+    
+    @records.each do |item|
+      row = [
+              "<div class=\"text-nowrap\">#{item.buyer.display_name}</div>",
+              item.pb_product.name,
+              item.quantity,
+              "<div class=\"text-nowrap text-right\">#{item.diplay_total}</div>",
+              item.customer_type,
+              "<div class=\"text-nowrap\">#{item.ordered_time.to_datetime.strftime("%d-%m-%Y, %H:%I %p")}</div>",
+              "<div class=\"text-nowrap\">#{item.pb_saleorder.display_statuses}</div>",
             ]
       data << row      
     end
@@ -76,6 +139,10 @@ class PbSaleorderitem < ActiveRecord::Base
   
   def total
     total = price.to_f*quantity.to_f    
+  end
+  
+  def deal_total
+    total = deal_price.to_f*quantity.to_f    
   end
   
   def diplay_total

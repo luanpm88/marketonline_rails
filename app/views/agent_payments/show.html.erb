@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Pb member:</strong>
+  <%= @agent_payment.pb_member_id %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @agent_payment.amount %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @agent_payment.user_id %>
+</p>
+
+<p>
+  <strong>Note:</strong>
+  <%= @agent_payment.note %>
+</p>
+
+<%= link_to 'Edit', edit_agent_payment_path(@agent_payment) %> |
+<%= link_to 'Back', agent_payments_path %>

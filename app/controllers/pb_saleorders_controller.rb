@@ -1,6 +1,5 @@
 class PbSaleordersController < ApplicationController
   load_and_authorize_resource
-  
   before_action :set_pb_saleorder, only: [:cancel, :finish, :delete, :show, :edit, :update, :destroy]
   
   def show

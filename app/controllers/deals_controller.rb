@@ -1,12 +1,12 @@
 class DealsController < ApplicationController
   # load_and_authorize_resource
-  before_action :set_deal, only: [:delete, :show, :edit, :update, :destroy]
+  before_action :set_deal, only: [:approve, :delete, :show, :edit, :update, :destroy]
 
   # GET /deals
   # GET /deals.json
   def index
     respond_to do |format|
-      format.html { redirect_to deals_url, notice: 'Deal was successfully destroyed.' }
+      format.html
       format.json { render json: Deal.select2_options(params, @current_user) }
     end
   end
@@ -71,11 +71,52 @@ class DealsController < ApplicationController
     render json: result[:result]
   end
   
+  def corp_deals
+    respond_to do |format|
+      format.html
+      format.json { render json: Deal.corp_deals(params, @current_user)[:result] }
+    end
+  end
+  
+  def corp_members
+    respond_to do |format|
+      format.html
+      format.json { render json: Deal.corp_members(params, @current_user)[:result] }
+    end
+  end
+  
+  def corp_customers
+    respond_to do |format|
+      format.html
+      format.json { render json: Deal.corp_customers(params, @current_user)[:result] }
+    end
+  end
+  
   def agent_list
     respond_to do |format|
       format.html
       format.json {
         result = Deal.agent_list(params, @current_user)    
+        render json: result[:result]
+      }
+    end    
+  end
+  
+  def admin_agent_list
+    respond_to do |format|
+      format.html
+      format.json {
+        result = Deal.admin_agent_list(params, @current_user)    
+        render json: result[:result]
+      }
+    end    
+  end
+  
+  def admin_deal_list
+    respond_to do |format|
+      format.html
+      format.json {
+        result = Deal.admin_deal_list(params, @current_user)    
         render json: result[:result]
       }
     end    
@@ -99,11 +140,27 @@ class DealsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def approve
+    @message = "DEAL sản phẩm <strong>#{@deal.pb_product.name}</strong> đã được duyệt."
+    #@deal.destroy
+    respond_to do |format|      
+      format.html { render "/home/ajax_success", layout: nil }
+      format.json { head :no_content }
+    end
+  end
 
   def show_product_details
     @product = PbProduct.find(params[:product_id])
     
     render layout: nil
+  end
+  
+  def agent_page
+    respond_to do |format|
+      format.html
+      format.json { render json: PbSaleorderitem.agent_corp_list(params, @current_user)[:result] }
+    end
   end
 
   private

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151229091252) do
+ActiveRecord::Schema.define(version: 20151230095248) do
 
   create_table "ad_clicks", force: :cascade do |t|
     t.integer  "ad_id",         limit: 4
@@ -72,6 +72,15 @@ ActiveRecord::Schema.define(version: 20151229091252) do
     t.integer  "active",               limit: 4,                    default: 0
     t.integer  "pb_industry_id",       limit: 4
     t.integer  "pb_area_id",           limit: 4
+  end
+
+  create_table "agent_payments", force: :cascade do |t|
+    t.integer  "pb_member_id", limit: 4
+    t.decimal  "amount",                     precision: 10
+    t.integer  "user_id",      limit: 4
+    t.text     "note",         limit: 65535
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
   end
 
   create_table "email", force: :cascade do |t|
@@ -605,12 +614,13 @@ ActiveRecord::Schema.define(version: 20151229091252) do
     t.decimal  "price",                       precision: 10
     t.text     "status",        limit: 65535
     t.text     "description",   limit: 65535
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
     t.decimal  "agent_price",                 precision: 10
     t.decimal  "share_price",                 precision: 10
     t.string   "name",          limit: 255
     t.integer  "pb_member_id",  limit: 4
+    t.integer  "approved",      limit: 4,                    default: 0
   end
 
   add_index "pb_deals", ["end_at"], name: "index_deals_on_end_at", using: :btree
@@ -1573,13 +1583,14 @@ ActiveRecord::Schema.define(version: 20151229091252) do
   end
 
   create_table "pb_saleorderitems", id: false, force: :cascade do |t|
-    t.integer "id",             limit: 4,   null: false
+    t.integer "id",             limit: 4,                  null: false
     t.integer "saleorder_id",   limit: 4
     t.integer "product_id",     limit: 4
     t.string  "price",          limit: 255
     t.integer "quantity",       limit: 4
     t.integer "deal_id",        limit: 4
     t.string  "agent_username", limit: 255
+    t.decimal "deal_price",                 precision: 10
   end
 
   create_table "pb_saleorders", force: :cascade do |t|

@@ -1,0 +1,74 @@
+                    <div class="row">
+                        <div class="col-sm-4 col-lg-2 col-xs-6">
+							<div class="panel">
+								<a  href="<%= corp_members_deals_path %>" title="Xem danh sách cộng tác viên">
+									<div class="bg-violet demo-color">
+										<span class="box-background"><i class="icon-store"></i></span>
+										<span class="box-count"><%= format_price(@current_user.corp_members.count) %></span>
+										<span class="box-title">Gian hàng<br>đã cộng tác</span>
+									</div>
+								</a>
+
+								<div style="height: 3px;">
+								</div>
+							</div>
+						</div>
+                        
+                        <div class="col-sm-4 col-lg-2 col-xs-6">
+							<div class="panel">
+								<a  href="<%= corp_deals_deals_path %>" title="Xem danh sách cộng tác viên">
+									<div class="bg-pink demo-color">
+										<span class="box-background"><i class="icon-price-tags"></i></span>
+										<span class="box-count"><%= format_price(@current_user.corp_deals.count) %></span>
+										<span class="box-title">DEALs tham gia</span>
+									</div>
+								</a>
+
+								<div style="height: 3px;">
+								</div>
+							</div>
+						</div>
+                        
+                        <div class="col-sm-4 col-lg-2 col-xs-6">
+							<div class="panel">
+                                <a  href="<%= agent_page_deals_path %>" title="Xem danh sách khách hàng">
+                                  <div class="bg-success demo-color">
+                                      <span class="box-background"><i class="icon-exit"></i></span>
+                                      <span class="box-count"><%= format_price(@current_user.deal_items_count) %></span>
+                                      <span class="box-title">Sản phẩm đã bán</span>
+                                  </div>
+                                </a>
+								<div style="height: 3px">
+								</div>
+							</div>
+						</div>
+                        
+                        <div class="col-sm-4 col-lg-2 col-xs-6">
+							<div class="panel">
+								<a  href="<%= corp_customers_deals_path %>" title="Xem danh sách khách hàng">
+									<div class="bg-teal demo-color">
+										<span class="box-background"><i class="icon-users4"></i></span>
+										<span class="box-count"><%= format_price(@current_user.deal_customers_count) %></span>
+										<span class="box-title">Khách hàng<br>giới thiệu</span>
+									</div>
+								</a>
+								<div style="height: 3px;">
+								</div>
+							</div>
+						</div>
+                        
+                        <div class="col-sm-4 col-lg-2 col-xs-6">
+							<div class="panel">
+								<a  href="<%= agent_page_deals_path %>" title="Xem danh sách khách hàng">
+									<div class="bg-brown demo-color">
+										<span class="box-background"><i class="icon-coins"></i></span>
+										<span class="box-count"><%= format_price(@current_user.deal_income) %></span>
+										<span class="box-title">Thu nhập</span>
+									</div>
+								</a>
+								<div style="height: 3px;">
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /palette colors -->

@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Agent Payments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Pb member</th>
+      <th>Amount</th>
+      <th>User</th>
+      <th>Note</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @agent_payments.each do |agent_payment| %>
+      <tr>
+        <td><%= agent_payment.pb_member_id %></td>
+        <td><%= agent_payment.amount %></td>
+        <td><%= agent_payment.user_id %></td>
+        <td><%= agent_payment.note %></td>
+        <td><%= link_to 'Show', agent_payment %></td>
+        <td><%= link_to 'Edit', edit_agent_payment_path(agent_payment) %></td>
+        <td><%= link_to 'Destroy', agent_payment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Agent payment', new_agent_payment_path %>

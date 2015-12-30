@@ -1,0 +1,29 @@
+<%= form_for(@agent_payment) do |f| %>
+  <% if @agent_payment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@agent_payment.errors.count, "error") %> prohibited this agent_payment from being saved:</h2>
+
+      <ul>
+      <% @agent_payment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :pb_member_id %><br>
+    <%= f.number_field :pb_member_id %>
+  </div>
+  <div class="field">
+    <%= f.label :amount %><br>
+    <%= f.text_field :amount, class: "form-control number_input" %>
+  </div>
+  <div class="field">
+    <%= f.label :note %><br>
+    <%= f.text_area :note, class: "form-control" %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
