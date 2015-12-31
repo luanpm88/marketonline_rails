@@ -192,7 +192,7 @@ class PbSaleorder < ActiveRecord::Base
     ActionView::Base.send(:include, Rails.application.routes.url_helpers)
     link_helper = ActionController::Base.helpers
     
-    title = !title.nil? ? title : "<i class=\"icon-checkmark\"></i> Hoàn tất".html_safe
+    title = !title.nil? ? title : "<i class=\"icon-checkmark\"></i> Xác nhận đã hoàn tất".html_safe
     "<div>"+link_helper.link_to(title, {controller: "pb_saleorders", action: "finish", id: self.id}, class: "ajax_link text-success")+"</div>"
   end
   
