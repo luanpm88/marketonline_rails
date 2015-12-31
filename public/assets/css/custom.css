@@ -392,3 +392,6 @@ legend {
 .demo-color.small_box .box-background i {
     font-size: 40px;
 }
+.dataTables_filter {
+    display: none;
+}
