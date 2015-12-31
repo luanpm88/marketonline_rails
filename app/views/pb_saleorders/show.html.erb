@@ -114,7 +114,7 @@
                                 
                                 <% @pb_saleorder.pb_saleorderitems.each do |item| %>
                                   <tr>
-                                    <td class="text-nowrap"><%= item.pb_product.name %></td>
+                                    <td class="text-nowrap"><%= item.pb_product_name %></td>
                                     <td class="text-nowrap"><%= item.quantity %></td>
                                     <td class="text-nowrap text-right"><%= format_price(item.price) %></td>
                                     <td class="text-nowrap text-right"><%= format_price(item.total) %></td>
