@@ -1,5 +1,5 @@
 class PbMembersController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource, :except => [:pending_order_count]
   
   def select2_options
     respond_to do |format|
