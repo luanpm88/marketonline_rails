@@ -1,6 +1,9 @@
 a {
     color: #00695c;
 }
+body {
+    font-family: "Arial"
+}
 .product_name_input {
     position: absolute;
     top: 26px;
