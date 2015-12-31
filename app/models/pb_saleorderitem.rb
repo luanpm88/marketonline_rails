@@ -135,7 +135,7 @@ class PbSaleorderitem < ActiveRecord::Base
   end
   
   def pb_product_name
-    return pb_product.nil? ? "<span =\"text-grey\">Sản phẩm đã bị xóa!</span>" : pb_product.name
+    return pb_product.nil? ? "<span class=\"text-grey\">Sản phẩm đã bị xóa!</span>" : pb_product.name
   end
   
   def pb_product_url
