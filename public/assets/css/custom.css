@@ -398,3 +398,6 @@ legend {
 .dataTables_filter {
     display: none;
 }
+.navigation > li ul li a {
+    font-size: 14px;
+}
