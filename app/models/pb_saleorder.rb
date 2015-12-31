@@ -84,7 +84,7 @@ class PbSaleorder < ActiveRecord::Base
   end
   
   def self.admin_list(params, user)
-    @records = self.includes(:pb_saleorderitems).where("pb_saleorderitems.id IS NOT NULL")
+    @records = self.joins(:pb_saleorderitems).where("pb_saleorderitems.id IS NOT NULL")
     
     # FILTERS
     filters = {}
