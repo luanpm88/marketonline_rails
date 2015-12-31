@@ -204,7 +204,7 @@
 												<span class="badge bg-warning-400 menu_bagde"><%= @current_user.saleorders_alert_count %></span>
 												<a href="<%= pb_saleorders_path %>">Đơn đặt hàng từ khách</a>											
 											</li>
-											<li <%= 'class=active' if ["pb_saleorders"].include?(params[:controller]) && ["buy_orders"].include?(params[:action]) %>><a href="<%= buy_orders_pb_saleorders_path %>">Lịch sử mua hàng</a></li>
+											<li <%= 'class=active' if ["pb_saleorders"].include?(params[:controller]) && ["buy_orders"].include?(params[:action]) %>><a href="<%= buy_orders_pb_saleorders_path %>">Lịch sử mua hàng của bạn</a></li>
 										</ul>
 									</li>
 									<li>
