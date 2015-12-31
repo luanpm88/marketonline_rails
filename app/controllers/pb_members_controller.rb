@@ -22,7 +22,7 @@ class PbMembersController < ApplicationController
   
   def pending_order_count
     user = PbMember.find(params[:user_id])
-    render text: "<span>"+user.saleorders_alert_count.to_s+"</span>"
+    render (text: user.saleorders_alert_count.present? ? "" : "<span>"+user.saleorders_alert_count.to_s+"</span>")
   end
   
 end
