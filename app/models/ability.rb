@@ -84,6 +84,7 @@ class Ability
         can :deal_customers, PbMember
         can :deal_agents, PbMember
         can :select2_options, PbMember
+        can :pending_order_count, PbMember
       end
       
       if user.role == "admin"

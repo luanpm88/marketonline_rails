@@ -9,6 +9,8 @@ class Deal < ActiveRecord::Base
   
   has_many :agents, :through => :pb_saleorderitems, :source => :pb_member, foreign_key: "agent_username", primary_key: "username"
   
+  belongs_to :pb_member
+  
   def price=(new)
     self[:price] = new.to_s.gsub(/\,/, '')
   end
@@ -61,7 +63,7 @@ class Deal < ActiveRecord::Base
     @records.each do |item|
       row = [
               "<div class=\"\"><img src=\"#{item.pb_product.default_image}\" width=\"100\" /></div>",
-              "<div class=\"\">#{item.show_link(item.pb_product.name)}<br/>#{item.description}</div>",
+              "<div class=\"\">#{item.show_link(item.pb_product.name)}<br/>#{item.description}<br />Thành viên: #{item.pb_member.display_name}</div>",
               "<div class=\"\">#{item.display_price}</div>",
               "<div class=\"\">#{item.pb_product.price_unit}</div>",
               "<div class=\"\">#{ApplicationController.helpers.format_price(item.remain_items_count.to_s)}</div>",
