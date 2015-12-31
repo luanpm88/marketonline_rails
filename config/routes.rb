@@ -123,6 +123,7 @@ Rails.application.routes.draw do
     collection do
       get 'deal_customers'
       get 'deal_agents'
+      get 'pending_order_count'
     end
   end
   

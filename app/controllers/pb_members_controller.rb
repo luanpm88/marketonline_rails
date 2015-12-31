@@ -19,4 +19,9 @@ class PbMembersController < ApplicationController
     
     render json: result[:result]
   end
+  
+  def pending_order_count
+    render text: "<span>"+@current_user.saleorders_alert_count.to_s+"</span>"
+  end
+  
 end
