@@ -25,7 +25,10 @@ Rails.application.routes.draw do
       get 'corp_deals'
       get 'corp_members'
       get 'corp_customers'
+      get 'corp_non_member_customers'
       get 'approve'
+      get 'on'
+      get 'off'
     end
   end
   resources :ad_clicks do

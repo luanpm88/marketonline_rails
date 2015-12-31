@@ -44,7 +44,7 @@ class PbSaleorderitem < ActiveRecord::Base
     
     @records.each do |item|
       row = [
-              "<div class=\"text-nowrap\">#{item.buyer.display_name}</div>",
+              "<div class=\"text-nowrap\">#{item.pb_saleorder.fullname}</div>",
               item.pb_product.name,
               item.quantity,
               "<div class=\"text-nowrap text-right\">#{item.diplay_total}</div>",
@@ -100,7 +100,7 @@ class PbSaleorderitem < ActiveRecord::Base
     
     @records.each do |item|
       row = [
-              "<div class=\"text-nowrap\">#{item.buyer.display_name}</div>",
+              "<div class=\"text-nowrap\">#{item.pb_saleorder.fullname}</div>",
               item.pb_product.name,
               item.quantity,
               "<div class=\"text-nowrap text-right\">#{item.diplay_total}</div>",
@@ -120,6 +120,7 @@ class PbSaleorderitem < ActiveRecord::Base
     
     return {result: result}
   end
+
   
   def ordered_time
     Time.at(pb_saleorder.created).to_datetime
@@ -143,6 +144,10 @@ class PbSaleorderitem < ActiveRecord::Base
   
   def deal_total
     total = deal_price.to_f*quantity.to_f    
+  end
+  
+  def agent_income
+    deal_total.to_f*(deal.agent_price.to_f/100.0)
   end
   
   def diplay_total

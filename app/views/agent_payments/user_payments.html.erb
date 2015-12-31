@@ -15,9 +15,9 @@
                               <div class="col-sm-4 col-lg-2 col-xs-6">
                                   <div class="panel">
                                       
-                                          <div class="bg-grey demo-color">
-                                              <span class="box-background"><i class="icon-store"></i></span>
-                                              <span class="box-count"><%= format_price(@current_user.agent_info[:total]) %></span>
+                                          <div class="bg-brown demo-color small_box">
+                                              <span class="box-background"><i class="icon-coins"></i></span>
+                                              <span class="box-count"><%= format_price(@current_user.deal_income) %></span>
                                               <span class="box-title">Tổng cộng</span>
                                           </div>
                                       
@@ -30,8 +30,8 @@
                               <div class="col-sm-4 col-lg-2 col-xs-6">
                                   <div class="panel">
                                       <a  href="<%= corp_deals_deals_path %>" title="Xem danh sách cộng tác viên">
-                                          <div class="bg-grey demo-color">
-                                              <span class="box-background"><i class="icon-price-tags"></i></span>
+                                          <div class="bg-brown demo-color small_box">
+                                              <span class="box-background"><i class="icon-coins"></i></span>
                                               <span class="box-count"><%= format_price(@current_user.paid_amount) %></span>
                                               <span class="box-title">Đã thanh toán</span>
                                           </div>
@@ -45,8 +45,8 @@
                               <div class="col-sm-4 col-lg-2 col-xs-6">
                                   <div class="panel">
                                       <a  href="<%= agent_page_deals_path %>" title="Xem danh sách khách hàng">
-                                        <div class="bg-grey demo-color">
-                                            <span class="box-background"><i class="icon-exit"></i></span>
+                                        <div class="bg-brown demo-color small_box">
+                                            <span class="box-background"><i class="icon-coins"></i></span>
                                             <span class="box-count"><%= format_price(@current_user.remain_amount) %></span>
                                             <span class="box-title">Chưa thanh toán</span>
                                         </div>

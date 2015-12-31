@@ -6,7 +6,7 @@ class PbSaleorder < ActiveRecord::Base
   belongs_to :seller, class_name: "PbMember", foreign_key: "seller_id"
   
   def self.datatable(params, user)
-    @records = user.pb_sell_saleorders
+    @records = user.pb_sell_saleorders.joins(:pb_saleorderitems).where("pb_saleorderitems.id IS NOT NULL")
     
     # FILTERS
     filters = {}
@@ -45,7 +45,7 @@ class PbSaleorder < ActiveRecord::Base
   end
   
   def self.buy_orders(params, user)
-    @records = user.pb_saleorders
+    @records = user.pb_saleorders.joins(:pb_saleorderitems).where("pb_saleorderitems.id IS NOT NULL")
     
     # FILTERS
     filters = {}

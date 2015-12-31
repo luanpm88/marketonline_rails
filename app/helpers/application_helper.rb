@@ -78,6 +78,24 @@ module ApplicationHelper
         title = 'Chỉnh sửa DEAL: '+deal.pb_product.name
         
       end
+      if ["item_list"].include?(params[:action])
+        breadcrumb += '<li><a href="'+deals_path+'">Danh sách DEAL</a></li>'
+        breadcrumb += '<li class="active">Lịch sử bán hàng</li>'
+        title = 'Lịch sử bán hàng'
+        
+      end
+      if ["agent_list"].include?(params[:action])
+        breadcrumb += '<li><a href="'+deals_path+'">Danh sách DEAL</a></li>'
+        breadcrumb += '<li class="active">Cộng tác viên</li>'
+        title = 'Cộng tác viên DEAL'
+        
+      end
+      if ["customer_list"].include?(params[:action])
+        breadcrumb += '<li><a href="'+deals_path+'">Danh sách DEAL</a></li>'
+        breadcrumb += '<li class="active">Khách hàng</li>'
+        title = 'Danh sách khách hàng mua DEAL'
+        
+      end
     elsif ["pb_saleorders"].include?(params[:controller])
       if ["index"].include?(params[:action])
         breadcrumb += '<li class="active">Đơn đặt hàng từ khách</li>'

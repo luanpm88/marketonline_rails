@@ -14,7 +14,7 @@ class AgentPayment < ActiveRecord::Base
     end
     
     #@deal = Deal.find(filters["deal_id"])
-    @records = AgentPayment.all
+    @records = AgentPayment.all.where(pb_member_id: user.id)
     
     ## Keyword search
     #q = params["search"]["value"].strip.downcase

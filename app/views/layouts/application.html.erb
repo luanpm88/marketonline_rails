@@ -101,10 +101,10 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown dropdown-user">
 					<a class="dropdown-toggle" data-toggle="dropdown">
-						<% !if @current_user.shop_url.nil? %>
-							<a target="_blank" href="http://marketonline.vn<%= @current_user.shop_url %>">
+						<% if !@current_user.shop_url.nil? %>
+							
 								<img src="<%= @current_user.image %>" alt="">
-							</a>
+							
 						<% else %>
 							<img src="<%= @current_user.image %>" alt="">
 						<% end %>
@@ -148,7 +148,7 @@
 										<img src="<%= @current_user.image %>" class="img-circle img-sm" alt="">
 									</a>
 								<% else %>
-									<img src="<%= @current_user.image %>" class="img-circle img-sm" alt="">
+									<a href="#" class="media-left"><img src="<%= @current_user.image %>" class="img-circle img-sm" alt=""></a>
 								<% end %>
 								<div class="media-body">
 									<% if @current_user.pb_company.present? %>
@@ -196,7 +196,7 @@
 										<!--<li><a href="#">Thống kê</a></li>-->
 									</ul>
 								</li>
-								<% if ["admin"].include? @current_user.role %>
+								
 									<li>
 										<a href="#"><i class="icon-credit-card2"></i> <span>Quản lý đơn hàng</span></a>
 										<ul>
@@ -226,7 +226,7 @@
 											<li <%= 'class=active' if ["agent_payments"].include?(params[:controller]) && ["user_payments"].include?(params[:action]) %>><a href="<%= user_payments_agent_payments_path %>">Tài khoản & Thu nhập</a></li>
 										</ul>
 									</li>
-								<% end %>
+
 								<% if ["admin"].include? @current_user.role %>
 									<li <%= 'class=active' if ["pb_areatypeinfos"].include?(params[:controller]) %>>
 										<a href="#"><i class="icon-cog5"></i> <span>Quản lý</span></a>

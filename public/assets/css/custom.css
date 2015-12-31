@@ -305,10 +305,10 @@ legend {
     bottom: inherit;
     display: block;
     float: left;
-    font-size: 34px;
+    font-size: 22px;
     height: auto;
     left: 5px;
-    top: 5px;
+    top: 17px;
     width: auto;
 }
 .demo-color .box-title {
@@ -321,7 +321,7 @@ legend {
     left: 5px;
     line-height: 20px;
     text-align: left;
-    top: 64px;
+    top: 58px;
     width: auto;
 }
 .demo-color .box-background {
@@ -376,4 +376,19 @@ legend {
 }
 .sidebar-content {
     padding-bottom: 100px;
+}
+.demo-color.small_box {
+    height: 80px;
+}
+.demo-color.small_box .box-count {
+    top: 28px;
+}
+.demo-color.small_box .box-title {
+    top: 7px;
+}
+.demo-color.small_box .box-background {
+    top: 30px;
+}
+.demo-color.small_box .box-background i {
+    font-size: 40px;
 }

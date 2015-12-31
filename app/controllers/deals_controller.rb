@@ -1,10 +1,12 @@
 class DealsController < ApplicationController
   # load_and_authorize_resource
-  before_action :set_deal, only: [:approve, :delete, :show, :edit, :update, :destroy]
+  before_action :set_deal, only: [:on, :off, :approve, :delete, :show, :edit, :update, :destroy]
 
   # GET /deals
   # GET /deals.json
   def index
+    authorize! :read, Deal
+    
     respond_to do |format|
       format.html
       format.json { render json: Deal.select2_options(params, @current_user) }
@@ -14,20 +16,26 @@ class DealsController < ApplicationController
   # GET /deals/1
   # GET /deals/1.json
   def show
+    authorize! :read, @deal
   end
 
   # GET /deals/new
   def new
+    authorize! :create, Deal
+    
     @deal = Deal.new
   end
 
   # GET /deals/1/edit
   def edit
+    authorize! :update, @deal
   end
 
   # POST /deals
   # POST /deals.json
   def create
+    authorize! :create, Deal
+    
     @deal = Deal.new(deal_params)
     @deal.pb_member_id = @current_user.id
     respond_to do |format|
@@ -44,6 +52,8 @@ class DealsController < ApplicationController
   # PATCH/PUT /deals/1
   # PATCH/PUT /deals/1.json
   def update
+    authorize! :create, @deal
+    
     respond_to do |format|
       if @deal.update(deal_params)
         format.html { redirect_to deals_path, notice: 'DEAL đã được sửa thành công!' }
@@ -58,6 +68,8 @@ class DealsController < ApplicationController
   # DELETE /deals/1
   # DELETE /deals/1.json
   def destroy
+    authorize! :destroy, @deal
+    
     @deal.destroy
     respond_to do |format|
       format.html { redirect_to deals_url, notice: 'Deal was successfully destroyed.' }
@@ -66,12 +78,16 @@ class DealsController < ApplicationController
   end
 
   def datatable
+    authorize! :read, Deal
+    
     result = Deal.datatable(params, @current_user)
     
     render json: result[:result]
   end
   
   def corp_deals
+    authorize! :corp_deals, Deal
+    
     respond_to do |format|
       format.html
       format.json { render json: Deal.corp_deals(params, @current_user)[:result] }
@@ -79,6 +95,8 @@ class DealsController < ApplicationController
   end
   
   def corp_members
+    authorize! :corp_members, Deal
+    
     respond_to do |format|
       format.html
       format.json { render json: Deal.corp_members(params, @current_user)[:result] }
@@ -86,13 +104,26 @@ class DealsController < ApplicationController
   end
   
   def corp_customers
+    authorize! :corp_customers, Deal
+
     respond_to do |format|
       format.html
       format.json { render json: Deal.corp_customers(params, @current_user)[:result] }
     end
   end
   
+  def corp_non_member_customers
+    authorize! :corp_non_member_customers, Deal
+
+    respond_to do |format|
+      format.html
+      format.json { render json: Deal.corp_non_member_customers(params, @current_user)[:result] }
+    end
+  end
+
   def agent_list
+    authorize! :agent_list, Deal
+    
     respond_to do |format|
       format.html
       format.json {
@@ -103,6 +134,8 @@ class DealsController < ApplicationController
   end
   
   def admin_agent_list
+    authorize! :admin_agent_list, Deal
+    
     respond_to do |format|
       format.html
       format.json {
@@ -113,6 +146,8 @@ class DealsController < ApplicationController
   end
   
   def admin_deal_list
+    authorize! :admin_deal_list, Deal
+    
     respond_to do |format|
       format.html
       format.json {
@@ -123,6 +158,8 @@ class DealsController < ApplicationController
   end
   
   def customer_list
+    authorize! :customer_list, Deal
+    
     respond_to do |format|
       format.html
       format.json {
@@ -133,6 +170,8 @@ class DealsController < ApplicationController
   end
 
   def delete
+    authorize! :destroy, Deal
+    
     @message = "DEAL sản phẩm <strong>#{@deal.pb_product.name}</strong> đã được xóa."
     @deal.destroy
     respond_to do |format|      
@@ -142,8 +181,32 @@ class DealsController < ApplicationController
   end
   
   def approve
+    authorize! :approve, Deal
+    
     @message = "DEAL sản phẩm <strong>#{@deal.pb_product.name}</strong> đã được duyệt."
-    #@deal.destroy
+    @deal.update_attribute(:approved, 1)
+    respond_to do |format|      
+      format.html { render "/home/ajax_success", layout: nil }
+      format.json { head :no_content }
+    end
+  end
+  
+  def on
+    authorize! :on, Deal
+    
+    @message = "DEAL sản phẩm <strong>#{@deal.pb_product.name}</strong> đã được bật."
+    @deal.update_attribute(:status, 1)
+    respond_to do |format|      
+      format.html { render "/home/ajax_success", layout: nil }
+      format.json { head :no_content }
+    end
+  end
+  
+  def off
+    authorize! :off, Deal
+    
+    @message = "DEAL sản phẩm <strong>#{@deal.pb_product.name}</strong> đã được tắt."
+    @deal.update_attribute(:status, 0)
     respond_to do |format|      
       format.html { render "/home/ajax_success", layout: nil }
       format.json { head :no_content }
@@ -151,12 +214,16 @@ class DealsController < ApplicationController
   end
 
   def show_product_details
+    authorize! :show_product_details, Deal
+    
     @product = PbProduct.find(params[:product_id])
     
     render layout: nil
   end
   
   def agent_page
+    authorize! :agent_page, Deal
+    
     respond_to do |format|
       format.html
       format.json { render json: PbSaleorderitem.agent_corp_list(params, @current_user)[:result] }

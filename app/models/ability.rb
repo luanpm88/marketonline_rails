@@ -41,7 +41,49 @@ class Ability
         end
         can :chart, Ad do |c|
           c.pb_member_id = user.id
-        end      
+        end
+        
+        can :read, PbSaleorder
+        can :datatable, PbSaleorder
+        can :buy_orders, PbSaleorder
+        can :cancel, PbSaleorder do |i|
+          i.seller_id == user.id
+        end
+        can :finish, PbSaleorder do |i|
+          i.seller_id == user.id
+        end
+        
+        can :read, Deal do |d|
+          d.pb_member_id == user.id
+        end
+        can :create, Deal
+        can :update, Deal do |d|
+          d.pb_member_id == user.id
+        end
+        can :destroy, Deal do |d|
+          d.pb_member_id == user.id
+        end
+        can :corp_deals, Deal
+        can :corp_members, Deal
+        can :corp_customers, Deal
+        can :corp_non_member_customers, Deal
+        can :agent_list, Deal
+        can :customer_list, Deal
+        can :show_product_details, Deal
+        can :agent_page, Deal
+        can :on, Deal do |d|
+          d.pb_member_id == user.id
+        end
+        can :off, Deal do |d|
+          d.pb_member_id == user.id
+        end
+        
+        can :read, PbSaleorderitem
+        can :datatable, PbSaleorderitem
+        
+        can :deal_customers, PbMember
+        can :deal_agents, PbMember
+        can :select2_options, PbMember
       end
       
       if user.role == "admin"

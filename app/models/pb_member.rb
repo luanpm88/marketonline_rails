@@ -6,7 +6,7 @@ class PbMember < ActiveRecord::Base
   has_many :pb_products, foreign_key: "member_id"
   has_many :pb_saleorders, foreign_key: "buyer_id"
   has_many :pb_saleorderitems, :through => :pb_saleorders
-  has_many :customers, -> { uniq }, :through => :pb_saleorders, :source => :buyer, foreign_key: "buyer_id", primary_key: "id"
+  has_many :customers, -> { uniq }, :through => :pb_sell_saleorders, :source => :buyer
   
   has_many :pb_sell_saleorders, foreign_key: "seller_id", class_name: "PbSaleorder"
   has_many :pb_sell_saleorderitems, :through => :pb_sell_saleorders, :source => :pb_saleorderitems, class_name: "PbSaleorderitem"
@@ -22,11 +22,12 @@ class PbMember < ActiveRecord::Base
   
   has_many :corp_members, -> { uniq }, :through => :corp_saleorders, :source => :seller
   
-  has_many :corp_customers, -> { uniq }, :through => :corp_saleorders, :source => :seller
+  has_many :corp_customers, -> { uniq }, :through => :corp_saleorders, :source => :buyer
   
   has_many :agent_payments
   
   def display_name
+    return username if !pb_memberfield.first_name.present? and !pb_memberfield.last_name.present?
     pb_memberfield.first_name+" "+pb_memberfield.last_name
   end
   
@@ -39,7 +40,11 @@ class PbMember < ActiveRecord::Base
   end
   
   def deal_income(filter={})
-    deal_items(filter).sum("deal_price*quantity")
+    total = 0.0
+    deal_items(filter).each do |item|
+      total += item.agent_income
+    end
+    return total
   end
   
   def deal_items(filter={})
@@ -61,7 +66,7 @@ class PbMember < ActiveRecord::Base
   end
   
   def deal_customers_count
-    corp_customers.uniq.count
+    corp_customers.uniq.count + corp_saleorderitems.includes(:pb_saleorder).where(pb_saleorders: {buyer_id: 0}).count
   end
   
   def self.deal_customers(params, user)
@@ -264,7 +269,9 @@ class PbMember < ActiveRecord::Base
   
   
   def saleorders_alert_count
-    pb_sell_saleorders.where(finished: 0).count
+    result = pb_sell_saleorders.where(finished: 0).count
+    
+    return (result == 0 ? "" : result)
   end
   
   def display_address
@@ -294,7 +301,7 @@ class PbMember < ActiveRecord::Base
   end
   
   def remain_amount
-    agent_info[:total] - paid_amount
+    deal_income - paid_amount
   end
   
 end

@@ -29,14 +29,14 @@ class Deal < ActiveRecord::Base
     @records.each do |item|
       row = [
               "<div class=\"\"><img src=\"#{item.pb_product.default_image}\" width=\"100\" /></div>",
-              "<div class=\"\">#{item.show_link(item.pb_product.name)}<br/>#{item.description}</div>",
+              "<div class=\"\"><a href=\"#{item.pb_product.url}\" target=\"_blank\">#{item.pb_product.name}</a><br/>#{item.description}</div>",
               "<div class=\"\">#{item.display_price}</div>",
               "<div class=\"\">#{item.pb_product.price_unit}</div>",
               "<div class=\"\">#{ApplicationController.helpers.format_price(item.remain_items_count.to_s)}</div>",
               "<div class=\"\">#{ApplicationController.helpers.format_price(item.sold_items_count.to_s)}/#{ApplicationController.helpers.format_price(item.quantity.to_s)}</div>",
               "<div class=\"text-nowrap\">#{item.display_time}</div>",
               "<div class=\"\">#{item.display_statuses}</div>",
-              "<div class=\"text-left text-nowrap\">#{item.show_link}<br />#{item.edit_link}<br />#{item.destroy_link}</div>"
+              "<div class=\"text-left text-nowrap\">#{item.show_link}<br />#{item.on_link}#{item.off_link}<br />#{item.edit_link}<br />#{item.destroy_link}</div>"
             ]
       data << row      
     end
@@ -52,7 +52,7 @@ class Deal < ActiveRecord::Base
   end
   
   def self.admin_deal_list(params, user)    
-    @records = self.all
+    @records = self.all.order("pb_deals.created_at DESC")
     
     total = @records.count
     @records = @records.limit(params[:length]).offset(params["start"])
@@ -85,10 +85,17 @@ class Deal < ActiveRecord::Base
   
   def display_statuses
     str = []
-    if approved == 1
-      str << "<span class=\"text-nowrap text-success\">Đã duyệt</span>"
+    
+    if status == "1"
+      str << "<span class=\"text-nowrap text-success\">Đang chạy</span>"
     else
-      str << "<span class=\"text-nowrap text-success\">Chưa được duyệt</span>"
+      str << "<span class=\"text-nowrap text-warning\">Đã tắt</span>"
+    end
+    
+    if approved == 1
+      str << "<span class=\"text-nowrap text-success\">Đã được duyệt</span>"
+    else
+      str << "<span class=\"text-nowrap text-warning\">Chưa được duyệt</span>"
     end
     
     return str.join("<br/>")
@@ -188,7 +195,7 @@ class Deal < ActiveRecord::Base
     end
     
     #@deal = Deal.find(filters["deal_id"])
-    @records = user.customers
+    @records = user.customers.joins(:pb_saleorders => :pb_saleorderitems).where("pb_saleorderitems.deal_id IS NOT NULL")
     
     ## Keyword search
     #q = params["search"]["value"].strip.downcase
@@ -263,6 +270,24 @@ class Deal < ActiveRecord::Base
   
   def remain_items_count
     quantity - sold_items_count
+  end
+  
+  def on_link
+    return "" if status == "1"
+    
+    ActionView::Base.send(:include, Rails.application.routes.url_helpers)
+    link_helper = ActionController::Base.helpers
+    
+    link_helper.link_to("<i class=\"icon-checkmark4\"></i> Bật deal".html_safe, {controller: "deals", action: "on", id: self.id}, class: "ajax_link")
+  end
+  
+  def off_link
+    return "" if status != "1"
+    
+    ActionView::Base.send(:include, Rails.application.routes.url_helpers)
+    link_helper = ActionController::Base.helpers
+    
+    link_helper.link_to("<i class=\"icon-close2\"></i> Tắt deal".html_safe, {controller: "deals", action: "off", id: self.id}, class: "ajax_link")
   end
   
   def approve_link
@@ -379,7 +404,7 @@ class Deal < ActiveRecord::Base
   end
   
   def self.corp_customers(params, user)    
-    @records = user.corp_customers
+    @records = user.corp_customers.includes(:pb_saleorderitems).where("pb_saleorderitems.agent_username IS NOT NULL")
     
     total = @records.count
     @records = @records.limit(params[:length]).offset(params["start"])
@@ -394,6 +419,35 @@ class Deal < ActiveRecord::Base
               "<div class=\"\">#{ApplicationController.helpers.format_price(user.deal_items({buyer_id: item.id}).sum(:quantity).to_s)}</div>",
               "<div class=\"\">#{ApplicationController.helpers.format_price(user.deal_income({buyer_id: item.id}))}</div>",
               "<div class=\"text-left text-nowrap\">#{user.corp_items_link(nil,item.id,nil)}</div>"
+            ]
+      data << row      
+    end
+
+    result = {
+              "drawn" => params[:drawn],
+              "recordsTotal" => total,
+              "recordsFiltered" => total
+    }
+    result["data"] = data
+    
+    return {result: result}
+  end
+  
+  def self.corp_non_member_customers(params, user)    
+    @records = user.corp_saleorderitems.includes(:pb_saleorder).where(pb_saleorders: {buyer_id: 0})
+    
+    total = @records.count
+    @records = @records.limit(params[:length]).offset(params["start"])
+    data = []
+    
+    @records.each do |item|
+      row = [
+              "#{item.pb_saleorder.fullname}",
+              item.pb_saleorder.address,
+              item.pb_saleorder.mobile,
+              item.pb_saleorder.email,
+              "<div class=\"\">#{item.diplay_total}</div>",
+              "<div class=\"\">#{ApplicationController.helpers.format_price(item.agent_income)}</div>",
             ]
       data << row      
     end
