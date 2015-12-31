@@ -142,7 +142,7 @@ class PbSaleorder < ActiveRecord::Base
   end
   
   def display_products
-    names = pb_saleorderitems.uniq.map {|p| "<div title=\"#{p.pb_product_name}\" class=\"sale_product_name\"><a target=\"_blank\" href=\"#{p.pb_product.url}\">#{p.pb_product_name}</a><div>"}
+    names = pb_saleorderitems.uniq.map {|p| "<div title=\"#{p.pb_product_name}\" class=\"sale_product_name\"><a target=\"_blank\" href=\"#{p.pb_product_url}\">#{p.pb_product_name}</a><div>"}
     
     return names.join("<br>")
   end

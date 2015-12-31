@@ -138,6 +138,10 @@ class PbSaleorderitem < ActiveRecord::Base
     return pb_product.nil? ? "" : pb_product.name
   end
   
+  def pb_product_url
+    return pb_product.nil? ? "" : pb_product.url
+  end
+  
   def total
     total = price.to_f*quantity.to_f    
   end
