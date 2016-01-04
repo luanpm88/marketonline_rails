@@ -2,7 +2,6 @@
   <% if @agent_payment.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@agent_payment.errors.count, "error") %> prohibited this agent_payment from being saved:</h2>
-
       <ul>
       <% @agent_payment.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -11,19 +10,82 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :pb_member_id %><br>
-    <%= f.number_field :pb_member_id %>
+  <div class="field">    
+    <%= f.hidden_field :pb_member_id %>
+    Cộng tác viên: <strong><%= @agent_payment.pb_member.display_name %></strong>
+    <br />
+    Số tiền cần thanh toán: <strong><%= format_price(@agent_payment.pb_member.remain_amount) %></strong>
+    <br />
+    Số quà còn lại chưa nhận:<br />
+    <div style="padding-left: 50px">
+      <%= @agent_payment.pb_member.display_agent_gifts %>
+    </div>
   </div>
+  <br />
   <div class="field">
-    <%= f.label :amount %><br>
+    Hình thức thanh toán<br>
+    <select name="agent_payment[payment_type]" class="form-control">
+      <option value="discount" <%= "selected=selected" if @agent_payment.payment_type == 'discount' %>>Tiền</option>
+      <option value="gift" <%= "selected=selected" if @agent_payment.payment_type == 'gift' %>>Quà</option>
+    </select>
+  </div>
+  <br />
+  <div class="field deal_select">
+    Chọn DEAL (nếu là quà)<br>
+    <select class="form-control required" name="agent_payment[deal_id]">
+      <option value="">chọn deal</option>
+      <% @current_user.agent_gifts_deals.each do |item| %>
+        <option value="<%= item.id %>" <%= "selected=selected" if item.id == @agent_payment.deal_id %>><%= item.pb_product.name %> (Còn lại: <%= @agent_payment.pb_member.remain_gift(item.id) %>)</option>
+      <% end %>
+    </select>
+    
+  </div>
+  <br />
+  <div class="field">
+    Số lượng (VND | quà)<br>
     <%= f.text_field :amount, class: "form-control number_input" %>
   </div>
+  <br />
   <div class="field">
-    <%= f.label :note %><br>
+    Nội dung thanh toán<br>
     <%= f.text_area :note, class: "form-control" %>
   </div>
+  <br />
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit(value: "Thanh toán", class: "btn btn-primary") %>
   </div>
 <% end %>
+<script>
+  function updatePaymentType() {
+    var val = $("select[name='agent_payment[payment_type]']").val();
+    if (val == 'discount') {
+        $('.deal_select').hide()
+    } else {
+        $('.deal_select').show()
+    }
+  }
+  var validator = $(".new_agent_payment").validate({
+        lang: 'vi',
+        ignore: ':hidden', // ignore hidden fields
+        errorClass: 'validation-error-label',
+        successClass: 'validation-valid-label',
+        highlight: function(element, errorClass) {  
+            $(element).removeClass(errorClass);
+        },
+        unhighlight: function(element, errorClass) {
+            $(element).removeClass(errorClass);
+        },
+        validClass: "validation-valid-label",
+        success: function(label) {
+            label.addClass("validation-valid-label").text("Hoàn tất.")
+        },
+        messages: {
+            "deal[pb_product_id]": "Hãy chọn sản phẩm.",
+        }
+    });
+  
+    updatePaymentType()
+    $("select[name='agent_payment[payment_type]']").change(function() {
+      updatePaymentType()  
+    })
+</script>

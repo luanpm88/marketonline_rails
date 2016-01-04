@@ -126,8 +126,8 @@ class Deal < ActiveRecord::Base
               item.display_name,
               item.agent_sales_items_count,
               ApplicationController.helpers.format_price(item.agent_info({seller_id: user.id})[:total]),
-              ApplicationController.helpers.format_price(item.agent_info({seller_id: user.id})[:deal_total]), 
-              "Chưa thanh toán: <br>0/#{ApplicationController.helpers.format_price(item.agent_income({seller_id: user.id}))}",
+              ApplicationController.helpers.format_price(item.agent_info({seller_id: user.id})[:deal_total]),
+              ApplicationController.helpers.format_price(item.agent_gifts_count({seller_id: user.id})),
               "<div class=\"text-left text-nowrap\">#{item.agent_history_link}</div>"
             ]
       data << row      
@@ -168,9 +168,10 @@ class Deal < ActiveRecord::Base
               item.display_name,
               item.agent_sales_items_count,
               ApplicationController.helpers.format_price(item.agent_info[:total]),
-              ApplicationController.helpers.format_price(item.agent_info[:deal_total]),
+              ApplicationController.helpers.format_price(item.deal_income),
               ApplicationController.helpers.format_price(item.paid_amount),
-              ApplicationController.helpers.format_price(item.remain_amount), 
+              ApplicationController.helpers.format_price(item.remain_amount),
+              "#{ApplicationController.helpers.format_price(item.remain_gift.to_i)}/#{ApplicationController.helpers.format_price(item.agent_gifts_count)}",
               "Chưa thanh toán",
               "<div class=\"text-left text-nowrap\">#{item.pay_agent_link}</div>"
             ]
@@ -244,8 +245,15 @@ class Deal < ActiveRecord::Base
     str = ["<div class=\"text-nowrap deal_label_col\">"]
     str << "<label>Giá deal/Giá gốc: </label>"
     str << "<div><span class=\"text-bold\">"+ApplicationController.helpers.format_price(price)+"</span>/<span class=\"text-bold\">"+ApplicationController.helpers.format_price(pb_product.price)+"</span></div>"
-    str << "<label>Giá cho cộng tác viên: </label>"
-    str << "<div><span class=\"text-bold\">"+ApplicationController.helpers.format_price(agent_amount)+"</span> (giảm #{agent_price}%)</div>"
+    if deal_type == 'discount'
+      str << "<label>Giá cho cộng tác viên: </label>"
+      str << "<div><span class=\"text-bold\">"+ApplicationController.helpers.format_price(agent_amount)+"</span> (giảm #{agent_price}%)</div>"
+    else
+      str << "<label>Điều kiện nhận quà: </label>"
+      str << "<div>Bán <span class=\"text-bold\">"+ApplicationController.helpers.format_price(free_count)+"</span> tặng <span class=\"text-bold\">1</span></div>"
+    end
+    
+      
     str << "<label>Giá người được giới thiệu: </label>"
     str << "<div><span class=\"text-bold\">"+ApplicationController.helpers.format_price(share_amout)+"</span> (giảm #{share_price}%)</div>"
     str << "</div>"
@@ -359,6 +367,7 @@ class Deal < ActiveRecord::Base
               "<div class=\"text-nowrap\">#{item.display_time}</div>",
               "<div class=\"\">#{ApplicationController.helpers.format_price(user.deal_items({deal_id: item.id}).sum(:quantity).to_s)}</div>",
               "<div class=\"\">#{ApplicationController.helpers.format_price(user.deal_income({deal_id: item.id}))}</div>",
+              "<div class=\"\">#{ApplicationController.helpers.format_price(user.deal_gift_count({deal_id: item.id}))}</div>",
               "<div class=\"text-left text-nowrap\">#{user.corp_items_link(item.id)}</div>"
             ]
       data << row      
@@ -390,6 +399,7 @@ class Deal < ActiveRecord::Base
               item.pb_company.email,
               "<div class=\"\">#{ApplicationController.helpers.format_price(user.deal_items({seller_id: item.id}).sum(:quantity).to_s)}</div>",
               "<div class=\"\">#{ApplicationController.helpers.format_price(user.deal_income({seller_id: item.id}))}</div>",
+              "<div class=\"\">#{ApplicationController.helpers.format_price(user.deal_gift_count({seller_id: item.id}))}</div>",
               "<div class=\"text-left text-nowrap\">#{user.corp_items_link(nil,nil,item.id)}</div>"
             ]
       data << row      
@@ -420,6 +430,7 @@ class Deal < ActiveRecord::Base
               item.email,
               "<div class=\"\">#{ApplicationController.helpers.format_price(user.deal_items({buyer_id: item.id}).sum(:quantity).to_s)}</div>",
               "<div class=\"\">#{ApplicationController.helpers.format_price(user.deal_income({buyer_id: item.id}))}</div>",
+              "<div class=\"\">#{ApplicationController.helpers.format_price(user.deal_gift_count({buyer_id: item.id}))}</div>",
               "<div class=\"text-left text-nowrap\">#{user.corp_items_link(nil,item.id,nil)}</div>"
             ]
       data << row      
@@ -450,6 +461,7 @@ class Deal < ActiveRecord::Base
               item.pb_saleorder.email,
               "<div class=\"\">#{item.diplay_total}</div>",
               "<div class=\"\">#{ApplicationController.helpers.format_price(item.agent_income)}</div>",
+              "<div class=\"\">#{ApplicationController.helpers.format_price(item.agent_gift_count.to_i)}</div>",
             ]
       data << row      
     end

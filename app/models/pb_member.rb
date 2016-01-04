@@ -47,6 +47,21 @@ class PbMember < ActiveRecord::Base
     return total
   end
   
+  def deal_gift_count(filter={})    
+    deals = {}
+    deal_items(filter).each do |item|
+      deals[item.deal.id] = 0.0 if deals[item.deal.id].nil?
+      deals[item.deal.id] += item.agent_gift_count
+    end
+    
+    total = 0.0
+    deals.each do |row|
+      total += row[1].to_i
+    end
+    
+    return total.to_i
+  end
+  
   def deal_items(filter={})
     result = corp_saleorderitems
     if filter[:deal_id].present?
@@ -134,8 +149,8 @@ class PbMember < ActiveRecord::Base
               item.display_name,
               item.agent_sales_items_count_by_deal(@deal),
               ApplicationController.helpers.format_price(item.agent_info({deal_id: @deal})[:total]),              
-              ApplicationController.helpers.format_price(item.agent_income({deal_id: @deal})), 
-              "Chưa thanh toán: <br>0/#{ApplicationController.helpers.format_price(item.agent_income({deal_id: @deal}))}",
+              ApplicationController.helpers.format_price(item.agent_info({deal_id: @deal})[:deal_total]),
+              ApplicationController.helpers.format_price(item.agent_gifts_count({deal_id: @deal})),
               "<div class=\"text-left text-nowrap\">#{item.agent_history_link}</div>"
             ]
       data << row      
@@ -149,6 +164,30 @@ class PbMember < ActiveRecord::Base
     result["data"] = data
     
     return {result: result}
+  end
+  
+  def agent_gifts_count(filters={})
+    count = 0.0
+    agent_gifts(filters).each do |item|
+      count += item[:gift_count]
+    end
+    return count
+  end
+  
+  def agent_gifts_deals(filters={})
+    arr = []
+    agent_gifts(filters).each do |item|
+      arr << item[:deal]
+    end
+    return arr
+  end
+  
+  def display_agent_gifts(filters={})
+    arr = []
+    agent_gifts(filters).each do |item|
+      arr << "<span class='text-nowrap'>#{item[:deal].pb_product.name}: <strong>#{remain_gift(item[:deal].id)}</strong></span>"
+    end
+    return arr.join("<br />").html_safe
   end
   
   def all_pb_products
@@ -226,6 +265,11 @@ class PbMember < ActiveRecord::Base
     agent_orderitems.where(deal_id: deal.id).sum(:quantity)
   end
   
+  def gift_count_by_deal(deal)
+    return "" if deal.deal_type != 'gift'
+    (agent_sales_items_count_by_deal(deal)/deal.free_count).to_i
+  end
+  
   def agent_info(filters = {})
     orderitems = agent_orderitems
     
@@ -233,18 +277,31 @@ class PbMember < ActiveRecord::Base
       orderitems = orderitems.includes(:pb_saleorder).where(pb_saleorders: {seller_id: filters[:seller_id]})
     end
     if filters[:deal_id].present?
+      @deal = Deal.find(filters[:deal_id])
       orderitems = orderitems.where(deal_id: filters[:deal_id])
     end    
     
     # statistic
-    result = {total: 0.0, deal_total: 0.0}
+    result = {total: 0.0, deal_total: 0.0, gifts: {}}
     orderitems.each do |item|
       result[:total] += item.total
-      result[:deal_total] += item.deal_total
-    end
+      result[:deal_total] += item.deal_total if item.deal.present? and item.deal.deal_type == "discount"
+      if item.deal.present? and item.deal.deal_type == "gift"
+        result[:gifts][item.deal.id] = {total: 0.0, free_count: item.deal.free_count}      
+        result[:gifts][item.deal.id][:total] += item.quantity
+      end
+    end    
     
     return result
-  end 
+  end
+  
+  def agent_gifts(filters={})
+    arr = []
+    agent_info(filters)[:gifts].each do |row|
+      arr << {deal: Deal.find(row[0]), total: row[1][:total], free_count: row[1][:free_count], gift_count: (row[1][:total]/row[1][:free_count]).to_i}
+    end
+    return arr
+  end
   
   def agent_income(filters = {})
     agent_info(filters)[:total]
@@ -297,11 +354,23 @@ class PbMember < ActiveRecord::Base
   end
   
   def paid_amount
-    agent_payments.sum(:amount)
+    agent_payments.where(payment_type: 'discount').sum(:amount)
   end
   
   def remain_amount
     deal_income - paid_amount
+  end
+  
+  def paid_gift(deal_id=nil)
+    result = agent_payments.where(payment_type: 'gift')
+    if deal_id.present?
+      result = result.where(deal_id: deal_id)
+    end    
+    return result.sum(:amount)
+  end
+  
+  def remain_gift(deal_id=nil)
+    deal_gift_count({deal_id: nil}) - paid_gift(deal_id)
   end
   
 end

@@ -26,8 +26,9 @@ class AgentPayment < ActiveRecord::Base
     
     @records.uniq.each do |item|
       row = [
-              item.created_at.strftime("%d-%m-%Y, %H:%I %p"),
-              item.note,
+              "<span class=\"text-nowrap\">#{item.created_at.strftime("%d-%m-%Y, %H:%I %p")}</span>",
+              item.display_payment_type,
+              item.note,              
               ApplicationController.helpers.format_price(item.amount)
             ]
       data << row      
@@ -41,6 +42,10 @@ class AgentPayment < ActiveRecord::Base
     result["data"] = data
     
     return {result: result}
+  end
+  
+  def display_payment_type
+    payment_type == 'dicount' ? "Gửi tiền" : "Tặng sản phẩm"
   end
   
 end

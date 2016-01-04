@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151230095248) do
+ActiveRecord::Schema.define(version: 20160104071732) do
 
   create_table "ad_clicks", force: :cascade do |t|
     t.integer  "ad_id",         limit: 4
@@ -79,8 +79,10 @@ ActiveRecord::Schema.define(version: 20151230095248) do
     t.decimal  "amount",                     precision: 10
     t.integer  "user_id",      limit: 4
     t.text     "note",         limit: 65535
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
+    t.datetime "created_at",                                                     null: false
+    t.datetime "updated_at",                                                     null: false
+    t.string   "payment_type", limit: 255,                  default: "discount"
+    t.integer  "deal_id",      limit: 4
   end
 
   create_table "email", force: :cascade do |t|
@@ -614,13 +616,15 @@ ActiveRecord::Schema.define(version: 20151230095248) do
     t.decimal  "price",                       precision: 10
     t.text     "status",        limit: 65535
     t.text     "description",   limit: 65535
-    t.datetime "created_at",                                             null: false
-    t.datetime "updated_at",                                             null: false
+    t.datetime "created_at",                                                      null: false
+    t.datetime "updated_at",                                                      null: false
     t.decimal  "agent_price",                 precision: 10
     t.decimal  "share_price",                 precision: 10
     t.string   "name",          limit: 255
     t.integer  "pb_member_id",  limit: 4
     t.integer  "approved",      limit: 4,                    default: 0
+    t.integer  "free_count",    limit: 4
+    t.string   "deal_type",     limit: 255,                  default: "discount"
   end
 
   add_index "pb_deals", ["end_at"], name: "index_deals_on_end_at", using: :btree

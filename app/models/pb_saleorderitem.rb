@@ -137,7 +137,9 @@ class PbSaleorderitem < ActiveRecord::Base
   def pb_product_name
     return pb_product.nil? ? "<span class=text-grey>Sản phẩm đã bị xóa!</span>".html_safe : pb_product.name
   end
-  
+  def pb_product_default_image
+    return pb_product.nil? ? "" : pb_product.default_image
+  end
   def pb_product_url
     return pb_product.nil? ? "" : pb_product.url
   end
@@ -151,8 +153,16 @@ class PbSaleorderitem < ActiveRecord::Base
   end
   
   def agent_income
+    return 0 if deal.deal_type != 'discount'
     deal_total.to_f*(deal.agent_price.to_f/100.0)
   end
+  
+  def agent_gift_count
+    return 0 if deal.deal_type != 'gift'
+    (quantity.to_f/deal.free_count.to_f)
+  end
+  
+  
   
   def diplay_total
     str = ["#{ApplicationController.helpers.format_price(total)}"]

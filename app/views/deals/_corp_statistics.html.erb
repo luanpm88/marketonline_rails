@@ -70,5 +70,19 @@
 								</div>
 							</div>
 						</div>
+						
+						<div class="col-sm-4 col-lg-2 col-xs-6">
+							<div class="panel">
+								<a  href="<%= user_payments_agent_payments_path %>" title="Quà tặng">
+									<div class="bg-purple demo-color">
+										<span class="box-background"><i class="icon-gift"></i></span>
+										<span class="box-count"><%= format_price(@current_user.agent_gifts_count({})) %></span>
+										<span class="box-title">Quà tặng</span>
+									</div>
+								</a>
+								<div style="height: 3px;">
+								</div>
+							</div>
+						</div>
 					</div>
 					<!-- /palette colors -->

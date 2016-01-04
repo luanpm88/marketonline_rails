@@ -81,6 +81,6 @@ class AgentPaymentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def agent_payment_params
-      params.require(:agent_payment).permit(:pb_member_id, :amount, :user_id, :note)
+      params.require(:agent_payment).permit(:deal_id, :payment_type, :pb_member_id, :amount, :user_id, :note)
     end
 end
