@@ -20,6 +20,7 @@ class Ability
     can :iframe_7_wide_banners, AdPosition
     can :iframe_area_top_3_banner, AdPosition
     can :get_remaining_time, AdPosition
+    can :home, Deal
     
     if user.present?
       if user.present?

@@ -229,6 +229,11 @@ class DealsController < ApplicationController
       format.json { render json: PbSaleorderitem.agent_corp_list(params, @current_user)[:result] }
     end
   end
+  
+  def home
+    
+    render layout: nil
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

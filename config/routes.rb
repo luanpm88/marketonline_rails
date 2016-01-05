@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       get 'approve'
       get 'on'
       get 'off'
+      get 'home'
     end
   end
   resources :ad_clicks do

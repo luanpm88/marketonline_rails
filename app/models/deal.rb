@@ -188,7 +188,9 @@ class Deal < ActiveRecord::Base
     return {result: result}
   end
   
-  
+  def deal_percent
+    ((price.to_f/pb_product.price.to_f)*100).round
+  end
   
   def self.customer_list(params, user)
     # FILTERS
