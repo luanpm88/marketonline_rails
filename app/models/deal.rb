@@ -11,6 +11,10 @@ class Deal < ActiveRecord::Base
   
   belongs_to :pb_member
   
+  def self.all_active
+    self.all
+  end
+  
   def price=(new)
     self[:price] = new.to_s.gsub(/\,/, '')
   end
@@ -189,7 +193,15 @@ class Deal < ActiveRecord::Base
   end
   
   def deal_percent
-    ((price.to_f/pb_product.price.to_f)*100).round
+    ((1 - price.to_f/pb_product.price.to_f)*100).round
+  end
+  
+  def share_percent
+    ((1 - share_amout.to_f/pb_product.price.to_f)*100).round
+  end
+  
+  def agent_percent
+    ((agent_amount.to_f/pb_product.price.to_f)*100).round
   end
   
   def self.customer_list(params, user)
@@ -240,7 +252,7 @@ class Deal < ActiveRecord::Base
   
   
   def agent_amount
-    price*(1.0-agent_price/100.0)
+    price*(agent_price/100.0)
   end
   
   def display_price

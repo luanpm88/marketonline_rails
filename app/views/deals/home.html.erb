@@ -1,8 +1,13 @@
     <h4 class="deal_title">Sản phẩm DEAL hàng ngày</h4>
-    <div class="row deal_list">
-      <% Deal.all.each do |deal| %>
+    <div class="row deal_list">      
+      <% (Deal.all_active+Deal.all_active+Deal.all_active+Deal.all_active+Deal.all_active).each_with_index do |deal,index| %>
+        
+      <% if [0,2,3].include?(index%5) %>
         <div class="deal-col col-xs-12 col-sm-6 col-md-6 col-lg-4">
-          <div class="panel panel-default deal_box">
+      <% end %>
+        
+        
+          <div class="panel <%= 'deal_big' if index%5 == 2 %> panel-default deal_box">
             <div class="panel-body">
               <div class="">
                 <div class="image_box">
@@ -17,14 +22,25 @@
                   <div class="prices">
                     <div class="deal_price"><%= format_price(deal.price) %> VNĐ</div>
                     <div>
-                      <span class="old_price"><%= format_price(deal.pb_product.price) %> VNĐ</span>
-                       | <strong>Giảm <%= deal.deal_percent %>%</strong>
+                        <span class="old_price"><%= format_price(deal.pb_product.price) %> VNĐ</span>
+                        |  <strong>Giảm <%= deal.deal_percent %>%</strong>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </div>          
+
+      <% if [1,2,4].include?(index%5) %>
         </div>
-      <% end %>      
+      <% end %>
+      
+      <% if [4].include?(index%5) %>
+        <br style="clear: both" /><br />
+      <% end %>
+      
+      
+      <% end %>    
+      
+      
     </div>

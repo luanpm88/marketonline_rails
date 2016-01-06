@@ -1,6 +1,6 @@
 class DealsController < ApplicationController
   # load_and_authorize_resource
-  before_action :set_deal, only: [:on, :off, :approve, :delete, :show, :edit, :update, :destroy]
+  before_action :set_deal, only: [:ajax_deal_info, :on, :off, :approve, :delete, :show, :edit, :update, :destroy]
 
   # GET /deals
   # GET /deals.json
@@ -215,9 +215,7 @@ class DealsController < ApplicationController
 
   def show_product_details
     authorize! :show_product_details, Deal
-    
     @product = PbProduct.find(params[:product_id])
-    
     render layout: nil
   end
   
@@ -231,8 +229,28 @@ class DealsController < ApplicationController
   end
   
   def home
-    
     render layout: nil
+  end
+
+  def ajax_deal_info
+    if params[:hash].present?
+      mem = PbMember.where(username: params[:hash].split("_share_")[0]).first
+      str = []
+      str << "Bạn đã được thành viên <strong>#{mem.display_name}</strong> giới thiệu mua sản phẩm với giá ưu đãi: <span class=\"deal_price\">#{ApplicationController.helpers.format_price(@deal.share_amout)} VNĐ</span> (Giá gốc: <span class=\"deal_old_price\">#{ApplicationController.helpers.format_price(@deal.pb_product.price)} VNĐ</span> | <strong>giảm #{@deal.share_percent}%</strong>).<br/>Mua ngay sản phẩm bên dưới để được giá ưu đãi."
+      
+      render text: str.join("")
+    else
+      str = ["<h5>Chương trình khuyến mãi đặc biệt dành cho sản phẩm</h5><ul>"]
+      str << "<li>Mua ngay sản phẩm với giá chỉ: <span class=\"deal_price\">#{ApplicationController.helpers.format_price(@deal.price)} VNĐ</span> (Giá gốc: <span class=\"deal_old_price\">#{ApplicationController.helpers.format_price(@deal.pb_product.price)} VNĐ</span> | <strong>giảm #{@deal.deal_percent}%</strong>)</li>"
+      #str << "<li>Khách hàng được giới thiệu giảm ngay <strong>#{@deal.share_percent}%</strong>, với giá: <span class=\"deal_price\">#{ApplicationController.helpers.format_price(@deal.share_amout)} VNĐ</span></li>"
+      
+      if @deal.deal_type == 'discount'
+        str << "<li>Nếu tham gia chương trình Cộng tác viên, bạn sẽ được nhận <span class=\"icome_price\">#{ApplicationController.helpers.format_price(@deal.agent_amount)} VNĐ</span> (<strong>#{@deal.agent_percent}%</strong>) trên mỗi sản phẩm giới thiệu được mua"
+      elsif @deal.deal_type == 'gift'
+        str << "<li>Nếu tham gia chương trình Cộng tác viên, bạn giới thiệu được <strong>#{@deal.free_count} người mua</strong> (với giá ưu đãi: <span class=\"deal_price\">#{ApplicationController.helpers.format_price(@deal.share_amout)} VNĐ</span>), bạn sẽ được tặng <strong>1 sản phẩm</strong>"
+      end  
+      render text: str.join("")
+    end
   end
 
   private

@@ -21,6 +21,9 @@ class Ability
     can :iframe_area_top_3_banner, AdPosition
     can :get_remaining_time, AdPosition
     can :home, Deal
+    can :ajax_deal_info, Deal
+    
+    can :ajax_content, SystemMessage
     
     if user.present?
       if user.present?

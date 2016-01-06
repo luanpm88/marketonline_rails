@@ -12,6 +12,14 @@ class SystemMessagesController < ApplicationController
   # GET /system_messages/1
   # GET /system_messages/1.json
   def show
+    render text: @system_message.content.html_safe
+  end
+  
+  # GET /system_messages/1
+  # GET /system_messages/1.json
+  def ajax_content
+    @system_message = SystemMessage.find_by_code(params[:code])
+    render text: @system_message.content.html_safe
   end
 
   # GET /system_messages/new

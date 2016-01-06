@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     collection do
       get 'datatable'
       get 'delete'
+      get 'ajax_content'
     end
   end
   resources :deals do
@@ -30,6 +31,7 @@ Rails.application.routes.draw do
       get 'on'
       get 'off'
       get 'home'
+      get 'ajax_deal_info'
     end
   end
   resources :ad_clicks do
