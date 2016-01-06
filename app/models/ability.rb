@@ -46,6 +46,7 @@ class Ability
         can :chart, Ad do |c|
           c.pb_member_id = user.id
         end
+        can :get_nganluong_checkout_return, Ad
         
         can :preview_box, AdPosition
         can :get_values, AdPosition
