@@ -503,7 +503,7 @@ class Deal < ActiveRecord::Base
       is << i.id if i.active_deals.count < 3
     end
     
-    self.where(top_industry_id: is)
+    self.where(status: 1).where(approved: 1).where(top_industry_id: is)
   end
   
 end
