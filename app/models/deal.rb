@@ -500,7 +500,7 @@ class Deal < ActiveRecord::Base
     is = []
     top_industries = PbIndustry.all.where(level: 1).order("display_order")
     top_industries.each do |i|
-      is << i.id if i.active_deals.count < 6
+      is << i.id if i.active_deals.count < 3
     end
     
     self.where(top_industry_id: is)

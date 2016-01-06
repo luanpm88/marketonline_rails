@@ -1,5 +1,5 @@
   <% @industries.each do |i| %>
-    <% if i.active_deals.count > 0 %>
+    <% if i.active_deals.count > 2 %>
       <h4 class="deal_title"><%= i.name %></h4>
       <div class="row deal_list">
         <% i.active_deals.each_with_index do |deal,index| %>
