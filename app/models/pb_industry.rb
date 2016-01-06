@@ -14,7 +14,7 @@ class PbIndustry < ActiveRecord::Base
   end
 
   def active_deals
-    deals
+    deals.where(status: 1).where(approved: 1)
   end
   
 end
