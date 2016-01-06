@@ -191,7 +191,7 @@
 									<ul>
 										<li <%= 'class=active' if ["ads"].include?(params[:controller]) && ["new"].include?(params[:action]) %>><a href="<%= new_ad_path %>">Đăng quảng cáo</a></li>
 										<li <%= 'class=active' if ["ads"].include?(params[:controller]) && ["index"].include?(params[:action]) %>>
-											<span class="badge bg-warning-400 menu_bagde"><%= Ad.count %></span>
+											<% if ["admin"].include? @current_user.role %><span class="badge bg-warning-400 menu_bagde"><%= Ad.count %></span><% end %>
 											<a href="<%= ads_path %>">
 												Quản lý quảng cáo</a>
 										</li>
@@ -206,7 +206,7 @@
 										<a href="#"><i class="icon-credit-card2"></i> <span>Quản lý đơn hàng</span></a>
 										<ul>
 											<li <%= 'class=active' if ["pb_saleorders"].include?(params[:controller]) && ["index","show"].include?(params[:action]) %>>
-												<% if ["admin"].include? @current_user.role %><span class="badge bg-warning-400 menu_bagde"><%= @current_user.saleorders_alert_count %></span><% end %>
+												<span class="badge bg-warning-400 menu_bagde"><%= @current_user.saleorders_alert_count %></span>
 												<a href="<%= pb_saleorders_path %>">Đơn đặt hàng từ khách</a>											
 											</li>
 											<li <%= 'class=active' if ["pb_saleorders"].include?(params[:controller]) && ["buy_orders"].include?(params[:action]) %>><a href="<%= buy_orders_pb_saleorders_path %>">Lịch sử mua hàng của bạn</a></li>
