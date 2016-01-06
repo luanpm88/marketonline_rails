@@ -485,9 +485,25 @@ class Deal < ActiveRecord::Base
               "recordsTotal" => total,
               "recordsFiltered" => total
     }
+    
     result["data"] = data
     
     return {result: result}
-  end  
+  end
+  
+  def update_top_industry
+    topparent = pb_product.pb_industry.top_parent.id if pb_product.pb_industry.present?
+    self.update_attribute(:top_industry_id, topparent)
+  end
+  
+  def self.other_deals
+    is = []
+    top_industries = PbIndustry.all.where(level: 1).order("display_order")
+    top_industries.each do |i|
+      is << i.id if i.active_deals.count < 6
+    end
+    
+    self.where(top_industry_id: is)
+  end
   
 end

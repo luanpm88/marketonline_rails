@@ -40,6 +40,7 @@ class DealsController < ApplicationController
     @deal.pb_member_id = @current_user.id
     respond_to do |format|
       if @deal.save
+        @deal.update_top_industry
         format.html { redirect_to deals_path, notice: 'DEAL đã được tạo thành công!' }
         format.json { render :show, status: :created, location: @deal }
       else
@@ -56,6 +57,7 @@ class DealsController < ApplicationController
     
     respond_to do |format|
       if @deal.update(deal_params)
+        @deal.update_top_industry
         format.html { redirect_to deals_path, notice: 'DEAL đã được sửa thành công!' }
         format.json { render :show, status: :ok, location: @deal }
       else
@@ -229,7 +231,9 @@ class DealsController < ApplicationController
   end
   
   def home
-    render layout: nil
+    @industries = PbIndustry.all.where(level: 1).order("display_order")
+    
+    render layout: nil   
   end
 
   def ajax_deal_info

@@ -1,4 +1,6 @@
 class PbIndustry < ActiveRecord::Base
+  has_many :deals, foreign_key: "top_industry_id"
+  
   def self.input_options(lvl=1, user)
     options = [["- Chọn chuyên mục -",""]]
     if user.role == "admin"
@@ -10,4 +12,9 @@ class PbIndustry < ActiveRecord::Base
   def top_parent
     top_parentid == 0 ? self : PbIndustry.find(top_parentid)
   end
+
+  def active_deals
+    deals
+  end
+  
 end

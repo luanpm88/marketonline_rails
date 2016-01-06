@@ -1,6 +1,8 @@
 class PbProduct < ActiveRecord::Base
   self.primary_key = :id
   
+  belongs_to :pb_industry, foreign_key: "industry_id"
+  
   def self.input_options(user)
     self.all.collect {|p| [p.name, p.id]}
   end
