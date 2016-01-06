@@ -134,7 +134,7 @@ class Ad < ActiveRecord::Base
               item.name+industry_info+area_info,
               "<div class=\"text-center\">#{item.ad_position.display_name}</div>",                     
               "<div class=\"text-center\">#{item.display_valid_time}</div>",
-              "<div class=\"text-center\">#{(item.pb_member.display_name if !item.pb_member.nil?)}</div>",
+              "<div class=\"text-center\">#{(item.pb_member.display_name if !item.pb_member.nil?)}<br/>#{(item.pb_member.username if !item.pb_member.nil?)}</div>",
               "<div class=\"text-center\">#{item.click_count.to_s}</div>",
               "<div class=\"text-center\">#{item.display_status}</div>",
               "<div class=\"text-right\"><ul class=\"icons-list\">"+
