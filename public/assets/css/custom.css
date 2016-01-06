@@ -401,3 +401,6 @@ legend {
 .navigation > li a {
     font-size: 14px;
 }
+.menu_bagde {
+    z-index: 10;
+}

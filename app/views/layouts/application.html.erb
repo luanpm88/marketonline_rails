@@ -186,10 +186,15 @@
 									<a href="<%= root_path %>"><i class="icon-home4"></i> <span>Trang chính</span></a>
 								</li>-->
                                 <li <%= 'class=active' if ["ad_types","ads"].include?(params[:controller]) %>>
+									<span class="badge bg-warning-400 menu_bagde"><%= Ad.count %></span>
 									<a href="#"><i class="icon-stack2"></i> <span>Quảng cáo</span></a>
 									<ul>
 										<li <%= 'class=active' if ["ads"].include?(params[:controller]) && ["new"].include?(params[:action]) %>><a href="<%= new_ad_path %>">Đăng quảng cáo</a></li>
-										<li <%= 'class=active' if ["ads"].include?(params[:controller]) && ["index"].include?(params[:action]) %>><a href="<%= ads_path %>">Quản lý quảng cáo</a></li>
+										<li <%= 'class=active' if ["ads"].include?(params[:controller]) && ["index"].include?(params[:action]) %>>
+											<span class="badge bg-warning-400 menu_bagde"><%= Ad.count %></span>
+											<a href="<%= ads_path %>">
+												Quản lý quảng cáo</a>
+										</li>
 										<% if ["admin"].include? @current_user.role %>
 											<li <%= 'class=active' if ["ad_positions"].include?(params[:controller]) %>><a href="<%= ad_positions_path %>">Vị trí đặt quảng cáo</a></li>
 										<% end %>
@@ -237,7 +242,6 @@
 											<li <%= 'class=active' if ["pb_areatypeinfos"].include?(params[:controller]) %>><a href="<%= pb_areatypeinfos_path %>">Vị tri địa lý</a></li>
 											<li <%= 'class=active' if ["pb_settings"].include?(params[:controller]) %>><a href="<%= pb_settings_path %>">Cấu hình hệ thống</a></li>
 											<li <%= 'class=active' if ["system_messages"].include?(params[:controller]) %>><a href="<%= system_messages_path %>">Nhãn nội dung hệ thống</a></li>
-											
 										</ul>
 									</li>
 								<% end %>
