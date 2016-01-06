@@ -1,5 +1,6 @@
     <h4 class="deal_title">Sản phẩm DEAL hàng ngày</h4>
-    <div class="row deal_list">      
+    <div class="row deal_list">
+      
       <% (Deal.all_active+Deal.all_active+Deal.all_active+Deal.all_active+Deal.all_active).each_with_index do |deal,index| %>
         
       <% if [0,2,3].include?(index%5) %>
@@ -40,6 +41,37 @@
       <% end %>
       
       
+      <% end %>    
+      
+      
+      
+      
+      <% (Deal.all_active+Deal.all_active+Deal.all_active+Deal.all_active+Deal.all_active).each_with_index do |deal,index| %>
+        <div class="deal-col col-xs-12 col-sm-6 col-md-6 col-lg-4">        
+          <div class="panel <%= 'deal_big' if index%5 == 2 %> panel-default deal_box">
+            <div class="panel-body">
+              <div class="">
+                <div class="image_box">
+                  <a href="<%= deal.pb_product.url %>">
+                    <img title="<%= deal.pb_product.name %>" class="product_image" src="<%= deal.pb_product.default_image %>">
+                  </a>
+                </div>
+                <div class="description_box">
+                  <a class="title" href="<%= deal.pb_product.url %>">
+                    <%= deal.pb_product.name %>
+                  </a>
+                  <div class="prices">
+                    <div class="deal_price"><%= format_price(deal.price) %> VNĐ</div>
+                    <div>
+                        <span class="old_price"><%= format_price(deal.pb_product.price) %> VNĐ</span>
+                        |  <strong>Giảm <%= deal.deal_percent %>%</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>      
       <% end %>    
       
       
