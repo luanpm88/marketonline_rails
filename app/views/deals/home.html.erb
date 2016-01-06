@@ -1,12 +1,13 @@
   
   
-  
+    <% empty = true %>
   
   
     <% if Deal.other_deals.count > 0 %>
       <h4 class="deal_title">Sản phẩm DEAL hàng ngày</h4>
       <div class="row deal_list">
         <% Deal.other_deals.each_with_index do |deal,index| %>
+          <% empty = false %>
           <div class="deal-col col-xs-12 col-sm-6 col-md-6 col-lg-4">        
             <div class="panel panel-default deal_box">
               <div class="panel-body">
@@ -43,6 +44,7 @@
       <h4 class="deal_title"><%= i.name %></h4>
       <div class="row deal_list">
         <% i.active_deals.each_with_index do |deal,index| %>
+          <% empty = false %>
           <div class="deal-col col-xs-12 col-sm-6 col-md-6 col-lg-4">        
             <div class="panel panel-default deal_box">
               <div class="panel-body">
@@ -74,6 +76,10 @@
     <% end %>
   <% end %>
 
+
+    <% if empty %>
+      <h4 class="deal_title">Hiện tạm thời đã hết sản phẩm DEAL. Quý khách vui lòng quay lại sau.</h4>
+    <% end %>
 
     
     <!--<h4 class="deal_title">Sản phẩm DEAL hàng ngày</h4>
