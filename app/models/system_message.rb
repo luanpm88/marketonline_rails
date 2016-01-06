@@ -23,7 +23,7 @@ class SystemMessage < ActiveRecord::Base
       row = [
               item.code,
               item.name,
-              item.content,
+              ActionController::Base.helpers.strip_tags(item.content)[0..50]+"...",
               "<div class=\"text-left text-nowrap\">#{item.edit_link}<br />#{item.destroy_link}</div>"
             ]
       data << row      
@@ -54,7 +54,7 @@ class SystemMessage < ActiveRecord::Base
   
   def self.get(code)
     sms = self.where(code: code).first
-    return (sms.nil? ? "" : sms.content)
+    return (sms.nil? ? "" : ActionController::Base.helpers.strip_tags(sms.content))
   end
   
 end
