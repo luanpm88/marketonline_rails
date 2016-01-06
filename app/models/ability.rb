@@ -47,6 +47,9 @@ class Ability
           c.pb_member_id = user.id
         end
         
+        can :preview_box, AdPosition
+        can :get_values, AdPosition
+        
         can :read, PbSaleorder
         can :datatable, PbSaleorder
         can :buy_orders, PbSaleorder
