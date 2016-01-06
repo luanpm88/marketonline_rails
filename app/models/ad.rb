@@ -104,7 +104,7 @@ class Ad < ActiveRecord::Base
       end      
     end    
     
-    order = "ads.name DESC"
+    order = "ads.created_at DESC"
     if !params["order"].nil?
       case params["order"]["0"]["column"]
       when "1"
