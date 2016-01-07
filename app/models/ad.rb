@@ -127,6 +127,7 @@ class Ad < ActiveRecord::Base
     data = []
     
     @records.each do |item|
+      item.view
       industry_info = !item.pb_industry.nil? ? "<div class=\"text-muted text-size-small\">#{item.pb_industry.name}</div>" : (item.pb_industry_id == -1 ? "<div class=\"text-muted text-size-small\">Mặc định</div>" : "")
       area_info = "<div class=\"text-muted text-size-small\">#{item.pb_area_name}</div>"
       row = [
@@ -454,5 +455,9 @@ class Ad < ActiveRecord::Base
     end
     
     return result
+  end
+  
+  def view
+    update_attribute(:viewed, 1)
   end
 end
