@@ -69,7 +69,7 @@
 	<%= javascript_include_tag '/assets/js/core/app.js' %>
 	
 	<%= javascript_include_tag '/assets/js/custom.js?v=2' %>
-	<%= stylesheet_link_tag '/assets/css/custom.css?v=2' %>	
+	<%= stylesheet_link_tag '/assets/css/custom.css?v=3' %>	
 	
 	<script>
 		var START_STEP = <%= @ad.present? ? @ad.current_step : 0 %>
@@ -113,14 +113,32 @@
 					</a>
 
 					<ul class="dropdown-menu dropdown-menu-right">
-						<li><a href="http://marketonline.vn/redirect.php?url=/virtual-office/"><i class="icon-cog5"></i> Trang quản lý</a></li>
+						<!--<li><a href="http://marketonline.vn/redirect.php?url=/virtual-office/"><i class="icon-cog5"></i> Trang quản lý</a></li>
 						<li class="divider"></li>
 						<li><a href="http://marketonline.vn/logging.php?action=logout"><i class="icon-switch2"></i> Đăng xuất</a></li>
-						<!--<li><a href="#"><i class="icon-coins"></i> My balance</a></li>
-						<li><a href="#"><span class="badge bg-teal-400 pull-right">58</span> <i class="icon-comment-discussion"></i> Messages</a></li>
-						<li class="divider"></li>
-						<li><a href="#"><i class="icon-cog5"></i> Account settings</a></li>
-						<li><a href="#"><i class="icon-switch2"></i> Logout</a></li>-->
+						
+						<li class="divider"></li>-->
+                        <li><a class="virtual_office_link" href="http://marketonline.vn/redirect.php?url=/virtual-office/?home=1">Quản lý chung</a></li>
+                        <li class="divider"></li>
+                        <li>
+                          <span class="sell_count badge bg-warning-400 menu_bagde"><%= @current_user.saleorders_alert_count %></span>
+                          <a class="virtual_office_link" href="http://marketonline.vn:3000/pb_saleorders">Quản lý đơn hàng</a>
+                          
+                          
+                        </li>
+                        
+                        
+                        <li><a class="virtual_office_link" href="http://marketonline.vn:3000">Quản lý Quảng cáo</a></li>
+                        <li><a class="virtual_office_link" href="http://marketonline.vn:3000/deals">Quản lý DEAL</a></li>
+                        <li class="divider"></li>
+                        <li><a class="virtual_office_link" href="http://marketonline.vn/redirect.php?url=/virtual-office/product.php">Sản phẩm</a></li>
+                        <li><a class="virtual_office_link" href="http://marketonline.vn/redirect.php?url=/virtual-office/product.php?type=service">Dịch vụ</a></li>
+                        <li><a class="virtual_office_link" href="http://marketonline.vn/redirect.php?url=/virtual-office/offer.php">Thương mại</a></li>
+                        <li class="divider"></li>
+                        <li><a class="virtual_office_link" href="http://marketonline.vn/redirect.php?url=/virtual-office/index.php">Hồ sơ Gian hàng</a></li>
+                        <li><a class="virtual_office_link" href="http://marketonline.vn/redirect.php?url=/virtual-office/personal.php">Hồ sơ cá nhân</a></li>
+                        <li class="divider"></li>
+                        <li><a href="http://marketonline.vn/logging.php?action=logout"><i class="icon-switch2"></i> Đăng xuất</a></li>
 					</ul>
 				</li>
 			</ul>

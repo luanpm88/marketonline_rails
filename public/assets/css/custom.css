@@ -405,3 +405,7 @@ legend {
 .menu_bagde {
     z-index: 10;
 }
+.sell_count {
+    position: absolute;
+    margin-top: -2px;
+}
