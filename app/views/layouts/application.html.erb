@@ -187,16 +187,18 @@
 								</li>-->
                                 <li <%= 'class=active' if ["ad_types","ads"].include?(params[:controller]) %>>
 									<% if ["admin"].include? @current_user.role %>
-										<span class="badge bg-info menu_bagde"><%= Ad.where(active: 0).count if Ad.where(active: 0).count > 0 %></span>
 										<span class="badge bg-warning-400 menu_bagde"><%= Ad.where(viewed: nil).count if Ad.where(viewed: nil).count > 0 %></span>
+										<span class="badge bg-info menu_bagde"><%= Ad.where(active: 0).count if Ad.where(active: 0).count > 0 %></span>
+										
 									<% end %>
 									<a href="#"><i class="icon-stack2"></i> <span>Quảng cáo</span></a>
 									<ul>
 										<li <%= 'class=active' if ["ads"].include?(params[:controller]) && ["new"].include?(params[:action]) %>><a href="<%= new_ad_path %>">Đăng quảng cáo</a></li>
 										<li <%= 'class=active' if ["ads"].include?(params[:controller]) && ["index"].include?(params[:action]) %>>
 											<% if ["admin"].include? @current_user.role %>
-												<span class="badge bg-info menu_bagde"><%= Ad.where(active: 0).count if Ad.where(active: 0).count > 0 %></span>
 												<span class="badge bg-warning-400 menu_bagde"><%= Ad.where(viewed: nil).count if Ad.where(viewed: nil).count > 0 %></span>
+												<span class="badge bg-info menu_bagde"><%= Ad.where(active: 0).count if Ad.where(active: 0).count > 0 %></span>
+												
 											<% end %>
 											<a href="<%= ads_path %>">
 												Quản lý quảng cáo</a>
