@@ -374,8 +374,9 @@ legend {
     line-height: 16px;
     margin-top: 8px !important;
     padding: 2px 7px;
-    position: absolute;
+    position: relative;
     right: 5px;
+    margin-right: 3px;
 }
 .sidebar-content {
     padding-bottom: 100px;
