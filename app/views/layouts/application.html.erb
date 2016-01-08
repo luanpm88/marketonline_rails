@@ -267,7 +267,10 @@
 										<ul>
 											<li <%= 'class=active' if ["deals"].include?(params[:controller]) && ["admin_agent_list"].include?(params[:action]) %>><a href="<%= admin_agent_list_deals_path %>">Cộng tác viên</a></li>
 											<li <%= 'class=active' if ["deals"].include?(params[:controller]) && ["admin_deal_list"].include?(params[:action]) %>><a href="<%= admin_deal_list_deals_path %>">Quản lý DEAL</a></li>
-											<li <%= 'class=active' if ["pb_saleorders"].include?(params[:controller]) and ["admin_list"].include?(params[:action]) %>><a href="<%= admin_list_pb_saleorders_path %>">Quản lý đơn hàng</a></li>
+											<li <%= 'class=active' if ["pb_saleorders"].include?(params[:controller]) and ["admin_list"].include?(params[:action]) %>>
+												<span class="badge bg-warning-400 menu_bagde"><%= PbMember.saleorders_alert_count %></span>
+												<a href="<%= admin_list_pb_saleorders_path %>">Quản lý đơn hàng</a>
+											</li>
 											<li <%= 'class=active' if ["pb_areatypeinfos"].include?(params[:controller]) %>><a href="<%= pb_areatypeinfos_path %>">Vị tri địa lý</a></li>
 											<li <%= 'class=active' if ["pb_settings"].include?(params[:controller]) %>><a href="<%= pb_settings_path %>">Cấu hình hệ thống</a></li>
 											<li <%= 'class=active' if ["system_messages"].include?(params[:controller]) %>><a href="<%= system_messages_path %>">Nhãn nội dung hệ thống</a></li>

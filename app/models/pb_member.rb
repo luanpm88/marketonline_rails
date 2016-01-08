@@ -324,6 +324,11 @@ class PbMember < ActiveRecord::Base
     link_helper.link_to(title, {controller: "deals", action: "item_list", customer_id: self.id})
   end
   
+  def self.saleorders_alert_count
+    result = PbSaleorder.where(finished: 0).where("created > 1451635200").count
+
+    return (result == 0 ? "" : result)
+  end
   
   def saleorders_alert_count
     result = pb_sell_saleorders.where(finished: 0).count
