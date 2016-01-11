@@ -89,7 +89,7 @@ class PbSaleorder < ActiveRecord::Base
     # FILTERS
     filters = {}
     params["filters"].split('&').each do |row|
-      filters[row.split("=")[0]] = URI.decode(row.split("=")[1]).gsub("+"," ")
+      filters[row.split("=")[0]] = URI.decode(row.split("=")[1]).gsub("+"," ") if row.split("=")[1].present?
     end
     
     if filters["shop_name"].present?

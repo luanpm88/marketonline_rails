@@ -397,7 +397,8 @@ class PbMember < ActiveRecord::Base
       row = [
               "<a target=\"_blank\" href=\"#{item.pb_company.url}\">#{item.pb_company.name}</a><br />#{item.display_name}<br />#{item.username}",
               item.total_sold_items_count,
-              ApplicationController.helpers.format_price(item.total_sales)+"<br><a target=\"_blank\" href=\"#{admin_list_pb_saleorders_path(shop_name: item.pb_company_name)}\">Xem chi tiết</a>",
+              ApplicationController.helpers.format_price(item.total_sales).to_s+"<br>".html_safe+item.order_list_link,
+              ApplicationController.helpers.format_price(item.real_total_sales).to_s,
               item.customer_count,
               item.last_sold,
               item.first_sold,
@@ -423,6 +424,14 @@ class PbMember < ActiveRecord::Base
     return self.update_attribute(:total_sales, total)
   end
   
+  def real_total_sales
+    total = 0.0
+    pb_sell_saleorderitems.each do |soi|
+      total += soi.total if soi.pb_saleorder.finished == 1
+    end
+    return total
+  end
+  
   def total_sold_items_count
     pb_sell_saleorderitems.sum(:quantity)
   end
@@ -439,6 +448,13 @@ class PbMember < ActiveRecord::Base
   def last_sold
     item = pb_sell_saleorders.order("created DESC").first
     return item.nil? ? "" : Time.at(item.created).to_datetime.strftime("%d-%m-%Y, %H:%I %p")
+  end
+  
+  def order_list_link
+    ActionView::Base.send(:include, Rails.application.routes.url_helpers)
+    link_helper = ActionController::Base.helpers
+    
+    link_helper.link_to("Xem chi tiết".html_safe, {controller: "pb_saleorders", action: "admin_list", shop_name: pb_company.name}, target: "_blank")
   end
   
 end
