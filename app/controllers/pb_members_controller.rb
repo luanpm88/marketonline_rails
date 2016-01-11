@@ -25,4 +25,14 @@ class PbMembersController < ApplicationController
     render text: (!user.saleorders_alert_count.present? ? "" : "<span>"+user.saleorders_alert_count.to_s+"</span>")
   end
   
+  def top_sellers
+    respond_to do |format|
+      format.html
+      format.json {
+        result = PbMember.top_sellers(params, @current_user)   
+        render json: result[:result]
+      }
+    end
+  end
+  
 end

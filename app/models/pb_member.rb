@@ -9,7 +9,7 @@ class PbMember < ActiveRecord::Base
   has_many :customers, -> { uniq }, :through => :pb_sell_saleorders, :source => :buyer
   
   has_many :pb_sell_saleorders, foreign_key: "seller_id", class_name: "PbSaleorder"
-  has_many :pb_sell_saleorderitems, :through => :pb_sell_saleorders, :source => :pb_saleorderitems, class_name: "PbSaleorderitem"
+  has_many :pb_sell_saleorderitems, -> { uniq }, :through => :pb_sell_saleorders, :source => :pb_saleorderitems, class_name: "PbSaleorderitem"
   
   has_many :agent_orderitems, foreign_key: "agent_username", primary_key: "username", class_name: "PbSaleorderitem"
   
@@ -376,6 +376,69 @@ class PbMember < ActiveRecord::Base
   
   def remain_gift(deal_id=nil)
     deal_gift_count({deal_id: nil}) - paid_gift(deal_id)
+  end
+  
+  def self.top_sellers(params, user)
+    @records = self.joins(:pb_company).where("pb_companies.id IS NOT NULL")
+    
+    ## FILTERS
+    #filters = {}
+    #params["filters"].split('&').each do |row|
+    #  filters[row.split("=")[0]] = row.split("=")[1]
+    #end
+    
+    @records = @records.order("pb_members.total_sales DESC")
+    
+    total = @records.count
+    @records = @records.limit(params[:length]).offset(params["start"])
+    data = []
+    
+    @records.uniq.each do |item|
+      row = [
+              "<a target=\"_blank\" href=\"#{item.pb_company.url}\">#{item.pb_company.name}</a><br />#{item.display_name}<br />#{item.username}",
+              item.total_sold_items_count,
+              ApplicationController.helpers.format_price(item.total_sales),
+              item.customer_count,
+              item.last_sold,
+              item.first_sold,
+            ]
+      data << row      
+    end
+    
+    result = {
+              "drawn" => params[:drawn],
+              "recordsTotal" => total,
+              "recordsFiltered" => total
+    }
+    result["data"] = data
+    
+    return {result: result}
+  end
+  
+  def update_total_sales
+    total = 0.0
+    pb_sell_saleorderitems.each do |soi|
+      total += soi.total
+    end
+    return self.update_attribute(:total_sales, total)
+  end
+  
+  def total_sold_items_count
+    pb_sell_saleorderitems.sum(:quantity)
+  end
+  
+  def customer_count
+    pb_sell_saleorders.map(&:buyer_id).uniq.count + pb_sell_saleorders.where(buyer_id: nil).map(&:fullname).uniq.count
+  end
+  
+  def first_sold
+    item = pb_sell_saleorders.order("created").first
+    return item.nil? ? "" : Time.at(item.created).to_datetime.strftime("%d-%m-%Y, %H:%I %p")
+  end
+  
+  def last_sold
+    item = pb_sell_saleorders.order("created DESC").first
+    return item.nil? ? "" : Time.at(item.created).to_datetime.strftime("%d-%m-%Y, %H:%I %p")
   end
   
 end

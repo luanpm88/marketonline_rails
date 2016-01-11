@@ -113,6 +113,8 @@ Rails.application.routes.draw do
       get 'finish'
       get 'cancel'
       get 'admin_list'
+      
+      
     end
   end
   
@@ -127,6 +129,8 @@ Rails.application.routes.draw do
       get 'deal_customers'
       get 'deal_agents'
       get 'pending_order_count'
+      
+      get 'top_sellers'
     end
   end
   

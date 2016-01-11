@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160106094531) do
+ActiveRecord::Schema.define(version: 20160111021518) do
 
   create_table "ad_clicks", force: :cascade do |t|
     t.integer  "ad_id",         limit: 4
@@ -1167,62 +1167,63 @@ ActiveRecord::Schema.define(version: 20160106094531) do
   end
 
   create_table "pb_members", id: false, force: :cascade do |t|
-    t.integer  "id",                        limit: 4,                   null: false
-    t.string   "space_name",                limit: 255,   default: "",  null: false
-    t.integer  "templet_id",                limit: 2,     default: 0,   null: false
-    t.string   "username",                  limit: 25,    default: "",  null: false
-    t.string   "userpass",                  limit: 50,    default: "",  null: false
-    t.string   "email",                     limit: 100,   default: "",  null: false
-    t.integer  "points",                    limit: 2,     default: 0,   null: false
-    t.integer  "credits",                   limit: 2,     default: 0,   null: false
-    t.float    "balance_amount",            limit: 24,    default: 0.0, null: false
-    t.string   "trusttype_ids",             limit: 25,    default: "",  null: false
-    t.string   "status",                    limit: 1,     default: "0", null: false
-    t.string   "photo",                     limit: 100,   default: "",  null: false
-    t.integer  "membertype_id",             limit: 2,     default: 0,   null: false
-    t.integer  "membergroup_id",            limit: 2,     default: 0,   null: false
-    t.string   "last_login",                limit: 11,    default: "0", null: false
-    t.string   "last_ip",                   limit: 25,    default: "0", null: false
-    t.string   "service_start_date",        limit: 11,    default: "0", null: false
-    t.string   "service_end_date",          limit: 11,    default: "0", null: false
-    t.integer  "office_redirect",           limit: 2,     default: 0,   null: false
-    t.string   "created",                   limit: 10,    default: "0", null: false
-    t.string   "modified",                  limit: 10,    default: "0", null: false
+    t.integer  "id",                        limit: 4,                                  null: false
+    t.string   "space_name",                limit: 255,                  default: "",  null: false
+    t.integer  "templet_id",                limit: 2,                    default: 0,   null: false
+    t.string   "username",                  limit: 25,                   default: "",  null: false
+    t.string   "userpass",                  limit: 50,                   default: "",  null: false
+    t.string   "email",                     limit: 100,                  default: "",  null: false
+    t.integer  "points",                    limit: 2,                    default: 0,   null: false
+    t.integer  "credits",                   limit: 2,                    default: 0,   null: false
+    t.float    "balance_amount",            limit: 24,                   default: 0.0, null: false
+    t.string   "trusttype_ids",             limit: 25,                   default: "",  null: false
+    t.string   "status",                    limit: 1,                    default: "0", null: false
+    t.string   "photo",                     limit: 100,                  default: "",  null: false
+    t.integer  "membertype_id",             limit: 2,                    default: 0,   null: false
+    t.integer  "membergroup_id",            limit: 2,                    default: 0,   null: false
+    t.string   "last_login",                limit: 11,                   default: "0", null: false
+    t.string   "last_ip",                   limit: 25,                   default: "0", null: false
+    t.string   "service_start_date",        limit: 11,                   default: "0", null: false
+    t.string   "service_end_date",          limit: 11,                   default: "0", null: false
+    t.integer  "office_redirect",           limit: 2,                    default: 0,   null: false
+    t.string   "created",                   limit: 10,                   default: "0", null: false
+    t.string   "modified",                  limit: 10,                   default: "0", null: false
     t.integer  "referrer_id",               limit: 4
-    t.integer  "checkout",                  limit: 4,     default: 0,   null: false
-    t.integer  "level1_point",              limit: 4,     default: 0,   null: false
-    t.integer  "level2_point",              limit: 4,     default: 0,   null: false
-    t.integer  "level1_paid",               limit: 4,     default: 0,   null: false
-    t.integer  "level2_paid",               limit: 4,     default: 0,   null: false
-    t.integer  "current_type",              limit: 4,                   null: false
-    t.text     "studypictures",             limit: 65535,               null: false
-    t.integer  "counted_effective_members", limit: 4,     default: 0,   null: false
-    t.string   "role",                      limit: 255,                 null: false
-    t.string   "typing",                    limit: 255,                 null: false
-    t.string   "typing_time",               limit: 255,                 null: false
-    t.text     "fb_app_id",                 limit: 65535,               null: false
-    t.text     "fb_secret",                 limit: 65535,               null: false
-    t.text     "fb_access_token",           limit: 65535,               null: false
-    t.text     "fb_code",                   limit: 65535,               null: false
-    t.text     "fb_data",                   limit: 65535,               null: false
-    t.text     "fb_user_id",                limit: 65535,               null: false
-    t.integer  "connect_points",            limit: 4,     default: 0,   null: false
-    t.integer  "good_shop_status",          limit: 4,     default: 0,   null: false
-    t.integer  "good_shop_moderator",       limit: 4,     default: 0,   null: false
+    t.integer  "checkout",                  limit: 4,                    default: 0,   null: false
+    t.integer  "level1_point",              limit: 4,                    default: 0,   null: false
+    t.integer  "level2_point",              limit: 4,                    default: 0,   null: false
+    t.integer  "level1_paid",               limit: 4,                    default: 0,   null: false
+    t.integer  "level2_paid",               limit: 4,                    default: 0,   null: false
+    t.integer  "current_type",              limit: 4,                                  null: false
+    t.text     "studypictures",             limit: 65535,                              null: false
+    t.integer  "counted_effective_members", limit: 4,                    default: 0,   null: false
+    t.string   "role",                      limit: 255,                                null: false
+    t.string   "typing",                    limit: 255,                                null: false
+    t.string   "typing_time",               limit: 255,                                null: false
+    t.text     "fb_app_id",                 limit: 65535,                              null: false
+    t.text     "fb_secret",                 limit: 65535,                              null: false
+    t.text     "fb_access_token",           limit: 65535,                              null: false
+    t.text     "fb_code",                   limit: 65535,                              null: false
+    t.text     "fb_data",                   limit: 65535,                              null: false
+    t.text     "fb_user_id",                limit: 65535,                              null: false
+    t.integer  "connect_points",            limit: 4,                    default: 0,   null: false
+    t.integer  "good_shop_status",          limit: 4,                    default: 0,   null: false
+    t.integer  "good_shop_moderator",       limit: 4,                    default: 0,   null: false
     t.datetime "good_shop_date"
-    t.integer  "active_time",               limit: 4,     default: 0,   null: false
-    t.datetime "active_last",                                           null: false
-    t.integer  "points_monthly",            limit: 4,     default: 0,   null: false
-    t.integer  "points_storage",            limit: 4,     default: 0,   null: false
+    t.integer  "active_time",               limit: 4,                    default: 0,   null: false
+    t.datetime "active_last",                                                          null: false
+    t.integer  "points_monthly",            limit: 4,                    default: 0,   null: false
+    t.integer  "points_storage",            limit: 4,                    default: 0,   null: false
     t.datetime "points_storage_updated"
-    t.integer  "points_monthly_lock",       limit: 4,     default: 0,   null: false
-    t.integer  "logging_count",             limit: 4,     default: 0,   null: false
-    t.integer  "points_weekly",             limit: 4,     default: 0,   null: false
-    t.integer  "points_weekly_store",       limit: 4,     default: 0,   null: false
+    t.integer  "points_monthly_lock",       limit: 4,                    default: 0,   null: false
+    t.integer  "logging_count",             limit: 4,                    default: 0,   null: false
+    t.integer  "points_weekly",             limit: 4,                    default: 0,   null: false
+    t.integer  "points_weekly_store",       limit: 4,                    default: 0,   null: false
     t.datetime "points_weekly_updated"
-    t.integer  "activity_announce_count",   limit: 4,     default: 0,   null: false
-    t.integer  "area_show",                 limit: 4,     default: 1,   null: false
-    t.integer  "area_moderator",            limit: 4,     default: 0,   null: false
+    t.integer  "activity_announce_count",   limit: 4,                    default: 0,   null: false
+    t.integer  "area_show",                 limit: 4,                    default: 1,   null: false
+    t.integer  "area_moderator",            limit: 4,                    default: 0,   null: false
+    t.decimal  "total_sales",                             precision: 10
   end
 
   create_table "pb_membertypes", id: false, force: :cascade do |t|

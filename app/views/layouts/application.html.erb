@@ -271,6 +271,9 @@
 												<span class="badge bg-warning-400 menu_bagde"><%= PbMember.saleorders_alert_count %></span>
 												<a href="<%= admin_list_pb_saleorders_path %>">Quản lý đơn hàng</a>
 											</li>
+											<li <%= 'class=active' if ["pb_members"].include?(params[:controller]) and ["top_sellers"].include?(params[:action]) %>>
+												<a href="<%= top_sellers_pb_members_path %>">Top Sellers</a>
+											</li>
 											<li <%= 'class=active' if ["pb_areatypeinfos"].include?(params[:controller]) %>><a href="<%= pb_areatypeinfos_path %>">Vị tri địa lý</a></li>
 											<li <%= 'class=active' if ["pb_settings"].include?(params[:controller]) %>><a href="<%= pb_settings_path %>">Cấu hình hệ thống</a></li>
 											<li <%= 'class=active' if ["system_messages"].include?(params[:controller]) %>><a href="<%= system_messages_path %>">Nhãn nội dung hệ thống</a></li>
