@@ -411,7 +411,7 @@ class PbMember < ActiveRecord::Base
     
     @records.uniq.each do |item|
       row = [
-              "<a target=\"_blank\" href=\"#{item.pb_company.url}\">#{item.pb_company.name}</a><br />#{item.display_name}<br />#{item.username}",
+              "<a target=\"_blank\" href=\"#{item.pb_company.url}\">#{item.pb_company.shop_name}</a><br />#{item.pb_company.name}<br />#{item.display_name}<br />#{item.username}",
               item.total_sold_items_count,
               ApplicationController.helpers.format_price(item.total_sales).to_s+"<br>".html_safe+item.order_list_link,
               ApplicationController.helpers.format_price(item.real_total_sales).to_s,
