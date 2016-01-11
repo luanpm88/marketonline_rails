@@ -98,6 +98,12 @@ class PbSaleorder < ActiveRecord::Base
       @records = @records.where(seller_id: seller_ids)
     end
     
+    if filters["buyer"].present?
+      seller_ids = PbMember.where("LOWER(pb_members.username) LIKE ?", "%#{filters["buyer"].strip.mb_chars.downcase}%").map(&:id).uniq
+      
+      @records = @records.where(buyer_id: seller_ids)
+    end
+    
     
     @records = @records.order("pb_saleorders.created DESC")
     
@@ -107,9 +113,10 @@ class PbSaleorder < ActiveRecord::Base
     
     @records.uniq.each do |item|
       item.seller.update_total_sales
+      userame = item.buyer.present? ? "("+item.buyer.username+")" : ""
       row = [
-              "#{filters["shop_name"]}<div class=\"\"><a target=\"_blank\" href=\"#{item.seller.pb_company.url}\">#{item.seller.pb_company.name}</a><br />#{item.seller.display_name}</div>",
-              "<div class=\"\">#{item.fullname}</div>",
+              "<div class=\"\"><a target=\"_blank\" href=\"#{item.seller.pb_company.url}\">#{item.seller.pb_company.name}</a><br />#{item.seller.display_name}</div>",
+              "<div class=\"\">#{item.fullname}<br/>#{userame}</div>",
               item.display_products,
               item.display_quantities,
               "<div class=\"text-nowrap text-right\">#{item.display_single_prices}</div>",

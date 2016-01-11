@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160111040848) do
+ActiveRecord::Schema.define(version: 20160111073751) do
 
   create_table "ad_clicks", force: :cascade do |t|
     t.integer  "ad_id",         limit: 4
@@ -1227,6 +1227,10 @@ ActiveRecord::Schema.define(version: 20160111040848) do
     t.integer  "total_buyers",              limit: 4
     t.integer  "real_total_sales",          limit: 4
     t.integer  "total_sold_products",       limit: 4
+    t.decimal  "total_bought",                            precision: 10
+    t.decimal  "total_sellers",                           precision: 10
+    t.decimal  "real_total_bought",                       precision: 10
+    t.integer  "total_bought_products",     limit: 4
   end
 
   create_table "pb_membertypes", id: false, force: :cascade do |t|

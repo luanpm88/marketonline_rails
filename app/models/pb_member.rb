@@ -441,6 +441,15 @@ class PbMember < ActiveRecord::Base
     self.update_attribute(:total_buyers, customer_count)
     self.update_attribute(:real_total_sales, real_total_sales)
     self.update_attribute(:total_sold_products, total_sold_items_count)
+    
+    total = 0.0
+    pb_saleorderitems.each do |soi|
+      total += soi.total
+    end
+    self.update_attribute(:total_bought, total)
+    self.update_attribute(:total_sellers, seller_count)
+    self.update_attribute(:real_total_bought, real_total_bought)
+    self.update_attribute(:total_bought_products, total_bought_items_count)
   end
   
   def real_total_sales
@@ -451,12 +460,28 @@ class PbMember < ActiveRecord::Base
     return total
   end
   
+  def real_total_bought
+    total = 0.0
+    pb_saleorderitems.each do |soi|
+      total += soi.total if soi.pb_saleorder.finished == 1
+    end
+    return total
+  end
+  
   def total_sold_items_count
     pb_sell_saleorderitems.sum(:quantity)
   end
   
+  def total_bought_items_count
+    pb_saleorderitems.sum(:quantity)
+  end
+  
   def customer_count
     pb_sell_saleorders.map(&:buyer_id).uniq.count + pb_sell_saleorders.where(buyer_id: nil).map(&:fullname).uniq.count
+  end
+  
+  def seller_count
+    pb_saleorders.map(&:seller_id).uniq.count
   end
   
   def first_sold
@@ -477,7 +502,7 @@ class PbMember < ActiveRecord::Base
   end
   
   def self.top_buyers(params, user)
-    @records = self.joins(:pb_company).where("pb_companies.id IS NOT NULL")
+    @records = self.where("total_bought > 0")
     
     ## FILTERS
     #filters = {}
@@ -485,7 +510,7 @@ class PbMember < ActiveRecord::Base
     #  filters[row.split("=")[0]] = row.split("=")[1]
     #end
     
-    @records = @records.order("pb_members.total_sales DESC")
+    @records = @records.order("pb_members.total_bought DESC")
     
     total = @records.count
     @records = @records.limit(params[:length]).offset(params["start"])
@@ -493,13 +518,13 @@ class PbMember < ActiveRecord::Base
     
     @records.uniq.each do |item|
       row = [
-              "<a target=\"_blank\" href=\"#{item.pb_company.url}\">#{item.pb_company.name}</a><br />#{item.display_name}<br />#{item.username}",
-              item.total_sold_items_count,
-              ApplicationController.helpers.format_price(item.total_sales).to_s+"<br>".html_safe+item.order_list_link,
-              ApplicationController.helpers.format_price(item.real_total_sales).to_s,
-              item.customer_count,
-              item.last_sold,
-              item.first_sold,
+              "#{item.display_name}<br />#{item.username}",
+              item.total_bought_items_count,
+              ApplicationController.helpers.format_price(item.total_bought).to_s+"<br>".html_safe+item.bought_order_list_link,
+              ApplicationController.helpers.format_price(item.real_total_bought).to_s,
+              item.seller_count,
+              item.last_bought,
+              item.first_bought,
             ]
       data << row      
     end
@@ -512,6 +537,23 @@ class PbMember < ActiveRecord::Base
     result["data"] = data
     
     return {result: result}
+  end
+  
+  def first_bought
+    item = pb_saleorders.order("created").first
+    return item.nil? ? "" : Time.at(item.created).to_datetime.strftime("%d-%m-%Y, %H:%I %p")
+  end
+  
+  def last_bought
+    item = pb_saleorders.order("created DESC").first
+    return item.nil? ? "" : Time.at(item.created).to_datetime.strftime("%d-%m-%Y, %H:%I %p")
+  end
+  
+  def bought_order_list_link
+    ActionView::Base.send(:include, Rails.application.routes.url_helpers)
+    link_helper = ActionController::Base.helpers
+    
+    link_helper.link_to("Xem chi tiết".html_safe, {controller: "pb_saleorders", action: "admin_list", buyer: self.username}, target: "_blank")
   end
   
 end
