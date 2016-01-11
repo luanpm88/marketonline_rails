@@ -89,11 +89,11 @@ class PbSaleorder < ActiveRecord::Base
     # FILTERS
     filters = {}
     params["filters"].split('&').each do |row|
-      filters[row.split("=")[0]] = row.split("=")[1]
+      filters[row.split("=")[0]] = URI.decode(row.split("=")[1]).gsub("+"," ")
     end
     
     if filters["shop_name"].present?
-      seller_ids = PbCompany.joins(:pb_member).where("pb_companies.name LIKE ?", "%#{filters["shop_name"]}%").map(&:member_id).uniq
+      seller_ids = PbCompany.joins(:pb_member).where("LOWER(pb_companies.name) LIKE ?", "%#{filters["shop_name"].strip.mb_chars.downcase}%").map(&:member_id).uniq
       
       @records = @records.where(seller_id: seller_ids)
     end
@@ -107,7 +107,7 @@ class PbSaleorder < ActiveRecord::Base
     
     @records.uniq.each do |item|
       row = [
-              "<div class=\"\">#{item.seller.pb_company.name}<br />#{item.seller.display_name}</div>",
+              "#{filters["shop_name"]}<div class=\"\">#{item.seller.pb_company.name}<br />#{item.seller.display_name}</div>",
               "<div class=\"\">#{item.fullname}</div>",
               item.display_products,
               item.display_quantities,
