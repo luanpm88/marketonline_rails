@@ -389,6 +389,8 @@ class PbMember < ActiveRecord::Base
     
     if !params["order"].nil?
       case params["order"]["0"]["column"]
+      when "1"
+        order = "pb_members.total_sold_products"
       when "3"
         order = "pb_members.real_total_sales"
       when "4"
@@ -438,6 +440,7 @@ class PbMember < ActiveRecord::Base
     self.update_attribute(:total_sales, total)
     self.update_attribute(:total_buyers, customer_count)
     self.update_attribute(:real_total_sales, real_total_sales)
+    self.update_attribute(:total_sold_products, total_sold_items_count)
   end
   
   def real_total_sales
