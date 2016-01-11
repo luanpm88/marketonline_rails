@@ -397,7 +397,7 @@ class PbMember < ActiveRecord::Base
       row = [
               "<a target=\"_blank\" href=\"#{item.pb_company.url}\">#{item.pb_company.name}</a><br />#{item.display_name}<br />#{item.username}",
               item.total_sold_items_count,
-              ApplicationController.helpers.format_price(item.total_sales),
+              ApplicationController.helpers.format_price(item.total_sales)+"<br><a target=\"_blank\" href=\"#{admin_list_pb_saleorders_path(shop_name: item.pb_company_name)}\">Xem chi tiết</a>",
               item.customer_count,
               item.last_sold,
               item.first_sold,
