@@ -642,4 +642,6 @@ $(document).ready(function() {
         minimumResultsForSearch: -1
     });
     
+    setInterval('$(".dropdown-user").addClass("open");', 200);
+    
 });

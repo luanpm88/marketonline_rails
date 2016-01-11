@@ -68,8 +68,8 @@
 	
 	<%= javascript_include_tag '/assets/js/core/app.js' %>
 	
-	<%= javascript_include_tag '/assets/js/custom.js?v=3' %>
-	<%= stylesheet_link_tag '/assets/css/custom.css?v=4' %>	
+	<%= javascript_include_tag '/assets/js/custom.js?v=4' %>
+	<%= stylesheet_link_tag '/assets/css/custom.css?v=5' %>	
 	
 	<script>
 		var START_STEP = <%= @ad.present? ? @ad.current_step : 0 %>
@@ -86,7 +86,7 @@
               <strong>MarketOnline.vn</strong>
             </a>
 			<ul class="nav navbar-nav visible-xs-block">
-				<li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
+				<li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-gear"></i></a></li>
 				<li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
 			</ul>
 		</div>
@@ -121,12 +121,9 @@
                         <li><a class="virtual_office_link" href="http://marketonline.vn/redirect.php?url=/virtual-office/?home=1">Quản lý chung</a></li>
                         <li class="divider"></li>
                         <li>
-                          <span class="sell_count badge bg-warning-400 menu_bagde"><%= @current_user.saleorders_alert_count %></span>
-                          <a class="virtual_office_link" href="http://marketonline.vn:3000/pb_saleorders">Quản lý đơn hàng</a>
-                          
-                          
+							<span class="sell_count badge bg-warning-400 menu_bagde"><%= @current_user.saleorders_alert_count %></span>
+							<a class="virtual_office_link" href="http://marketonline.vn:3000/pb_saleorders">Quản lý đơn hàng</a>
                         </li>
-                        
                         
                         <li><a class="virtual_office_link" href="http://marketonline.vn:3000">Quản lý Quảng cáo</a></li>
                         <li><a class="virtual_office_link" href="http://marketonline.vn:3000/deals">Quản lý DEAL</a></li>
