@@ -642,6 +642,21 @@ $(document).ready(function() {
         minimumResultsForSearch: -1
     });
     
-    setInterval('$(".dropdown-user").addClass("open");', 200);
+    setInterval('$(".sidebar-xs-indicator .dropdown-user").addClass("open");', 200);
+    
+    
+    $(".sidebar-xs-indicator .sidebar").css("display");
+    $(".sidebar-xs-indicator .dropdown-user").hasClass("open");
+    
+            $(".visible-xs-block a").click(function() {
+                        //alert($(".sidebar-xs-indicator .sidebar").css("display") == "block");
+                        if($(this).hasClass("sidebar-mobile-main-toggle")) {
+                                    $("#navbar-mobile").removeClass("in");
+                        } else {
+                                    if($(".sidebar-xs-indicator .sidebar").css("display") == "block") {
+                                                $(".sidebar-xs-indicator .sidebar-mobile-main-toggle").trigger("click");
+                                    }
+                        }
+            });
     
 });

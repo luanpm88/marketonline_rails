@@ -409,6 +409,11 @@ legend {
     position: absolute;
     margin-top: -2px;
 }
-.navbar-nav .dropdown-user .dropdown-menu-right a, .navbar-nav > .dropdown-user > a > span {
+.sidebar-xs-indicator .navbar-nav .dropdown-user .dropdown-menu-right a, .sidebar-xs-indicator .navbar-nav > .dropdown-user > a > span {
     font-size: 16px;
+}
+.sidebar-xs-indicator .navbar-nav .dropdown-user .sell_count {
+    background: #ff7043;
+    border: none;
+    color: #fff;
 }
