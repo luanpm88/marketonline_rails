@@ -400,7 +400,7 @@ class PbMember < ActiveRecord::Base
       end
       order += " "+params["order"]["0"]["dir"]
     else
-      "pb_members.total_sales DESC"
+      order = "pb_members.total_sales DESC"
     end
     
     @records = @records.order(order)
@@ -510,7 +510,21 @@ class PbMember < ActiveRecord::Base
     #  filters[row.split("=")[0]] = row.split("=")[1]
     #end
     
-    @records = @records.order("pb_members.total_bought DESC")
+    if !params["order"].nil?
+      case params["order"]["0"]["column"]
+      when "1"
+        order = "pb_members.total_bought_products"
+      when "3"
+        order = "pb_members.real_total_bought"
+      when "4"
+        order = "pb_members.total_sellers"
+      else
+        order = "pb_members.total_bought"
+      end
+      order += " "+params["order"]["0"]["dir"]
+    else
+      order = "pb_members.total_bought DESC"
+    end
     
     total = @records.count
     @records = @records.limit(params[:length]).offset(params["start"])
