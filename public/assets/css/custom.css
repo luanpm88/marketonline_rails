@@ -417,3 +417,9 @@ legend {
     border: none;
     color: #fff;
 }
+.sidebar-xs-indicator .sidebar-content {
+    padding-bottom: 0 !important;
+}
+.sidebar-xs-indicator .navbar-nav .dropdown-user .dropdown-menu-right {
+    padding-bottom: 30px;
+}
