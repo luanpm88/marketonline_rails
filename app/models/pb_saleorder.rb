@@ -93,7 +93,7 @@ class PbSaleorder < ActiveRecord::Base
     end
     
     if filters["shop_name"].present?
-      seller_ids = PbCompany.joins(:pb_member).where("LOWER(pb_companies.name) LIKE ?", "%#{filters["shop_name"].strip.mb_chars.downcase}%").map(&:member_id).uniq
+      seller_ids = PbCompany.joins(:pb_member).where("LOWER(pb_companies.name) LIKE ? OR LOWER(pb_companies.shop_name) LIKE ?", "%#{filters["shop_name"].strip.mb_chars.downcase}%", "%#{filters["shop_name"].strip.mb_chars.downcase}%").map(&:member_id).uniq
       
       @records = @records.where(seller_id: seller_ids)
     end
@@ -115,7 +115,7 @@ class PbSaleorder < ActiveRecord::Base
       item.seller.update_total_sales
       userame = item.buyer.present? ? "("+item.buyer.username+")" : ""
       row = [
-              "<div class=\"\"><a target=\"_blank\" href=\"#{item.seller.pb_company.url}\">#{item.seller.pb_company.name}</a><br />#{item.seller.display_name}</div>",
+              "<div class=\"\"><a target=\"_blank\" href=\"#{item.seller.pb_company.url}\">#{item.seller.pb_company.shop_name}</a><br />#{item.seller.display_name}</div>",
               "<div class=\"\">#{item.fullname}<br/>#{userame}</div>",
               item.display_products,
               item.display_quantities,
