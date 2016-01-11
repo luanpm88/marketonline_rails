@@ -106,16 +106,17 @@ class PbSaleorder < ActiveRecord::Base
     data = []
     
     @records.uniq.each do |item|
+      item.seller.update_total_sales
       row = [
-              "#{filters["shop_name"]}<div class=\"\">#{item.seller.pb_company.name}<br />#{item.seller.display_name}</div>",
+              "#{filters["shop_name"]}<div class=\"\"><a target=\"_blank\" href=\"#{item.seller.pb_company.url}\">#{item.seller.pb_company.name}</a><br />#{item.seller.display_name}</div>",
               "<div class=\"\">#{item.fullname}</div>",
               item.display_products,
               item.display_quantities,
               "<div class=\"text-nowrap text-right\">#{item.display_single_prices}</div>",
               "<div class=\"text-nowrap text-right\">#{item.display_prices}</div>",
-              "<div class=\"text-nowrap\">#{item.ordered_time.to_datetime.strftime("%d-%m-%Y, %H:%I %p")}</div>",
+              "<div class=\"text-nowrap\">#{item.ordered_time.to_datetime.strftime("%d-%m-%Y<br />%H:%I")}</div>",
               "<div class=\"text-nowrap\">#{item.display_statuses}</div>",
-              "<div class=\"text-left text-nowrap\">#{item.show_link}#{item.finish_link}#{item.cancel_link}</div>"
+              "<div class=\"text-left text-nowrap\">#{item.show_link(true)}#{item.finish_link(true)}#{item.cancel_link(true)}</div>"
             ]
       data << row      
     end
@@ -190,7 +191,7 @@ class PbSaleorder < ActiveRecord::Base
     ActionView::Base.send(:include, Rails.application.routes.url_helpers)
     link_helper = ActionController::Base.helpers
     
-    title = !title.nil? ? title : "<i class=\"icon-zoomin3\"></i> Xem chi tiết".html_safe
+    title = !title.nil? ? "<i class=\"icon-zoomin3\"></i> Xem".html_safe : "<i class=\"icon-zoomin3\"></i> Xem chi tiết".html_safe
     link_helper.link_to(title, {controller: "pb_saleorders", action: "show", id: self.id})
   end
   
@@ -200,7 +201,7 @@ class PbSaleorder < ActiveRecord::Base
     ActionView::Base.send(:include, Rails.application.routes.url_helpers)
     link_helper = ActionController::Base.helpers
     
-    title = !title.nil? ? title : "<i class=\"icon-checkmark\"></i> Xác nhận đã hoàn tất".html_safe
+    title = !title.nil? ? "<i class=\"icon-checkmark\"></i> Hoàn tất".html_safe : "<i class=\"icon-checkmark\"></i> Xác nhận đã hoàn tất".html_safe
     "<div>"+link_helper.link_to(title, {controller: "pb_saleorders", action: "finish", id: self.id}, class: "ajax_link text-success")+"</div>"
   end
   
@@ -210,7 +211,7 @@ class PbSaleorder < ActiveRecord::Base
     ActionView::Base.send(:include, Rails.application.routes.url_helpers)
     link_helper = ActionController::Base.helpers
     
-    title = !title.nil? ? title : "<i class=\"icon-close2\"></i> Hủy đơn hàng".html_safe
+    title = !title.nil? ? "<i class=\"icon-close2\"></i> Hủy".html_safe : "<i class=\"icon-close2\"></i> Hủy đơn hàng".html_safe
     "<div>"+link_helper.link_to(title, {controller: "pb_saleorders", action: "cancel", id: self.id}, class: "ajax_link text-grey")+"</div>"
   end
   
