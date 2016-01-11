@@ -526,6 +526,8 @@ class PbMember < ActiveRecord::Base
       order = "pb_members.total_bought DESC"
     end
     
+    @records = @records.order(order)
+    
     total = @records.count
     @records = @records.limit(params[:length]).offset(params["start"])
     data = []
