@@ -7,7 +7,13 @@
 						<div class="panel-body">
 							<!--<form class="datatable_filter">
 							  <h4>Bộ lọc</h4>
-							  <div class="row">                            
+							  <div class="row">
+								<div class="col-md-3">
+								  <div class="form_group">
+									<label>Tìm theo SHOP:</label>
+									<input placeholder="chọn khách hàng" type="text" value="" text="" name="customer_id" class="select2-ajax" data_link="<%= pb_members_path(format: "json") %>" />
+								  </div>
+								</div>
 								<div class="col-md-3">
 								  <div class="form_group">
 									<label>Tìm theo Khách hàng:</label>

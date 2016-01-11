@@ -532,6 +532,10 @@ $(document).ready(function() {
         var box = $(this).parents(".datatable_box")
         box.find("table").dataTable().fnFilter()
     })
+    $(".datatable_filter input").change(function() {
+        var box = $(this).parents(".datatable_box")
+        box.find("table").dataTable().fnFilter()
+    })
     
     var validator = $(".form-validate").validate({
         lang: 'vi',

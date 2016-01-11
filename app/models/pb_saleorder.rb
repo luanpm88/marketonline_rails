@@ -84,13 +84,20 @@ class PbSaleorder < ActiveRecord::Base
   end
   
   def self.admin_list(params, user)
-    @records = self.joins(:pb_saleorderitems).where("pb_saleorderitems.id IS NOT NULL")
+    @records = self.joins(:pb_saleorderitems, :seller).where("pb_saleorderitems.id IS NOT NULL")
     
     # FILTERS
     filters = {}
     params["filters"].split('&').each do |row|
       filters[row.split("=")[0]] = row.split("=")[1]
     end
+    
+    if filters["shop_name"].present?
+      seller_ids = PbCompany.joins(:pb_member).where("pb_companies.name LIKE ?", "%#{filters["shop_name"]}%").map(&:member_id).uniq
+      
+      @records = @records.where(seller_id: seller_ids)
+    end
+    
     
     @records = @records.order("pb_saleorders.created DESC")
     
@@ -100,6 +107,7 @@ class PbSaleorder < ActiveRecord::Base
     
     @records.uniq.each do |item|
       row = [
+              "<div class=\"\">#{item.seller.pb_company.name}<br />#{item.seller.display_name}</div>",
               "<div class=\"\">#{item.fullname}</div>",
               item.display_products,
               item.display_quantities,
