@@ -131,6 +131,7 @@ Rails.application.routes.draw do
       get 'pending_order_count'
       
       get 'top_sellers'
+      get 'top_buyers'
     end
   end
   

@@ -42,4 +42,14 @@ class PbMembersController < ApplicationController
     end
   end
   
+  def top_buyers
+    respond_to do |format|
+      format.html
+      format.json {
+        result = PbMember.top_buyers(params, @current_user)   
+        render json: result[:result]
+      }
+    end
+  end
+  
 end
