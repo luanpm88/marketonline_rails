@@ -201,7 +201,7 @@ class PbMember < ActiveRecord::Base
     elsif photo.present?
       "http://marketonline.vn/attachment/#{photo}"
     else
-      "/app/assets/images/placeholder.jpg"
+      "/assets/images/placeholder.jpg"
     end
   end
   
