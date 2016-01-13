@@ -27,7 +27,8 @@ class PbMember < ActiveRecord::Base
   has_many :agent_payments
   
   def display_name
-    return username if !pb_memberfield.present? or !pb_memberfield.first_name.present? and !pb_memberfield.last_name.present?
+    return username if !pb_memberfield.present?
+    return username if !pb_memberfield.first_name.present? and !pb_memberfield.last_name.present?
     pb_memberfield.first_name+" "+pb_memberfield.last_name
   end
   
