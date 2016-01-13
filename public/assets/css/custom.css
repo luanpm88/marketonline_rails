@@ -219,11 +219,7 @@ body {
         padding-bottom: 160px;
     }
 }
-@media screen and (min-width: 450px) {
-    .navigation > li a {
-        font-size: 15px;
-    }
-}
+
 .navbar-nav > .dropdown-user img, .media-left img:not(.media-preview), .media-right img:not(.media-preview), .thumbnail .media img:not(.media-preview) {
     border: 1px solid rgba(255, 255, 255, 0.6);
 }
@@ -427,4 +423,9 @@ legend {
 }
 .sidebar-xs-indicator .navbar-nav .dropdown-user .dropdown-menu-right {
     padding-bottom: 30px;
+}
+@media screen and (min-width: 450px) {
+    .navigation > li a {
+        font-size: 15px;
+    }
 }
