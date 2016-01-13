@@ -338,7 +338,7 @@ class PbMember < ActiveRecord::Base
   end
   
   def display_address
-    return "" if pb_memberfield.present?
+    return "" if !pb_memberfield.present?
     pb_memberfield.address+", "+pb_memberfield.pb_area.full_name
   end
   
