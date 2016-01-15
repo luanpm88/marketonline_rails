@@ -440,7 +440,7 @@ class Deal < ActiveRecord::Base
       row = [
               "#{item.display_name}",
               item.display_address,
-              item.pb_memberfield.mobile,
+              (item.pb_memberfield.present? ? item.pb_memberfield.mobile : ""),
               item.email,
               "<div class=\"\">#{ApplicationController.helpers.format_price(user.deal_items({buyer_id: item.id}).sum(:quantity).to_s)}</div>",
               "<div class=\"\">#{ApplicationController.helpers.format_price(user.deal_income({buyer_id: item.id}))}</div>",

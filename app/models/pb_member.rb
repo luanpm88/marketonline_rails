@@ -222,7 +222,7 @@ class PbMember < ActiveRecord::Base
     if filters[:seller_id].present?
       items = items.includes(:pb_saleorder).where(pb_saleorders: {seller_id: filters[:seller_id]})
     end
-    
+
     return items
   end
   
@@ -453,7 +453,7 @@ class PbMember < ActiveRecord::Base
     self.update_attribute(:real_total_bought, real_total_bought)
     self.update_attribute(:total_bought_products, total_bought_items_count)
   end
-  
+
   def real_total_sales
     total = 0.0
     pb_sell_saleorderitems.each do |soi|
@@ -461,7 +461,7 @@ class PbMember < ActiveRecord::Base
     end
     return total
   end
-  
+
   def real_total_bought
     total = 0.0
     pb_saleorderitems.each do |soi|
