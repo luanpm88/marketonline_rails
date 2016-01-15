@@ -99,9 +99,11 @@ class PbSaleorder < ActiveRecord::Base
     end
     
     if filters["buyer"].present?
-      seller_ids = PbMember.where("LOWER(pb_members.username) LIKE ?", "%#{filters["buyer"].strip.mb_chars.downcase}%").map(&:id).uniq
+      q = "%#{filters["buyer"].strip.mb_chars.downcase}%"
+      buyer_ids = PbMember.joins(:pb_memberfield).where("LOWER(pb_members.username) LIKE ? OR LOWER(pb_members.email) LIKE ? OR LOWER(pb_memberfields.first_name) LIKE ? OR LOWER(pb_memberfields.last_name) LIKE ?", q, q, q, q).map(&:id).uniq
+      buyer_ids << -1
       
-      @records = @records.where(buyer_id: seller_ids)
+      @records = @records.where("pb_saleorders.buyer_id IN (#{buyer_ids.join(",")}) OR LOWER(pb_saleorders.fullname) LIKE ? OR LOWER(pb_saleorders.receiver_fullname) LIKE ? OR LOWER(pb_saleorders.mobile) LIKE ? OR LOWER(pb_saleorders.email) LIKE ? OR LOWER(pb_saleorders.receiver_mobile) LIKE ? OR LOWER(pb_saleorders.receiver_email) LIKE ?", q, q, q, q, q, q)
     end
     
     
@@ -112,11 +114,10 @@ class PbSaleorder < ActiveRecord::Base
     data = []
     
     @records.uniq.each do |item|
-      item.seller.update_total_sales
-      userame = item.buyer.present? ? "("+item.buyer.username+")" : ""
+      item.seller.update_total_sales      
       row = [
               "<div class=\"\"><a target=\"_blank\" href=\"#{item.seller.pb_company.url}\">#{item.seller.pb_company.shop_name}</a><br />#{item.seller.display_name}</div>",
-              "<div class=\"\">#{item.fullname}<br/>#{userame}</div>",
+              "<div class=\"\">#{item.display_buyer}</div>",
               item.display_products,
               item.display_quantities,
               "<div class=\"text-nowrap text-right\">#{item.display_single_prices}</div>",
@@ -136,6 +137,19 @@ class PbSaleorder < ActiveRecord::Base
     result["data"] = data
     
     return {result: result}
+  end
+  
+  def display_buyer
+    str = []
+    str << "#{fullname}"
+    str << "#{mobile}"
+    str << "#{email}"   
+    str << "username: "+buyer.username if buyer.present?
+    str << "email: "+buyer.email if buyer.present?
+    str << "user's fullname"+buyer.display_name+")" if buyer.present?
+    
+    
+    return str.join("<br />")
   end
   
   def display_statuses
