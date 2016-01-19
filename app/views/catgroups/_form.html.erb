@@ -1,0 +1,41 @@
+<%= form_for(@catgroup, html: {multipart: true}) do |f| %>
+  <% if @catgroup.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@catgroup.errors.count, "error") %> prohibited this catgroup from being saved:</h2>
+
+      <ul>
+      <% @catgroup.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    Tên nhóm<br>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+  <br />
+  <div class="field ">
+    Các chuyên mục<br>
+    <%= select_tag "catgroup[cat_ids][]", options_for_select(PbIndustry.all.collect {|p| [ p.name, p.id ]}, @catgroup.industry_ids), {multiple: "mutiple"} %>
+  </div>
+  <br />
+  <div class="field">
+    Hình ảnh<br>
+    <%= f.file_field :image, class: "form-control" %>
+  </div>
+  <br />
+  <div class="field">
+    Thứ tự<br>
+    <%= f.text_field :display_order, class: "form-control" %>
+  </div>
+  <br />
+  <div class="actions">
+    <%= f.submit(class: "form-control btn btn-primary", value: "Lưu") %>
+  </div>
+<% end %>
+
+<script>
+  $("#catgroup_cat_ids_").select2();
+</script>

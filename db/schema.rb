@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160111073751) do
+ActiveRecord::Schema.define(version: 20160119063934) do
 
   create_table "ad_clicks", force: :cascade do |t|
     t.integer  "ad_id",         limit: 4
@@ -371,6 +371,15 @@ ActiveRecord::Schema.define(version: 20160111073751) do
 
   add_index "pb_carts", ["member_id", "created"], name: "member_id_2", using: :btree
   add_index "pb_carts", ["member_id"], name: "member_id", using: :btree
+
+  create_table "pb_catgroups", force: :cascade do |t|
+    t.string   "name",          limit: 255
+    t.text     "cat_ids",       limit: 65535
+    t.string   "image",         limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "display_order", limit: 4
+  end
 
   create_table "pb_chats", force: :cascade do |t|
     t.string  "type",                limit: 7,     default: "user", null: false
@@ -1166,8 +1175,7 @@ ActiveRecord::Schema.define(version: 20160111073751) do
     t.datetime "created",                 null: false
   end
 
-  create_table "pb_members", id: false, force: :cascade do |t|
-    t.integer  "id",                        limit: 4,                                  null: false
+  create_table "pb_members", force: :cascade do |t|
     t.string   "space_name",                limit: 255,                  default: "",  null: false
     t.integer  "templet_id",                limit: 2,                    default: 0,   null: false
     t.string   "username",                  limit: 25,                   default: "",  null: false

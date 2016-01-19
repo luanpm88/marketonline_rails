@@ -17,4 +17,9 @@ class PbIndustry < ActiveRecord::Base
     return deals.where(status: 1).where(approved: 1)
   end
   
+  def self.general_search(params, user)
+    result = self.all
+    result = result.limit(50).map {|model| {:id => model.id, :text => model.name}}
+  end
+  
 end

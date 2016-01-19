@@ -1,0 +1,40 @@
+					<!-- Ajax sourced data -->
+					<div class="panel panel-flat datatable_box">
+						<div class="panel-heading">
+							<h5 class="panel-title">Danh sách Nhóm chuyên mục</h5>
+							<div class="heading-elements">
+								<%= link_to '<i class="icon-plus3 position-left"></i> Tạo nhóm mới'.html_safe, new_catgroup_path, class: "btn btn-xs btn-default pull-left" %>
+		                	</div>
+						</div>
+
+                        <hr style="margin:0" />
+						<table class="table table-striped table-hover no-footer">
+							<thead>
+								<tr class="border-double">
+                                    <th width="1%">Hình</th>
+					                <th class="text-nowrap">Tên nhóm</th>					                
+					                <th class="text-nowrap">Chuyên mục</th>
+									<th class="text-nowrap">Thứ tự</th>
+					                <th class="text-nowrap">Thao tác</th>
+					            </tr>
+							</thead>
+                            <tbody>
+                              <% @catgroups.each do |catgroup| %>
+                                <tr>
+                                  <td class="text-nowrap"><img width="100px" src="<%= root_path %><%= catgroup.image.thumb.url %>" /></td>
+                                  <td class="text-nowrap"><%= catgroup.name %></td>
+                                  <td><%= catgroup.industries.map(&:name).join(", ") %></td>
+								  <td><%= catgroup.display_order %></td>                                  
+                                  <td>
+                                    <%= link_to 'Sửa', edit_catgroup_path(catgroup) %>
+                                    <%= link_to 'Xóa', catgroup, method: :delete, data: { confirm: 'Are you sure?' } %>
+                                  </td>
+                                </tr>
+                              <% end %>
+                            </tbody>
+                              
+						</table>
+					</div>
+					<!-- /ajax sourced data -->
+					
+					

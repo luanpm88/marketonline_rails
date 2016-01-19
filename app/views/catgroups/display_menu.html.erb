@@ -1,0 +1,10 @@
+          <ul>
+            <% Catgroup.ordered.each do |cg| %>
+              <li>				
+                  <a href="#">
+                      <h4><%= cg.name %></h4>
+                      <img src="http://marketonline.vn:3000<%= root_path %><%= cg.image.thumb.url %>" />
+                  </a>
+              </li>
+            <% end %>			
+		</ul>

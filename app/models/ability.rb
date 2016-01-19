@@ -23,6 +23,9 @@ class Ability
     can :home, Deal
     can :ajax_deal_info, Deal
     
+    can :read, Catgroup
+    can :display_menu, Catgroup
+    
     can :ajax_content, SystemMessage
     
     if user.present?
@@ -107,6 +110,7 @@ class Ability
         can :manage, PbMember
         can :manage, SystemMessage
         can :manage, PbSaleorder
+        can :manage, Catgroup
       end
     end
     

@@ -1,0 +1,2 @@
+module CatgroupsHelper
+end

@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :catgroups do
+    collection do
+      get 'display_menu'
+    end
+  end
   resources :agent_payments do
     collection do
       get 'datatable'
