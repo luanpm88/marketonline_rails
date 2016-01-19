@@ -20,4 +20,15 @@ class Catgroup < ActiveRecord::Base
     self.all.order("display_order")
   end
   
+  def update_related_cat_ids
+    ids = []
+    industries.each do |i|
+      ids += i.children.split(",")
+    end
+    
+    self.update_attribute(:related_cat_ids, ids.join(","))
+    
+    return ids
+  end
+  
 end

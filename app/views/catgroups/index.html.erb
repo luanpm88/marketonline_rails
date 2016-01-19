@@ -13,7 +13,8 @@
 								<tr class="border-double">
                                     <th width="1%">Hình</th>
 					                <th class="text-nowrap">Tên nhóm</th>					                
-					                <th class="text-nowrap">Chuyên mục</th>
+					                <th class="text-nowrap">Chuyên mục chính</th>
+									<th class="text-nowrap">Tổng số chuyên mục</th>
 									<th class="text-nowrap">Thứ tự</th>
 					                <th class="text-nowrap">Thao tác</th>
 					            </tr>
@@ -24,7 +25,8 @@
                                   <td class="text-nowrap"><img width="100px" src="<%= root_path %><%= catgroup.image.thumb.url %>" /></td>
                                   <td class="text-nowrap"><%= catgroup.name %></td>
                                   <td><%= catgroup.industries.map(&:name).join(", ") %></td>
-								  <td><%= catgroup.display_order %></td>                                  
+								  <td><%= catgroup.related_cat_ids.split(",").count %></td>   
+								  <td><%= catgroup.display_order %></td>								  
                                   <td>
                                     <%= link_to 'Sửa', edit_catgroup_path(catgroup) %>
                                     <%= link_to 'Xóa', catgroup, method: :delete, data: { confirm: 'Are you sure?' } %>

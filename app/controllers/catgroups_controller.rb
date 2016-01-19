@@ -34,6 +34,7 @@ class CatgroupsController < ApplicationController
 
     respond_to do |format|
       if @catgroup.save
+        @catgroup.update_related_cat_ids
         format.html { redirect_to catgroups_path, notice: 'Catgroup was successfully created.' }
         format.json { render :show, status: :created, location: @catgroup }
       else
@@ -48,6 +49,7 @@ class CatgroupsController < ApplicationController
   def update
     respond_to do |format|
       if @catgroup.update(catgroup_params)
+        @catgroup.update_related_cat_ids
         format.html { redirect_to catgroups_path, notice: 'Catgroup was successfully updated.' }
         format.json { render :show, status: :ok, location: @catgroup }
       else
