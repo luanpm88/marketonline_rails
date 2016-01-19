@@ -45,6 +45,11 @@ class Catgroup < ActiveRecord::Base
     if params[:type].present?
       str << params[:type]
     end
+    
+    str << "vung-mien"
+    str << self.id
+    str << self.name.unaccent.downcase.gsub(/\s+/,"xaaaaax").gsub(/[^a-zA-Z0-9]/, '').gsub("xaaaaax","-")
+    
     return str.join("/")
   end
   
