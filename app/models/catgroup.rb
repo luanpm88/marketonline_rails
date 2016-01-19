@@ -3,6 +3,7 @@ class Catgroup < ActiveRecord::Base
   
   mount_uploader :image, CatgroupUploader
   
+  
   def industry_ids
     return [] if cat_ids.nil?
     JSON.parse(cat_ids)
@@ -31,8 +32,20 @@ class Catgroup < ActiveRecord::Base
     return ids
   end
   
-  def area_link
-    
+  def area_link(params)
+    str = ["http://marketonline.vn"]
+    str << ["thi-truong"]
+    if params[:areatype_id].present?
+      str << PbAreatype.find(params[:areatype_id]).name.unaccent.downcase.gsub(/\s+/,"xaaaaax").gsub(/[^a-zA-Z0-9]/, '').gsub("xaaaaax","-")
+    end
+    if params[:area_id].present?
+      str << PbArea.find(params[:area_id]).id
+      str << PbArea.find(params[:area_id]).name.unaccent.downcase.gsub(/\s+/,"xaaaaax").gsub(/[^a-zA-Z0-9]/, '').gsub("xaaaaax","-")
+    end
+    if params[:type].present?
+      str << params[:type]
+    end
+    return str.join("/")
   end
   
 end

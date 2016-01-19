@@ -15,6 +15,7 @@ class CatgroupsController < ApplicationController
   end
   
   def display_menu
+    
     render layout: nil
   end
 
