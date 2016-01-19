@@ -25,7 +25,7 @@
                                   <td class="text-nowrap"><img width="100px" src="<%= root_path %><%= catgroup.image.thumb.url %>" /></td>
                                   <td class="text-nowrap"><%= catgroup.name %></td>
                                   <td><%= catgroup.industries.map(&:name).join(", ") %></td>
-								  <td><%= catgroup.related_cat_ids.split(",").count %></td>   
+								  <td><%= catgroup.related_cat_ids.to_s.split(",").count %></td>   
 								  <td><%= catgroup.display_order %></td>								  
                                   <td>
                                     <%= link_to 'Sửa', edit_catgroup_path(catgroup) %>
