@@ -22,7 +22,7 @@
                             <tbody>
                               <% @catgroups.each do |catgroup| %>
                                 <tr>
-                                  <td class="text-nowrap"><img width="100px" src="<%= root_path %><%= catgroup.image.thumb.url %>" /></td>
+                                  <td class="text-nowrap"><img width="150px" src="<%= catgroup.image.thumb.url %>" /></td>
                                   <td class="text-nowrap"><%= catgroup.name %></td>
                                   <td><%= catgroup.industries.map(&:name).join(", ") %></td>
 								  <td><%= catgroup.related_cat_ids.to_s.split(",").count %></td>   

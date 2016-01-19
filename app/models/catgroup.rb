@@ -31,4 +31,8 @@ class Catgroup < ActiveRecord::Base
     return ids
   end
   
+  def area_link
+    
+  end
+  
 end
