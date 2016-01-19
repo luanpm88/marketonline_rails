@@ -1,6 +1,7 @@
 class PbIndustry < ActiveRecord::Base
   has_many :deals, foreign_key: "top_industry_id"
   has_many :child_cats, class_name: "PbIndustry", foreign_key: "parent_id"
+  belongs_to :parent, class_name: "PbIndustry", foreign_key: "parent_id"
   
   def self.input_options(lvl=1, user)
     options = [["- Chọn chuyên mục -",""]]
@@ -44,6 +45,10 @@ class PbIndustry < ActiveRecord::Base
     self.update_attribute(:children, ids.join(","))
     
     return ids
+  end
+  
+  def parent_name
+    parent.nil? ? "" : parent.name
   end
   
 end

@@ -18,7 +18,7 @@
   <br />
   <div class="field ">
     Các chuyên mục<br>
-    <%= select_tag "catgroup[cat_ids][]", options_for_select(PbIndustry.all.collect {|p| [ p.name, p.id ]}, @catgroup.industry_ids), {multiple: "mutiple"} %>
+    <%= select_tag "catgroup[cat_ids][]", options_for_select(PbIndustry.all.collect {|p| [ p.parent_name+" -> "+p.name, p.id ]}, @catgroup.industry_ids), {multiple: "mutiple"} %>
   </div>
   <br />
   <div class="field">
