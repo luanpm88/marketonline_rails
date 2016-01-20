@@ -3,7 +3,7 @@
 						<div class="panel-heading">
 							<h5 class="panel-title">Bài viết giới thiệu</h5>
                             <div class="heading-elements">
-								<%= link_to '<i class="icon-plus3 position-left"></i> Tạo thông báo mới'.html_safe, new_pb_areainfo_path(type_name: params[:type_name]), class: "btn btn-xs btn-default pull-left" %>
+								<%= link_to '<i class="icon-plus3 position-left"></i> Tạo '.html_safe+(params[:type_name] == "gt" ? "giới thiệu" : "thông báo")+' mới'.html_safe, new_pb_areainfo_path(type_name: params[:type_name]), class: "btn btn-xs btn-default pull-left" %>
 		                	</div>
 						</div>						
 						<table class="table table-striped table-hover no-footer datatable-ajax" url="<%= member_datatable_pb_areainfos_path(format: "json", type_name: params[:type_name]) %>">
