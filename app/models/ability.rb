@@ -30,6 +30,16 @@ class Ability
     
     can :display_tree, PbArea
     
+    can :read, PbAreainfo
+    can :create, PbAreainfo
+    can :update, PbAreainfo do |c|
+      c.member_id == user.id
+    end    
+    can :read, PbAreainfo
+    can :delete, PbAreainfo do |c|
+      c.member_id == user.id
+    end    
+    
     if user.present?
       if user.present?
         can :manage, :home

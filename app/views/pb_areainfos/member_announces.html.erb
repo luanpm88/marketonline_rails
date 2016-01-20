@@ -1,0 +1,23 @@
+					<!-- Ajax sourced data -->
+					<div class="panel panel-flat datatable_box">
+						<div class="panel-heading">
+							<h5 class="panel-title">Bài viết giới thiệu</h5>
+                            <div class="heading-elements">
+								<%= link_to '<i class="icon-plus3 position-left"></i> Tạo thông báo mới'.html_safe, new_pb_areainfo_path(type_name: "tb"), class: "btn btn-xs btn-default pull-left" %>
+		                	</div>
+						</div>						
+						<table class="table table-striped table-hover no-footer datatable-ajax" url="<%= datatable_pb_areainfos_path(format: "json", type_name: "gt") %>">
+							<thead>
+								<tr class="border-double">
+                                    <th class="text-nowrap">Khu vực</th>
+					                <th class="text-nowrap">Nội dung</th>					                				                
+					                <th class="text-nowrap">Ngày bắt đầu</th>
+									<th class="text-nowrap">Ngày hết hạn</th>
+									<th class="text-nowrap">Thao tác</th>
+					            </tr>
+							</thead>
+						</table>
+					</div>
+					<!-- /ajax sourced data -->
+					
+					

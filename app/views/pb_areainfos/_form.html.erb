@@ -1,0 +1,241 @@
+                <%= javascript_include_tag '/ckeditor/ckeditor.js' %>
+				<%= javascript_include_tag '/assets/js/plugins/forms/selects/select2.min.js' %>
+				<%= javascript_include_tag '/assets/js/pages/editor_ckeditor.js' %>
+				
+				<!-- Wizard with validation -->
+				<%= form_for(@pb_areainfo, html: {class: "form-validate"}) do |f| %>
+				<%= f.hidden_field :type_name %>
+		            <div class="panel panel-white">
+						<div class="panel-heading">
+							<h6 class="panel-title">
+								<% if @pb_areainfo.type_name == 'tb' %>
+									Đăng thông báo
+								<% elsif @pb_areainfo.type_name == 'gt' %>
+									Đăng bài giới thiệu
+								<% end %>
+							</h6>
+						</div>
+						
+						<div class="panel-body">							
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label>Tiêu đề <span class="text-danger">*</span></label>
+										<%= f.text_field :title, required: "required", class: "form-control required", placeholder: "Tiêu đề" %>												
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-8">
+									<div class="form-group">
+										<label>Chọn thị trường <span class="text-danger">*</span></label>
+										<div>
+											<%= f.text_field :area_ids, required: "required", class: "select2-ajax multiple", data_link: pb_areas_path(format: "json"), placeholder: "Tìm khu vực...", value: @pb_areainfo.area_id, text: @pb_areainfo.area_name, values: @pb_areainfo.json_encode_area_ids_names %>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-2">
+									<div class="form-group">
+										<label>Ngày đăng <span class="text-danger">*</span></label>
+										<%= f.text_field :start_at, class: "form-control date_control required", value: (@pb_areainfo.start_at.nil? ? "" : @pb_areainfo.start_at.strftime("%d-%m-%Y")) %>
+									</div>
+								</div>
+								<div class="col-md-2">
+									<div class="form-group">
+										<label>Ngày kết thúc <span class="text-danger">*</span></label>
+										<div>
+											<%= f.text_field :end_at, class: "form-control date_control required", value: (@pb_areainfo.end_at.nil? ? "" : @pb_areainfo.end_at.strftime("%d-%m-%Y")) %>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label>Nội dung <span class="text-danger">*</span></label>
+										<%= f.text_area :content, class: "form-control required", id: "editor-full" %>
+									</div>
+								</div>
+							</div>
+								
+								
+										
+							<div class="text-right">
+								<button type="submit" class="btn btn-primary">Lưu <i class="icon-arrow-right14 position-right"></i></button>
+							</div>
+
+						</div>
+                    </div>
+				
+				<% end %>
+
+
+<script>
+	
+	function updateDealType() {
+        var val = $("input[name='deal[deal_type]']:checked").val();
+		$(".deal_type_group").hide()
+		$(".deal_type_group."+val).show()
+    }
+	
+	function updateFormPrice() {
+        if($("#deal_price").val() != "") {
+			var origin = parseFloat($("#deal_price").val().replace(/,/g,""))
+			var unit = $(".product_unit").html()
+			
+			// update unit
+			$(".copied_product_unit").html(unit)
+			
+			// Calculate agent price
+			if ($("#deal_agent_price").val() != "") {
+                $(".agent_remain").show()
+				
+				var value = parseFloat($("#deal_agent_price").val().replace(/,/g,""))
+				var remain = origin*(value/100)
+				
+				$(".agent_remain_price").html(ReplaceNumberWithDots(remain.toFixed(0)))
+            } else {
+				$(".agent_remain").hide()
+			}
+			
+			// Calculate share price
+			if ($("#deal_share_price").val() != "") {
+                $(".share_remain").show()
+				
+				var value = parseFloat($("#deal_share_price").val().replace(/,/g,""))
+				var remain = origin*(1 - value/100)
+				
+				$(".share_remain_price").html(ReplaceNumberWithDots(remain.toFixed(0)))
+            } else {
+				$(".share_remain").hide()
+			}
+		} else {
+			$(".agent_remain").hide()
+			$(".share_remain").hide()
+		}
+    }
+	
+	function renderProductDetail(id) {
+		if (id == "") {
+			$(".product_details").html("")
+			return
+		}
+		$.ajax({
+            url : '<%= show_product_details_deals_path %>?product_id='+id,
+            success:function(data, textStatus, jqXHR)
+            {
+                $(".product_details").html(data)
+				updateFormPrice()
+            }
+        })
+	}
+	
+	$('#deal_start_at, #deal_end_at').daterangepicker({ 
+            singleDatePicker: true,
+            locale: {
+                        format: 'DD-MM-YYYY',
+                        closeText: "Đóng",
+                        prevText: "Trước",
+                        nextText: "Sau",
+                        currentText: "Hôm nay",
+                        monthNames: ["Tháng một", "Tháng hai", "Tháng ba", "Tháng tư", "Tháng năm", "Tháng sáu", "Tháng bảy", "Tháng tám", "Tháng chín", "Tháng mười", "Tháng mười một", "Tháng mười hai"],
+                        monthNamesShort: ["Một", "Hai", "Ba", "Bốn", "Năm", "Sáu", "Bảy", "Tám", "Chín", "Mười", "Mười một", "Mười hai"],
+                        dayNames: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"],
+                        dayNamesShort: ["CN", "Hai", "Ba", "Tư", "Năm", "Sáu", "Bảy"],
+                        daysOfWeek: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
+                        weekHeader: "Tuần",
+                        dateFormat: "dd/mm/yy",
+                        firstDay: 1,
+                        isRTL: false,
+                        showMonthAfterYear: false,
+                        cancelLabel: "Đóng",
+                        applyLabel: "Lưu",
+                        startLabel: "Bắt đầu",
+                        endLabel: "Kết thúc",
+                        customRangeLabel: "Tùy chọn"
+
+            },
+    });
+	
+	var validator = $(".new_deal").validate({
+        lang: 'vi',
+        ignore: ':hidden', // ignore hidden fields
+        errorClass: 'validation-error-label',
+        successClass: 'validation-valid-label',
+        highlight: function(element, errorClass) {  
+            $(element).removeClass(errorClass);
+        },
+        unhighlight: function(element, errorClass) {
+            $(element).removeClass(errorClass);
+        },
+        validClass: "validation-valid-label",
+        success: function(label) {
+            label.addClass("validation-valid-label").text("Hoàn tất.")
+        },
+        messages: {
+            "deal[pb_product_id]": "Hãy chọn sản phẩm.",
+        }
+    });
+	var validator = $(".edit_deal").validate({
+        lang: 'vi',
+        ignore: ':hidden', // ignore hidden fields
+        errorClass: 'validation-error-label',
+        successClass: 'validation-valid-label',
+        highlight: function(element, errorClass) {  
+            $(element).removeClass(errorClass);
+        },
+        unhighlight: function(element, errorClass) {
+            $(element).removeClass(errorClass);
+        },
+        validClass: "validation-valid-label",
+        success: function(label) {
+            label.addClass("validation-valid-label").text("Hoàn tất.")
+        },
+        messages: {
+            "deal[pb_product_id]": "Hãy chọn sản phẩm.",
+        }
+    });
+	
+	renderProductDetail($('input[name="deal[pb_product_id]"]').val())
+	$('input[name="deal[pb_product_id]"]').change(function() {
+		renderProductDetail($(this).val())
+	})
+	
+	updateFormPrice()
+	
+	$('#deal_price').change(function() {
+		updateFormPrice()
+	})
+	$('#deal_price').keyup(function() {
+		updateFormPrice()
+	})
+	
+	$('#deal_agent_price').change(function() {
+		updateFormPrice()
+	})
+	$('#deal_agent_price').keyup(function() {
+		updateFormPrice()
+	})
+	
+	$('#deal_share_price').change(function() {
+		updateFormPrice()
+	})
+	$('#deal_share_price').keyup(function() {
+		updateFormPrice()
+	})
+	
+	updateDealType()
+	$("input[name='deal[deal_type]']").change(function() {
+		updateDealType()
+	})
+	
+</script>
+
+
+<script>
+	 $(document).ready(function() {
+		  vs = JSON.parse($('input[name="pb_areainfo[area_ids]"]').attr('values'))
+		  $('input[name="pb_areainfo[area_ids]"]').select2('data', vs)
+	 });
+</script>

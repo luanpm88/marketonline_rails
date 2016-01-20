@@ -552,9 +552,16 @@ $(document).ready(function() {
         success: function(label) {
             label.addClass("validation-valid-label").text("Hoàn tất.")
         },
+        rules: {
+            "pb_areainfo[content]": {
+                minlength: 5,
+                required: true,
+            },
+        },
         messages: {
             "ad[ad_position_id]": "Hãy chọn vị trí.",
             "ad[image]": "Hãy chọn ảnh.",
+            "pb_areainfo[area_id]": "Hãy chọn thị trường cần đăng.",
         }
     });
     
@@ -658,5 +665,36 @@ $(document).ready(function() {
                                     }
                         }
             });
+            
+            
+            
+            
+            
+            $('.date_control').daterangepicker({ 
+            singleDatePicker: true,
+            locale: {
+                        format: 'DD-MM-YYYY',
+                        closeText: "Đóng",
+                        prevText: "Trước",
+                        nextText: "Sau",
+                        currentText: "Hôm nay",
+                        monthNames: ["Tháng một", "Tháng hai", "Tháng ba", "Tháng tư", "Tháng năm", "Tháng sáu", "Tháng bảy", "Tháng tám", "Tháng chín", "Tháng mười", "Tháng mười một", "Tháng mười hai"],
+                        monthNamesShort: ["Một", "Hai", "Ba", "Bốn", "Năm", "Sáu", "Bảy", "Tám", "Chín", "Mười", "Mười một", "Mười hai"],
+                        dayNames: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"],
+                        dayNamesShort: ["CN", "Hai", "Ba", "Tư", "Năm", "Sáu", "Bảy"],
+                        daysOfWeek: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
+                        weekHeader: "Tuần",
+                        dateFormat: "dd/mm/yy",
+                        firstDay: 1,
+                        isRTL: false,
+                        showMonthAfterYear: false,
+                        cancelLabel: "Đóng",
+                        applyLabel: "Lưu",
+                        startLabel: "Bắt đầu",
+                        endLabel: "Kết thúc",
+                        customRangeLabel: "Tùy chọn"
+
+            },
+    });
     
 });

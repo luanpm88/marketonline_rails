@@ -104,6 +104,13 @@ Rails.application.routes.draw do
       
       get 'intros'
       get 'announces'
+      
+      get 'member_intros'
+      get 'member_announces'
+      
+      get 'member_datatable'
+      get 'approve'
+      get 'unapprove'
     end
   end
   

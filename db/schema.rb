@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160119072807) do
+ActiveRecord::Schema.define(version: 20160120081810) do
 
   create_table "ad_clicks", force: :cascade do |t|
     t.integer  "ad_id",         limit: 4
@@ -240,6 +240,11 @@ ActiveRecord::Schema.define(version: 20160119072807) do
     t.integer  "status",         limit: 4,     default: 0, null: false
     t.datetime "created",                                  null: false
     t.integer  "area_moderator", limit: 4,                 null: false
+    t.string   "type_name",      limit: 255,               null: false
+    t.text     "title",          limit: 65535,             null: false
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.text     "area_ids",       limit: 65535
   end
 
   create_table "pb_areas", force: :cascade do |t|
@@ -271,6 +276,7 @@ ActiveRecord::Schema.define(version: 20160119072807) do
     t.integer  "status",         limit: 4,     default: 0, null: false
     t.datetime "created",                                  null: false
     t.integer  "area_moderator", limit: 4,                 null: false
+    t.string   "type_name",      limit: 255,               null: false
   end
 
   create_table "pb_areatypes", force: :cascade do |t|

@@ -257,6 +257,14 @@
 											<li <%= 'class=active' if ["agent_payments"].include?(params[:controller]) && ["user_payments"].include?(params[:action]) %>><a href="<%= user_payments_agent_payments_path %>">Tài khoản & Thu nhập</a></li>
 										</ul>
 									</li>
+									
+									<li <%= 'class=active' if ["pb_areainfos"].include?(params[:controller]) && ["tb"].include?(params[:type_name]) %>>
+										<a href="<%= pb_areainfos_path(type_name: "tb") %>"><i class="icon-megaphone"></i> <span>Thông báo</span></a>
+									</li>
+									
+									<li <%= 'class=active' if ["pb_areainfos"].include?(params[:controller]) && ["gt"].include?(params[:type_name]) %>>
+										<a href="<%= pb_areainfos_path(type_name: "gt") %>"><i class="icon-magazine"></i> <span>Giới thiệu</span></a>
+									</li>
 
 								<% if ["admin"].include? @current_user.role %>
 									<li <%= 'class=active' if ["pb_areatypeinfos"].include?(params[:controller]) %>>
@@ -277,8 +285,8 @@
 											</li>
 											<li <%= 'class=active' if ["catgroups"].include?(params[:controller]) %>><a href="<%= catgroups_path %>">Quản lý nhóm chuyên mục</a></li>
 											<li <%= 'class=active' if ["pb_areatypeinfos"].include?(params[:controller]) && ["index"].include?(params[:action]) %>><a href="<%= pb_areatypeinfos_path %>">Thị trường - Vị trí địa lý</a></li>
-											<li <%= 'class=active' if ["pb_areainfos"].include?(params[:controller]) && ["intros"].include?(params[:action]) %>><a href="<%= intros_pb_areainfos_path %>">Thị trường - Giới thiệu</a></li>
-											<li <%= 'class=active' if ["pb_areainfos"].include?(params[:controller]) && ["announces"].include?(params[:action]) %>><a href="<%= announces_pb_areainfos_path %>">Thị trường - Thông báo</a></li>
+											<!--<li <%= 'class=active' if ["pb_areainfos"].include?(params[:controller]) && ["intros"].include?(params[:action]) %>><a href="<%= intros_pb_areainfos_path %>">Thị trường - Giới thiệu</a></li>
+											<li <%= 'class=active' if ["pb_areainfos"].include?(params[:controller]) && ["announces"].include?(params[:action]) %>><a href="<%= announces_pb_areainfos_path %>">Thị trường - Thông báo</a></li>-->
 											<li <%= 'class=active' if ["pb_settings"].include?(params[:controller]) %>><a href="<%= pb_settings_path %>">Cấu hình hệ thống</a></li>
 											<li <%= 'class=active' if ["system_messages"].include?(params[:controller]) %>><a href="<%= system_messages_path %>">Nhãn nội dung hệ thống</a></li>
 										</ul>

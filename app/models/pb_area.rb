@@ -6,7 +6,7 @@ class PbArea < ActiveRecord::Base
     result = self.where.not(id: 1)
     result = result.where("LOWER(pb_areas.name) LIKE ?", "%#{params[:q].strip.downcase}%")
    
-    result = result.limit(50).map {|model| {:id => model.id, :text => model.full_name_inverse} }
+    result = result.limit(200).map {|model| {:id => model.id, :text => model.full_name_inverse} }
     result.unshift({"text": "Miền Nam", "id": -2})
     result.unshift({"text": "Miền Trung", "id": -3})
     result.unshift({"text": "Miền Bắc", "id": -4})
@@ -74,6 +74,19 @@ class PbArea < ActiveRecord::Base
     end
     
     return str.join("/")
+  end
+  
+  def self.select_toptions
+    
+    result = self.where.not(id: 1)
+    #result = result.where("LOWER(pb_areas.name) LIKE ?", "%#{params[:q].strip.downcase}%")
+   
+    result = result.map {|model| [model.full_name_inverse, model.id] }
+    #result.unshift(["Miền Nam", -2])
+    #result.unshift(["Miền Trung", -3])
+    #result.unshift(["Miền Bắc", -4])
+    
+    return result
   end
   
 end

@@ -118,6 +118,29 @@ module ApplicationHelper
         title = 'Chi tiết đơn hàng'
         
       end
+    elsif ["pb_areainfos"].include?(params[:controller])
+      if ["index"].include?(params[:action])
+        if params[:type_name] == "tb"
+            breadcrumb += '<li class="active">Thông báo</li>'
+            title = 'Thông báo'
+        elsif params[:type_name] == "gt"
+            breadcrumb += '<li class="active">Giới thiệu</li>'
+            title = 'Giới thiệu'
+        end
+      end
+      if ["show","edit"].include?(params[:action])
+        item = PbAreainfo.find(params[:id])
+        if item[:type_name] == "tb"
+            breadcrumb += '<li class=""><a href="'+pb_areainfos_path(type_name: item[:type_name])+'">Thông báo</a></li>'
+            
+            title = 'Nội dung thông báo'
+        elsif item[:type_name] == "gt"
+            breadcrumb += '<li class=""><a href="'+pb_areainfos_path(type_name: item[:type_name])+'">Giới thiệu</a></li>'
+            title = 'Nội dung giới thiệu'
+        end
+        breadcrumb += '<li class="active">'+item.title+'</li>'
+      end
+      
     end
     
     breadcrumb += '</ul>'

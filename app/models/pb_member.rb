@@ -26,6 +26,11 @@ class PbMember < ActiveRecord::Base
   
   has_many :agent_payments
   
+  def ability
+    @ability ||= Ability.new(self)
+  end
+  delegate :can?, :cannot?, :to => :ability
+  
   def display_name
     return username if !pb_memberfield.present?
     return username if !pb_memberfield.first_name.present? and !pb_memberfield.last_name.present?
