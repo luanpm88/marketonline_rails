@@ -11,6 +11,10 @@ class PbAreatypeinfo < ActiveRecord::Base
     q = params["search"]["value"].strip.downcase
     @records = @records.where("pb_areatypes.name LIKE ?", "%#{q}%") if !q.empty?
     
+    if params[:type_name].present?
+      @records = @records.where("pb_areatypeinfos.type_name = ?", params[:type_name])
+    end
+    
     total = @records.count
     @records = @records.limit(params[:length]).offset(params["start"])
     data = []
@@ -31,7 +35,7 @@ class PbAreatypeinfo < ActiveRecord::Base
                   "</li>"+
               "</ul></div>"
             ]
-      data << row      
+      data << row
     end
     
     result = {

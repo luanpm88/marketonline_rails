@@ -101,6 +101,9 @@ Rails.application.routes.draw do
     collection do
       get 'datatable'
       get 'delete'
+      
+      get 'intros'
+      get 'announces'
     end
   end
   

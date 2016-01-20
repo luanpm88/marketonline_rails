@@ -11,6 +11,11 @@ class PbAreainfo < ActiveRecord::Base
     q = params["search"]["value"].strip.downcase
     @records = @records.where("pb_areas.name LIKE ?", "%#{q}%") if !q.empty?
     
+    if params[:type_name].present?
+      @records = @records.where("pb_areainfos.type_name = ?", params[:type_name])
+    end
+    
+    
     total = @records.count
     @records = @records.limit(params[:length]).offset(params["start"])
     data = []

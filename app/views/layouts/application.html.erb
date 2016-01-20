@@ -276,7 +276,9 @@
 												<a href="<%= top_buyers_pb_members_path %>">Khách hàng mua nhiều</a>
 											</li>
 											<li <%= 'class=active' if ["catgroups"].include?(params[:controller]) %>><a href="<%= catgroups_path %>">Quản lý nhóm chuyên mục</a></li>
-											<li <%= 'class=active' if ["pb_areatypeinfos"].include?(params[:controller]) %>><a href="<%= pb_areatypeinfos_path %>">Vị tri địa lý</a></li>
+											<li <%= 'class=active' if ["pb_areatypeinfos"].include?(params[:controller]) && ["index"].include?(params[:action]) %>><a href="<%= pb_areatypeinfos_path %>">Thị trường - Vị trí địa lý</a></li>
+											<li <%= 'class=active' if ["pb_areainfos"].include?(params[:controller]) && ["intros"].include?(params[:action]) %>><a href="<%= intros_pb_areainfos_path %>">Thị trường - Giới thiệu</a></li>
+											<li <%= 'class=active' if ["pb_areainfos"].include?(params[:controller]) && ["announces"].include?(params[:action]) %>><a href="<%= announces_pb_areainfos_path %>">Thị trường - Thông báo</a></li>
 											<li <%= 'class=active' if ["pb_settings"].include?(params[:controller]) %>><a href="<%= pb_settings_path %>">Cấu hình hệ thống</a></li>
 											<li <%= 'class=active' if ["system_messages"].include?(params[:controller]) %>><a href="<%= system_messages_path %>">Nhãn nội dung hệ thống</a></li>
 										</ul>

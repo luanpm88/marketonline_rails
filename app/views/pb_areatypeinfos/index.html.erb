@@ -4,7 +4,7 @@
 						<div class="panel-heading">
 							<h5 class="panel-title">Danh sách Thông tin địa lý - Vùng miền</h5>
 						</div>						
-						<table class="table table-striped table-hover no-footer datatable-ajax" url="<%= datatable_pb_areatypeinfos_path(format: "json") %>">
+						<table class="table table-striped table-hover no-footer datatable-ajax" url="<%= datatable_pb_areatypeinfos_path(format: "json", type_name: "vtdl") %>">
 							<thead>
 								<tr class="border-double">
                                     <th>Khu vực</th>
@@ -24,7 +24,7 @@
 						<div class="panel-heading">
 							<h5 class="panel-title">Danh sách Thông tin địa lý - Tỉnh/Thành; Quận/Huyện</h5>
 						</div>						
-						<table class="table table-striped table-hover no-footer datatable-ajax" url="<%= datatable_pb_areainfos_path(format: "json") %>">
+						<table class="table table-striped table-hover no-footer datatable-ajax" url="<%= datatable_pb_areainfos_path(format: "json", type_name: "vtdl") %>">
 							<thead>
 								<tr class="border-double">
                                     <th>Khu vực</th>

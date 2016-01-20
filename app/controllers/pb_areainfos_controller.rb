@@ -10,6 +10,10 @@ class PbAreainfosController < ApplicationController
     render json: result[:result]
   end
   
+  def intros
+    #code
+  end
+  
   # DELETE /ads/1
   # DELETE /ads/1.json
   def delete
