@@ -1,11 +1,10 @@
 	  	<ul>
             <% Catgroup.ordered.each_with_index do |cg,index| %>
-              <li class="<%= "box" if index == 1 or index == 4 %>">				
+              <li class="">				
                   <a href="<%= cg.area_link(params) %>">
                       <h4><%= cg.name %></h4>
                       <img src="http://marketonline.vn:3000<%= root_path %><%= cg.image.thumb.url %>" />
                   </a>
               </li>
-			<%= "</ul><ul>" if index == 2 %>
             <% end %>			
 		</ul>
