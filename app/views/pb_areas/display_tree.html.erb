@@ -9,7 +9,7 @@
   
 </h2>
 <ul class="box" style="display: none">
-  <li>
+  <li style="border-bottom: 1px solid #ddd">
     <a href="<%= PbArea.new.area_link(params) %>">Tất cả Tỉnh/Thành</a>
   </li>
   <% PbAreatype.order("id DESC").each do |at| %>
