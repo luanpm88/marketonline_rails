@@ -1,0 +1,27 @@
+<h2 class="current_selected" onclick="$(this).parent().find('.box').toggle()">
+  <% if params[:area_id].present? %>
+    <%= PbArea.find(params[:area_id]).pb_areatype.name %> / <%= PbArea.find(params[:area_id]).name %>
+  <% elsif params[:areatype_id].present? %>
+    <%= PbAreatype.find(params[:areatype_id]).name %>
+  <% else %>
+    Tất cả khu vực
+  <% end %>
+  
+</h2>
+<ul class="box" style="display: none">
+  <% PbAreatype.order("id DESC").each do |at| %>
+    <li>
+      <a href=""><%= at.name %></a>
+      <% if !at.pb_areas.empty? %>
+        <ul>
+          <% at.pb_areas.order("display_order DESC").each do |a| %>
+            <li>
+              <a href="<%= a.area_link(params) %>"><%= a.name %></a>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    </li>  
+  <% end %>
+  
+</ul>

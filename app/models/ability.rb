@@ -28,6 +28,8 @@ class Ability
     
     can :ajax_content, SystemMessage
     
+    can :display_tree, PbArea
+    
     if user.present?
       if user.present?
         can :manage, :home

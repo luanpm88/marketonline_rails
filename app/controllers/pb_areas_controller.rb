@@ -8,4 +8,8 @@ class PbAreasController < ApplicationController
       }
     end
   end
+  
+  def display_tree
+    render layout: nil
+  end
 end

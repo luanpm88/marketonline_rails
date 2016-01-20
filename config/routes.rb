@@ -86,7 +86,7 @@ Rails.application.routes.draw do
   end
   resources :pb_areas do
     collection do
-      
+      get 'display_tree'
     end
   end
   
