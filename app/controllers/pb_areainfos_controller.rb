@@ -161,7 +161,7 @@ class PbAreainfosController < ApplicationController
         file.write(uploaded_io.read)
       end
       
-      render text: "<script>parent.editor_uploaded('<img style=\"max-width: 300px\" src=\""+public_path.to_s+"\" />')</script>"
+      render text: "<script>parent.editor_uploaded('<img src=\""+public_path.to_s+"\" />')</script>"
     end
     
     # check video
