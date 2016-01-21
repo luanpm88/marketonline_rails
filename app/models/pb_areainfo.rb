@@ -4,6 +4,8 @@ class PbAreainfo < ActiveRecord::Base
   belongs_to :pb_area, foreign_key: "area_id"
   belongs_to :pb_member, foreign_key: "member_id"
   
+  mount_uploader :image, AreainfoUploader
+  
   def self.datatable(params, user)    
     @records = self.includes(:pb_area).order("created DESC")
     
@@ -73,7 +75,8 @@ class PbAreainfo < ActiveRecord::Base
       if user.role == "admin"
         row << item.pb_member.display_name+"<br />"+item.pb_member.username
 	  end
-      row += [              
+      row += [
+			  '<img width="90" src="'+item.image_thumb+'" />',
               item.title,
               item.pb_areas.map(&:name).join(", "),              
               item.start_at.strftime("%d/%m/%Y"),
@@ -92,6 +95,14 @@ class PbAreainfo < ActiveRecord::Base
     result["data"] = data
     
     return {result: result}
+  end
+  
+  def image_thumb
+	if !image.present?
+	  return "http://marketonline.vn/images/icon/announce.png"
+	else
+	  return "http://marketonline.vn:3000/"+image.quare.url.to_s
+	end
   end
   
   def display_status

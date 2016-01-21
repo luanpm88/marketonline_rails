@@ -4,6 +4,20 @@ class PbAreainfosController < ApplicationController
   # load_and_authorize_resource
   before_action :set_pb_areainfo, only: [:delete, :show, :edit, :update, :destroy]
   
+  
+  def listing
+    if params[:info_page] == 'thong-bao'
+      @type_title = "Thông báo"
+      @new_list = PbAreainfo.where(type_name: "tb").order("created DESC")
+    elsif params[:info_page] == 'gioi-thieu'
+      @type_title = "Giới thiệu"
+      @new_list = PbAreainfo.where(type_name: "gt").order("created DESC")
+    end
+    
+    
+    render layout: nil
+  end
+  
   def index
   
   end
@@ -173,7 +187,7 @@ class PbAreainfosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pb_areainfo_params
-      params.require(:pb_areainfo).permit(:type_name, :area_ids, :start_at, :end_at, :title, :area_id, :member_id, :content, :status, :created, :type_name, :area_moderator)
+      params.require(:pb_areainfo).permit(:image, :type_name, :area_ids, :start_at, :end_at, :title, :area_id, :member_id, :content, :status, :created, :type_name, :area_moderator)
     end
   
 end

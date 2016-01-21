@@ -113,6 +113,8 @@ Rails.application.routes.draw do
       get 'unapprove'
       
       post 'upload_image_video'
+      
+      get 'listing'
     end
   end
   

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160120081810) do
+ActiveRecord::Schema.define(version: 20160121050402) do
 
   create_table "ad_clicks", force: :cascade do |t|
     t.integer  "ad_id",         limit: 4
@@ -245,6 +245,7 @@ ActiveRecord::Schema.define(version: 20160120081810) do
     t.datetime "start_at"
     t.datetime "end_at"
     t.text     "area_ids",       limit: 65535
+    t.string   "image",          limit: 255
   end
 
   create_table "pb_areas", force: :cascade do |t|

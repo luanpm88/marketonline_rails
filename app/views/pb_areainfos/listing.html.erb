@@ -1,0 +1,19 @@
+<% if !@new_list.empty? %>
+  <div class="info_page_listing_container">
+    <h2><%= @type_title %> mới</h2>
+    
+    <ul class="listing_ul">
+      <% @new_list.each do |af| %>
+        <li>
+          <a href="#">
+            <img src="<%= af.image_thumb %>" />
+            <h4><%= af.title %></h4>            
+          </a>
+          <p><%= af.content.gsub(/<\/?[^>]*>/, "")  %></p>
+          <a href="#" class="view_more_button">Xem thêm</a>
+        </li>
+      <% end %>
+    </ul>
+    
+  </div>
+<% end %>

@@ -14,7 +14,7 @@
   </li>
   <% PbAreatype.order("id DESC").each do |at| %>
     <li>
-      <a href=""><%= at.name %></a>
+      <a href="<%= at.area_link(params) %>"><%= at.name %></a>
       <% if !at.pb_areas.empty? %>
         <ul>
           <% at.pb_areas.order("display_order DESC").each do |a| %>

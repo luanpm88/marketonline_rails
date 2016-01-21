@@ -7,7 +7,7 @@
 				
 				
 				<!-- Wizard with validation -->
-				<%= form_for(@pb_areainfo, html: {class: "form-validate"}) do |f| %>
+				<%= form_for(@pb_areainfo, html: {class: "form-validate", multipart: true}) do |f| %>
 				<%= f.hidden_field :type_name %>
 		            <div class="panel panel-white">
 						<div class="panel-heading">
@@ -22,20 +22,10 @@
 						
 						<div class="panel-body">							
 							<div class="row">
-								<div class="col-md-12">
+								<div class="col-md-8">
 									<div class="form-group">
 										<label>Tiêu đề <span class="text-danger">*</span></label>
 										<%= f.text_field :title, required: "required", class: "form-control required", placeholder: "Tiêu đề" %>												
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-8">
-									<div class="form-group">
-										<label>Chọn thị trường <span class="text-danger">*</span></label>
-										<div>
-											<%= f.text_field :area_ids, required: "required", class: "select2-ajax multiple", data_link: pb_areas_path(format: "json"), placeholder: "Tìm khu vực...", value: @pb_areainfo.area_id, text: @pb_areainfo.area_name, values: @pb_areainfo.json_encode_area_ids_names %>
-										</div>
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -52,6 +42,25 @@
 										</div>
 									</div>
 								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-8">
+									<div class="form-group">
+										<label>Chọn thị trường <span class="text-danger">*</span></label>
+										<div>
+											<%= f.text_field :area_ids, required: "required", class: "select2-ajax multiple", data_link: pb_areas_path(format: "json"), placeholder: "Tìm khu vực...", value: @pb_areainfo.area_id, text: @pb_areainfo.area_name, values: @pb_areainfo.json_encode_area_ids_names %>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<label>Chọn ảnh đại diện <span class="text-danger">*</span></label>
+										<div>
+											<%= f.file_field :image, required: "required", class: "form-control file-styled" %>
+											<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
+										</div>
+									</div>
+								</div>	
 							</div>
 							
 							<div class="row">
@@ -256,6 +265,8 @@
 		updateDealType()
 	})
 	
+	
+	
 </script>
 
 
@@ -263,5 +274,11 @@
 	 $(document).ready(function() {
 		  vs = JSON.parse($('input[name="pb_areainfo[area_ids]"]').attr('values'))
 		  $('input[name="pb_areainfo[area_ids]"]').select2('data', vs)
+		  
+		  // File input
+			$(".file-styled").uniform({
+				fileButtonHtml: '<i class="icon-googleplus5"></i>',
+				wrapperClass: 'bg-warning'
+			});
 	 });
 </script>
