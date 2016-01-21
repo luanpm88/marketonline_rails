@@ -133,6 +133,38 @@ class PbAreainfosController < ApplicationController
     end
   end
   
+  def upload_image_video
+    `mkdir public/uploads/editor`    
+    uploaded_io = params[:upload_file]
+    file_name = Time.now.getutc.to_i.to_s+"."+uploaded_io.original_filename.split(".").last
+    path = Rails.root.join('public', 'uploads', 'editor', file_name)
+    public_path = 'http://local.marketonline.vn/app/uploads/editor/'+file_name
+    
+    # check image
+    images = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif']
+    if images.include?(uploaded_io.content_type)
+      File.open(path, 'wb') do |file|
+        file.write(uploaded_io.read)
+      end
+      
+      render text: "<script>parent.editor_uploaded('<img style=\"max-width: 300px\" src=\""+public_path.to_s+"\" />')</script>"
+    end
+    
+    # check video
+    videos = ['video/x-flv', 'video/mp4', 'application/x-mpegURL', 'video/MP2T', 'video/3gpp', 'video/quicktime', 'video/x-msvideo', 'video/x-ms-wmv']
+    if videos.include?(uploaded_io.content_type)
+      File.open(path, 'wb') do |file|
+        file.write(uploaded_io.read)
+      end
+      
+      video_tag = '<video width="100%" height="100%" autoplay controls>'
+      video_tag += '<source src="'+public_path+'" type="video/mp4">'
+      video_tag += 'Your browser does not support the video tag.'
+      video_tag += '</video>'
+      render text: "<script>parent.editor_uploaded('"+video_tag+"')</script>"
+    end
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_pb_areainfo

@@ -30,7 +30,7 @@ class PbAreainfo < ActiveRecord::Base
                   "<li class=\"dropup\">"+
                       "<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\"><i class=\"icon-menu7\"></i></a>"+
                       "<ul class=\"dropdown-menu dropdown-menu-right\">"+
-                          "<li>#{item.destroy_link}</li>"+
+                          "<li>#{item.destroy_link(user)}</li>"+
                       "</ul>"+
                   "</li>"+
               "</ul></div>"

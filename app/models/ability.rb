@@ -38,7 +38,8 @@ class Ability
     can :read, PbAreainfo
     can :delete, PbAreainfo do |c|
       c.member_id == user.id
-    end    
+    end
+    can :upload_image_video, PbAreainfo
     
     if user.present?
       if user.present?

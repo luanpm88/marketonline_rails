@@ -111,6 +111,8 @@ Rails.application.routes.draw do
       get 'member_datatable'
       get 'approve'
       get 'unapprove'
+      
+      post 'upload_image_video'
     end
   end
   

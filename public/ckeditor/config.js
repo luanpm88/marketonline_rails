@@ -31,12 +31,12 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'document',	   groups: [ 'mode', 'document', 'doctools' ] },
 		{ name: 'colors' },
 		{ name: 'tools' },
-		{ name: 'pbckcode' }
+		{ name: 'pbckcode' },
 	];
 
 
 	// CKEDITOR PLUGINS LOADING
-    config.extraPlugins = 'pbckcode'; // add other plugins here (comma separated)
+    config.extraPlugins = 'pbckcode,justify'; // add other plugins here (comma separated)
 
 	// Remove some buttons provided by the standard plugins, which are
 	// not needed in the Standard(s) toolbar.
@@ -80,4 +80,5 @@ CKEDITOR.editorConfig = function( config ) {
         // without any Internet connection
         js : "http://cdn.jsdelivr.net//ace/1.1.4/noconflict/"
     };
+	
 };

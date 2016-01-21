@@ -2,6 +2,10 @@
 				<%= javascript_include_tag '/assets/js/plugins/forms/selects/select2.min.js' %>
 				<%= javascript_include_tag '/assets/js/pages/editor_ckeditor.js' %>
 				
+				
+				
+				
+				
 				<!-- Wizard with validation -->
 				<%= form_for(@pb_areainfo, html: {class: "form-validate"}) do |f| %>
 				<%= f.hidden_field :type_name %>
@@ -54,6 +58,10 @@
 								<div class="col-md-12">
 									<div class="form-group">
 										<label>Nội dung <span class="text-danger">*</span></label>
+										<div class="upload_tools text-right" style="margin-bottom: 5px;
+																						margin-top: -30px;">											
+											<a id="editor_upload_button" class="btn btn-primary btn-xs upload-image-video">Tải hình ảnh/video</a>
+										</div>
 										<%= f.text_area :content, class: "form-control required", id: "editor-full" %>
 									</div>
 								</div>
@@ -68,8 +76,26 @@
 						</div>
                     </div>
 				
+			<% end %>
+			
+			
+			
+				<!-- UPLOADER -->
+				<iframe style="position: absolute; top: -900000px" id="editor_upload_frame" name="editor_upload_frame"></iframe>
+				<%= form_for(PbAreainfo.new, :url => upload_image_video_pb_areainfos_path, html: {multipart: true, id: "editor_upload_form", target: "editor_upload_frame"}) do |f| %>
+					<input style="position: absolute; top: -900000px" type="file" id="editor_upload_file" name="upload_file" />
 				<% end %>
-
+				<script>
+					function editor_uploaded(data) {
+                        CKEDITOR.instances["editor-full"].insertHtml(data);
+                    }
+					$("#editor_upload_button").click(function() {
+						$("#editor_upload_file").trigger("click")
+					});
+					$("#editor_upload_file").change(function() {
+						$("#editor_upload_form").submit();
+					})
+				</script>
 
 <script>
 	
