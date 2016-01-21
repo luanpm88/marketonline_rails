@@ -152,7 +152,7 @@ class PbAreainfosController < ApplicationController
     uploaded_io = params[:upload_file]
     file_name = Time.now.getutc.to_i.to_s+"."+uploaded_io.original_filename.split(".").last
     path = Rails.root.join('public', 'uploads', 'editor', file_name)
-    public_path = 'http://local.marketonline.vn/app/uploads/editor/'+file_name
+    public_path = 'http://marketonline.vn:3000/uploads/editor/'+file_name
     
     # check image
     images = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif']
