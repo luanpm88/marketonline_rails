@@ -3,7 +3,7 @@
   <div class="ad_sidebar_item">
       <a href="<%= click_ads_path(id: ad) %>" target="_blank">
           <h4><%= ad.name %></h4>
-          <img src="<%= ad.image_url(:banner) %>" />
+          <img src="<%= request.base_url %><%= ad.image_url(:banner) %>" />
       </a>
   </div>
   
