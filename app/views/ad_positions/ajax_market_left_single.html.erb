@@ -1,12 +1,12 @@
 <% if !@pos.nil? %>
-  <% @pos.active_ads.each do |ad| %>
-    
-    <div class="ad_sidebar_item">
-        <a title="<%= ad.description %>" href="<%= click_ads_path(id: ad) %>" target="_blank">
-            <h4><%= ad.name %></h4>
-            <img src="<%= request.base_url %><%= ad.image_url(:banner) %>" />
-        </a>
-    </div>
-    
-  <% end %>
+    <% @pos.active_ads.each do |ad| %>
+      
+      <div class="ad_sidebar_item">
+          <a title="<%= ad.description %>" href="<%= click_ads_path(id: ad) %>" target="_blank">
+              <h4><%= ad.name %></h4>
+              <img src="<%= request.base_url %><%= ad.image_url(:banner) %>" />
+          </a>
+      </div>
+      
+    <% end %>
 <% end %>
