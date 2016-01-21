@@ -10,7 +10,7 @@
             <a href="<%= af.area_link(params) %>">
               <h4><%= af.title %></h4>            
             </a>
-            <p><%= af.content.html_safe  %></p>
+            <p><%= af.content.gsub(/<\/?[^>]*>/, "")  %></p>
           </div>
           <a href="<%= af.area_link(params) %>" class="view_more_button">Xem thêm</a>
         </li>
