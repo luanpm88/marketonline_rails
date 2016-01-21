@@ -20,8 +20,11 @@ class Ability
     can :iframe_7_wide_banners, AdPosition
     can :iframe_area_top_3_banner, AdPosition
     can :get_remaining_time, AdPosition
+    can :ajax_market_left_single, AdPosition
+    
     can :home, Deal
     can :ajax_deal_info, Deal
+    
     
     can :read, Catgroup
     can :display_menu, Catgroup

@@ -5,6 +5,8 @@ class AdPositionsController < ApplicationController
   # GET /ad_positions
   # GET /ad_positions.json
   def index
+    authorize! :manage, AdPosition
+    
     @page_title = "<i class=\"icon-stack2 position-left\"></i> Vị trí đặt quảng cáo".html_safe
 
     @ad_positions = AdPosition.all
@@ -13,20 +15,27 @@ class AdPositionsController < ApplicationController
   # GET /ad_positions/1
   # GET /ad_positions/1.json
   def show
+    authorize! :manage, AdPosition
   end
 
   # GET /ad_positions/new
   def new
+    authorize! :manage, AdPosition
+    
     @ad_position = AdPosition.new
   end
 
   # GET /ad_positions/1/edit
   def edit
+    authorize! :manage, AdPosition
+    
   end
 
   # POST /ad_positions
   # POST /ad_positions.json
   def create
+    authorize! :manage, AdPosition
+    
     @ad_position = AdPosition.new(ad_position_params)
 
     respond_to do |format|
@@ -43,6 +52,8 @@ class AdPositionsController < ApplicationController
   # PATCH/PUT /ad_positions/1
   # PATCH/PUT /ad_positions/1.json
   def update
+    authorize! :manage, AdPosition
+    
     respond_to do |format|
       if @ad_position.update(ad_position_params)
         format.html { redirect_to ad_positions_path, notice: 'Ad position was successfully updated.' }
@@ -57,6 +68,8 @@ class AdPositionsController < ApplicationController
   # DELETE /ad_positions/1
   # DELETE /ad_positions/1.json
   def destroy
+    authorize! :manage, AdPosition
+    
     @ad_position.destroy
     respond_to do |format|
       format.html { redirect_to ad_positions_url, notice: 'Ad position was successfully destroyed.' }
@@ -65,6 +78,8 @@ class AdPositionsController < ApplicationController
   end
 
   def datatable
+    authorize! :manage, AdPosition
+    
     result = AdPosition.datatable(params)
     
     render json: result[:result]
@@ -198,6 +213,11 @@ class AdPositionsController < ApplicationController
     @member = PbMember.find(params[:member_id])
     @pos = AdPosition.get(params[:pos])
     render layout: "ad_frame"
+  end
+  
+  def ajax_market_left_single
+    @pos = AdPosition.get(params[:pos])
+    render layout: nil
   end
 
   private

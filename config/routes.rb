@@ -77,6 +77,7 @@ Rails.application.routes.draw do
       get 'preview_box'
       get 'get_values'
       get 'get_remaining_time'
+      get 'ajax_market_left_single'
     end
   end
   resources :pb_products do
