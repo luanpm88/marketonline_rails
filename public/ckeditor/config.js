@@ -37,6 +37,8 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// CKEDITOR PLUGINS LOADING
     config.extraPlugins = 'pbckcode,justify'; // add other plugins here (comma separated)
+	
+	config.entities_latin = false;
 
 	// Remove some buttons provided by the standard plugins, which are
 	// not needed in the Standard(s) toolbar.
