@@ -171,7 +171,7 @@ class PbAreainfosController < ApplicationController
         file.write(uploaded_io.read)
       end
       
-      video_tag = '<video width="100%" height="100%" autoplay controls>'
+      video_tag = '<video width="100%" height="100%" controls>'
       video_tag += '<source src="'+public_path+'" type="video/mp4">'
       video_tag += 'Your browser does not support the video tag.'
       video_tag += '</video>'
