@@ -54,7 +54,11 @@
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
-										<label>Chọn ảnh đại diện</label>
+										<label>Chọn ảnh đại diện <% if @pb_areainfo.type_name == 'tb' %>
+									thông báo
+								<% elsif @pb_areainfo.type_name == 'gt' %>
+									giới thiệu
+								<% end %></label>
 										<div>
 											<%= f.file_field :image, class: "form-control file-styled" %>
 											<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
