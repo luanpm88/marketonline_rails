@@ -118,6 +118,7 @@ class Ability
         can :manage, Ad
         can :manage, AdPosition
         can :manage, PbArea
+        can :manage, PbAreatype
         can :manage, PbAreainfo
         can :manage, PbAreatypeinfo
         can :manage, PbSetting

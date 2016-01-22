@@ -1,0 +1,73 @@
+				<!-- Wizard with validation -->
+				<%= form_for(@pb_areatype, html: {class: "form-validate", multipart: true}) do |f| %>
+		            <div class="panel panel-white">
+						<div class="panel-heading">
+							<h6 class="panel-title">
+								Chỉnh sửa
+							</h6>
+						</div>
+						
+						<div class="panel-body">							
+							
+							<div class="row">
+								
+								<div class="col-md-3">
+									<div class="form-group">
+										<label>Hình ảnh thông báo</label>
+										<div>
+											<%= f.file_field :image, class: "form-control file-styled" %>
+											<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
+										</div>
+									</div>
+								</div>
+								
+								<div class="col-md-3">
+									<div class="form-group">
+										<label>Hình ảnh giới thiệu</label>
+										<div>
+											<%= f.file_field :image_2, class: "form-control file-styled" %>
+											<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
+										</div>
+									</div>
+								</div>
+									
+								<div class="col-md-3">
+									<div class="form-group">
+										<label>Hình ảnh nhu cầu mua</label>
+										<div>
+											<%= f.file_field :image_3, class: "form-control file-styled" %>
+											<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
+										</div>
+									</div>
+								</div>
+									
+								<div class="col-md-3">
+									<div class="form-group">
+										<label>Hình ảnh tìm đối tác</label>
+										<div>
+											<%= f.file_field :image_4, class: "form-control file-styled" %>
+											<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
+										</div>
+									</div>
+								</div>	
+							</div>
+							<div class="text-right">
+								<button type="submit" class="btn btn-primary">Lưu <i class="icon-arrow-right14 position-right"></i></button>
+							</div>
+
+						</div>
+                    </div>
+				
+			<% end %>
+			
+			
+
+<script>
+	 $(document).ready(function() {
+		  // File input
+			$(".file-styled").uniform({
+				fileButtonHtml: '<i class="icon-googleplus5"></i>',
+				wrapperClass: 'bg-warning'
+			});
+	 });
+</script>

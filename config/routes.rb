@@ -91,6 +91,7 @@ Rails.application.routes.draw do
       get 'announce_intro_box'
     end
   end
+  resources :pb_areatypes
   
   resources :pb_areatypeinfos do
     collection do

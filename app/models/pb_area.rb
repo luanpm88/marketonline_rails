@@ -60,7 +60,9 @@ class PbArea < ActiveRecord::Base
 	if !image.present?
 	  if parent.present? && parent.image.present?
 		return "http://marketonline.vn:3000/"+parent.image.quare.url.to_s
-	  else
+	  elsif pb_areatype.present? && pb_areatype.image.present?
+		return "http://marketonline.vn:3000/"+pb_areatype.image.quare.url.to_s
+	  else		
 		return "http://marketonline.vn/images/icon/announce.png"
 	  end		
 	else
@@ -72,6 +74,8 @@ class PbArea < ActiveRecord::Base
 	if !image_2.present?
 	  if parent.present? && parent.image_2.present?
 		return "http://marketonline.vn:3000/"+parent.image_2.quare.url.to_s
+	  elsif pb_areatype.present? && pb_areatype.image_2.present?
+		return "http://marketonline.vn:3000/"+pb_areatype.image_2.quare.url.to_s
 	  else
 		return "http://marketonline.vn/images/icon/announce.png"
 	  end
@@ -84,6 +88,8 @@ class PbArea < ActiveRecord::Base
 	if !image_3.present?
 	  if parent.present? && parent.image_3.present?
 		return "http://marketonline.vn:3000/"+parent.image_3.quare.url.to_s
+	  elsif pb_areatype.present? && pb_areatype.image_3.present?
+		return "http://marketonline.vn:3000/"+pb_areatype.image_3.quare.url.to_s
 	  else
 		return "http://marketonline.vn/images/icon/announce.png"
 	  end
@@ -96,6 +102,8 @@ class PbArea < ActiveRecord::Base
 	if !image_4.present?
 	  if parent.present? && parent.image_4.present?
 		return "http://marketonline.vn:3000/"+parent.image_4.quare.url.to_s
+	  elsif pb_areatype.present? && pb_areatype.image_4.present?
+		return "http://marketonline.vn:3000/"+pb_areatype.image_4.quare.url.to_s
 	  else
 		return "http://marketonline.vn/images/icon/announce.png"
 	  end

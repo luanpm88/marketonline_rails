@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160122051210) do
+ActiveRecord::Schema.define(version: 20160122055604) do
 
   create_table "ad_clicks", force: :cascade do |t|
     t.integer  "ad_id",         limit: 4
@@ -290,6 +290,10 @@ ActiveRecord::Schema.define(version: 20160122051210) do
     t.string  "map_lat",  limit: 255,              null: false
     t.string  "map_lng",  limit: 255,              null: false
     t.integer "map_zoom", limit: 4,                null: false
+    t.string  "image",    limit: 255
+    t.string  "image_2",  limit: 255
+    t.string  "image_3",  limit: 255
+    t.string  "image_4",  limit: 255
   end
 
   create_table "pb_attachmentcomments", force: :cascade do |t|
