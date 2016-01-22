@@ -156,7 +156,7 @@ class PbArea < ActiveRecord::Base
     result.unshift({"text": "Miền Bắc", "id": -4})
     
     if user.role == "admin"
-        result.unshift({"text": "Mặc định", "id": -1})
+        result.unshift({"text": "Tất cả", "id": -1})
     end
     
     return result
