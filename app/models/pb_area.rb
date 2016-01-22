@@ -94,6 +94,8 @@ class PbArea < ActiveRecord::Base
 	#	return "http://marketonline.vn:3000/"+parent.parent.image_2.quare.url.to_s
 	  elsif pb_areatype.present? && pb_areatype.image_2.present?
 		return "http://marketonline.vn:3000/"+pb_areatype.image_2.quare.url.to_s
+	  elsif parent.present? && parent.pb_areatype.present? && parent.pb_areatype.image_2.present?
+		return "http://marketonline.vn:3000/"+parent.pb_areatype.image_2.quare.url.to_s
 	  elsif PbCountry.find(4).present? && PbCountry.find(4).image_2.present?
 		return "http://marketonline.vn:3000/"+PbCountry.find(4).image_2.quare.url.to_s
 	  else
@@ -112,6 +114,8 @@ class PbArea < ActiveRecord::Base
 	#	return "http://marketonline.vn:3000/"+parent.parent.image_3.quare.url.to_s
 	  elsif pb_areatype.present? && pb_areatype.image_3.present?
 		return "http://marketonline.vn:3000/"+pb_areatype.image_3.quare.url.to_s
+	  elsif parent.present? && parent.pb_areatype.present? && parent.pb_areatype.image_3.present?
+		return "http://marketonline.vn:3000/"+parent.pb_areatype.image_3.quare.url.to_s
 	  elsif PbCountry.find(4).present? && PbCountry.find(4).image_3.present?
 		return "http://marketonline.vn:3000/"+PbCountry.find(4).image_3.quare.url.to_s
 	  else
@@ -130,6 +134,8 @@ class PbArea < ActiveRecord::Base
 	#	return "http://marketonline.vn:3000/"+parent.parent.image_4.quare.url.to_s
 	  elsif pb_areatype.present? && pb_areatype.image_4.present?
 		return "http://marketonline.vn:3000/"+pb_areatype.image_4.quare.url.to_s
+	  elsif parent.present? && parent.pb_areatype.present? && parent.pb_areatype.image_4.present?
+		return "http://marketonline.vn:3000/"+parent.pb_areatype.image_4.quare.url.to_s
 	  elsif PbCountry.find(4).present? && PbCountry.find(4).image_4.present?
 		return "http://marketonline.vn:3000/"+PbCountry.find(4).image_4.quare.url.to_s
 	  else
