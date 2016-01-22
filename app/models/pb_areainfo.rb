@@ -8,10 +8,10 @@ class PbAreainfo < ActiveRecord::Base
   
   def self.active_items(params)
     items = self.all.order("created DESC").where(status: 1)
-    items = items.where("created >= ?", Time.now.beginning_of_day)
-    items = items.where("created <= ?", Time.now.end_of_day)
+    items = items.where("created >= ?", self.start_at.beginning_of_day)
+    items = items.where("created <= ?", self.end_at.end_of_day)
     if params[:area_id].present?
-	  #items = items.where("pb_areainfos.related_area_ids LIKE ?", "%[#{params[:area_id]}]%")
+	  items = items.where("pb_areainfos.related_area_ids LIKE ?", "%[#{params[:area_id]}]%")
     end
     return items
   end
