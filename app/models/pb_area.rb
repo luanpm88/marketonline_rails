@@ -3,6 +3,107 @@ class PbArea < ActiveRecord::Base
   belongs_to :pb_areatype, class_name: "PbAreatype", foreign_key: "areatype_id"
   has_many :children, class_name: "PbArea", foreign_key: "parent_id"
   
+  mount_uploader :image, AreaUploader
+  mount_uploader :image_2, AreaUploader
+  mount_uploader :image_3, AreaUploader
+  mount_uploader :image_4, AreaUploader
+  
+  def self.datatable(params, user)    
+    @records = self.order("areatype_id, name")
+    
+    # Keyword search
+    q = params["search"]["value"].strip.downcase
+    @records = @records.where("pb_areas.name LIKE ?", "%#{q}%") if !q.empty?
+    
+    #if params[:type_name].present?
+    #  @records = @records.where("pb_areainfos.type_name = ?", params[:type_name])
+    #end
+    
+    total = @records.count
+    @records = @records.limit(params[:length]).offset(params["start"])
+    data = []
+    
+    @records.each do |item|
+      row = [
+              '<img width="90" height="20" src="'+item.image_thumb+'" />',
+              '<img width="90" height="20" src="'+item.image_2_thumb+'" />',
+              '<img width="90" height="20" src="'+item.image_3_thumb+'" />',
+              '<img width="90" height="20" src="'+item.image_4_thumb+'" />',
+              item.full_name_inverse,
+              item.edit_link(user),
+            ]
+      data << row      
+    end
+    
+    result = {
+              "drawn" => params[:drawn],
+              "recordsTotal" => total,
+              "recordsFiltered" => total
+    }
+    result["data"] = data
+    
+    return {result: result}
+  end
+  
+  def edit_link(user)
+    ActionView::Base.send(:include, Rails.application.routes.url_helpers)
+    link_helper = ActionController::Base.helpers
+    
+    link_helper.link_to("<i class=\"icon-pencil\"></i> Sửa".html_safe, {controller: "pb_areas", action: "edit", id: self.id})
+  end
+  
+  def areatype_name
+    (pb_areatype.nil? ? "" : pb_areatype.name)
+  end
+  
+  def image_thumb
+	if !image.present?
+	  if parent.present? && parent.image.present?
+		return "http://marketonline.vn:3000/"+parent.image.quare.url.to_s
+	  else
+		return "http://marketonline.vn/images/icon/announce.png"
+	  end		
+	else
+	  return "http://marketonline.vn:3000/"+image.quare.url.to_s
+	end
+  end
+  
+  def image_2_thumb
+	if !image_2.present?
+	  if parent.present? && parent.image_2.present?
+		return "http://marketonline.vn:3000/"+parent.image_2.quare.url.to_s
+	  else
+		return "http://marketonline.vn/images/icon/announce.png"
+	  end
+	else
+	  return "http://marketonline.vn:3000/"+image_2.quare.url.to_s
+	end
+  end
+  
+  def image_3_thumb
+	if !image_3.present?
+	  if parent.present? && parent.image_3.present?
+		return "http://marketonline.vn:3000/"+parent.image_3.quare.url.to_s
+	  else
+		return "http://marketonline.vn/images/icon/announce.png"
+	  end
+	else
+	  return "http://marketonline.vn:3000/"+image_3.quare.url.to_s
+	end
+  end
+  
+  def image_4_thumb
+	if !image_4.present?
+	  if parent.present? && parent.image_4.present?
+		return "http://marketonline.vn:3000/"+parent.image_4.quare.url.to_s
+	  else
+		return "http://marketonline.vn/images/icon/announce.png"
+	  end
+	else
+	  return "http://marketonline.vn:3000/"+image_4.quare.url.to_s
+	end
+  end
+  
   def self.general_search(params, user)
     result = self.where.not(id: 1)
     result = result.where("LOWER(pb_areas.name) LIKE ?", "%#{params[:q].strip.downcase}%")

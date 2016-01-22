@@ -13,8 +13,7 @@ class PbAreainfosController < ApplicationController
       @type_title = "Giới thiệu"
       @new_list = PbAreainfo.active_items.where(type_name: "gt") #.order("created DESC")
     end
-    
-    
+
     render layout: nil
   end
   

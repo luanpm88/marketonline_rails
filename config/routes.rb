@@ -88,6 +88,7 @@ Rails.application.routes.draw do
   resources :pb_areas do
     collection do
       get 'display_tree'
+      get 'announce_intro_box'
     end
   end
   
