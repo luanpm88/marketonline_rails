@@ -25,10 +25,10 @@ class PbArea < ActiveRecord::Base
     
     @records.each do |item|
       row = [
-              '<img width="90" height="20" src="'+item.image_thumb+'" />',
-              '<img width="90" height="20" src="'+item.image_2_thumb+'" />',
-              '<img width="90" height="20" src="'+item.image_3_thumb+'" />',
-              '<img width="90" height="20" src="'+item.image_4_thumb+'" />',
+              '<img width="90" height="" src="'+item.image_thumb+'" />',
+              '<img width="90" height="" src="'+item.image_2_thumb+'" />',
+              '<img width="90" height="" src="'+item.image_3_thumb+'" />',
+              '<img width="90" height="" src="'+item.image_4_thumb+'" />',
               item.full_name_inverse,
               item.edit_link(user),
             ]

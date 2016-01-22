@@ -26,7 +26,7 @@ class PbAreatypesController < ApplicationController
 
     respond_to do |format|
       if @pb_areatype.update(pb_areatype_params)
-        format.html { redirect_to pb_areatypes_path, notice: 'Thông tin đã được lưu thành công!' }
+        format.html { redirect_to pb_areas_path, notice: 'Thông tin đã được lưu thành công!' }
         format.json { render :show, status: :created, location: @deal }
       else
         format.html { render :new }
