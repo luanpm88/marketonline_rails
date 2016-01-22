@@ -8,10 +8,10 @@ class PbAreainfo < ActiveRecord::Base
   
   def self.active_items(params)
     items = self.all.order("created DESC").where(status: 1)
-    items = item.where("created >=", Time.now.beginning_of_day)
-    items = item.where("created <=", Time.now.end_of_day)
+    items = items.where("created >= ?", Time.now.beginning_of_day)
+    items = items.where("created <= ?", Time.now.end_of_day)
     if params[:area_id].present?
-	  #items.where("")
+	  items = items.where("pb_areainfos.related_area_ids LIKE ?", "%[#{params[:area_id]}]%")
     end
     return items
   end
@@ -233,6 +233,26 @@ class PbAreainfo < ActiveRecord::Base
     str << self.title.unaccent.downcase.gsub(/\s+/,"xaaaaax").gsub(/[^a-zA-Z0-9]/, '').gsub("xaaaaax","-")
     
     return str.join("/")
+  end
+  
+  def related_area_ids
+	arr = []
+	pb_areas.each do |c|
+	  arr += c.related_ids
+	end
+	
+	pb_areatypes.each do |at|
+	  at.pb_areas.each do |c|
+		arr += c.related_ids
+	  end
+	end
+	
+	return arr
+  end
+  
+  def update_related_area_ids
+	values = "["+related_area_ids.join("][")+"]"
+	self.update_attribute(:related_area_ids, values)
   end
   
 end

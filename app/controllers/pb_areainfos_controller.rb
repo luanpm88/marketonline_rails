@@ -11,7 +11,7 @@ class PbAreainfosController < ApplicationController
       @new_list = PbAreainfo.active_items(params).where(type_name: "tb") #.order("created DESC")
     elsif params[:info_page] == 'gioi-thieu'
       @type_title = "Giới thiệu"
-      @new_list = PbAreainfo.where(type_name: "gt").order("created DESC")
+      @new_list = PbAreainfo.active_items.where(type_name: "gt") #.order("created DESC")
     end
     
     
@@ -122,6 +122,7 @@ class PbAreainfosController < ApplicationController
     @pb_areainfo.member_id = @current_user.id
     respond_to do |format|
       if @pb_areainfo.save
+        @pb_areainfo.update_related_area_ids
         format.html { redirect_to pb_areainfos_path(type_name: @pb_areainfo.type_name), notice: 'Thông tin đã được tạo thành công!' }
         format.json { render :show, status: :created, location: @deal }
       else
@@ -138,6 +139,7 @@ class PbAreainfosController < ApplicationController
 
     respond_to do |format|
       if @pb_areainfo.update(pb_areainfo_params)
+        @pb_areainfo.update_related_area_ids
         format.html { redirect_to pb_areainfos_path(type_name: @pb_areainfo.type_name), notice: 'Thông tin đã được lưu thành công!' }
         format.json { render :show, status: :created, location: @deal }
       else

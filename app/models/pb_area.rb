@@ -1,6 +1,7 @@
 class PbArea < ActiveRecord::Base
   belongs_to :parent, class_name: "PbArea", foreign_key: "parent_id"
   belongs_to :pb_areatype, class_name: "PbAreatype", foreign_key: "areatype_id"
+  has_many :children, class_name: "PbArea", foreign_key: "parent_id"
   
   def self.general_search(params, user)
     result = self.where.not(id: 1)
@@ -91,6 +92,20 @@ class PbArea < ActiveRecord::Base
     #result.unshift(["Miền Bắc", -4])
     
     return result
+  end
+  
+  def related_ids
+    arr = [self.id]
+    children.each do |c|
+      arr << c.id
+      c.children.each do |cc|
+        arr << cc.id
+        cc.children.each do |ccc|
+          arr << ccc.id          
+        end
+      end
+    end
+    return arr
   end
   
 end
