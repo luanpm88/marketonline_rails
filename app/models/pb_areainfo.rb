@@ -235,6 +235,31 @@ class PbAreainfo < ActiveRecord::Base
     return str.join("/")
   end
   
+  def self.area_link(params)
+    str = ["http://marketonline.vn"]
+    str << ["thi-truong"]
+    
+    if params[:areatype_id].present? && !params[:area_id].present?
+		areatype = PbAreatype.find(params[:areatype_id])
+        str << areatype.name.unaccent.downcase.gsub(/\s+/,"xaaaaax").gsub(/[^a-zA-Z0-9]/, '').gsub("xaaaaax","-")
+    end
+    
+    if params[:area_id].present?
+		area = PbArea.find(params[:area_id])
+        str << area.pb_areatype.name.unaccent.downcase.gsub(/\s+/,"xaaaaax").gsub(/[^a-zA-Z0-9]/, '').gsub("xaaaaax","-")
+        str << area.id
+        str << area.name.unaccent.downcase.gsub(/\s+/,"xaaaaax").gsub(/[^a-zA-Z0-9]/, '').gsub("xaaaaax","-")
+    end
+    
+    if params[:info_page].present?
+      str << params[:info_page]
+    end
+    
+    
+    
+    return str.join("/")
+  end
+  
   def related_area_ids
 	arr = []
 	pb_areas.each do |c|
