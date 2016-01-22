@@ -1,6 +1,6 @@
 class PbAreasController < ApplicationController
   
-  before_action :set_pb_area, only: [:delete, :show, :edit, :update, :destroy]
+  before_action :set_pb_area, only: [:delete_image, :delete, :show, :edit, :update, :destroy]
   
   def index
     respond_to do |format|
@@ -18,7 +18,7 @@ class PbAreasController < ApplicationController
   
   def index
     authorize! :manage, PbArea
-    
+    @country = PbCountry.find(4)
     respond_to do |format|
       format.html
       format.json {
@@ -55,6 +55,22 @@ class PbAreasController < ApplicationController
     @item = PbArea.find(params[:area_id]) if params[:area_id].present?
     
     render layout: nil
+  end
+  
+  def delete_image
+    authorize! :manager, @pb_area
+    
+    @pb_area.remove_image! if params[:pos] == ""
+    @pb_area.remove_image_2! if params[:pos] == "_2"
+    @pb_area.remove_image_3! if params[:pos] == "_3"
+    @pb_area.remove_image_4! if params[:pos] == "_4"
+    
+    @pb_area.save
+    @message = "Đã xóa ảnh."
+    respond_to do |format|      
+      format.html { render "/home/ajax_success", layout: nil }
+      format.json { head :no_content }
+    end
   end
   
   private

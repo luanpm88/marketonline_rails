@@ -151,7 +151,7 @@ function modernAlert(sms) {
 function ajaxLink(item) {
     var ok = true
     var url = item.attr("href")
-    var table = item.parents("table")
+    var tables = $("table")
     
     if(typeof(item.attr("data-confirm")) != 'undefined') {
         ok = confirm(item.attr("data-confirm"));
@@ -164,8 +164,10 @@ function ajaxLink(item) {
             success:function(data, textStatus, jqXHR)
             {
                 modernAlert(data)
-                if(table.length) {
-                    table.dataTable().fnDraw(true);
+                if(tables.length == 1) {
+                    tables.each(function() {
+                      $(this).dataTable().fnDraw(true);
+                    })
                 } else {
                     location.reload(); 
                 }

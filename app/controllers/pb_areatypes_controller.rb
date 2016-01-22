@@ -1,5 +1,5 @@
 class PbAreatypesController < ApplicationController
-  before_action :set_pb_areatype, only: [:delete, :show, :edit, :update, :destroy]
+  before_action :set_pb_areatype, only: [:delete_image, :delete, :show, :edit, :update, :destroy]
   
   def index
     authorize! :manage, PbAreatype
@@ -10,6 +10,22 @@ class PbAreatypesController < ApplicationController
         result = PbAreatype.datatable(params, @current_user)    
         render json: result[:result]
       }
+    end
+  end
+  
+  def delete_image
+    authorize! :manager, PbAreatype
+    
+    @pb_areatype.remove_image! if params[:pos] == ""
+    @pb_areatype.remove_image_2! if params[:pos] == "_2"
+    @pb_areatype.remove_image_3! if params[:pos] == "_3"
+    @pb_areatype.remove_image_4! if params[:pos] == "_4"
+    
+    @pb_areatype.save
+    @message = "Đã xóa ảnh."
+    respond_to do |format|      
+      format.html { render "/home/ajax_success", layout: nil }
+      format.json { head :no_content }
     end
   end
   

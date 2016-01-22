@@ -128,6 +128,7 @@ class Ability
         can :manage, SystemMessage
         can :manage, PbSaleorder
         can :manage, Catgroup
+        can :manage, PbCountry
       end
     end
     

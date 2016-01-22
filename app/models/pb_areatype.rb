@@ -23,10 +23,10 @@ class PbAreatype < ActiveRecord::Base
     
     @records.each do |item|
       row = [
-              '<img width="90" height="" src="'+item.image_thumb+'" />',
-              '<img width="90" height="" src="'+item.image_2_thumb+'" />',
-              '<img width="90" height="" src="'+item.image_3_thumb+'" />',
-              '<img width="90" height="" src="'+item.image_4_thumb+'" />',
+              '<img width="90" height="" src="'+item.image_thumb+'" /><br/>'+item.delete_image_link(user, ""),
+              '<img width="90" height="" src="'+item.image_2_thumb+'" /><br/>'+item.delete_image_link(user, "_2"),
+              '<img width="90" height="" src="'+item.image_3_thumb+'" /><br/>'+item.delete_image_link(user, "_3"),
+              '<img width="90" height="" src="'+item.image_4_thumb+'" /><br/>'+item.delete_image_link(user, "_4"),
               item.name,
               item.edit_link(user),
             ]
@@ -43,6 +43,15 @@ class PbAreatype < ActiveRecord::Base
     return {result: result}
   end
   
+  def delete_image_link(user, pos)
+    return "" if !user.can?(:delete, self) || !self["image"+pos].present?
+  
+    ActionView::Base.send(:include, Rails.application.routes.url_helpers)
+    link_helper = ActionController::Base.helpers
+    
+    link_helper.link_to("<i class=\"icon-bin\"></i> Xóa hình".html_safe, {controller: "pb_areatypes", action: "delete_image", id: self.id, pos: pos}, method: :delete, data: { confirm: 'Bạn có chắc muốn xóa quảng cáo này?' }, class: "ajax_link reload_page")
+  end
+  
   def edit_link(user)
     ActionView::Base.send(:include, Rails.application.routes.url_helpers)
     link_helper = ActionController::Base.helpers
@@ -52,7 +61,11 @@ class PbAreatype < ActiveRecord::Base
   
   def image_thumb
 	if !image.present?
-	  return "http://marketonline.vn/images/icon/announce.png"	
+	  if PbCountry.find(4).present? && PbCountry.find(4).image.present?
+		return "http://marketonline.vn:3000/"+PbCountry.find(4).image.quare.url.to_s
+	  else
+		return "http://marketonline.vn/images/icon/announce.png"
+	  end
 	else
 	  return "http://marketonline.vn:3000/"+image.quare.url.to_s
 	end
@@ -60,7 +73,11 @@ class PbAreatype < ActiveRecord::Base
   
   def image_2_thumb
 	if !image_2.present?
-	  return "http://marketonline.vn/images/icon/announce.png"
+	  if PbCountry.find(4).present? && PbCountry.find(4).image_2.present?
+		return "http://marketonline.vn:3000/"+PbCountry.find(4).image_2.quare.url.to_s
+	  else
+		return "http://marketonline.vn/images/icon/announce.png"
+	  end
 	else
 	  return "http://marketonline.vn:3000/"+image_2.quare.url.to_s
 	end
@@ -68,7 +85,11 @@ class PbAreatype < ActiveRecord::Base
   
   def image_3_thumb
 	if !image_3.present?
-	  return "http://marketonline.vn/images/icon/announce.png"
+	  if PbCountry.find(4).present? && PbCountry.find(4).image_3.present?
+		return "http://marketonline.vn:3000/"+PbCountry.find(4).image_3.quare.url.to_s
+	  else
+		return "http://marketonline.vn/images/icon/announce.png"
+	  end
 	else
 	  return "http://marketonline.vn:3000/"+image_3.quare.url.to_s
 	end
@@ -76,7 +97,11 @@ class PbAreatype < ActiveRecord::Base
   
   def image_4_thumb
 	if !image_4.present?
-	  return "http://marketonline.vn/images/icon/announce.png"
+	  if PbCountry.find(4).present? && PbCountry.find(4).image_4.present?
+		return "http://marketonline.vn:3000/"+PbCountry.find(4).image_4.quare.url.to_s
+	  else
+		return "http://marketonline.vn/images/icon/announce.png"
+	  end
 	else
 	  return "http://marketonline.vn:3000/"+image_4.quare.url.to_s
 	end

@@ -89,9 +89,20 @@ Rails.application.routes.draw do
     collection do
       get 'display_tree'
       get 'announce_intro_box'
+      get 'delete_image'
+      get 'delete_country_image'
     end
   end
-  resources :pb_areatypes
+  resources :pb_areatypes do
+    collection do
+      get 'delete_image'
+    end
+  end
+  resources :pb_countries do
+    collection do
+      get 'delete_image'
+    end
+  end
   
   resources :pb_areatypeinfos do
     collection do
