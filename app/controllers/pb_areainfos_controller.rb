@@ -175,7 +175,7 @@ class PbAreainfosController < ApplicationController
       #video_tag += '<source src="'+public_path+'" type="video/mp4">'
       #video_tag += 'Your browser does not support the video tag.'
       #video_tag += '</video>'
-      video_tag += "<img width=\"100%\" height=\"100%\" rel=\"#{public_path.to_s}\" src=\"'http://marketonline.vn:3000/img/videobg.png\" />"
+      video_tag = "<img width=\"100%\" height=\"100%\" class=\"video_map\" rel=\"#{public_path.to_s}\" src=\"http://marketonline.vn:3000/img/videobg.png\" />"
       render text: "<script>parent.editor_uploaded('"+video_tag+"')</script>"
     end
   end
