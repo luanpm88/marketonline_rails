@@ -2,25 +2,25 @@
                 <li>
                     <a href="{the_url module=areas areatype_id=`$areatype.id` area_id=`$area.id` title=`$area.name` info_page='thong-bao'}">
                         <h4>Thông báo</h4>
-                        <img src="<%= @area.image_thumb %>" />
+                        <img src="<%= @item.image_thumb %>" />
                     </a>
                 </li>
                 <li>
                     <a href="{the_url module=areas areatype_id=`$areatype.id` area_id=`$area.id` title=`$area.name` info_page='gioi-thieu'}">
                         <h4>Giới thiệu</h4>
-                        <img src="<%= @area.image_2_thumb %>" />
+                        <img src="<%= @item.image_2_thumb %>" />
                     </a>
                 </li>
                 <li>
                     <a href="{the_url title=`$area.name` module=areas area_id=`$smarty.get.area_id` areatype_id=`$smarty.get.areatype_id` type='thuong-mai' catgroup_id=`$catgroup.id` catgroup_name=`$catgroup.name`}#14">
                         <h4>Nhu cầu mua</h4>
-                        <img src="<%= @area.image_3_thumb %>" />
+                        <img src="<%= @item.image_3_thumb %>" />
                     </a>
                 </li>
                 <li>
                     <a href="{the_url title=`$area.name` module=areas area_id=`$smarty.get.area_id` areatype_id=`$smarty.get.areatype_id` type='thuong-mai' catgroup_id=`$catgroup.id` catgroup_name=`$catgroup.name`}#16">
                         <h4>Tìm đối tác</h4>
-                        <img src="<%= @area.image_4_thumb %>" />
+                        <img src="<%= @item.image_4_thumb %>" />
                     </a>
                 </li>
             </ul>

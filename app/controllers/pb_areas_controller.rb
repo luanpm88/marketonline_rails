@@ -51,7 +51,8 @@ class PbAreasController < ApplicationController
   end
   
   def announce_intro_box
-    @area = PbArea.find(params[:area_id])
+    @item = PbAreatype.find(params[:areatype_id]) if params[:areatype_id].present?
+    @item = PbArea.find(params[:area_id]) if params[:area_id].present?
     
     render layout: nil
   end

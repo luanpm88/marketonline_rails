@@ -45,6 +45,8 @@ class PbArea < ActiveRecord::Base
     return {result: result}
   end
   
+  
+  
   def edit_link(user)
     ActionView::Base.send(:include, Rails.application.routes.url_helpers)
     link_helper = ActionController::Base.helpers
