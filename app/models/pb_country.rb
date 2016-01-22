@@ -105,9 +105,9 @@ class PbCountry < ActiveRecord::Base
       str << PbArea.find(params[:area_id]).name.unaccent.downcase.gsub(/\s+/,"xaaaaax").gsub(/[^a-zA-Z0-9]/, '').gsub("xaaaaax","-")
     end
     
-    if params[:type].present? && !params[:info_page].present?
-      str << params[:type]
-    end
+    #if params[:type].present? && !params[:info_page].present?
+    #  str << params[:type]
+    #end
     
     if params[:catgroup_id].present? && !params[:info_page].present?
       str << "vung-mien"
