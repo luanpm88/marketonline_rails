@@ -51,6 +51,7 @@ class PbAreasController < ApplicationController
   end
   
   def announce_intro_box
+    @item = PbCountry.find(4)
     @item = PbAreatype.find(params[:areatype_id]) if params[:areatype_id].present?
     @item = PbArea.find(params[:area_id]) if params[:area_id].present?
     
