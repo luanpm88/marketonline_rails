@@ -199,8 +199,8 @@ class PbAreainfo < ActiveRecord::Base
         str << areatype.name.unaccent.downcase.gsub(/\s+/,"xaaaaax").gsub(/[^a-zA-Z0-9]/, '').gsub("xaaaaax","-")
     end
     
-    if pb_area.present?
-		area = pb_area
+    if params[:area_id].present?
+		area = PbArea.find(params[:area_id])
         str << area.pb_areatype.name.unaccent.downcase.gsub(/\s+/,"xaaaaax").gsub(/[^a-zA-Z0-9]/, '').gsub("xaaaaax","-")
         str << area.id
         str << area.name.unaccent.downcase.gsub(/\s+/,"xaaaaax").gsub(/[^a-zA-Z0-9]/, '').gsub("xaaaaax","-")
