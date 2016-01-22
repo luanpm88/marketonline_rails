@@ -7,14 +7,16 @@
             </div>
         <% end %>
     </div>
-    <% @pos.active_ads.each do |ad| %>
-      
-      <div class="ad_sidebar_item">
-          <a title="<%= ad.description %>" href="<%= request.base_url %><%= click_ads_path(id: ad) %>" target="_blank">
-              <h4><%= ad.name %></h4>
-              <img src="<%= request.base_url %><%= ad.image_url(:banner) %>" />
-          </a>
-      </div>
-      
-    <% end %>
+    <div>
+        <% @pos.active_ads.each do |ad| %>
+          
+          <div class="ad_sidebar_item">
+              <a title="<%= ad.description %>" href="<%= request.base_url %><%= click_ads_path(id: ad) %>" target="_blank">
+                  <h4><%= ad.name %></h4>
+                  <img src="<%= request.base_url %><%= ad.image_url(:banner) %>" />
+              </a>
+          </div>
+          
+        <% end %>
+    </div>
 <% end %>
