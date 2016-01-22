@@ -60,6 +60,15 @@ class PbAreainfo < ActiveRecord::Base
     return {result: result}
   end
   
+  def display_image_url
+	if !image.present?
+	  "http://marketonline.vn:3000/img/announce.png"
+    else
+	  image_url
+    end
+    
+  end
+  
   def self.member_datatable(params, user)    
     @records = self.includes(:pb_area).order("created DESC")
     

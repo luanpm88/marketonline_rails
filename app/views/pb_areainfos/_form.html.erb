@@ -54,14 +54,25 @@
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
-										<label>Chọn ảnh đại diện <% if @pb_areainfo.type_name == 'tb' %>
-									thông báo
-								<% elsif @pb_areainfo.type_name == 'gt' %>
-									giới thiệu
-								<% end %></label>
+										<label>
+											Chọn ảnh đại diện <% if @pb_areainfo.type_name == 'tb' %>
+												thông báo
+											<% elsif @pb_areainfo.type_name == 'gt' %>
+												giới thiệu
+											<% end %>
+										</label>
 										<div>
-											<%= f.file_field :image, class: "form-control file-styled" %>
-											<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
+											<div class="row">
+												<div class="col-md-4">
+													<div>
+														<img class="info_image" width="100%" src="<%= @pb_areainfo.display_image_url %>" />
+													</div>
+												</div>
+												<div class="col-md-8">
+													<%= f.file_field :image, class: "form-control file-styled", onchange: "readURL(this);" %>
+													<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>	
@@ -158,7 +169,7 @@
 			$(".share_remain").hide()
 		}
     }
-	
+
 	function renderProductDetail(id) {
 		if (id == "") {
 			$(".product_details").html("")
@@ -173,7 +184,7 @@
             }
         })
 	}
-	
+
 	$('#deal_start_at, #deal_end_at').daterangepicker({ 
             singleDatePicker: true,
             locale: {
@@ -279,6 +290,16 @@
 
 
 <script>
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+		  var reader = new FileReader();
+		  reader.onload = function (e) {
+			$('.info_image')
+			  .attr('src', e.target.result)
+		  };
+		  reader.readAsDataURL(input.files[0]);
+		}
+	  }
 	 $(document).ready(function() {
 		  vs = JSON.parse($('input[name="pb_areainfo[area_ids]"]').attr('values'))
 		  $('input[name="pb_areainfo[area_ids]"]').select2('data', vs)
