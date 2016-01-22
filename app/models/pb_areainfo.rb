@@ -206,6 +206,10 @@ class PbAreainfo < ActiveRecord::Base
         str << area.name.unaccent.downcase.gsub(/\s+/,"xaaaaax").gsub(/[^a-zA-Z0-9]/, '').gsub("xaaaaax","-")
     end
     
+    if params[:info_page].present?
+      str << params[:info_page]
+    end
+    
     str << self.id
     str << self.title.unaccent.downcase.gsub(/\s+/,"xaaaaax").gsub(/[^a-zA-Z0-9]/, '').gsub("xaaaaax","-")
     
