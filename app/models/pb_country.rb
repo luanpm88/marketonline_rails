@@ -94,4 +94,27 @@ class PbCountry < ActiveRecord::Base
 	end
   end
   
+  def area_link(params)
+    str = ["http://marketonline.vn"]
+    str << ["thi-truong"]
+    
+    
+    
+    if params[:type].present? && !params[:info_page].present?
+      str << params[:type]
+    end
+    
+    if params[:catgroup_id].present? && !params[:info_page].present?
+      str << "vung-mien"
+      str << params[:catgroup_id]
+      str << Catgroup.find(params[:catgroup_id]).name.unaccent.downcase.gsub(/\s+/,"xaaaaax").gsub(/[^a-zA-Z0-9]/, '').gsub("xaaaaax","-")
+    end
+    
+    if params[:info_page].present?
+      str << params[:info_page]
+    end
+    
+    return str.join("/")
+  end
+  
 end
