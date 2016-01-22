@@ -1,12 +1,12 @@
 <ul>
                 <li>
-                    <a href="<%= @item.area_link(params)  %>">
+                    <a href="<%= @item.area_link(params)  %>/thong-bao">
                         <h4>Thông báo</h4>
                         <img src="<%= @item.image_thumb %>" />
                     </a>
                 </li>
                 <li>
-                    <a href="{the_url module=areas areatype_id=`$areatype.id` area_id=`$area.id` title=`$area.name` info_page='gioi-thieu'}">
+                    <a href="<%= @item.area_link(params)  %>/thong-bao">
                         <h4>Giới thiệu</h4>
                         <img src="<%= @item.image_2_thumb %>" />
                     </a>
