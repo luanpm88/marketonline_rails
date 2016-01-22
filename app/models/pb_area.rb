@@ -74,6 +74,8 @@ class PbArea < ActiveRecord::Base
 	#	return "http://marketonline.vn:3000/"+parent.parent.image.quare.url.to_s
 	  elsif pb_areatype.present? && pb_areatype.image.present?
 		return "http://marketonline.vn:3000/"+pb_areatype.image.quare.url.to_s
+	  elsif parent.present? && parent.pb_areatype.present? && parent.pb_areatype.image.present?
+		return "http://marketonline.vn:3000/"+parent.pb_areatype.image.quare.url.to_s
 	  elsif country.present? && country.image.present?
 		return "http://marketonline.vn:3000/"+country.image.quare.url.to_s
 	  else		
