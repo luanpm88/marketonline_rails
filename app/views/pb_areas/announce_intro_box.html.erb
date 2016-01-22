@@ -1,6 +1,6 @@
 <ul>
                 <li>
-                    <a href="{the_url module=areas areatype_id=`$areatype.id` area_id=`$area.id` title=`$area.name` info_page='thong-bao'}">
+                    <a href="<%= @item.area_link(params)  %>">
                         <h4>Thông báo</h4>
                         <img src="<%= @item.image_thumb %>" />
                     </a>
