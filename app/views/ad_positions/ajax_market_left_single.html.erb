@@ -1,4 +1,12 @@
 <% if !@pos.nil? %>
+    <div class="addd">
+        <% @pos.active_ads.each do |ad| %>
+            <div class="ad_banner_item product_home_banner" pos="<%= params[:pos] %>">
+                Nhấn vào đây
+                <br><span class="subtitle">Để đăng ký quảng cáo vị trí này</span>
+            </div>
+        <% end %>
+    </div>
     <% @pos.active_ads.each do |ad| %>
       
       <div class="ad_sidebar_item">
