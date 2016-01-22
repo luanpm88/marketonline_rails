@@ -97,8 +97,13 @@ class PbCountry < ActiveRecord::Base
   def area_link(params)
     str = ["http://marketonline.vn"]
     str << ["thi-truong"]
-    
-    
+    if params[:areatype_id].present?
+      str << PbAreatype.find(params[:areatype_id]).name.unaccent.downcase.gsub(/\s+/,"xaaaaax").gsub(/[^a-zA-Z0-9]/, '').gsub("xaaaaax","-")
+    end
+    if params[:area_id].present?
+      str << PbArea.find(params[:area_id]).id
+      str << PbArea.find(params[:area_id]).name.unaccent.downcase.gsub(/\s+/,"xaaaaax").gsub(/[^a-zA-Z0-9]/, '').gsub("xaaaaax","-")
+    end
     
     if params[:type].present? && !params[:info_page].present?
       str << params[:type]
