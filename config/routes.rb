@@ -91,6 +91,7 @@ Rails.application.routes.draw do
       get 'announce_intro_box'
       get 'delete_image'
       get 'delete_country_image'
+      get 'list'
     end
   end
   resources :pb_areatypes do

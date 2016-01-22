@@ -285,7 +285,7 @@
 											</li>
 											<li <%= 'class=active' if ["catgroups"].include?(params[:controller]) %>><a href="<%= catgroups_path %>">Quản lý nhóm chuyên mục</a></li>
 											<li <%= 'class=active' if ["pb_areatypeinfos"].include?(params[:controller]) && ["index"].include?(params[:action]) %>><a href="<%= pb_areatypeinfos_path %>">Thị trường - Vị trí địa lý</a></li>
-											<li <%= 'class=active' if ["pb_areas"].include?(params[:controller]) && ["index"].include?(params[:action]) %>><a href="<%= pb_areas_path %>">Quản lý vùng miền</a></li>
+											<li <%= 'class=active' if ["pb_areas"].include?(params[:controller]) && ["list"].include?(params[:action]) %>><a href="<%= list_pb_areas_path %>">Quản lý vùng miền</a></li>
 											<li <%= 'class=active' if ["pb_settings"].include?(params[:controller]) %>><a href="<%= pb_settings_path %>">Cấu hình hệ thống</a></li>
 											<li <%= 'class=active' if ["system_messages"].include?(params[:controller]) %>><a href="<%= system_messages_path %>">Nhãn nội dung hệ thống</a></li>
 										</ul>

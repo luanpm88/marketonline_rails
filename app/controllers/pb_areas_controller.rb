@@ -16,7 +16,7 @@ class PbAreasController < ApplicationController
     render layout: nil
   end
   
-  def index
+  def list
     authorize! :manage, PbArea
     @country = PbCountry.find(4)
     respond_to do |format|

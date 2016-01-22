@@ -32,6 +32,7 @@ class Ability
     can :ajax_content, SystemMessage
     
     can :display_tree, PbArea
+    can :list, PbArea
     
     can :read, PbAreainfo
     can :create, PbAreainfo
