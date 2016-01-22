@@ -6,6 +6,16 @@ class PbAreainfo < ActiveRecord::Base
   
   mount_uploader :image, AreainfoUploader
   
+  def self.active_items(params)
+    items = self.all.order("created DESC").where(status: 1)
+    items = item.where("created >=", Time.now.beginning_of_day)
+    items = item.where("created <=", Time.now.end_of_day)
+    if params[:area_id].present?
+	  #items.where("")
+    end
+    return items
+  end
+  
   def self.datatable(params, user)    
     @records = self.includes(:pb_area).order("created DESC")
     
@@ -78,7 +88,7 @@ class PbAreainfo < ActiveRecord::Base
       row += [
 			  '<img width="90" src="'+item.image_thumb+'" />',
               item.title,
-              item.pb_areas.map(&:name).join(", "),              
+              (item.pb_areatypes.empty? ? "" : item.pb_areatypes.map(&:name).join(", ")+", ")+item.pb_areas.map(&:name).join(", "),              
               item.start_at.strftime("%d/%m/%Y"),
               item.end_at.strftime("%d/%m/%Y"),
               item.display_status,
@@ -188,6 +198,15 @@ class PbAreainfo < ActiveRecord::Base
   
   def pb_areas    
     PbArea.where(id: pb_area_ids)
+  end
+  
+  def pb_areatypes
+	maps = [{"id": "-2", "to_id": 1},{"id": "-3", "to_id": 2},{"id": "-4", "to_id": 3}]
+	at_ids = []
+	maps.each do |m|
+	  at_ids << m[:to_id] if pb_area_ids.include?(m[:id])
+	end
+    PbAreatype.where(id: at_ids)
   end
   
   def area_link(params)

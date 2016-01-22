@@ -8,7 +8,7 @@ class PbAreainfosController < ApplicationController
   def listing
     if params[:info_page] == 'thong-bao'
       @type_title = "Thông báo"
-      @new_list = PbAreainfo.where(type_name: "tb").order("created DESC")
+      @new_list = PbAreainfo.active_items(params).where(type_name: "tb") #.order("created DESC")
     elsif params[:info_page] == 'gioi-thieu'
       @type_title = "Giới thiệu"
       @new_list = PbAreainfo.where(type_name: "gt").order("created DESC")
