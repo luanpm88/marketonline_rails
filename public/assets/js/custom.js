@@ -696,5 +696,19 @@ $(document).ready(function() {
 
             },
     });
+            
+    $(".video_map").each(function() {
+      var width = $(this).width();
+      var height = $(this).height();
+      var source = $(this).attr("rel");
+      
+      var video_tag = '<video width="'+width+'" height="'+height+'" controls>'
+      video_tag += '<source src="'+source+'" type="video/mp4">'
+      video_tag += 'Your browser does not support the video tag.'
+      video_tag += '</video>'
+      
+      $(this).after(video_tag)
+      $(this).hide()
+    });
     
 });
