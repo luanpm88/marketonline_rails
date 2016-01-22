@@ -64,7 +64,7 @@ class PbAreasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pb_area_params
-      params.require(:pb_area).permit(:image, :type_name, :area_ids, :start_at, :end_at, :title, :area_id, :member_id, :content, :status, :created, :type_name, :area_moderator)
+      params.require(:pb_area).permit(:image, :image_2, :image_3, :image_4, :type_name, :area_ids, :start_at, :end_at, :title, :area_id, :member_id, :content, :status, :created, :type_name, :area_moderator)
     end
   
 end
