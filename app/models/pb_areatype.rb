@@ -23,10 +23,10 @@ class PbAreatype < ActiveRecord::Base
     
     @records.each do |item|
       row = [
-              '<img width="90" height="" src="'+item.image_thumb+'" /><br/>'+item.delete_image_link(user, ""),
-              '<img width="90" height="" src="'+item.image_2_thumb+'" /><br/>'+item.delete_image_link(user, "_2"),
-              '<img width="90" height="" src="'+item.image_3_thumb+'" /><br/>'+item.delete_image_link(user, "_3"),
-              '<img width="90" height="" src="'+item.image_4_thumb+'" /><br/>'+item.delete_image_link(user, "_4"),
+              '<img width="140" height="" src="'+item.image_thumb+'" /><br/>'+item.delete_image_link(user, ""),
+              '<img width="140" height="" src="'+item.image_2_thumb+'" /><br/>'+item.delete_image_link(user, "_2"),
+              '<img width="140" height="" src="'+item.image_3_thumb+'" /><br/>'+item.delete_image_link(user, "_3"),
+              '<img width="140" height="" src="'+item.image_4_thumb+'" /><br/>'+item.delete_image_link(user, "_4"),
               item.name,
               item.edit_link(user),
             ]
