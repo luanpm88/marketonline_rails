@@ -66,7 +66,7 @@
 													</div>
 												</div>
 												<div class="col-md-8">
-													<%= f.file_field :image, class: "form-control file-styled", onchange: "readURL(this);" %>
+													<%= f.file_field :image, class: "form-control file-styled", onchange: "readURL(this, $('.info_image'));" %>
 													<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
 												</div>
 											</div>
@@ -111,20 +111,7 @@
 				<%= form_for(PbAreainfo.new, :url => upload_image_video_pb_areainfos_path, html: {multipart: true, id: "editor_upload_form", target: "editor_upload_frame"}) do |f| %>
 					<input style="position: absolute; top: -900000px" type="file" id="editor_upload_file" name="upload_file" />
 				<% end %>
-				<script>
-					function editor_uploaded(data) {
-                        CKEDITOR.instances["editor-full"].insertHtml(data);
-						$(".uploading").hide();
-						$("#modal_upload_video").trigger("click")
-                    }
-					$("#editor_upload_button").click(function() {
-						$("#modal_upload_video").trigger("click")
-					});
-					$("#editor_upload_file").change(function() {
-						$(".uploading").show();
-						$("#editor_upload_form").submit();
-					})
-				</script>
+				
 				
 				<div id="modal_upload_video" class="modal fade modal_import_file">
 					<div class="modal-dialog">
@@ -147,15 +134,30 @@
 										</div>
 										<div class="form-group">
 											<label>Chọn hình ảnh đại diện <span class="text-danger">*</span></label>
-											<div class="">
-												<input type="file" class="file-styled" name="image">
+											<div class="row">
+												<div class="col-md-2">
+													<div>
+														<img class="video_thumb" width="100%" src="http://marketonline.vn:3000/img/announce.png" />
+													</div>
+												</div>
+												<div class="col-md-10">
+													<div class="">
+														<input type="file" class="file-styled" name="image" onchange="readURL(this, $('.video_thumb'));">
+													</div>
+													<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
+												</div>
 											</div>
+											
 										</div>
 									
 								</div>
 
-								<div class="modal-footer before">													
-									<button type="button" class="btn btn-primary" type="submit" onclick="$(this).parents('form').submit()"><i class=""></i> Tải video</button>
+								<div class="modal-footer before">
+									<span style="display: none;font-size: 17px;" class="uploading">
+										Đang tải hình ảnh/video...
+										<i style="font-size: 40px; display: inline-block; margin-right: 10px;" class="icon-spinner2 spinner"></i>
+									</span>
+									<button type="button" class="btn btn-primary post_video" type="submit" onclick="$(this).parents('form').submit()"><i class=""></i> Tải video</button>
 									<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
 								</div>
 								
@@ -164,6 +166,26 @@
 					</div>
 				</div>
 				<!-- /basic modal -->
+				
+				<script>
+					function editor_uploaded(data) {
+                        CKEDITOR.instances["editor-full"].insertHtml(data);
+						$(".uploading").hide();
+						$("#modal_upload_video").trigger("click")
+						$(".post_video").attr("disabled", false);
+                    }
+						$("#editor_upload_button").click(function() {
+							$("#modal_upload_video").trigger("click")
+						});
+						$("#editor_upload_file").change(function() {
+							$(".uploading").show();
+							$("#editor_upload_form").submit();
+						})
+						$(".post_video").click(function() {
+							$(".uploading").show();
+							$(this).attr("disabled", true);
+						})
+				</script>
 
 <script>
 	
@@ -330,16 +352,17 @@
 
 
 <script>
-	function readURL(input) {
+	function readURL(input, img) {
 		if (input.files && input.files[0]) {
 		  var reader = new FileReader();
 		  reader.onload = function (e) {
-			$('.info_image')
+			img
 			  .attr('src', e.target.result)
 		  };
 		  reader.readAsDataURL(input.files[0]);
 		}
-	  }
+	}
+	
 	 $(document).ready(function() {
 		  vs = JSON.parse($('input[name="pb_areainfo[area_ids]"]').attr('values'))
 		  $('input[name="pb_areainfo[area_ids]"]').select2('data', vs)
