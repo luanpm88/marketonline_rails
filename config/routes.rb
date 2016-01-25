@@ -70,6 +70,7 @@ Rails.application.routes.draw do
       get 'iframe_1_wide_banners'
       get 'ajax_1_wide_banners'
       get 'iframe_3_wide_banners'
+      get 'ajax_3_wide_banners'
       get 'iframe_4_wide_banners'
       get 'iframe_5_wide_banners'
       get 'iframe_6_wide_banners'

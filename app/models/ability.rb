@@ -15,6 +15,7 @@ class Ability
     can :iframe_1_wide_banners, AdPosition
     can :ajax_1_wide_banners, AdPosition
     can :iframe_3_wide_banners, AdPosition
+    can :ajax_3_wide_banners, AdPosition
     can :iframe_4_wide_banners, AdPosition
     can :iframe_5_wide_banners, AdPosition
     can :iframe_6_wide_banners, AdPosition
