@@ -12,6 +12,8 @@ function formatAdPositionOption(result) {
                 icon = 'home2'
             } else if(text.indexOf("dịch vụ") > -1) {
                 icon = 'alarm'
+            } else if(text.indexOf("thị trường") > -1) {
+                icon = 'earth'
             } else if(text.indexOf("sản phẩm") > -1) {
                 icon = 'cart5'
             } else if(text.indexOf("thương mại") > -1) {
@@ -19,9 +21,7 @@ function formatAdPositionOption(result) {
             } else if(text.indexOf("thương hiệu") > -1) {
                 icon = 'users4'
             } else if(text.indexOf("học") > -1) {
-                icon = 'compose'
-            } else if(text.indexOf("thị trường") > -1) {
-                icon = 'earth'
+                icon = 'compose'            
             }
 
             return "<i class=\"ad_position_icon icon-"+icon+"\"></i> "+result.text
