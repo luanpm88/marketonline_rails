@@ -4,7 +4,7 @@
     <% @ads.each do |ad| %>
       <li>
         <a title="<%= ad.name %>" href="<%= click_ads_path(id: ad) %>" target="_blank">
-          <img title="" src="<%= ad.image_url(:banner) %>" />
+          <img title="" src="http://marketonline.vn:3000<%= ad.image_url(:banner) %>" />
         </a>
       </li>      
     <% end %>
