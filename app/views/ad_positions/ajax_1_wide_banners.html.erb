@@ -1,13 +1,13 @@
-<% if !@ads.empty? %>
-<div class="">
-  <ul class="ajax_1_wide_banners">
-    <% @ads.each do |ad| %>
-      <li>
-        <a title="<%= ad.name %>" href="<%= click_ads_path(id: ad) %>" target="_blank">
-          <img title="" src="http://marketonline.vn:3000<%= ad.image_url(:banner) %>" />
-        </a>
-      </li>      
-    <% end %>
-  </ul>
-</div>
+<% if @pos.status == 1 && !@ads.empty? %>
+  <div class="">
+    <ul class="ajax_1_wide_banners">
+      <% @ads.each do |ad| %>
+        <li>
+          <a title="<%= ad.name %>" href="<%= click_ads_path(id: ad) %>" target="_blank">
+            <img title="" src="http://marketonline.vn:3000<%= ad.image_url(:banner) %>" />
+          </a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>

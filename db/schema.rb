@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160122080413) do
+ActiveRecord::Schema.define(version: 20160125074037) do
 
   create_table "ad_clicks", force: :cascade do |t|
     t.integer  "ad_id",         limit: 4
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20160122080413) do
     t.string   "style_name",    limit: 255
     t.integer  "number_of_ad",  limit: 4,                    default: 1
     t.integer  "display_order", limit: 4
+    t.integer  "status",        limit: 4,                    default: 1
   end
 
   create_table "ads", force: :cascade do |t|

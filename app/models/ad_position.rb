@@ -80,6 +80,7 @@ class AdPosition < ActiveRecord::Base
               "<div class=\"text-center\">#{item.created_at.strftime("%d-%m-%Y")}</div>",              
               "<div class=\"text-right\">#{item.display_prices}</div>",
               "<div class=\"text-center\">#{item.display_order}</div>",
+              "<div class=\"text-center\">#{item.display_status}</div>",
               "<div class=\"text-right\"><ul class=\"icons-list\">"+
                   "<li class=\"dropup\">"+
                       "<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\"><i class=\"icon-menu7\"></i></a>"+
@@ -101,6 +102,19 @@ class AdPosition < ActiveRecord::Base
     result["data"] = data
     
     return {result: result}
+  end
+  
+  def display_status
+    ActionView::Base.send(:include, Rails.application.routes.url_helpers)
+    link_helper = ActionController::Base.helpers
+    
+    
+    
+    if status == 1      
+      link_helper.link_to("<span class=\"ad_status label bg-green\" title=\"\">Bật</span>".html_safe, {controller: "ad_positions", action: "off", id: self.id}, class: "ajax_link")
+    else
+      link_helper.link_to("<span class=\"ad_status label bg-draft\" title=\"\">Tắt</span>".html_safe, {controller: "ad_positions", action: "on", id: self.id}, class: "ajax_link")
+    end
   end
   
   def display_prices

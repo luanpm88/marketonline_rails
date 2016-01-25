@@ -80,6 +80,9 @@ Rails.application.routes.draw do
       get 'get_values'
       get 'get_remaining_time'
       get 'ajax_market_left_single'
+      
+      get "off"
+      get "on"
     end
   end
   resources :pb_products do

@@ -1,6 +1,6 @@
 class AdPositionsController < ApplicationController
   #load_and_authorize_resource
-  before_action :set_ad_position, only: [:get_values, :preview_box, :show, :edit, :update, :destroy]
+  before_action :set_ad_position, only: [:on, :off, :get_values, :preview_box, :show, :edit, :update, :destroy]
 
   # GET /ad_positions
   # GET /ad_positions.json
@@ -244,6 +244,24 @@ class AdPositionsController < ApplicationController
   def ajax_market_left_single
     @pos = AdPosition.get(params[:pos])
     render layout: nil
+  end
+  
+  def on
+    @message = "Đã bật."
+    @ad_position.update_attribute(:status, 1)
+    respond_to do |format|      
+      format.html { render "/home/ajax_success", layout: nil }
+      format.json { head :no_content }
+    end
+  end
+  
+  def off
+    @message = "Đã tắt."
+    @ad_position.update_attribute(:status, 0)
+    respond_to do |format|      
+      format.html { render "/home/ajax_success", layout: nil }
+      format.json { head :no_content }
+    end
   end
 
   private
