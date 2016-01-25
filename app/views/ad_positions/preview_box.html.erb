@@ -90,7 +90,7 @@
     
     // hide/show industry
     $(".area_group").hide()
-    <% if @ad_position.name == "area_top_map" or @ad_position.name == "area_top_map_2" or @ad_position.name == "area_top_map_3" %>
+    <% if @ad_position.name.include?("area_") or @ad_position.name == "area_top_map" or @ad_position.name == "area_top_map_2" or @ad_position.name == "area_top_map_3" %>
         $(".area_group").show()
     <% end %>
 </script>
