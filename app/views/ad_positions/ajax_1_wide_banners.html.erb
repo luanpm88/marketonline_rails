@@ -1,0 +1,12 @@
+<div class="">
+  <ul class="ajax_1_wide_banners">
+    <div class="loading"></div>
+    <% @ads.each do |ad| %>
+      <li>
+        <a title="<%= ad.name %>" href="<%= click_ads_path(id: ad) %>" target="_blank">
+          <img title="" src="<%= ad.image_url(:banner) %>" />
+        </a>
+      </li>      
+    <% end %>
+  </ul>
+</div>

@@ -155,6 +155,25 @@ class AdPositionsController < ApplicationController
     render layout: "ad_frame"
   end
   
+  def ajax_1_wide_banners
+    if params[:industry_id] != "-1" and params[:industry_id] != "0"
+      industry = PbIndustry.find(params[:industry_id])
+      @top_industry = industry.top_parent
+      iid = @top_industry.id
+    else
+      iid = -1
+    end
+    
+    @pos = AdPosition.get(params[:pos])
+    @ads = @pos.active_ads(iid)
+    
+    if @ads.count < @pos.number_of_ad
+      @ads += @pos.active_ads(-1).limit(@pos.number_of_ad - @ads.count)
+    end
+    
+    render layout: nil
+  end
+  
   def iframe_3_wide_banners
     @pos = AdPosition.get(params[:pos])
     @pos_2 = AdPosition.get(params[:pos]+"_2")
