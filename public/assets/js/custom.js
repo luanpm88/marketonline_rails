@@ -9,11 +9,11 @@ function formatAdPositionOption(result) {
             if (text.indexOf("trang chủ cá nhân") > -1) {
                 icon = 'vcard'
             } else if (text.indexOf("trang chủ") > -1) {
-                icon = 'home2'
-            } else if(text.indexOf("dịch vụ") > -1) {
-                icon = 'alarm'
+                icon = 'home2'            
             } else if(text.indexOf("thị trường") > -1) {
                 icon = 'earth'
+            } else if(text.indexOf("dịch vụ") > -1) {
+                icon = 'alarm'
             } else if(text.indexOf("sản phẩm") > -1) {
                 icon = 'cart5'
             } else if(text.indexOf("thương mại") > -1) {
