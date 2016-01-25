@@ -18,55 +18,7 @@
                         <br><span class="subtitle">Để đăng ký quảng cáo vị trí này</span>
                     </div>
                     
-                    <div style="border: medium none;height: 252px;width: 102%;" src="http://marketonline.vn:3000/ad_positions/iframe_3_wide_banners?pos=trade_home_top" style="border: none;">
-                      
-                      <div class="ad_slider<%= params[:device] %>">
-                        <ul class="iframe_3_wide_banners">
-                          <div class="loading"></div>
-                          <% @pos.active_ads.each do |ad| %>
-                            <li>
-                              <a href="<%= click_ads_path(id: ad) %>" target="_blank">
-                                <img title="" src="<%= ad.image_url(:banner) %>" />
-                              </a>
-                              <a class="title" class="title" href="<%= click_ads_path(id: ad) %>" target="_blank">
-                                <strong><%= ad.name %></strong><br />
-                                <div><%= ad.description %></div>
-                              </a>
-                            </li>
-                            
-                          <% end %>
-                          
-                          <% if @pos_2.present? %>
-                            <% @pos_2.active_ads.each do |ad| %>
-                              <li>
-                                <a href="<%= click_ads_path(id: ad) %>" target="_blank">
-                                  <img title="" src="<%= ad.image_url(:banner) %>" />
-                                </a>
-                                <a class="title" class="title" href="<%= click_ads_path(id: ad) %>" target="_blank">
-                                  <strong><%= ad.name %></strong><br />
-                                  <div><%= ad.description %></div>
-                                </a>
-                              </li>      
-                            <% end %>
-                          <% end %>
-                          
-                          <% if @pos_3.present? %>
-                            <% @pos_3.active_ads.each do |ad| %>
-                              <li>
-                                <a href="<%= click_ads_path(id: ad) %>" target="_blank">
-                                  <img title="" src="<%= ad.image_url(:banner) %>" />
-                                </a>
-                                <a class="title" class="title" href="<%= click_ads_path(id: ad) %>" target="_blank">
-                                  <strong><%= ad.name %></strong><br />
-                                  <div><%= ad.description %></div>
-                                </a>
-                              </li>      
-                            <% end %>
-                          <% end %>
-                        </ul>
-                        </div>
-                      
-                    </div>
+                    <iframe style="border: medium none;height: 252px;width: 102%;" src="http://marketonline.vn:3000/ad_positions/iframe_3_wide_banners?pos=trade_home_top" style="border: none;"></iframe>
             </div>
       </div>
 </div>
