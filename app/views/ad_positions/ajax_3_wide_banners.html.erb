@@ -5,20 +5,20 @@
               <div class="ad_toggle_h2"><a href="#add_toggle" class="ad_toggle" target="_blank">Đăng Quảng Cáo</a></div>
             </div>
             <div class="works-list compage" style="padding: 0" >         
-                    <div class="ad_banner_item product_home_banner" pos="trade_home_top">
+                    <div class="ad_banner_item product_home_banner" pos="<%= params[:pos] %>">
                         Nhấn vào đây
                         <br><span class="subtitle">Để đăng ký quảng cáo vị trí này</span>
                     </div>
-                    <div class="ad_banner_item product_home_banner" pos="trade_home_top_2">
+                    <div class="ad_banner_item product_home_banner" pos="<%= params[:pos] %>_2">
                         Nhấn vào đây
                         <br><span class="subtitle">Để đăng ký quảng cáo vị trí này</span>
                     </div>
-                    <div class="ad_banner_item product_home_banner" pos="trade_home_top_3">
+                    <div class="ad_banner_item product_home_banner" pos="<%= params[:pos] %>_3">
                         Nhấn vào đây
                         <br><span class="subtitle">Để đăng ký quảng cáo vị trí này</span>
                     </div>
                     
-                    <iframe style="border: medium none;height: 252px;width: 102%;" src="http://marketonline.vn:3000/ad_positions/iframe_3_wide_banners?pos=trade_home_top" style="border: none;"></iframe>
+                    <iframe style="border: medium none;height: 252px;width: 102%;" src="http://marketonline.vn:3000/ad_positions/iframe_3_wide_banners?pos=<%= params[:pos] %>" style="border: none;"></iframe>
             </div>
       </div>
 </div>
