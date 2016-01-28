@@ -220,7 +220,7 @@ class Ad < ActiveRecord::Base
   end
   
   def display_image_2(version = nil)
-    "<img src='#{image_2_url(version)}' />".html_safe
+    "<img src='#{image_2_src(version)}' />".html_safe
   end
   
   def image_2_link
@@ -250,7 +250,7 @@ class Ad < ActiveRecord::Base
   end
   
   def display_image_3(version = nil)
-    "<img src='#{image_3_url(version)}' />".html_safe
+    "<img src='#{image_3_src(version)}' />".html_safe
   end
   
   def image_3_link
@@ -280,7 +280,7 @@ class Ad < ActiveRecord::Base
   end
   
   def display_image_4(version = nil)
-    "<img src='#{image_4_url(version)}' />".html_safe
+    "<img src='#{image_4_src(version)}' />".html_safe
   end
   
   def image_4_link

@@ -65,7 +65,7 @@
 																<%= @ad.image_link %>
 																<label class="image-checkbutton"><i image="<%= @ad.image_url(:banner) %>" class="<%= "icon-checkmark" if @ad.image.present? %> <%= "noimage" if !@ad.image.present? %>"></i></label>
 															</div>
-															<div class="col-md-4">
+															<div class="col-md-7">
 																<label>Tải hình</label>
 																<input type="file" name="ad[image]" class="form-control file-styled">
 																<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
@@ -81,13 +81,15 @@
 													<%= f.hidden_field "banner_2" %>
 													
 													<div class="form-group image_upload_input">
-														<label>Thay hình ảnh</label>
+														
 														<div class="row">
 															<div class="col-md-3">
+																<label>Xem trước</label>
 																<%= @ad.image_2_link %>
 																<label class="image-checkbutton"><i image="<%= @ad.image_2_url(:banner) %>" class="<%= "icon-checkmark" if @ad.image_2.present? %> <%= "noimage" if !@ad.image_2.present? %>"></i></label>
 															</div>
-															<div class="col-md-7">																		
+															<div class="col-md-7">
+																<label>Tải hình</label>
 																<input type="file" name="ad[image_2]" class="form-control file-styled">
 																<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
 															</div>
@@ -102,13 +104,15 @@
 													<%= f.hidden_field "banner_3" %>
 													
 													<div class="form-group image_upload_input">
-														<label>Thay hình ảnh</label>
+														
 														<div class="row">
 															<div class="col-md-3">
+																<label>Xem trước</label>
 																<%= @ad.image_3_link %>
 																<label class="image-checkbutton"><i image="<%= @ad.image_3_url(:banner) %>" class="<%= "icon-checkmark" if @ad.image_3.present? %> <%= "noimage" if !@ad.image_3.present? %>"></i></label>
 															</div>
-															<div class="col-md-7">																		
+															<div class="col-md-7">
+																<label>Tải hình</label>
 																<input type="file" name="ad[image_3]" class="form-control file-styled">
 																<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
 															</div>
@@ -123,13 +127,15 @@
 													<%= f.hidden_field "banner_4" %>
 													
 													<div class="form-group image_upload_input">
-														<label>Thay hình ảnh</label>
+														
 														<div class="row">
 															<div class="col-md-3">
+																<label>Xem trước</label>
 																<%= @ad.image_4_link %>
 																<label class="image-checkbutton"><i image="<%= @ad.image_4_url(:banner) %>" class="<%= "icon-checkmark" if @ad.image_4.present? %> <%= "noimage" if !@ad.image_4.present? %>"></i></label>
 															</div>
-															<div class="col-md-7">																		
+															<div class="col-md-7">
+																<label>Tải hình</label>
 																<input type="file" name="ad[image_4]" class="form-control file-styled">
 																<span class="help-block">Định dạng ảnh: gif, png, jpg. Kích thước tối đa: 2Mb</span>
 															</div>
