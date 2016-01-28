@@ -766,12 +766,12 @@
 			updatePaymentTypeSelect()
 		})
 		
-		// get ad position values
-		getAdPositionValues()
-		$("select[name='ad[ad_position_id]']").change(function() {
-			getAdPositionValues()
-			$(".steps-validation").steps("next")
-		})
+		//// get ad position values
+		//getAdPositionValues()
+		//$("select[name='ad[ad_position_id]']").change(function() {
+		//	getAdPositionValues()
+		//	$(".steps-validation").steps("next")
+		//})
 		
 		$("input[name='ad[max_budget]'], input[name='ad[days]'], input[name='ad[start_at]'], input[name='ad[end_at]']").keyup(function() {
 			calculateAdPrices()
