@@ -26,6 +26,8 @@ class PbMember < ActiveRecord::Base
   
   has_many :agent_payments
   
+  has_many :pb_links, foreign_key: "member_id"
+  
   def ability
     @ability ||= Ability.new(self)
   end
@@ -215,7 +217,12 @@ class PbMember < ActiveRecord::Base
   end
   
   def referrer
-    (referrer_id.present? and referrer_id > 0) ? PbMember.find(referrer_id) : PbMember.first
+    link = pb_links.order("created DESC").first
+    if !link.nil?
+      PbMember.find(link.parent_id)
+    else
+      PbMember.first
+    end
   end
   
   def deal_saleorderitems(filters={})
