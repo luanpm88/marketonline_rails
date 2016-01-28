@@ -2,7 +2,7 @@ class PbSetting < ActiveRecord::Base
   self.primary_key = :id
   
   def self.datatable(params, user)    
-    @records = self.all.order("name DESC, variable")
+    @records = self.where.not("name = ''").order("name DESC, variable")
     
     # Keyword search
     q = params["search"]["value"].strip.downcase
