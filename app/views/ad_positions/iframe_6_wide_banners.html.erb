@@ -11,29 +11,33 @@
             </a>
         </li>
     <% end %>
-    <li>
-        <a href="<%= @referrer.all_pb_products.last.url %>" target="_blank"
-                    style="
-                        display: block;
-                        height: 173px;
-                        margin-bottom: 4px;
-                        overflow: hidden;"
-        >
-            <img title="" src="<%= @referrer.all_pb_products.last.default_image %>" />
+    
+    <% if !@referrer.all_pb_products.empty? %>
+        <li>
+            <a href="<%= @referrer.all_pb_products.last.url %>" target="_blank"
+                        style="
+                            display: block;
+                            height: 173px;
+                            margin-bottom: 4px;
+                            overflow: hidden;"
+            >
+                <img title="" src="<%= @referrer.all_pb_products.last.default_image %>" />
+            </a>
+            <a class="title" class="title" href="<%= @referrer.pb_company.url %>" target="_blank">
+                <%= @referrer.all_pb_products.last.name %>
+            </a>
+        </li>
+    <% end %>
+    
+    <% @pos.active_ads.each do |ad| %>
+      <li>
+        <a href="<%= click_ads_path(id: ad) %>" target="_blank">
+          <img title="" src="<%= ad.image_src(:banner) %>" />
         </a>
-        <a class="title" class="title" href="<%= @referrer.pb_company.url %>" target="_blank">
-            <%= @referrer.all_pb_products.last.name %>
+        <a class="title" class="title" href="<%= click_ads_path(id: ad) %>" target="_blank">
+            <%= ad.name %>
         </a>
-    </li>
-  <% @pos.active_ads.each do |ad| %>
-    <li>
-      <a href="<%= click_ads_path(id: ad) %>" target="_blank">
-        <img title="" src="<%= ad.image_src(:banner) %>" />
-      </a>
-      <a class="title" class="title" href="<%= click_ads_path(id: ad) %>" target="_blank">
-          <%= ad.name %>
-      </a>
-    </li>    
-  <% end %>
+      </li>    
+    <% end %>
 </ul>
 </div>
