@@ -107,6 +107,7 @@ class Ability
         can :off, Deal do |d|
           d.pb_member_id == user.id
         end
+        can :item_list, Deal
         
         can :read, PbSaleorderitem
         can :datatable, PbSaleorderitem

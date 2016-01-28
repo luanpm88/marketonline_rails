@@ -256,6 +256,10 @@ class DealsController < ApplicationController
       render text: str.join("")
     end
   end
+  
+  def item_list
+    authorize! :item_list, Deal
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
