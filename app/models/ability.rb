@@ -116,6 +116,8 @@ class Ability
         can :deal_agents, PbMember
         can :select2_options, PbMember
         can :pending_order_count, PbMember
+        
+        can :read, AgentPayment
       end
       
       if user.role == "admin"

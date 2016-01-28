@@ -64,6 +64,8 @@ class AgentPaymentsController < ApplicationController
   end
   
   def user_payments
+     authorize! :read, AgentPayment
+    
     respond_to do |format|
       format.html
       format.json {
