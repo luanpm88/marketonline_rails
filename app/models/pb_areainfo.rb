@@ -178,7 +178,13 @@ class PbAreainfo < ActiveRecord::Base
   end
   
   def json_encode_area_ids_names
-    json = pb_areas.map {|t| {id: t.id.to_s, text: t.full_name_inverse}}
+    json = []
+    
+    json << {id: "-2", text: "Miền Nam"} if pb_area_ids.include?("-2")
+    json << {id: "-3", text: "Miền Trung"} if pb_area_ids.include?("-3")
+    json << {id: "-4", text: "Miền Bắc"} if pb_area_ids.include?("-4")
+    
+    json += pb_areas.map {|t| {id: t.id.to_s, text: t.full_name_inverse}}
     json.to_json
   end
   
