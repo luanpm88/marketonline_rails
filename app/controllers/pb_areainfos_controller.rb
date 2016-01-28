@@ -6,6 +6,8 @@ class PbAreainfosController < ApplicationController
   
   
   def listing
+    authorize! :read, PbAreainfo
+    
     if params[:info_page] == 'thong-bao'
       @type_title = "Thông báo"
       @new_list = PbAreainfo.active_items(params).where(type_name: "tb") #.order("created DESC")
@@ -18,7 +20,7 @@ class PbAreainfosController < ApplicationController
   end
   
   def index
-    authorize! :read, PbAreainfo
+    authorize! :view_own, PbAreainfo
   end
   
   def datatable

@@ -118,6 +118,8 @@ class Ability
         can :pending_order_count, PbMember
         
         can :read, AgentPayment
+        
+        can :view_own, PbAreainfo
       end
       
       if user.role == "admin"
