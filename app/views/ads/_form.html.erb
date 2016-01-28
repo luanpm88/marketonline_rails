@@ -504,8 +504,8 @@
 				$(".per_click_price").html(format_number(data.pos.click_price))
 				$(".per_day_price").html(format_number(data.pos.day_price))
 				pd_box.show()
-				$('#ad_start_at').val(data.start_date)
-				$('#ad_end_at').val(data.end_date)
+				//$('#ad_start_at').val(data.start_date)
+				//$('#ad_end_at').val(data.end_date)
 				calculateAdPrices()
 			}
 		})
@@ -766,12 +766,12 @@
 			updatePaymentTypeSelect()
 		})
 		
-		//// get ad position values
-		//getAdPositionValues()
-		//$("select[name='ad[ad_position_id]']").change(function() {
-		//	getAdPositionValues()
-		//	$(".steps-validation").steps("next")
-		//})
+		// get ad position values
+		getAdPositionValues()
+		$("select[name='ad[ad_position_id]']").change(function() {
+			getAdPositionValues()
+			$(".steps-validation").steps("next")
+		})
 		
 		$("input[name='ad[max_budget]'], input[name='ad[days]'], input[name='ad[start_at]'], input[name='ad[end_at]']").keyup(function() {
 			calculateAdPrices()
