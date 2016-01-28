@@ -18,7 +18,7 @@ class PbAreainfosController < ApplicationController
   end
   
   def index
-  
+    authorize! :read, PbAreainfo
   end
   
   def datatable
