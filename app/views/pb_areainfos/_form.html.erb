@@ -1,6 +1,7 @@
-                <%= javascript_include_tag '/ckeditor/ckeditor.js' %>
+                <%= javascript_include_tag '/ckeditor/ckeditorz.js' %>
 				<%= javascript_include_tag '/assets/js/plugins/forms/selects/select2.min.js' %>
-				<%= javascript_include_tag '/assets/js/pages/editor_ckeditor.js' %>
+				<%= javascript_include_tag '/assets/js/pages/editor_ckeditorz.js' %>
+				<%= javascript_include_tag '/tinymce/tinymce.min.js' %>
 				
 				
 				<!-- Wizard with validation -->
@@ -88,7 +89,7 @@
 											<a id="editor_upload_button" class="btn btn-primary btn-xs upload-image-video">Tải hình ảnh</a>
 											<a data-toggle="modal" data-target="#modal_upload_video" href="#" class="btn btn-primary btn-xs upload-video" >Tải video</a>
 										</div>
-										<%= f.text_area :content, class: "form-control required", id: "editor-full" %>
+										<%= f.text_area :content, class: "form-control required", id: "editor-full", style: "height: 300px;" %>
 									</div>
 								</div>
 							</div>
@@ -169,13 +170,14 @@
 				
 				<script>
 					function editor_uploaded(data) {
-                        CKEDITOR.instances["editor-full"].insertHtml(data);
+                        //CKEDITOR.instances["editor-full"].insertHtml(data);
+						tinymce.activeEditor.execCommand('mceInsertContent', false, data);
 						$(".uploading").hide();
 						$("#modal_upload_video").trigger("click")
-						$(".post_video").attr("disabled", false);
-                    }
-						$("#editor_upload_button").click(function() {
-							$("#modal_upload_video").trigger("click")
+							$(".post_video").attr("disabled", false);
+						}
+						$("#editor_upload_button").click(function() {							
+							$("#editor_upload_file").trigger("click")
 						});
 						$("#editor_upload_file").change(function() {
 							$(".uploading").show();
@@ -371,6 +373,11 @@
 			$(".file-styled").uniform({
 				fileButtonHtml: '<i class="icon-googleplus5"></i>',
 				wrapperClass: 'bg-warning'
+			});
+			
+			tinymce.init({
+				selector:'textarea',
+				valid_elements: '*[*]',
 			});
 	 });
 </script>
