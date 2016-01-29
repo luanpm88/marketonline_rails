@@ -429,3 +429,6 @@ legend {
         font-size: 15px;
     }
 }
+video {
+    background: #888;
+}
