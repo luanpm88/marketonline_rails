@@ -569,15 +569,15 @@ class PbMember < ActiveRecord::Base
     return {result: result}
   end
   
-  def first_bought
-    item = pb_saleorders.order("created").first
-    return item.nil? ? "" : Time.at(item.created).to_datetime.strftime("%d-%m-%Y, %H:%I %p")
-  end
+  #def first_bought(filter=nil)
+  #  item = pb_saleorders.order("created").first
+  #  return item.nil? ? "" : Time.at(item.created).to_datetime.strftime("%d-%m-%Y, %H:%I %p")
+  #end
   
-  def last_bought
-    item = pb_saleorders.order("created DESC").first
-    return item.nil? ? "" : Time.at(item.created).to_datetime.strftime("%d-%m-%Y, %H:%I %p")
-  end
+  #def last_bought(filter=nil)
+  #  item = pb_saleorders.order("created DESC").first
+  #  return item.nil? ? "" : Time.at(item.created).to_datetime.strftime("%d-%m-%Y, %H:%I %p")
+  #end
   
   def bought_order_list_link
     ActionView::Base.send(:include, Rails.application.routes.url_helpers)

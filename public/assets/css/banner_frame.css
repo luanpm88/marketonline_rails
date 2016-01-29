@@ -453,3 +453,6 @@ body {
     float: left;
     margin-bottom: 5px;
 }
+.iframe_1_wide_banners li a img {
+    width: 980px;
+}

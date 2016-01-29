@@ -33,18 +33,22 @@ class Deal < ActiveRecord::Base
     data = []
     
     @records.each do |item|
-      row = [
-              "<div class=\"\"><img src=\"#{item.pb_product.default_image}\" width=\"100\" /></div>",
-              "<div class=\"\"><a href=\"#{item.pb_product.url}\" target=\"_blank\">#{item.pb_product.name}</a><br/>#{item.description}</div>",
-              "<div class=\"\">#{item.display_price}</div>",
-              "<div class=\"\">#{item.pb_product.price_unit}</div>",
-              "<div class=\"\">#{ApplicationController.helpers.format_price(item.remain_items_count.to_s)}</div>",
-              "<div class=\"\">#{ApplicationController.helpers.format_price(item.sold_items_count.to_s)}/#{ApplicationController.helpers.format_price(item.quantity.to_s)}</div>",
-              "<div class=\"text-nowrap\">#{item.display_time}</div>",
-              "<div class=\"\">#{item.display_statuses}</div>",
-              "<div class=\"text-left text-nowrap\">#{item.show_link}<br />#{item.on_link}#{item.off_link}<br />#{item.edit_link}<br />#{item.destroy_link}</div>"
-            ]
-      data << row      
+      if item.pb_product.present?
+        row = [
+                "<div class=\"\"><img src=\"#{item.pb_product.default_image}\" width=\"100\" /></div>",
+                "<div class=\"\"><a href=\"#{item.pb_product.url}\" target=\"_blank\">#{item.pb_product.name}</a><br/>#{item.description}</div>",
+                "<div class=\"\">#{item.display_price}</div>",
+                "<div class=\"\">#{item.pb_product.price_unit}</div>",
+                "<div class=\"\">#{ApplicationController.helpers.format_price(item.remain_items_count.to_s)}</div>",
+                "<div class=\"\">#{ApplicationController.helpers.format_price(item.sold_items_count.to_s)}/#{ApplicationController.helpers.format_price(item.quantity.to_s)}</div>",
+                "<div class=\"text-nowrap\">#{item.display_time}</div>",
+                "<div class=\"\">#{item.display_statuses}</div>",
+                "<div class=\"text-left text-nowrap\">#{item.show_link}<br />#{item.on_link}#{item.off_link}<br />#{item.edit_link}<br />#{item.destroy_link}</div>"
+              ]
+        data << row
+      else
+        item.destroy
+      end
     end
 
     result = {
@@ -65,18 +69,22 @@ class Deal < ActiveRecord::Base
     data = []
     
     @records.each do |item|
-      row = [
-              "<div class=\"\"><img src=\"#{item.pb_product.default_image}\" width=\"100\" /></div>",
-              "<div class=\"\">#{item.show_link(item.pb_product.name)}<br/>#{item.description}<br />Thành viên: #{item.pb_member.display_name}</div>",
-              "<div class=\"\">#{item.display_price}</div>",
-              "<div class=\"\">#{item.pb_product.price_unit}</div>",
-              "<div class=\"\">#{ApplicationController.helpers.format_price(item.remain_items_count.to_s)}</div>",
-              "<div class=\"\">#{ApplicationController.helpers.format_price(item.sold_items_count.to_s)}/#{ApplicationController.helpers.format_price(item.quantity.to_s)}</div>",
-              "<div class=\"text-nowrap\">#{item.display_time}</div>",
-              "<div class=\"\">#{item.display_statuses}</div>",
-              "<div class=\"text-left text-nowrap\">#{item.approve_link}<br />#{item.show_link}<br />#{item.edit_link}<br />#{item.destroy_link}</div>"
-            ]
-      data << row      
+      if item.pb_product.present?
+        row = [
+                "<div class=\"\"><img src=\"#{item.pb_product.default_image}\" width=\"100\" /></div>",
+                "<div class=\"\">#{item.show_link(item.pb_product.name)}<br/>#{item.description}<br />Thành viên: #{item.pb_member.display_name}</div>",
+                "<div class=\"\">#{item.display_price}</div>",
+                "<div class=\"\">#{item.pb_product.price_unit}</div>",
+                "<div class=\"\">#{ApplicationController.helpers.format_price(item.remain_items_count.to_s)}</div>",
+                "<div class=\"\">#{ApplicationController.helpers.format_price(item.sold_items_count.to_s)}/#{ApplicationController.helpers.format_price(item.quantity.to_s)}</div>",
+                "<div class=\"text-nowrap\">#{item.display_time}</div>",
+                "<div class=\"\">#{item.display_statuses}</div>",
+                "<div class=\"text-left text-nowrap\">#{item.approve_link}<br />#{item.show_link}<br />#{item.edit_link}<br />#{item.destroy_link}</div>"
+              ]
+        data << row
+      else
+        item.destroy
+      end
     end
 
     result = {
@@ -373,18 +381,22 @@ class Deal < ActiveRecord::Base
     data = []
     
     @records.each do |item|
-      row = [
-              "<div class=\"\"><img src=\"#{item.pb_product.default_image}\" width=\"100\" /></div>",
-              "<div class=\"\"><a href=\"#{item.pb_product.url}\" target=\"_blank\">#{item.pb_product.name}</a><br/>#{item.description}</div>",
-              "<div class=\"\">#{item.display_price}</div>",
-              "<div class=\"\">#{item.pb_product.price_unit}</div>",
-              "<div class=\"text-nowrap\">#{item.display_time}</div>",
-              "<div class=\"\">#{ApplicationController.helpers.format_price(user.deal_items({deal_id: item.id}).sum(:quantity).to_s)}</div>",
-              "<div class=\"\">#{ApplicationController.helpers.format_price(user.deal_income({deal_id: item.id}))}</div>",
-              "<div class=\"\">#{ApplicationController.helpers.format_price(user.deal_gift_count({deal_id: item.id}))}</div>",
-              "<div class=\"text-left text-nowrap\">#{user.corp_items_link(item.id)}</div>"
-            ]
-      data << row      
+      if item.pb_product.present?
+        row = [
+                "<div class=\"\"><img src=\"#{item.pb_product.default_image}\" width=\"100\" /></div>",
+                "<div class=\"\"><a href=\"#{item.pb_product.url}\" target=\"_blank\">#{item.pb_product.name}</a><br/>#{item.description}</div>",
+                "<div class=\"\">#{item.display_price}</div>",
+                "<div class=\"\">#{item.pb_product.price_unit}</div>",
+                "<div class=\"text-nowrap\">#{item.display_time}</div>",
+                "<div class=\"\">#{ApplicationController.helpers.format_price(user.deal_items({deal_id: item.id}).sum(:quantity).to_s)}</div>",
+                "<div class=\"\">#{ApplicationController.helpers.format_price(user.deal_income({deal_id: item.id}))}</div>",
+                "<div class=\"\">#{ApplicationController.helpers.format_price(user.deal_gift_count({deal_id: item.id}))}</div>",
+                "<div class=\"text-left text-nowrap\">#{user.corp_items_link(item.id)}</div>"
+              ]
+        data << row
+      else
+        item.destroy
+      end
     end
 
     result = {
