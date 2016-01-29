@@ -39,7 +39,13 @@ class AdsController < ApplicationController
 
     respond_to do |format|
       if @ad.save
-        format.html { redirect_to edit_ad_path(@ad), notice: 'Đã thêm quảng cáo thành công.' }
+        if params["close"].present?
+          return_path = ads_path
+        else
+          return_path = edit_ad_path(@ad)
+        end
+        
+        format.html { redirect_to return_path, notice: 'Đã thêm quảng cáo thành công.' }
         format.json { render :show, status: :created, location: @ad }
       else
         format.html { render :new }
@@ -55,7 +61,13 @@ class AdsController < ApplicationController
       if @ad.update(ad_params)
         @ad.image.recreate_versions!
         
-        format.html { redirect_to edit_ad_path(@ad), notice: 'Đã cập nhật quảng cáo thành công.' }
+        if params["close"].present?
+          return_path = ads_path
+        else
+          return_path = edit_ad_path(@ad)
+        end
+        
+        format.html { redirect_to return_path, notice: 'Đã cập nhật quảng cáo thành công.' }
         format.json { render :show, status: :ok, location: @ad }
       else
         format.html { render :edit }

@@ -322,10 +322,6 @@ function renderBasicAreaChart(chart_id, days, values_1, values_2) {
 
 var xhr = {};
 $(document).ready(function() {
-    
-    //
-    // Wizard with validation
-    //
 
     // Show form
     var form = $(".steps-validation").show();
@@ -388,6 +384,7 @@ $(document).ready(function() {
             //form.validate().settings.ignore = ":disabled,:hidden";
             //if (form.valid()) {
                 form.validate().settings.ignore = "*";
+                $("input[name=close]").val("1");
                 $(".steps-validation").submit();
             //}
         },
@@ -723,5 +720,9 @@ $(document).ready(function() {
       $(this).after(video_tag)
       $(this).hide()
     });
+    
+    
+    
+    
     
 });
