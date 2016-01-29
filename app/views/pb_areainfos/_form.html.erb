@@ -46,7 +46,7 @@
 									<div class="form-group">
 										<label>Chọn thị trường <span class="text-danger">*</span></label>
 										<div>
-											<%= f.text_field :area_ids, required: "required", class: "select2-ajax multiple", data_link: pb_areas_path(format: "json"), placeholder: "Tìm khu vực...", value: @pb_areainfo.area_id, text: @pb_areainfo.area_name, values: @pb_areainfo.json_encode_area_ids_names %>
+											<%= f.text_field :area_ids, required: "required", class: "select2-ajax multiple", data_link: pb_areas_path(format: "json", select_all: "no"), placeholder: "Tìm khu vực...", value: @pb_areainfo.area_id, text: @pb_areainfo.area_name, values: @pb_areainfo.json_encode_area_ids_names %>
 										</div>
 									</div>
 								</div>
