@@ -705,6 +705,13 @@ $(document).ready(function() {
       var source = $(this).attr("rel");
       var thumb = $(this).attr("thumb");
       
+      if (width == 0) {
+        width = "100%"
+      }
+      if (height == 0) {
+        height = "100%"
+      }
+      
       var video_tag = '<video poster="'+thumb+'" width="'+width+'" height="'+height+'" controls>'
       video_tag += '<source src="'+source+'" type="video/mp4">'
       video_tag += 'Your browser does not support the video tag.'
