@@ -400,7 +400,7 @@ class Ad < ActiveRecord::Base
     return_url = "http://"+request.host+ActionController::Base.helpers.url_for(controller: "ads", action: "get_nganluong_checkout_return", id: self.id)
     email = "service@marketonline.vn"
     note = self.name
-    amount = self.total_price
+    amount = self.total_price.to_i
     
     url = (`php lib/nganluong.php get_checkout_url "#{return_url}" "#{email}" "#{note}" "#{ad_code}" "#{amount}"`).strip
     
